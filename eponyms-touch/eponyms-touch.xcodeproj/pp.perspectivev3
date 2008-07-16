@@ -307,9 +307,6 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>9</integer>
-									<integer>7</integer>
-									<integer>1</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -363,7 +360,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>EE4B747B0E2E6B0000F7B157</string>
+										<string>EE4B74910E2E6E1700F7B157</string>
 										<key>history</key>
 										<array>
 											<string>EE2DE6D80E1AE6CF00D97653</string>
@@ -436,18 +433,18 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1024, 763}}</string>
+								<string>{{0, 0}, {1024, 534}}</string>
 								<key>RubberWindowFrame</key>
 								<string>108 69 1263 809 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>763pt</string>
+							<string>534pt</string>
 						</dict>
 						<dict>
 							<key>Proportion</key>
-							<string>0pt</string>
+							<string>229pt</string>
 							<key>Tabs</key>
 							<array>
 								<dict>
@@ -462,8 +459,6 @@
 									<dict>
 										<key>Frame</key>
 										<string>{{10, 27}, {1024, -27}}</string>
-										<key>RubberWindowFrame</key>
-										<string>108 69 1263 809 0 0 1440 878 </string>
 									</dict>
 									<key>Module</key>
 									<string>XCDetailModule</string>
@@ -493,7 +488,7 @@
 										<dict>
 											<key>PBXCVSModuleTreeModuleColumnWidthsKey</key>
 											<array>
-												<real>200</real>
+												<real>624</real>
 												<real>56</real>
 												<real>63</real>
 												<real>60</real>
@@ -518,7 +513,9 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {1008, 264}}</string>
+										<string>{{10, 27}, {1024, 202}}</string>
+										<key>RubberWindowFrame</key>
+										<string>108 69 1263 809 0 0 1440 878 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXCVSModule</string>
@@ -715,14 +712,14 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>EEABFFE90E2CD4F600D84A8A</string>
+				<string>EE4B74930E2E6E1700F7B157</string>
 				<string>1CCC7628064C1048000F2A68</string>
 				<string>1CCC7629064C1048000F2A68</string>
-				<string>EEABFFEA0E2CD4F600D84A8A</string>
-				<string>EEABFFEB0E2CD4F600D84A8A</string>
-				<string>EEABFFEC0E2CD4F600D84A8A</string>
-				<string>EEABFFED0E2CD4F600D84A8A</string>
-				<string>EEABFFEE0E2CD4F600D84A8A</string>
+				<string>EE4B74940E2E6E1700F7B157</string>
+				<string>EE4B74950E2E6E1700F7B157</string>
+				<string>EE4B74960E2E6E1700F7B157</string>
+				<string>EE4B74970E2E6E1700F7B157</string>
+				<string>EE4B74980E2E6E1700F7B157</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -737,7 +734,7 @@
 	<key>StatusbarIsVisible</key>
 	<true/>
 	<key>TimeStamp</key>
-	<real>237923072.63374701</real>
+	<real>237923863.881051</real>
 	<key>ToolbarDisplayMode</key>
 	<integer>2</integer>
 	<key>ToolbarIsVisible</key>

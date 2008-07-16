@@ -1,10 +1,13 @@
-//
+//  
 //  eponyms_touchAppDelegate.h
 //  eponyms-touch
-//
+//  
 //  Created by Pascal Pfiffner on 01.07.08.
-//  Copyright home sweet home 2008. All rights reserved.
-//
+//  This sourcecode is released under the Apache License, Version 2.0
+//  http://www.apache.org/licenses/LICENSE-2.0.html
+//  
+//  AppDelegate Header for eponyms-touch
+//  
 
 #import <UIKit/UIKit.h>
 #import <sqlite3.h>

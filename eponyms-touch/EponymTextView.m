@@ -1,10 +1,13 @@
 //
-//  EponymTextView.m
+//  InfoViewController.h
 //  eponyms-touch
 //
-//  Created by Pascal Pfiffner on 15.07.08.
-//  Copyright 2008 __MyCompanyName__. All rights reserved.
-//
+//  Created by Pascal Pfiffner on 01.07.08.
+//  This sourcecode is released under the Apache License, Version 2.0
+//  http://www.apache.org/licenses/LICENSE-2.0.html
+//  
+//  UITextView subclass that draws rounded corners for eponyms-touch
+//  
 
 #import "EponymTextView.h"
 
@@ -74,6 +77,7 @@
 - (void) dealloc
 {
 	[borderColor release];
+	[fillColor release];
 	
 	[super dealloc];
 }

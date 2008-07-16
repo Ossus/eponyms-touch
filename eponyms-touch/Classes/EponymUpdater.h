@@ -3,8 +3,13 @@
 //  eponyms-touch
 //
 //  Created by Pascal Pfiffner on 08.07.08.
-//  Copyright 2008 __MyCompanyName__. All rights reserved.
-//
+//  This sourcecode is released under the Apache License, Version 2.0
+//  http://www.apache.org/licenses/LICENSE-2.0.html
+//  
+//  Updater object that downloads the eponym XML and fills the SQLite database
+//  for eponyms-touch
+//  
+
 
 #import <UIKit/UIKit.h>
 #import <sqlite3.h>
