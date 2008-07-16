@@ -1,0 +1,67 @@
+
+WELCOME
+-------
+
+This file tells you what XML files eponyms-touch can parse.
+
+In order to determine whether new eponyms are available, a small info file named eponyms_info.xml is downloaded which looks like this:
+
+*****
+eponyms_info.xml
+*****
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+	<lastupdate epoch="1215525044" />
+	<size byte="485063" num="1623" />
+</root>
+*****
+
+- The <lastupdate> node needs the attribute "epoch" where the epoch time of the last update is saved. This is compared to the last update the respective user has conducted and if newer eponyms are available, the user may download these.
+
+- The <size> node has two attributes, "byte" and "num". byte is the bytes the real eponyms XML file weighs and num is the number of eponyms it contains. Both are used to display a progress bar.
+
+
+The actual eponyms are saved in the file eponyms.xml which looks like this:
+
+*****
+eponyms.xml
+*****
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE eponyms [
+	<!ELEMENT eponym (name, desc, cat*, c?, e?)>
+	<!ELEMENT name (#PCDATA)>
+	<!ELEMENT desc (#PCDATA)>
+	<!ELEMENT cat (#PCDATA)>
+	<!ELEMENT c (#PCDATA)>
+	<!ELEMENT e (#PCDATA)>
+]>
+<root created="1215525044">
+<eponym id="AnEponymID">
+	<name>Eponym Title</name>
+	<desc>The Eponym Description</desc>
+	<cat>ANAT</cat>
+	<cat>GI</cat>
+	...
+	<c>1/17/2005</c>
+	<e>3/28/2007</e>
+</eponym>
+...
+</root>
+*****
+
+- The <root> node has the attribute "created" which should match the "epoch" attribute of eponyms_info.lastupdate and is the creation date of this file in epoch time. The root node might contain as many <eponym> elements as desired.
+
+- The <eponym> node has the "id" attribute which is not currently in use. Each <eponym> should contain at least a <name> and a <desc> node.
+
+- The <name> node is the name/title of the eponym
+
+- The <desc> node is the textual description
+
+- The eponym may contain as many <cat> nodes as it belongs to categories. Currently categories consist only of shortcuts. Maybe we could introduce a third XML file with shortcut-categoryname mappings in the future.
+
+- The <c> node is the date the eponym was created in US notation
+
+- The <e> node is the date of the last edit, also in US notation
+
+
+

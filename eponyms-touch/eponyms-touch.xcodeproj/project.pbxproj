@@ -1,0 +1,335 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D3623260D0F684500981E51 /* eponyms_touchAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* eponyms_touchAppDelegate.m */; };
+		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+		EE07C8B30E2C7FA3006F7F8A /* EponymTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE07C8B20E2C7FA3006F7F8A /* EponymTextView.m */; };
+		EE14428F0E236E10003EA64C /* InfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE14428E0E236E10003EA64C /* InfoView.xib */; };
+		EE1443EA0E23A576003EA64C /* EponymUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1443E90E23A576003EA64C /* EponymUpdater.m */; };
+		EE2DE6B50E1AE31800D97653 /* Eponyms.png in Resources */ = {isa = PBXBuildFile; fileRef = EE2DE6B40E1AE31800D97653 /* Eponyms.png */; };
+		EE2DE6BA0E1AE38200D97653 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2DE6B90E1AE38200D97653 /* InfoViewController.m */; };
+		EE2DE74E0E1C297200D97653 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2DE74D0E1C297200D97653 /* ListViewController.m */; };
+		EE2DE7530E1C297F00D97653 /* EponymViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2DE7520E1C297F00D97653 /* EponymViewController.m */; };
+		EE2DE7AC0E1C2F7A00D97653 /* CategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2DE7AB0E1C2F7A00D97653 /* CategoriesViewController.m */; };
+		EE2DE9DE0E2125C700D97653 /* Eponym.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2DE9DD0E2125C700D97653 /* Eponym.m */; };
+		EE2DEAF20E22302500D97653 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EE2DEAF10E22302500D97653 /* libsqlite3.dylib */; };
+		EE2DEDFA0E229B9B00D97653 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EE2DEDF90E229B9B00D97653 /* Icon.png */; };
+		EE2DEDFF0E229DB700D97653 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = EE2DEDFE0E229DB700D97653 /* Default.png */; };
+		EE64C7C00E2680D40000BC8D /* eponyms.xml in Resources */ = {isa = PBXBuildFile; fileRef = EE64C7BF0E2680D40000BC8D /* eponyms.xml */; };
+		EEAB00FA0E2E2F3E00D84A8A /* Info.txt in Resources */ = {isa = PBXBuildFile; fileRef = EEAB00F90E2E2F3E00D84A8A /* Info.txt */; };
+		EED69F830E2BF41900BEF0C4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED69F820E2BF41900BEF0C4 /* CoreGraphics.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D3623240D0F684500981E51 /* eponyms_touchAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eponyms_touchAppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* eponyms_touchAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = eponyms_touchAppDelegate.m; sourceTree = "<group>"; };
+		1D6058910D05DD3D006BFB54 /* eponyms-touch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "eponyms-touch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		32CA4F630368D1EE00C91783 /* eponyms_touch_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eponyms_touch_Prefix.pch; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EE07C8B10E2C7FA3006F7F8A /* EponymTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EponymTextView.h; path = ../EponymTextView.h; sourceTree = "<group>"; };
+		EE07C8B20E2C7FA3006F7F8A /* EponymTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EponymTextView.m; path = ../EponymTextView.m; sourceTree = "<group>"; };
+		EE14428E0E236E10003EA64C /* InfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoView.xib; sourceTree = "<group>"; };
+		EE1443E80E23A576003EA64C /* EponymUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EponymUpdater.h; sourceTree = "<group>"; };
+		EE1443E90E23A576003EA64C /* EponymUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EponymUpdater.m; sourceTree = "<group>"; };
+		EE2DE6B40E1AE31800D97653 /* Eponyms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Eponyms.png; sourceTree = "<group>"; };
+		EE2DE6B80E1AE38200D97653 /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoViewController.h; path = ../InfoViewController.h; sourceTree = "<group>"; };
+		EE2DE6B90E1AE38200D97653 /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfoViewController.m; path = ../InfoViewController.m; sourceTree = "<group>"; };
+		EE2DE74C0E1C297200D97653 /* ListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
+		EE2DE74D0E1C297200D97653 /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
+		EE2DE7510E1C297F00D97653 /* EponymViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EponymViewController.h; sourceTree = "<group>"; };
+		EE2DE7520E1C297F00D97653 /* EponymViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EponymViewController.m; sourceTree = "<group>"; };
+		EE2DE7AA0E1C2F7A00D97653 /* CategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesViewController.h; sourceTree = "<group>"; };
+		EE2DE7AB0E1C2F7A00D97653 /* CategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesViewController.m; sourceTree = "<group>"; };
+		EE2DE9DC0E2125C700D97653 /* Eponym.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Eponym.h; sourceTree = "<group>"; };
+		EE2DE9DD0E2125C700D97653 /* Eponym.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Eponym.m; sourceTree = "<group>"; };
+		EE2DEAF10E22302500D97653 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = /usr/lib/libsqlite3.dylib; sourceTree = "<absolute>"; };
+		EE2DEDF90E229B9B00D97653 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		EE2DEDFE0E229DB700D97653 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		EE64C7BF0E2680D40000BC8D /* eponyms.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = eponyms.xml; sourceTree = "<group>"; };
+		EEAB00F90E2E2F3E00D84A8A /* Info.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Info.txt; sourceTree = "<group>"; };
+		EED69F820E2BF41900BEF0C4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				EE2DEAF20E22302500D97653 /* libsqlite3.dylib in Frameworks */,
+				EED69F830E2BF41900BEF0C4 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				1D3623240D0F684500981E51 /* eponyms_touchAppDelegate.h */,
+				1D3623250D0F684500981E51 /* eponyms_touchAppDelegate.m */,
+				EE2DE9DC0E2125C700D97653 /* Eponym.h */,
+				EE2DE9DD0E2125C700D97653 /* Eponym.m */,
+				EE2DE7AD0E1C2F8600D97653 /* View Controllers */,
+				EE64C7570E2674EF0000BC8D /* Info Window */,
+				EE07C8B10E2C7FA3006F7F8A /* EponymTextView.h */,
+				EE07C8B20E2C7FA3006F7F8A /* EponymTextView.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* eponyms-touch.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				EE2DE6B30E1AE30C00D97653 /* Images */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32CA4F630368D1EE00C91783 /* eponyms_touch_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
+				EE14428E0E236E10003EA64C /* InfoView.xib */,
+				8D1107310486CEB800E47090 /* Info.plist */,
+				EEAB00F90E2E2F3E00D84A8A /* Info.txt */,
+				EE64C7BF0E2680D40000BC8D /* eponyms.xml */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EED69F820E2BF41900BEF0C4 /* CoreGraphics.framework */,
+				EE2DEAF10E22302500D97653 /* libsqlite3.dylib */,
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EE2DE6B30E1AE30C00D97653 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				EE2DEDF90E229B9B00D97653 /* Icon.png */,
+				EE2DE6B40E1AE31800D97653 /* Eponyms.png */,
+				EE2DEDFE0E229DB700D97653 /* Default.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		EE2DE7AD0E1C2F8600D97653 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EE2DE7AA0E1C2F7A00D97653 /* CategoriesViewController.h */,
+				EE2DE7AB0E1C2F7A00D97653 /* CategoriesViewController.m */,
+				EE2DE74C0E1C297200D97653 /* ListViewController.h */,
+				EE2DE74D0E1C297200D97653 /* ListViewController.m */,
+				EE2DE7510E1C297F00D97653 /* EponymViewController.h */,
+				EE2DE7520E1C297F00D97653 /* EponymViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		EE64C7570E2674EF0000BC8D /* Info Window */ = {
+			isa = PBXGroup;
+			children = (
+				EE2DE6B80E1AE38200D97653 /* InfoViewController.h */,
+				EE2DE6B90E1AE38200D97653 /* InfoViewController.m */,
+				EE1443E80E23A576003EA64C /* EponymUpdater.h */,
+				EE1443E90E23A576003EA64C /* EponymUpdater.m */,
+			);
+			name = "Info Window";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* eponyms-touch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "eponyms-touch" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "eponyms-touch";
+			productName = "eponyms-touch";
+			productReference = 1D6058910D05DD3D006BFB54 /* eponyms-touch.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "eponyms-touch" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* eponyms-touch */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
+				EE2DE6B50E1AE31800D97653 /* Eponyms.png in Resources */,
+				EE2DEDFA0E229B9B00D97653 /* Icon.png in Resources */,
+				EE2DEDFF0E229DB700D97653 /* Default.png in Resources */,
+				EE14428F0E236E10003EA64C /* InfoView.xib in Resources */,
+				EE64C7C00E2680D40000BC8D /* eponyms.xml in Resources */,
+				EEAB00FA0E2E2F3E00D84A8A /* Info.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				1D3623260D0F684500981E51 /* eponyms_touchAppDelegate.m in Sources */,
+				EE2DE6BA0E1AE38200D97653 /* InfoViewController.m in Sources */,
+				EE2DE74E0E1C297200D97653 /* ListViewController.m in Sources */,
+				EE2DE7530E1C297F00D97653 /* EponymViewController.m in Sources */,
+				EE2DE7AC0E1C2F7A00D97653 /* CategoriesViewController.m in Sources */,
+				EE2DE9DE0E2125C700D97653 /* Eponym.m in Sources */,
+				EE1443EA0E23A576003EA64C /* EponymUpdater.m in Sources */,
+				EE07C8B30E2C7FA3006F7F8A /* EponymTextView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = "eponyms-touch";
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = "eponyms-touch";
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Pascal Pfiffner";
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DD13AC8D-5B95-44A5-ACD2-E8C7A7F145C4";
+				SDKROOT = iphoneos2.0;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos2.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "eponyms-touch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "eponyms-touch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
