@@ -20,13 +20,13 @@
 
 @interface InfoViewController : UIViewController <UIAlertViewDelegate> {
 	id delegate;
-	sqlite3 *database;
 	
 	EponymUpdater *myUpdater;
 	BOOL needToReloadEponyms;
 	BOOL firstTimeLaunch;
 	BOOL newEponymsAvailable;
 	BOOL iAmUpdating;
+	BOOL askingToAbortImport;
 	
 	NSInteger lastEponymCheck;
 	NSInteger lastEponymUpdate;
@@ -52,8 +52,7 @@
 	NSURL *eponymXMLURL;
 }
 
-@property (nonatomic, retain) id delegate;
-@property (nonatomic, assign) sqlite3 *database;
+@property (nonatomic, assign) id delegate;
 @property (nonatomic, assign) BOOL needToReloadEponyms;
 @property (nonatomic, assign) BOOL firstTimeLaunch;
 @property (nonatomic, assign) BOOL newEponymsAvailable;
@@ -74,17 +73,21 @@
 @property (nonatomic, retain) NSURL *eponymUpdateCheckURL;
 @property (nonatomic, retain) NSURL *eponymXMLURL;
 
-- (void) updateLabelsWithDateForLastCheck:(NSDate *) lastCheck lastUpdate:(NSDate *) lastUpdate usingEponyms:(NSDate *) usingEponyms;
-- (void) dismissMe:(id) sender;
+- (void) updateLabelsWithDateForLastCheck:(NSDate *)lastCheck lastUpdate:(NSDate *)lastUpdate usingEponyms:(NSDate *)usingEponyms;
+- (void) dismissMe:(id)sender;
+- (void) abortUpdateAction;
 
-- (void) setUpdateButtonTitle:(NSString *) title;
-- (void) setUpdateButtonTitleColor:(UIColor *) color;
-- (void) setStatusMessage:(NSString *) message;
+- (void) setUpdateButtonTitle:(NSString *)title;
+- (void) setUpdateButtonTitleColor:(UIColor *)color;
+- (void) setStatusMessage:(NSString *)message;
 - (void) setProgress:(CGFloat) progress;
 
 // Online Access
-- (IBAction) performUpdateAction:(id) sender;
-- (IBAction) openProjectWebsite:(id) sender;
-- (IBAction) openEponymsDotNet:(id) sender;
+- (IBAction) performUpdateAction:(id)sender;
+- (IBAction) openProjectWebsite:(id)sender;
+- (IBAction) openEponymsDotNet:(id)sender;
+
+- (void) alertViewWithTitle:(NSString *)title message:(NSString *)message cancelTitle:(NSString *)cancelTitle;
+- (void) alertViewWithTitle:(NSString *)title message:(NSString *)message cancelTitle:(NSString *)cancelTitle otherTitle:(NSString *)otherTitle;
 
 @end

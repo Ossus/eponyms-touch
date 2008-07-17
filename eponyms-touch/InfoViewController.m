@@ -19,9 +19,7 @@
 
 
 @interface InfoViewController (Private)
-
 - (void) loadEponymXMLFromDisk;
-
 @end
 
 
@@ -29,18 +27,19 @@
 
 @implementation InfoViewController
 
-@synthesize delegate, database, needToReloadEponyms, firstTimeLaunch, newEponymsAvailable, myUpdater;
+@synthesize delegate, needToReloadEponyms, firstTimeLaunch, newEponymsAvailable, myUpdater;
 @synthesize lastEponymCheck, lastEponymUpdate, usingEponymsOf, readyToLoadNumEponyms, progressText, progressView, updateButton;
 @synthesize infoPlistDict, projectWebsiteURL, eponymUpdateCheckURL, eponymXMLURL;
 
 @dynamic iAmUpdating;
 
 
-- (id) initWithNibName:(NSString *) nibNameOrNil bundle:(NSBundle *) nibBundleOrNil
+- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 	if(self) {
 		iAmUpdating = NO;
+		askingToAbortImport = NO;
 		self.needToReloadEponyms = NO;
 		self.newEponymsAvailable = NO;
 		self.title = @"About Eponyms";
@@ -57,10 +56,10 @@
 
 - (void) dealloc
 {
-	[infoPlistDict release];
-	[projectWebsiteURL release];
-	[eponymUpdateCheckURL release];
-	[eponymXMLURL release];
+	[infoPlistDict release];				infoPlistDict = nil;
+	[projectWebsiteURL release];			projectWebsiteURL = nil;
+	[eponymUpdateCheckURL release];			eponymUpdateCheckURL = nil;
+	[eponymXMLURL release];					eponymXMLURL = nil;
 	
 	[super dealloc];
 }
@@ -69,11 +68,11 @@
 
 
 #pragma mark KVC
-- (BOOL) iAmUpdating
+- (BOOL)iAmUpdating
 {
 	return iAmUpdating;
 }
-- (void) setIAmUpdating:(BOOL) updating
+- (void) setIAmUpdating:(BOOL)updating
 {
 	iAmUpdating = updating;
 	
@@ -95,7 +94,7 @@
 
 
 #pragma mark GUI
-- (void) updateLabelsWithDateForLastCheck:(NSDate *) lastCheck lastUpdate:(NSDate *) lastUpdate usingEponyms:(NSDate *) usingEponyms
+- (void) updateLabelsWithDateForLastCheck:(NSDate *)lastCheck lastUpdate:(NSDate *)lastUpdate usingEponyms:(NSDate *)usingEponyms
 {
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateStyle:NSDateFormatterShortStyle];
@@ -124,12 +123,12 @@
 }
 
 
-- (void) setUpdateButtonTitle:(NSString *) title
+- (void) setUpdateButtonTitle:(NSString *)title
 {
 	[updateButton setTitle:title forState:(UIControlStateNormal & UIControlStateHighlighted & UIControlStateSelected & UIControlStateDisabled)];
 }
 
-- (void) setUpdateButtonTitleColor:(UIColor *) color
+- (void) setUpdateButtonTitleColor:(UIColor *)color
 {
 	if(nil == color) {
 		color = [UIColor colorWithRed:0.2 green:0.3 blue:0.5 alpha:1.0];		// default button text color
@@ -137,7 +136,7 @@
 	[updateButton setTitleColor:color forState:(UIControlStateNormal & UIControlStateHighlighted & UIControlStateSelected & UIControlStateDisabled)];
 }
 
-- (void) setStatusMessage:(NSString *) message
+- (void) setStatusMessage:(NSString *)message
 {
 	if(message) {
 		self.progressText.hidden = NO;
@@ -148,7 +147,7 @@
 	}
 }
 
-- (void) setProgress:(CGFloat) progress
+- (void) setProgress:(CGFloat)progress
 {
 	if(progress >= 0.0) {
 		self.progressView.hidden = NO;
@@ -160,12 +159,13 @@
 }
 
 
-- (void) dismissMe:(id) sender
+- (void) dismissMe:(id)sender
 {
 	// warning when closing during import
 	if(iAmUpdating) {
-		UIAlertView *importingAlert = [[[UIAlertView alloc] initWithTitle:CANCEL_IMPORT_TITLE message:@"Are you sure you want to abort the eponym import? This will discard any imported eponyms." delegate:self cancelButtonTitle:@"Keep importing" otherButtonTitles:@"Abort import"] autorelease];
-		[importingAlert show];
+		askingToAbortImport = YES;
+		NSString *warning = @"Are you sure you want to abort the eponym import? This will discard any imported eponyms.";
+		[self alertViewWithTitle:CANCEL_IMPORT_TITLE message:warning cancelTitle:@"Continue" otherTitle:@"Abort Import"];
 	}
 	
 	// not importing
@@ -216,19 +216,17 @@
 	[versionLabel setText:version];
 }
 
-- (void) viewDidAppear:(BOOL) animated
+- (void) viewDidAppear:(BOOL)animated
 {
 	if(firstTimeLaunch) {
 		NSString *title = @"First Launch";
 		NSString *message = @"Welcome to Eponyms!\nBefore using Eponyms, the database must be created.";
-		UIAlertView *info = [[[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
-		info.delegate = self;
-		[info show];
-		firstTimeLaunch = NO;
+		
+		[self alertViewWithTitle:title message:message cancelTitle:@"OK"];		// maybe allow postponing first import?
 	}
 }
 
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
@@ -242,32 +240,10 @@
 
 
 
-#pragma mark First Launch + Alert View Delegate
-- (void) alertView:(UIAlertView *) alertView willDismissWithButtonIndex:(NSInteger) buttonIndex
-{
-	// abort import alert
-	if([[alertView title] isEqualToString:CANCEL_IMPORT_TITLE]) {			// !! could be dangerous
-		NSLog(@"Dismissed import alert with buttonIndex: %i", buttonIndex);
-		
-		// abort import
-		if(NO) {
-			
-		}
-		else {
-			// keep importing
-		}
-	}
-	
-	// first import alert
-	else {
-		[self loadEponymXMLFromDisk];
-	}
-}
-
+#pragma mark EponymUpdater
 - (void) loadEponymXMLFromDisk
 {
-	self.myUpdater = [[[EponymUpdater alloc] init] autorelease];
-	myUpdater.delegate = self;
+	self.myUpdater = [[[EponymUpdater alloc] initWithDelegate:self] autorelease];
 	myUpdater.updateAction = 2;
 	
 	// Info.plist
@@ -278,16 +254,11 @@
 	NSData *includedXMLData = [NSData dataWithContentsOfFile:eponymXMLPath];
 	[myUpdater createEponymsWithData:includedXMLData];
 }
-#pragma mark -
 
-
-
-#pragma mark Online Access
 - (IBAction) performUpdateAction:(id) sender
 {
 	NSUInteger updateAction = newEponymsAvailable ? 2 : 1;				// 1: check  2: download new
-	self.myUpdater = [[[EponymUpdater alloc] init] autorelease];
-	myUpdater.delegate = self;
+	self.myUpdater = [[[EponymUpdater alloc] initWithDelegate:self] autorelease];
 	myUpdater.updateAction = updateAction;
 	
 	// We are going to update the eponyms - tell the updater how many eponyms to expect
@@ -298,7 +269,57 @@
 	[myUpdater startDownloadingWithAction:updateAction];
 }
 
-- (void) openWebsite:(NSURL *) url fromButton:(id) button
+- (void) abortUpdateAction
+{
+	if(myUpdater) {
+		myUpdater.mustAbortImport = YES;
+	}
+	
+	self.iAmUpdating = NO;
+}
+#pragma mark -
+
+
+
+#pragma mark Alert View + Delegate
+// alert with one button
+- (void) alertViewWithTitle:(NSString *)title message:(NSString *)message cancelTitle:(NSString *)cancelTitle
+{
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelTitle otherButtonTitles:nil];
+	[alert show];
+	[alert release];
+}
+
+// alert with 2 buttons
+- (void) alertViewWithTitle:(NSString *)title message:(NSString *)message cancelTitle:(NSString *)cancelTitle otherTitle:(NSString *)otherTitle
+{
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelTitle otherButtonTitles:otherTitle, nil];
+	[alert show];
+	[alert release];
+}
+
+- (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger) buttonIndex
+{
+	// abort import alert
+	if(askingToAbortImport) {
+		if(buttonIndex == alertView.firstOtherButtonIndex) {
+			[self abortUpdateAction];
+			[self dismissMe:nil];
+		}
+	}
+	
+	// first import alert (can only be accepted ATM)
+	else if(firstTimeLaunch) {
+		[self loadEponymXMLFromDisk];
+		firstTimeLaunch = NO;
+	}
+}
+#pragma mark -
+
+
+
+#pragma mark Online Access
+- (void) openWebsite:(NSURL *)url fromButton:(id) button
 {
 	if(![[UIApplication sharedApplication] openURL:url]) {
 		[button setText:@"Failed"];

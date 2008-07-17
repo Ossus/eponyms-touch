@@ -29,7 +29,7 @@ static sqlite3_stmt *load_query = nil;
 }
 
 // Init the Eponym with the desired key
-- (id) initWithID:(NSUInteger) eid title:(NSString*) ttl fromDatabase:(sqlite3 *) db
+- (id) initWithID:(NSUInteger) eid title:(NSString*) ttl fromDatabase:(sqlite3 *)db
 {
 	self = [super init];
 	if(self) {
@@ -42,6 +42,7 @@ static sqlite3_stmt *load_query = nil;
 
 - (void) dealloc
 {
+	NSLog(@"eponym dealloc");
 	[self unload];
 	[title release];		title = nil;
 	
@@ -54,6 +55,7 @@ static sqlite3_stmt *load_query = nil;
 #pragma mark loading/unloading
 - (void) load
 {
+	NSLog(@"want to load id %i, retainCount %i", eponym_id, [self retainCount]);
 	if(loaded) {
 		return;
 	}
@@ -78,11 +80,11 @@ static sqlite3_stmt *load_query = nil;
 			self.created = (createdEpoch > 10.0) ? [NSDate dateWithTimeIntervalSince1970:createdEpoch] : nil;
 			double updatedEpoch = sqlite3_column_double(load_query, 1);
 			self.lastedit = (updatedEpoch > 10.0) ? [NSDate dateWithTimeIntervalSince1970:updatedEpoch] : nil;
-			char *textStr = (char *) sqlite3_column_text(load_query, 2);
+			char *textStr = (char *)sqlite3_column_text(load_query, 2);
 			self.text = textStr ? [NSString stringWithUTF8String:textStr] : @"";
 		}
 		
-		char *categoryStr = (char *) sqlite3_column_text(load_query, 3);
+		char *categoryStr = (char *)sqlite3_column_text(load_query, 3);
 		[newCategoriesArr addObject:(categoryStr ? [NSString stringWithUTF8String:categoryStr] : @"")];
 		
 		rows++;

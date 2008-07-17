@@ -20,34 +20,34 @@
 @interface EponymUpdater (Private)
 
 // Download delegate
-- (NSURLRequest *) connection:(NSURLConnection *) connection willSendRequest:(NSURLRequest *) request redirectResponse:(NSURLResponse *) redirectResponse;
-- (void) connection:(NSURLConnection *) connection didReceiveResponse:(NSURLResponse *) response;
-- (void) connection:(NSURLConnection *) connection didReceiveData:(NSData *) data;
-- (void) connectionDidFinishLoading:(NSURLConnection *) connection;
-- (void) connection:(NSURLConnection *) connection didFailWithError:(NSError *) error;
-- (void) connection:(NSURLConnection *) connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *) challenge;
-- (void) connectionDidFinishLoading:(NSURLConnection *) connection;
-- (void) downloadFailedWithMessage:(NSString *) message;
+- (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse;
+- (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;
+- (void) connection:(NSURLConnection *)connection didReceiveData:(NSData *)data;
+- (void) connectionDidFinishLoading:(NSURLConnection *)connection;
+- (void) connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
+- (void) connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
+- (void) connectionDidFinishLoading:(NSURLConnection *)connection;
+- (void) downloadFailedWithMessage:(NSString *)message;
 
 // Main functions
-- (void) parseEponyms:(NSData *) XMLData;
-- (void) parseNewEponymCheck:(NSData *) XMLData;
+- (void) parseEponyms:(NSData *)XMLData;
+- (void) parseNewEponymCheck:(NSData *)XMLData;
 
 // Parser delegate
-- (void) parserDidStartDocument:(NSXMLParser *) parser;
-- (void) parseXMLData:(NSData *) data parseError:(NSError **) error;
-- (void) parser:(NSXMLParser *) parser didStartElement:(NSString *) elementName namespaceURI:(NSString *) namespaceURI qualifiedName:(NSString *) qName attributes:(NSDictionary *) attributeDict;
-- (void) parser:(NSXMLParser *) parser didEndElement:(NSString *) elementName namespaceURI:(NSString *) namespaceURI qualifiedName:(NSString *) qName;
-- (void) parser:(NSXMLParser *) parser foundCharacters:(NSString *) string;
-- (void) updateProgress:(NSNumber *) progress;
+- (void) parserDidStartDocument:(NSXMLParser *)parser;
+- (void) parseXMLData:(NSData *)data parseError:(NSError **) error;
+- (void) parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict;
+- (void) parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName;
+- (void) parser:(NSXMLParser *)parser foundCharacters:(NSString *)string;
+- (void) updateProgress:(NSNumber *)progress;
 
 // SQLite
 - (void) emptyDBAndPrepareQueries;
 - (void) catMemoryDBToDisk;
 - (void) createInMemoryDatabase;
 - (void) finalizeQueries;
-- (void) insertEponymIntoDatabase:(NSDictionary *) eponymDict withCategories:(NSArray *) categoryArray;
-- (NSInteger) epochForStringDate:(NSString *) stringDate;
+- (void) insertEponymIntoDatabase:(NSDictionary *)eponymDict withCategories:(NSArray *)categoryArray;
+- (NSInteger) epochForStringDate:(NSString *)stringDate;
 
 @end
 
@@ -66,19 +66,24 @@ static sqlite3_stmt *insert_linker_query = nil;
 
 @implementation EponymUpdater
 
-@synthesize delegate, updateAction, mustAbortImport;
+@synthesize delegate, appDelegate, updateAction, mustAbortImport;
 @synthesize statusCode, expectedContentLength, myConnection, receivedData;
 @synthesize eponymCheckLastUpdateTime, eponymCheckFileSize, eponymCheckNumEponyms;
 @synthesize readyToLoadNumEponyms, eponymCreationDate, currentlyParsedEponym, contentOfCurrentXMLNode, categoriesOfCurrentEponym, categoriesAlreadyInserted, numEponymsParsed;
 
 
 
-- (id) init
+- (id) initWithDelegate:(id) myDelegate
 {
 	self = [super init];
 	if(self) {
+		self.delegate = myDelegate;
+		self.appDelegate = [[UIApplication sharedApplication] delegate];
 		self.receivedData = [NSMutableData data];
 		self.mustAbortImport = NO;
+		self.categoriesAlreadyInserted = [[[NSMutableDictionary alloc] init] autorelease];
+		
+		[delegate setIAmUpdating:YES];
 	}
 	
 	return self;
@@ -87,13 +92,15 @@ static sqlite3_stmt *insert_linker_query = nil;
 
 - (void) dealloc
 {
-	[receivedData release];
+	[delegate release];							delegate = nil;
+	[appDelegate release];						appDelegate = nil;
+	[receivedData release];						receivedData = nil;
 	
-	[eponymCreationDate release];
-	[currentlyParsedEponym release];
-	[contentOfCurrentXMLNode release];
-	[categoriesOfCurrentEponym release];
-	[categoriesAlreadyInserted release];
+	[eponymCreationDate release];				eponymCreationDate = nil;
+	[currentlyParsedEponym release];			currentlyParsedEponym = nil;
+	[contentOfCurrentXMLNode release];			contentOfCurrentXMLNode = nil;
+	[categoriesOfCurrentEponym release];		categoriesOfCurrentEponym = nil;
+	[categoriesAlreadyInserted release];		categoriesAlreadyInserted = nil;
 	
 	// SQLite
 	[self finalizeQueries];
@@ -108,7 +115,6 @@ static sqlite3_stmt *insert_linker_query = nil;
 - (void) startDownloadingWithAction:(NSUInteger) myAction
 {
 	self.updateAction = myAction;
-	[delegate setIAmUpdating:YES];
 	[delegate setStatusMessage:@"Downloading..."];
 	[delegate setProgress:0.0];
 	
@@ -131,7 +137,7 @@ static sqlite3_stmt *insert_linker_query = nil;
 }
 
 // called right before we send a request
-- (NSURLRequest *) connection:(NSURLConnection *) connection willSendRequest:(NSURLRequest *) request redirectResponse:(NSURLResponse *) redirectResponse
+- (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse
 {
 	NSURLRequest *newRequest = request;
 	
@@ -146,7 +152,7 @@ static sqlite3_stmt *insert_linker_query = nil;
 }
 
 // called whenever we receive a response from the server following our request
-- (void) connection:(NSURLConnection *) connection didReceiveResponse:(NSURLResponse *) response
+- (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
 	[receivedData setLength:0];
 	self.expectedContentLength = [response expectedContentLength];
@@ -157,7 +163,7 @@ static sqlite3_stmt *insert_linker_query = nil;
 }
 
 // implement properly, may be of use
-- (void) connection:(NSURLConnection *) connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *) challenge
+- (void) connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
 	if([challenge previousFailureCount] == 0) {
 		NSURLCredential *newCredential;
@@ -174,7 +180,7 @@ static sqlite3_stmt *insert_linker_query = nil;
 	}
 }
 
-- (void) connection:(NSURLConnection *) connection didReceiveData:(NSData *) data
+- (void) connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
 	[receivedData appendData:data];
 	NSUInteger bytesReceived = [receivedData length];
@@ -186,7 +192,7 @@ static sqlite3_stmt *insert_linker_query = nil;
 	}
 }
 
-- (void) connectionDidFinishLoading:(NSURLConnection *) connection
+- (void) connectionDidFinishLoading:(NSURLConnection *)connection
 {
 	if(statusCode) {
 		if(200 == statusCode) {
@@ -222,7 +228,7 @@ static sqlite3_stmt *insert_linker_query = nil;
 }
 
 
-- (void) connection:(NSURLConnection *) connection didFailWithError:(NSError *) error
+- (void) connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
 	[myConnection release];
 	[self downloadFailedWithMessage:[NSString stringWithFormat:@"Error - %@ %@", [error localizedDescription], [[error userInfo] objectForKey:NSErrorFailingURLStringKey]]];
@@ -234,10 +240,9 @@ static sqlite3_stmt *insert_linker_query = nil;
 #pragma mark Workhorse
 
 // call this to spawn a new thread which imports eponyms from the XML
-- (void) createEponymsWithData:(NSData *) XMLData
+- (void) createEponymsWithData:(NSData *)XMLData
 {
 	[XMLData retain];
-	[delegate setIAmUpdating:YES];
 	[delegate setStatusMessage:@"Creating eponyms..."];
 	[delegate setProgress:0.0];
 	
@@ -247,43 +252,51 @@ static sqlite3_stmt *insert_linker_query = nil;
 
 
 // will detach this thread from the main thread because it might run some time - create our own NSAutoreleasePool
-- (void) parseEponyms:(NSData *) XMLData
+- (void) parseEponyms:(NSData *)XMLData
 {
 	NSAutoreleasePool* myAutoreleasePool = [[NSAutoreleasePool alloc] init];
 	
 	self.numEponymsParsed = 0;
-	self.categoriesAlreadyInserted = [NSMutableDictionary dictionary];
+	[categoriesAlreadyInserted removeAllObjects];
 	[self emptyDBAndPrepareQueries];
-	[delegate setNeedToReloadEponyms:YES];
+	
+	NSString *finalMessage;
+	NSError *parseError = nil;
 	
 	
 	// Parse and create			****  (~ 11 sec on iPod touch 1st Gen)
-	[self parseXMLData:XMLData parseError:nil];			// does the parsing and inserting into the :memory: database
+	[self parseXMLData:XMLData parseError:&parseError];			// does the parsing and inserting into memory_database
 	// Parsing done				****
 	
 	
-	// memory_data to disk		****  (~ 0.5 sec on iPod touch 1st Gen)
-	[self catMemoryDBToDisk];							// concatenates the :memory: database to the file database and closes memory_database
-	// cat done					****
-	
-	
-	NSString *finalMessage;
-	if(numEponymsParsed > 0) {
-		finalMessage = [NSString stringWithFormat:@"Created %u eponyms", numEponymsParsed];
-		
-		// update time and save in prefs
-		NSDate *nowDate = [NSDate date];
-		[delegate updateLabelsWithDateForLastCheck:nil lastUpdate:nowDate usingEponyms:nil];
-		
-		NSTimeInterval nowInEpoch = [nowDate timeIntervalSince1970];
-		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(NSInteger)nowInEpoch] forKey:@"lastEponymUpdate"];
-		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:[eponymCreationDate intValue]] forKey:@"usingEponymsOf"];
+	// Error occurred (we end up here if mustAbortImport was set tu true)
+	if(parseError) {
+		finalMessage = @"Parser Error";
+		[appDelegate eponymImportFailed];
+		database = nil;
 	}
+	
+	// cat memory_data to disk
 	else {
-		finalMessage = @"No eponyms were created";
+		[self catMemoryDBToDisk];						// concatenates memory_database to the file database and closes memory_database
+		
+		if(numEponymsParsed > 0) {
+			finalMessage = [NSString stringWithFormat:@"Created %u eponyms", numEponymsParsed];
+			
+			// update time in GUI and save it in the prefs
+			NSDate *nowDate = [NSDate date];
+			[delegate updateLabelsWithDateForLastCheck:nil lastUpdate:nowDate usingEponyms:nil];
+			
+			NSTimeInterval nowInEpoch = [nowDate timeIntervalSince1970];
+			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(NSInteger)nowInEpoch] forKey:@"lastEponymUpdate"];
+			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:[eponymCreationDate intValue]] forKey:@"usingEponymsOf"];
+		}
+		else {
+			finalMessage = @"No eponyms were created";
+		}
 	}
 	
-	[delegate setIAmUpdating:NO];
+	// reset GUI
 	[delegate setNewEponymsAvailable:NO];
 	[delegate setUpdateButtonTitle:@"Check for Eponym Updates"];
 	[delegate setUpdateButtonTitleColor:nil];
@@ -291,10 +304,13 @@ static sqlite3_stmt *insert_linker_query = nil;
 	[delegate setProgress:-1.0];
 	
 	[myAutoreleasePool release];
+	
+	[delegate setIAmUpdating:NO];
 }
 
+
 // New eponym check. only runs a few milliseconds (XML has 2 child nodes...), so no extra thread and no NSAutoreleasePool
-- (void) parseNewEponymCheck:(NSData *) XMLData
+- (void) parseNewEponymCheck:(NSData *)XMLData
 {
 	[XMLData retain];
 	self.eponymCheckNumEponyms = 0;
@@ -347,19 +363,19 @@ static sqlite3_stmt *insert_linker_query = nil;
 	
 	[XMLData release];
 	
-	[delegate setIAmUpdating:NO];
 	[delegate setStatusMessage:finalMessage];
+	[delegate setIAmUpdating:NO];
 }
 #pragma mark -
 
 
 
 #pragma mark Parser Delegate
-- (void) parserDidStartDocument:(NSXMLParser *) parser
+- (void) parserDidStartDocument:(NSXMLParser *)parser
 {
 }
 
-- (void) parseXMLData:(NSData *) data parseError:(NSError **) error
+- (void) parseXMLData:(NSData *)data parseError:(NSError **) error
 {	
 	NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
 	[parser setDelegate:self];
@@ -380,8 +396,9 @@ static sqlite3_stmt *insert_linker_query = nil;
 	[parser release];
 }
 
+
 // START ***
-- (void) parser:(NSXMLParser *) parser didStartElement:(NSString *) elementName namespaceURI:(NSString *) namespaceURI qualifiedName:(NSString *) qName attributes:(NSDictionary *) attributeDict
+- (void) parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
 {
 	if(qName) {
 		elementName = qName;
@@ -424,8 +441,9 @@ static sqlite3_stmt *insert_linker_query = nil;
 	}
 }
 
+
 // END *** the parser ended an element - save contentOfCurrentXMLNode accordingly
-- (void) parser:(NSXMLParser *) parser didEndElement:(NSString *) elementName namespaceURI:(NSString *) namespaceURI qualifiedName:(NSString *) qName
+- (void) parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
 {     
 	if(qName) {
 		elementName = qName;
@@ -436,7 +454,11 @@ static sqlite3_stmt *insert_linker_query = nil;
 		
 		// Ended an eponym - insert the eponym and the categories into the database
 		if([elementName isEqualToString:@"eponym"]) {
-			self.numEponymsParsed += 1;
+			if(self.mustAbortImport) {
+				[parser abortParsing];
+			}
+			
+			self.numEponymsParsed++;
 			
 			// insert into database *****
 			[self insertEponymIntoDatabase:currentlyParsedEponym withCategories:categoriesOfCurrentEponym];
@@ -445,11 +467,6 @@ static sqlite3_stmt *insert_linker_query = nil;
 			if(0 == numEponymsParsed % 100) {
 				CGFloat fraction = numEponymsParsed / (CGFloat) readyToLoadNumEponyms;
 				[self performSelectorOnMainThread:@selector(updateProgress:) withObject:[NSNumber numberWithFloat:fraction] waitUntilDone:NO];
-			}
-			
-			// Abort the process
-			if(mustAbortImport) {
-				[parser abortParsing];
 			}
 		}
 		
@@ -466,7 +483,7 @@ static sqlite3_stmt *insert_linker_query = nil;
 }
 
 // called when the parser has a string - add it to our contentOfCurrentXMLNode string
-- (void) parser:(NSXMLParser *) parser foundCharacters:(NSString *) string
+- (void) parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
 	if(contentOfCurrentXMLNode) {
 		[contentOfCurrentXMLNode appendString:string];
@@ -474,9 +491,8 @@ static sqlite3_stmt *insert_linker_query = nil;
 }
 
 // gets called on error AND on abort
-- (void) parser:(NSXMLParser *) parser parseErrorOccurred:(NSError *) parseError
+- (void) parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
-	NSLog(@"Parse error/abort occurred");
 }
 #pragma mark -
 
@@ -485,7 +501,7 @@ static sqlite3_stmt *insert_linker_query = nil;
 #pragma mark SQLite
 
 // Inserts the eponym and its categories into the database (if not already present) and links them
-- (void) insertEponymIntoDatabase:(NSDictionary *) eponymDict withCategories:(NSArray *) categoryArray
+- (void) insertEponymIntoDatabase:(NSDictionary *)eponymDict withCategories:(NSArray *)categoryArray
 {
 	if(!memory_database) {
 		NSAssert(0, @"memory_database is not present!");
@@ -525,7 +541,7 @@ static sqlite3_stmt *insert_linker_query = nil;
 		}
 		insert_category_id = 0;
 		
-		// was the category already inserted?
+		// was the category already inserted? Get its ID
 		NSArray *allExistingCategories = [categoriesAlreadyInserted allKeys];
 		for(NSString *cat in allExistingCategories) {
 			if([category isEqualToString:cat]) {
@@ -562,47 +578,10 @@ static sqlite3_stmt *insert_linker_query = nil;
 	[categoryArray release];
 }
 
-
-- (void) catMemoryDBToDisk
-{
-	eponyms_touchAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-	NSString *sqlPath = [appDelegate databaseFilePath];
-	char *err;
-	
-	// ATTACH main database to :memory: database
-	NSString *attach_qry = [NSString stringWithFormat:@"ATTACH DATABASE \"%@\" AS real_db", sqlPath];
-	sqlite3_exec(memory_database, [attach_qry UTF8String], NULL, NULL, &err);
-	if(err) {
-		NSAssert1(0, @"Error: failed to ATTACH DATABASE: '%s'.", sqlite3_errmsg(memory_database));
-	}
-	
-	// INSERT eponyms
-	sqlite3_exec(memory_database, "INSERT INTO real_db.eponyms SELECT * FROM main.eponyms", NULL, NULL, &err);
-	if(err) {
-		NSAssert1(0, @"Error: failed to cat eponyms to the real database: '%s'.", sqlite3_errmsg(memory_database));
-	}
-	
-	// INSERT categories
-	sqlite3_exec(memory_database, "INSERT INTO real_db.categories SELECT * FROM main.categories", NULL, NULL, &err);
-	if(err) {
-		NSAssert1(0, @"Error: failed to cat categories to the real database: '%s'.", sqlite3_errmsg(memory_database));
-	}
-	
-	// INSERT links
-	sqlite3_exec(memory_database, "INSERT INTO real_db.category_eponym_linker SELECT * FROM main.category_eponym_linker", NULL, NULL, &err);
-	if(err) {
-		NSAssert1(0, @"Error: failed to cat category-eponym-links to the real database: '%s'.", sqlite3_errmsg(memory_database));
-	}
-	
-	sqlite3_close(memory_database);
-}
-
 - (void) createInMemoryDatabase
 {
 	// Create the in-memory database for faster insert operation
-	if(SQLITE_OK == sqlite3_open(":memory:", &memory_database)) {		// sqlite3_open_v2([sqlPath UTF8String], &database, SQLITE_OPEN_CREATE, NULL)
-		eponyms_touchAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-		
+	if(SQLITE_OK == sqlite3_open(":memory:", &memory_database)) {		// sqlite3_open_v2(":memory:", &memory_database, SQLITE_OPEN_CREATE, NULL)
 		char *err;
 		NSDictionary *creationQueries = [appDelegate databaseCreationQueries];
 		NSString *createCatTable = [creationQueries objectForKey:@"createCatTable"];
@@ -634,9 +613,13 @@ static sqlite3_stmt *insert_linker_query = nil;
 
 - (void) emptyDBAndPrepareQueries
 {
-	database = [delegate database];
+	database = [appDelegate database];
+	if(nil == database) {
+		[appDelegate connectToDBAndCreateIfNeeded];
+		database = [appDelegate database];
+	}
+	
 	[self createInMemoryDatabase];
-	[self finalizeQueries];					// just to be sure (maybe user chose to update the db a second time)
 	
 	char *err;
 	
@@ -677,17 +660,56 @@ static sqlite3_stmt *insert_linker_query = nil;
 	[delegate setNeedToReloadEponyms:YES];
 }
 
+
+- (void) catMemoryDBToDisk
+{
+	NSString *sqlPath = [appDelegate databaseFilePath];
+	char *err;
+	
+	// ATTACH main database to :memory: database
+	NSString *attach_qry = [NSString stringWithFormat:@"ATTACH DATABASE \"%@\" AS real_db", sqlPath];
+	sqlite3_exec(memory_database, [attach_qry UTF8String], NULL, NULL, &err);
+	if(err) {
+		NSAssert1(0, @"Error: failed to ATTACH DATABASE: '%s'.", sqlite3_errmsg(memory_database));
+	}
+	
+	// INSERT eponyms
+	sqlite3_exec(memory_database, "INSERT INTO real_db.eponyms SELECT * FROM main.eponyms", NULL, NULL, &err);
+	if(err) {
+		NSAssert1(0, @"Error: failed to cat eponyms to the real database: '%s'.", sqlite3_errmsg(memory_database));
+	}
+	
+	// INSERT categories
+	sqlite3_exec(memory_database, "INSERT INTO real_db.categories SELECT * FROM main.categories", NULL, NULL, &err);
+	if(err) {
+		NSAssert1(0, @"Error: failed to cat categories to the real database: '%s'.", sqlite3_errmsg(memory_database));
+	}
+	
+	// INSERT links
+	sqlite3_exec(memory_database, "INSERT INTO real_db.category_eponym_linker SELECT * FROM main.category_eponym_linker", NULL, NULL, &err);
+	if(err) {
+		NSAssert1(0, @"Error: failed to cat category-eponym-links to the real database: '%s'.", sqlite3_errmsg(memory_database));
+	}
+}
+
+
 - (void) finalizeQueries
 {
 	if(insert_eponym_query) {
 		sqlite3_finalize(insert_eponym_query);
+		insert_eponym_query = nil;
 	}
 	if(insert_category_query) {
 		sqlite3_finalize(insert_category_query);
+		insert_category_query = nil;
 	}
 	if(insert_linker_query) {
 		sqlite3_finalize(insert_linker_query);
+		insert_linker_query = nil;
 	}
+	
+	sqlite3_close(memory_database);
+	memory_database = nil;
 }
 #pragma mark -
 
@@ -696,17 +718,16 @@ static sqlite3_stmt *insert_linker_query = nil;
 #pragma mark GUI
 
 // handles GUI stuff when the download fails
-- (void) downloadFailedWithMessage:(NSString *) message
+- (void) downloadFailedWithMessage:(NSString *)message
 {
-	[delegate setIAmUpdating:NO];
 	[delegate setStatusMessage:nil];
 	[delegate setProgress:-1.0];
+	[delegate setIAmUpdating:NO];
 	
-	UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Download Failed" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
-	[alert show];
+	[delegate alertViewWithTitle:@"Download Failed" message:message cancelTitle:@"OK"];
 }
 
-- (void) updateProgress:(NSNumber *) progress
+- (void) updateProgress:(NSNumber *)progress
 {
 	[delegate progressView].progress = [progress floatValue];
 }
@@ -717,7 +738,7 @@ static sqlite3_stmt *insert_linker_query = nil;
 #pragma mark Utilities
 
 // converts US-style dates to epoch time (feed: @"3/28/1981")
-- (NSInteger) epochForStringDate:(NSString *) stringDate
+- (NSInteger) epochForStringDate:(NSString *)stringDate
 {
 	NSInteger epoch = 0;
 	[stringDate retain];

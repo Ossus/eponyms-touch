@@ -23,7 +23,7 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 @dynamic categoryArrayCache;
 
 
-- (id) initWithNibName:(NSString *) nibNameOrNil bundle:(NSBundle *) nibBundleOrNil
+- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 	if(self) {
@@ -42,17 +42,16 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 	myTableView.autoresizesSubviews = YES;
 	self.view = myTableView;
 	
-	// create the info panel button
+	// add the info panel button
 	UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
 	[infoButton addTarget:delegate action:@selector(showInfoPanel:) forControlEvents:UIControlEventTouchUpInside];
 	UIBarButtonItem *infoBarButton = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
 	
-	// add it
 	self.navigationItem.rightBarButtonItem = infoBarButton;
 	[infoBarButton release];
 }
 
-- (void) viewWillAppear:(BOOL) animated
+- (void) viewWillAppear:(BOOL)animated
 {
 	NSIndexPath *tableSelection = [myTableView indexPathForSelectedRow];
 	[myTableView deselectRowAtIndexPath:tableSelection animated:NO];
@@ -69,7 +68,7 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 }
 
 
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation
 {
 	return YES;
 }
@@ -83,8 +82,8 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 
 - (void) dealloc
 {
-	[categoryArrayCache release];
-	[myTableView release];
+	[categoryArrayCache release];		categoryArrayCache = nil;
+	[myTableView release];				myTableView = nil;
 	
 	[super dealloc];
 }
@@ -93,11 +92,11 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 
 
 #pragma mark KVC
-- (NSArray *) categoryArrayCache
+- (NSArray *)categoryArrayCache
 {
 	return categoryArrayCache;
 }
-- (void) setCategoryArrayCache:(NSArray *) categories
+- (void) setCategoryArrayCache:(NSArray *)categories
 {
 	[categories retain];
 	[categoryArrayCache release];
@@ -109,15 +108,13 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 
 
 #pragma mark UITableView delegate methods
-
-// Return the accessory type to use in the right edge of the tablecells
-- (UITableViewCellAccessoryType) tableView:(UITableView *) tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *) indexPath
+- (UITableViewCellAccessoryType) tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath
 {
 	return UITableViewCellAccessoryDisclosureIndicator;
 }
 
 // table selection changed
-- (void) tableView:(UITableView *) tableView didSelectRowAtIndexPath:(NSIndexPath *) indexPath
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	NSUInteger selectedCategory = [[[categoryArrayCache objectAtIndex:indexPath.row] objectForKey:@"id"] intValue];
 	[delegate loadEponymsOfCategory:selectedCategory containingString:nil animated:YES];
@@ -127,12 +124,12 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 
 
 #pragma mark UITableView datasource methods
-- (NSInteger) tableView:(UITableView *) tableView numberOfRowsInSection:(NSInteger) section
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger) section
 {
 	return [categoryArrayCache count];
 }
 
-- (UITableViewCell *) tableView:(UITableView *) tableView cellForRowAtIndexPath:(NSIndexPath *) indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyCellIdentifier];
 	if(cell == nil) {

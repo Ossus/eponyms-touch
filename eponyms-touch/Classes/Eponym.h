@@ -42,7 +42,7 @@
 + (void) finalizeQueries;
 
 // Init the Eponym with the desired key
-- (id) initWithID:(NSUInteger) eid title:(NSString*) ttl fromDatabase:(sqlite3 *) db;
+- (id) initWithID:(NSUInteger) eid title:(NSString*) ttl fromDatabase:(sqlite3 *)db;
 
 // Loading and unloading. Everything but key and title are wiped from memory on unload
 - (void) load;

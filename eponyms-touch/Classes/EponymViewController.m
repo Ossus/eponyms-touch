@@ -38,7 +38,7 @@
 @synthesize eponymView, eponymTitleLabel, eponymTextView, eponymCategoriesLabel, dateCreatedLabel, dateUpdatedLabel;
 
 
-- (id) initWithNibName:(NSString *) nibNameOrNil bundle:(NSBundle *) nibBundleOrNil
+- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 	if(self) {
@@ -201,7 +201,7 @@
 }
 
 
-- (void) viewWillAppear:(BOOL) animated
+- (void) viewWillAppear:(BOOL)animated
 {
 	// title and text
 	eponymTitleLabel.text = eponymToBeShown.title;
@@ -235,7 +235,7 @@
 }
 
 
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation
 {
 	return YES;		//(interfaceOrientation == UIInterfaceOrientationPortrait);
 }

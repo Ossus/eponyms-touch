@@ -23,7 +23,6 @@
 	UISearchBar *mySearchBar;
 	UIBarButtonItem *initSearchButton;
 	UIBarButtonItem *abortSearchButton;
-	//UIView *mySearchLens;
 	
 	CGFloat atLaunchScrollTo;
 }
@@ -37,10 +36,9 @@
 @property (nonatomic, retain) UISearchBar *mySearchBar;
 @property (nonatomic, retain) UIBarButtonItem *initSearchButton;
 @property (nonatomic, retain) UIBarButtonItem *abortSearchButton;
-//@property (nonatomic, retain) UIView *mySearchLens;
 
 @property (nonatomic, assign) CGFloat atLaunchScrollTo;
 
-- (void) cacheEponyms:(NSArray *) eponyms andHeaders:(NSArray *) sections;
+- (void) cacheEponyms:(NSArray *)eponyms andHeaders:(NSArray *)sections;
 
 @end

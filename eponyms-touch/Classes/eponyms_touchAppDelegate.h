@@ -16,6 +16,7 @@
 @class CategoriesViewController;
 @class ListViewController;
 @class EponymViewController;
+@class InfoViewController;
 @class Eponym;
 
 
@@ -37,9 +38,11 @@
 	CategoriesViewController *categoriesController;
 	ListViewController *listController;
 	EponymViewController *eponymController;
-	
-	BOOL isUpdating;
+	InfoViewController *infoController;
 }
+
+@property (nonatomic, retain) UIWindow *window;
+@property (nonatomic, assign) sqlite3 *database;
 
 @property (nonatomic, assign) NSInteger categoryShown;				// not unsigned since we will be using -1 for no category and 0 for all eponyms
 @property (nonatomic, assign) NSUInteger eponymShown;
@@ -49,15 +52,15 @@
 @property (nonatomic, retain) NSMutableArray *eponymArray;
 @property (nonatomic, retain) NSMutableArray *eponymSectionArray;
 
-@property (nonatomic, retain) UIWindow *window;
 @property (nonatomic, retain) UINavigationController *navigationController;
 
-@property (nonatomic, assign) BOOL isUpdating;
 
-
-- (void) loadDatabaseAnimated:(BOOL) animated reload:(BOOL) as_reload;
-- (void) loadEponymsOfCategory:(NSUInteger) category_id containingString:(NSString *) searchString animated:(BOOL) animated;
-- (void) loadEponym:(Eponym *) eponym animated:(BOOL) animated;
+- (BOOL) connectToDBAndCreateIfNeeded;
+- (void) loadDatabaseAnimated:(BOOL)animated reload:(BOOL)as_reload;
+- (void) loadEponymsOfCategory:(NSUInteger) category_id containingString:(NSString *)searchString animated:(BOOL)animated;
+- (void) loadEponym:(Eponym *)eponym animated:(BOOL)animated;
+- (void) closeMainDatabase;
+- (void) eponymImportFailed;
 
 - (NSString *) databaseFilePath;
 - (NSDictionary *) databaseCreationQueries;

@@ -25,18 +25,15 @@ static NSString *MyCellIdentifier = @"EponymCell";
 
 @implementation ListViewController
 
-@synthesize delegate, myTableView, mySearchBar, initSearchButton, abortSearchButton, atLaunchScrollTo;		// mySearchLens
+@synthesize delegate, myTableView, mySearchBar, initSearchButton, abortSearchButton, atLaunchScrollTo;
 @synthesize eponymArrayCache, eponymSectionArrayCache;
 
 
-- (id) initWithNibName:(NSString *) nibNameOrNil bundle:(NSBundle *) nibBundleOrNil
+- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 	if(self) {
 		self.title = @"Eponyms";
-		
-		// the mini search icon in the section slider to the right
-		//self.mySearchLens = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Lens.png"]];		// section slider does only allow strings
 	}
 	return self;
 }
@@ -49,12 +46,12 @@ static NSString *MyCellIdentifier = @"EponymCell";
 
 - (void) dealloc
 {
-	[eponymArrayCache release];
-	[eponymSectionArrayCache release];
-	[myTableView release];
-	[mySearchBar release];
-	[initSearchButton release];
-	//[mySearchLens release];
+	[eponymArrayCache release];				eponymArrayCache = nil;
+	[eponymSectionArrayCache release];		eponymSectionArrayCache = nil;
+	[myTableView release];					myTableView = nil;
+	[mySearchBar release];					mySearchBar = nil;
+	[initSearchButton release];				initSearchButton = nil;
+	[abortSearchButton release];			abortSearchButton = nil;
 	
 	[super dealloc];
 }
@@ -73,8 +70,8 @@ static NSString *MyCellIdentifier = @"EponymCell";
 	self.view = myTableView;
 	
 	// Create the buttons to toggle search
-	self.initSearchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(initSearch)];
-	self.abortSearchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(abortSearch)];
+	initSearchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(initSearch)];
+	abortSearchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(abortSearch)];
 	self.navigationItem.rightBarButtonItem = initSearchButton;
 }
 
@@ -95,7 +92,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 
 
 #pragma mark GUI
-- (void) switchToSearchMode:(BOOL) switchTo
+- (void) switchToSearchMode:(BOOL)switchTo
 {
 	// switch searchmode on
 	if(switchTo) {
@@ -136,7 +133,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 	[self switchToSearchMode:NO];
 }
 
-- (void) viewWillAppear:(BOOL) animated
+- (void) viewWillAppear:(BOOL)animated
 {
 	// deselect the previously shown eponym
 	NSIndexPath *tableSelection = [myTableView indexPathForSelectedRow];
@@ -165,7 +162,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 	}
 }
 
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation
 {
 	return YES;
 }
@@ -179,13 +176,13 @@ static NSString *MyCellIdentifier = @"EponymCell";
 
 
 #pragma mark Data Cache
-- (void) cacheEponyms:(NSArray *) eponyms andHeaders:(NSArray *) sections
+- (void) cacheEponyms:(NSArray *)eponyms andHeaders:(NSArray *)sections
 {
 	self.eponymArrayCache = eponyms;
 	self.eponymSectionArrayCache = sections	;
 	
 	// !! reload section headers somehow!
-	//[self didChangeValueForKey:@"eponymSectionArrayCache"];
+	//[self didChangeValueForKey:@"eponymSectionArrayCache"];		// does not work
 	[myTableView reloadData];
 }
 #pragma mark -
@@ -193,13 +190,13 @@ static NSString *MyCellIdentifier = @"EponymCell";
 
 
 #pragma mark UITableView delegate methods
-- (UITableViewCellAccessoryType) tableView:(UITableView *) tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *) indexPath
+- (UITableViewCellAccessoryType) tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath
 {
 	return UITableViewCellAccessoryNone;
 }
 
 // table selection changed
-- (void) tableView:(UITableView *) tableView didSelectRowAtIndexPath:(NSIndexPath *) indexPath
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	Eponym *selectedEponym = [[eponymArrayCache objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	[delegate loadEponym:selectedEponym animated:YES];
@@ -209,33 +206,33 @@ static NSString *MyCellIdentifier = @"EponymCell";
 
 
 #pragma mark UITableView datasource methods
-- (NSInteger) numberOfSectionsInTableView:(UITableView *) tableView
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
 	return [eponymArrayCache count];
 }
 
-- (NSArray *) sectionIndexTitlesForTableView:(UITableView *) tableView
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
 	return eponymSectionArrayCache;
 }
 
-/*- (UIView *) tableView:(UITableView *) tableView viewForHeaderInSection:(NSInteger) section
+/*- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger) section
 {
 }*/
 
-- (NSString *) tableView:(UITableView *) tableView titleForHeaderInSection:(NSInteger) section
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger) section
 {
 	return [eponymSectionArrayCache objectAtIndex:section];
 }
 
 
 // eponyms per section
-- (NSInteger) tableView:(UITableView *) tableView numberOfRowsInSection:(NSInteger) section
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger) section
 {
 	return [[eponymArrayCache objectAtIndex:section] count];
 }
 
-- (UITableViewCell *) tableView:(UITableView *) tableView cellForRowAtIndexPath:(NSIndexPath *) indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	NSString *identifier = MyCellIdentifier;
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -252,26 +249,26 @@ static NSString *MyCellIdentifier = @"EponymCell";
 
 
 #pragma mark UISearchBar delegate methods
-- (void) searchBarTextDidBeginEditing:(UISearchBar *) searchBar
+- (void) searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
 }
 
-- (void) searchBarTextDidEndEditing:(UISearchBar *) searchBar
+- (void) searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
 }
 
 // we want live search so we do our searching here, not in the searchBarTextDidEndEditing delegate method
-- (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *) searchText
+- (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
 	[delegate loadEponymsOfCategory:[delegate categoryShown] containingString:searchText animated:NO];
 }
 
-- (void) searchBarSearchButtonClicked:(UISearchBar *) searchBar
+- (void) searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
 	[mySearchBar resignFirstResponder];
 }
 
-- (void) searchBarCancelButtonClicked:(UISearchBar *) searchBar
+- (void) searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
 	[self abortSearch];
 }

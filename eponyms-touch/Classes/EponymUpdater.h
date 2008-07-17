@@ -14,9 +14,12 @@
 #import <UIKit/UIKit.h>
 #import <sqlite3.h>
 
+@class eponyms_touchAppDelegate;
+
 
 @interface EponymUpdater : NSObject {
 	id delegate;
+	eponyms_touchAppDelegate *appDelegate;
 	sqlite3 *database;
 	sqlite3 *memory_database;
 	
@@ -44,6 +47,7 @@
 
 
 @property (nonatomic, retain) id delegate;
+@property (nonatomic, retain) eponyms_touchAppDelegate *appDelegate;
 @property (nonatomic, assign) NSUInteger updateAction;
 
 // Downloading
@@ -53,7 +57,6 @@
 
 @property (nonatomic, retain) NSURLConnection *myConnection;
 @property (nonatomic, retain) NSMutableData *receivedData;
-- (void) startDownloadingWithAction:(NSUInteger) myAction;
 
 // Parsing
 @property (nonatomic, assign) NSInteger eponymCheckLastUpdateTime;
@@ -68,6 +71,8 @@
 @property (nonatomic, retain) NSMutableDictionary *categoriesAlreadyInserted;
 @property (nonatomic, assign) NSUInteger numEponymsParsed;
 
-- (void) createEponymsWithData:(NSData *) XMLData;
+- (id) initWithDelegate:(id) myDelegate;
+- (void) startDownloadingWithAction:(NSUInteger) myAction;
+- (void) createEponymsWithData:(NSData *)XMLData;
 
 @end

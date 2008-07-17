@@ -1,5 +1,5 @@
 //
-//  InfoViewController.h
+//  EponymTextView.h
 //  eponyms-touch
 //
 //  Created by Pascal Pfiffner on 01.07.08.
