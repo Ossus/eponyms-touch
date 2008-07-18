@@ -42,7 +42,6 @@ static sqlite3_stmt *load_query = nil;
 
 - (void) dealloc
 {
-	NSLog(@"eponym dealloc");
 	[self unload];
 	[title release];		title = nil;
 	

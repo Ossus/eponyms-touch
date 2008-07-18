@@ -16,9 +16,12 @@
 
 
 #define CANCEL_IMPORT_TITLE @"Cancel import?"
+#define pPortraitContentMargin 20.0;
+#define pLandscapeContentMargin 10.0;
 
 
 @interface InfoViewController (Private)
+- (void) adjustContentToOrientation;
 - (void) loadEponymXMLFromDisk;
 @end
 
@@ -125,7 +128,7 @@
 
 - (void) setUpdateButtonTitle:(NSString *)title
 {
-	[updateButton setTitle:title forState:(UIControlStateNormal & UIControlStateHighlighted & UIControlStateSelected & UIControlStateDisabled)];
+	[updateButton setTitle:title forState:(UIControlStateNormal & UIControlStateHighlighted & UIControlStateDisabled & UIControlStateSelected & UIControlStateApplication & UIControlStateReserved)];
 }
 
 - (void) setUpdateButtonTitleColor:(UIColor *)color
@@ -210,9 +213,9 @@
 	[self updateLabelsWithDateForLastCheck:lastCheckDate lastUpdate:lastUpdateDate usingEponyms:usingEponymsDate];
 	
 	// version
-	[versionLabel setFont:[UIFont systemFontOfSize:[UIFont smallSystemFontSize]]];
+	[versionLabel setFont:[UIFont boldSystemFontOfSize:[UIFont smallSystemFontSize]]];
 	
-	NSString *version = [NSString stringWithFormat:@"Version %@", [infoPlistDict objectForKey:@"CFBundleVersion"]];
+	NSString *version = [NSString stringWithFormat:@"Version %@ (%@)", [infoPlistDict objectForKey:@"CFBundleVersion"], [infoPlistDict objectForKey:@"SubversionRevision"]];
 	[versionLabel setText:version];
 }
 
@@ -224,11 +227,45 @@
 		
 		[self alertViewWithTitle:title message:message cancelTitle:@"OK"];		// maybe allow postponing first import?
 	}
+	
+	[self adjustContentToOrientation];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	return (interfaceOrientation == UIInterfaceOrientationPortrait);
+	return YES;
+}
+
+- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+	[self adjustContentToOrientation];
+}
+
+- (void) adjustContentToOrientation
+{
+	UIInterfaceOrientation orientation = [self interfaceOrientation];
+	CGFloat screenWidth = topContainer.superview.frame.size.width;
+	CGRect topRect = topContainer.frame;
+	CGRect bottomRect = bottomContainer.frame;
+	
+	// Portrait
+	if((UIInterfaceOrientationPortrait == orientation) || (UIInterfaceOrientationPortraitUpsideDown == orientation)) {
+		topRect.size.width = screenWidth - 2 * pPortraitContentMargin;
+		topRect.origin.x = pPortraitContentMargin;
+		bottomRect.size.width = screenWidth - 2 * pPortraitContentMargin;
+		bottomRect.origin.x = pPortraitContentMargin;
+	}
+	
+	// Landscape
+	else {
+		topRect.size.width = screenWidth / 2 - 2 * pLandscapeContentMargin;
+		topRect.origin.x = pLandscapeContentMargin;
+		bottomRect.size.width = screenWidth / 2 - 2 * pLandscapeContentMargin;
+		bottomRect.origin.x = screenWidth / 2 + pLandscapeContentMargin;
+	}
+	
+	topContainer.frame = topRect;
+	bottomContainer.frame = bottomRect;
 }
 
 - (void) didReceiveMemoryWarning

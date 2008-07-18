@@ -134,6 +134,189 @@
 			EE0B08930E3092BA00F54ADD /* PBXTextBookmark */ = EE0B08930E3092BA00F54ADD /* PBXTextBookmark */;
 			EE0B08940E3092BA00F54ADD /* PBXTextBookmark */ = EE0B08940E3092BA00F54ADD /* PBXTextBookmark */;
 			EE0B08950E3092C200F54ADD /* PBXTextBookmark */ = EE0B08950E3092C200F54ADD /* PBXTextBookmark */;
+			EE0B08990E30A4E400F54ADD /* PBXTextBookmark */ = EE0B08990E30A4E400F54ADD /* PBXTextBookmark */;
+			EE0B089A0E30A4E400F54ADD /* PBXTextBookmark */ = EE0B089A0E30A4E400F54ADD /* PBXTextBookmark */;
+			EE0B089B0E30A4E400F54ADD /* PBXTextBookmark */ = EE0B089B0E30A4E400F54ADD /* PBXTextBookmark */;
+			EE0B089C0E30A4E400F54ADD /* PBXTextBookmark */ = EE0B089C0E30A4E400F54ADD /* PBXTextBookmark */;
+			EE0B089D0E30A54E00F54ADD /* PBXTextBookmark */ = EE0B089D0E30A54E00F54ADD /* PBXTextBookmark */;
+			EE0B08BE0E30A7E500F54ADD /* PBXTextBookmark */ = EE0B08BE0E30A7E500F54ADD /* PBXTextBookmark */;
+			EE0B08C00E30A7E700F54ADD /* PBXTextBookmark */ = EE0B08C00E30A7E700F54ADD /* PBXTextBookmark */;
+			EE0B08C10E30A7E700F54ADD /* PBXTextBookmark */ = EE0B08C10E30A7E700F54ADD /* PBXTextBookmark */;
+			EE0B08C20E30A7E700F54ADD /* PBXTextBookmark */ = EE0B08C20E30A7E700F54ADD /* PBXTextBookmark */;
+			EE0B08C60E30A82700F54ADD /* PBXTextBookmark */ = EE0B08C60E30A82700F54ADD /* PBXTextBookmark */;
+			EE0B08C70E30A82700F54ADD /* PBXTextBookmark */ = EE0B08C70E30A82700F54ADD /* PBXTextBookmark */;
+			EE0B08C90E30A82800F54ADD /* PBXTextBookmark */ = EE0B08C90E30A82800F54ADD /* PBXTextBookmark */;
+			EE0B08CA0E30A82E00F54ADD /* PBXTextBookmark */ = EE0B08CA0E30A82E00F54ADD /* PBXTextBookmark */;
+			EE0B08CC0E30A82F00F54ADD /* PBXTextBookmark */ = EE0B08CC0E30A82F00F54ADD /* PBXTextBookmark */;
+			EE0B08CD0E30A84000F54ADD /* PBXTextBookmark */ = EE0B08CD0E30A84000F54ADD /* PBXTextBookmark */;
+			EE0B08CE0E30A84C00F54ADD /* PBXTextBookmark */ = EE0B08CE0E30A84C00F54ADD /* PBXTextBookmark */;
+			EE0B08D00E30A84E00F54ADD /* PBXTextBookmark */ = EE0B08D00E30A84E00F54ADD /* PBXTextBookmark */;
+			EE0B08D10E30A8CB00F54ADD /* PBXTextBookmark */ = EE0B08D10E30A8CB00F54ADD /* PBXTextBookmark */;
+			EE0B08D30E30A8CD00F54ADD /* PBXTextBookmark */ = EE0B08D30E30A8CD00F54ADD /* PBXTextBookmark */;
+			EE0B08D40E30A91000F54ADD /* PBXTextBookmark */ = EE0B08D40E30A91000F54ADD /* PBXTextBookmark */;
+			EE0B08D60E30A91200F54ADD /* PBXTextBookmark */ = EE0B08D60E30A91200F54ADD /* PBXTextBookmark */;
+			EE0B08D70E30A92400F54ADD /* PBXTextBookmark */ = EE0B08D70E30A92400F54ADD /* PBXTextBookmark */;
+			EE0B08D80E30A9BD00F54ADD /* PBXTextBookmark */ = EE0B08D80E30A9BD00F54ADD /* PBXTextBookmark */;
+			EE0B08D90E30A9BD00F54ADD /* PBXTextBookmark */ = EE0B08D90E30A9BD00F54ADD /* PBXTextBookmark */;
+			EE0B08DA0E30A9BD00F54ADD /* PBXTextBookmark */ = EE0B08DA0E30A9BD00F54ADD /* PBXTextBookmark */;
+			EE0B08DB0E30A9BD00F54ADD /* PBXTextBookmark */ = EE0B08DB0E30A9BD00F54ADD /* PBXTextBookmark */;
+			EE0B08DC0E30A9BD00F54ADD /* PBXTextBookmark */ = EE0B08DC0E30A9BD00F54ADD /* PBXTextBookmark */;
+			EE0B08DD0E30A9CD00F54ADD /* PBXTextBookmark */ = EE0B08DD0E30A9CD00F54ADD /* PBXTextBookmark */;
+			EE0B08DF0E30A9CF00F54ADD /* PBXTextBookmark */ = EE0B08DF0E30A9CF00F54ADD /* PBXTextBookmark */;
+			EE0B08E00E30A9ED00F54ADD /* PBXTextBookmark */ = EE0B08E00E30A9ED00F54ADD /* PBXTextBookmark */;
+			EE0B08E20E30A9FD00F54ADD /* PBXTextBookmark */ = EE0B08E20E30A9FD00F54ADD /* PBXTextBookmark */;
+			EE0B08ED0E30AAC900F54ADD /* PBXTextBookmark */ = EE0B08ED0E30AAC900F54ADD /* PBXTextBookmark */;
+			EE0B08EE0E30AAC900F54ADD /* PBXTextBookmark */ = EE0B08EE0E30AAC900F54ADD /* PBXTextBookmark */;
+			EE0B08F00E30AAE800F54ADD /* PBXTextBookmark */ = EE0B08F00E30AAE800F54ADD /* PBXTextBookmark */;
+			EE0B08F20E30AB3C00F54ADD /* PBXTextBookmark */ = EE0B08F20E30AB3C00F54ADD /* PBXTextBookmark */;
+			EE0B08F60E30C03D00F54ADD /* PBXTextBookmark */ = EE0B08F60E30C03D00F54ADD /* PBXTextBookmark */;
+			EE0B08F70E30C03D00F54ADD /* PBXTextBookmark */ = EE0B08F70E30C03D00F54ADD /* PBXTextBookmark */;
+			EE0B08F80E30C08D00F54ADD /* PBXTextBookmark */ = EE0B08F80E30C08D00F54ADD /* PBXTextBookmark */;
+			EE0B08FA0E30C09200F54ADD /* PBXTextBookmark */ = EE0B08FA0E30C09200F54ADD /* PBXTextBookmark */;
+			EE0B08FB0E30C09D00F54ADD /* PBXTextBookmark */ = EE0B08FB0E30C09D00F54ADD /* PBXTextBookmark */;
+			EE0B08FD0E30C10200F54ADD /* PBXTextBookmark */ = EE0B08FD0E30C10200F54ADD /* PBXTextBookmark */;
+			EE0B08FF0E30C10300F54ADD /* PBXTextBookmark */ = EE0B08FF0E30C10300F54ADD /* PBXTextBookmark */;
+			EE0B09000E30C12900F54ADD /* PBXTextBookmark */ = EE0B09000E30C12900F54ADD /* PBXTextBookmark */;
+			EE0B09020E30C16700F54ADD /* PBXTextBookmark */ = EE0B09020E30C16700F54ADD /* PBXTextBookmark */;
+			EE0B09040E30C16900F54ADD /* PBXTextBookmark */ = EE0B09040E30C16900F54ADD /* PBXTextBookmark */;
+			EE0B09050E30C17900F54ADD /* PBXTextBookmark */ = EE0B09050E30C17900F54ADD /* PBXTextBookmark */;
+			EE0B09070E30C18E00F54ADD /* PBXTextBookmark */ = EE0B09070E30C18E00F54ADD /* PBXTextBookmark */;
+			EE0B09090E30C1BE00F54ADD /* PBXTextBookmark */ = EE0B09090E30C1BE00F54ADD /* PBXTextBookmark */;
+			EE0B090B0E30C1D300F54ADD /* PBXTextBookmark */ = EE0B090B0E30C1D300F54ADD /* PBXTextBookmark */;
+			EE0B090D0E30C1E700F54ADD /* PBXTextBookmark */ = EE0B090D0E30C1E700F54ADD /* PBXTextBookmark */;
+			EE0B09100E30C34300F54ADD /* PBXTextBookmark */ = EE0B09100E30C34300F54ADD /* PBXTextBookmark */;
+			EE0B09110E30C34300F54ADD /* PBXTextBookmark */ = EE0B09110E30C34300F54ADD /* PBXTextBookmark */;
+			EE0B09120E30C34300F54ADD /* PBXTextBookmark */ = EE0B09120E30C34300F54ADD /* PBXTextBookmark */;
+			EE0B09130E30C34300F54ADD /* PBXTextBookmark */ = EE0B09130E30C34300F54ADD /* PBXTextBookmark */;
+			EE0B09140E30C34300F54ADD /* PBXTextBookmark */ = EE0B09140E30C34300F54ADD /* PBXTextBookmark */;
+			EE0B09160E30C34600F54ADD /* PBXTextBookmark */ = EE0B09160E30C34600F54ADD /* PBXTextBookmark */;
+			EE0B09170E30C38600F54ADD /* PBXTextBookmark */ = EE0B09170E30C38600F54ADD /* PBXTextBookmark */;
+			EE0B09190E30C3A600F54ADD /* PBXTextBookmark */ = EE0B09190E30C3A600F54ADD /* PBXTextBookmark */;
+			EE0B091B0E30C3BC00F54ADD /* PBXTextBookmark */ = EE0B091B0E30C3BC00F54ADD /* PBXTextBookmark */;
+			EE0B09220E30C6C500F54ADD /* PBXTextBookmark */ = EE0B09220E30C6C500F54ADD /* PBXTextBookmark */;
+			EE0B09230E30C6C500F54ADD /* PBXTextBookmark */ = EE0B09230E30C6C500F54ADD /* PBXTextBookmark */;
+			EE0B09240E30C6C500F54ADD /* PBXTextBookmark */ = EE0B09240E30C6C500F54ADD /* PBXTextBookmark */;
+			EE0B09250E30C6C500F54ADD /* PBXTextBookmark */ = EE0B09250E30C6C500F54ADD /* PBXTextBookmark */;
+			EE0B09260E30C6C500F54ADD /* PBXTextBookmark */ = EE0B09260E30C6C500F54ADD /* PBXTextBookmark */;
+			EE0B09270E30C6C500F54ADD /* PBXTextBookmark */ = EE0B09270E30C6C500F54ADD /* PBXTextBookmark */;
+			EE0B09280E30C6C500F54ADD /* PBXTextBookmark */ = EE0B09280E30C6C500F54ADD /* PBXTextBookmark */;
+			EE0B09290E30C6C500F54ADD /* PBXTextBookmark */ = EE0B09290E30C6C500F54ADD /* PBXTextBookmark */;
+			EE0B092B0E30C6E300F54ADD /* PBXTextBookmark */ = EE0B092B0E30C6E300F54ADD /* PBXTextBookmark */;
+			EE0B092D0E30C71100F54ADD /* PBXTextBookmark */ = EE0B092D0E30C71100F54ADD /* PBXTextBookmark */;
+			EE0B092F0E30C72B00F54ADD /* PBXTextBookmark */ = EE0B092F0E30C72B00F54ADD /* PBXTextBookmark */;
+			EE0B09340E30C8B800F54ADD /* PBXTextBookmark */ = EE0B09340E30C8B800F54ADD /* PBXTextBookmark */;
+			EE0B09350E30C8B800F54ADD /* PBXTextBookmark */ = EE0B09350E30C8B800F54ADD /* PBXTextBookmark */;
+			EE0B09360E30C8B800F54ADD /* PBXTextBookmark */ = EE0B09360E30C8B800F54ADD /* PBXTextBookmark */;
+			EE0B09370E30C8B800F54ADD /* PBXTextBookmark */ = EE0B09370E30C8B800F54ADD /* PBXTextBookmark */;
+			EE0B093B0E30C9EE00F54ADD /* PBXTextBookmark */ = EE0B093B0E30C9EE00F54ADD /* PBXTextBookmark */;
+			EE0B093C0E30C9EE00F54ADD /* PBXTextBookmark */ = EE0B093C0E30C9EE00F54ADD /* PBXTextBookmark */;
+			EE0B093D0E30C9EE00F54ADD /* PBXTextBookmark */ = EE0B093D0E30C9EE00F54ADD /* PBXTextBookmark */;
+			EE0B093E0E30C9EE00F54ADD /* PBXTextBookmark */ = EE0B093E0E30C9EE00F54ADD /* PBXTextBookmark */;
+			EE0B09410E30CB8300F54ADD /* PlistBookmark */ = EE0B09410E30CB8300F54ADD /* PlistBookmark */;
+			EE0B09420E30CB8300F54ADD /* PBXTextBookmark */ = EE0B09420E30CB8300F54ADD /* PBXTextBookmark */;
+			EE0B09430E30CB8300F54ADD /* PBXTextBookmark */ = EE0B09430E30CB8300F54ADD /* PBXTextBookmark */;
+			EE0B09440E30CB8300F54ADD /* PlistBookmark */ = EE0B09440E30CB8300F54ADD /* PlistBookmark */;
+			EE0B09450E30CB8300F54ADD /* PBXTextBookmark */ = EE0B09450E30CB8300F54ADD /* PBXTextBookmark */;
+			EE0B09500E30CC2400F54ADD /* PBXTextBookmark */ = EE0B09500E30CC2400F54ADD /* PBXTextBookmark */;
+			EE0B09510E30CC2400F54ADD /* PBXTextBookmark */ = EE0B09510E30CC2400F54ADD /* PBXTextBookmark */;
+			EE0B09520E30CC6F00F54ADD /* PBXTextBookmark */ = EE0B09520E30CC6F00F54ADD /* PBXTextBookmark */;
+			EE0B09530E30CC6F00F54ADD /* PBXTextBookmark */ = EE0B09530E30CC6F00F54ADD /* PBXTextBookmark */;
+			EE0B09540E30CC6F00F54ADD /* PBXTextBookmark */ = EE0B09540E30CC6F00F54ADD /* PBXTextBookmark */;
+			EE0B09550E30CC6F00F54ADD /* PBXTextBookmark */ = EE0B09550E30CC6F00F54ADD /* PBXTextBookmark */;
+			EE0B09560E30CC6F00F54ADD /* PBXTextBookmark */ = EE0B09560E30CC6F00F54ADD /* PBXTextBookmark */;
+			EE0B09570E30CC6F00F54ADD /* PBXTextBookmark */ = EE0B09570E30CC6F00F54ADD /* PBXTextBookmark */;
+			EE0B09580E30CC6F00F54ADD /* PBXTextBookmark */ = EE0B09580E30CC6F00F54ADD /* PBXTextBookmark */;
+			EE0B09590E30CC6F00F54ADD /* PBXTextBookmark */ = EE0B09590E30CC6F00F54ADD /* PBXTextBookmark */;
+			EE0B095A0E30CC6F00F54ADD /* PBXTextBookmark */ = EE0B095A0E30CC6F00F54ADD /* PBXTextBookmark */;
+			EE0B095B0E30CC6F00F54ADD /* PBXTextBookmark */ = EE0B095B0E30CC6F00F54ADD /* PBXTextBookmark */;
+			EE0B095C0E30CC6F00F54ADD /* PBXTextBookmark */ = EE0B095C0E30CC6F00F54ADD /* PBXTextBookmark */;
+			EE0B095E0E30CC7300F54ADD /* PBXTextBookmark */ = EE0B095E0E30CC7300F54ADD /* PBXTextBookmark */;
+			EE0B09600E30CC9200F54ADD /* PBXTextBookmark */ = EE0B09600E30CC9200F54ADD /* PBXTextBookmark */;
+			EE0B09610E30CC9200F54ADD /* PBXTextBookmark */ = EE0B09610E30CC9200F54ADD /* PBXTextBookmark */;
+			EE0B09620E30CC9200F54ADD /* PBXTextBookmark */ = EE0B09620E30CC9200F54ADD /* PBXTextBookmark */;
+			EE0B09640E30CCB700F54ADD /* PBXTextBookmark */ = EE0B09640E30CCB700F54ADD /* PBXTextBookmark */;
+			EE0B09650E30CCB700F54ADD /* PBXTextBookmark */ = EE0B09650E30CCB700F54ADD /* PBXTextBookmark */;
+			EE0B09660E30CCB700F54ADD /* PBXTextBookmark */ = EE0B09660E30CCB700F54ADD /* PBXTextBookmark */;
+			EE0B09670E30CCB700F54ADD /* PBXTextBookmark */ = EE0B09670E30CCB700F54ADD /* PBXTextBookmark */;
+			EE0B096A0E30CCB800F54ADD /* PBXTextBookmark */ = EE0B096A0E30CCB800F54ADD /* PBXTextBookmark */;
+			EE0B096B0E30CCBA00F54ADD /* PBXTextBookmark */ = EE0B096B0E30CCBA00F54ADD /* PBXTextBookmark */;
+			EE0B096C0E30CD3C00F54ADD /* PBXTextBookmark */ = EE0B096C0E30CD3C00F54ADD /* PBXTextBookmark */;
+			EE0B096D0E30CD3C00F54ADD /* PBXTextBookmark */ = EE0B096D0E30CD3C00F54ADD /* PBXTextBookmark */;
+			EE0B096F0E30CD9800F54ADD /* PBXTextBookmark */ = EE0B096F0E30CD9800F54ADD /* PBXTextBookmark */;
+			EE0B09700E30CD9800F54ADD /* PBXTextBookmark */ = EE0B09700E30CD9800F54ADD /* PBXTextBookmark */;
+			EE0B09710E30CD9800F54ADD /* PBXTextBookmark */ = EE0B09710E30CD9800F54ADD /* PBXTextBookmark */;
+			EE0B09720E30CD9800F54ADD /* PBXTextBookmark */ = EE0B09720E30CD9800F54ADD /* PBXTextBookmark */;
+			EE0B09730E30CD9800F54ADD /* PBXTextBookmark */ = EE0B09730E30CD9800F54ADD /* PBXTextBookmark */;
+			EE0B09740E30CD9800F54ADD /* PBXTextBookmark */ = EE0B09740E30CD9800F54ADD /* PBXTextBookmark */;
+			EE0B09750E30CD9800F54ADD /* PBXTextBookmark */ = EE0B09750E30CD9800F54ADD /* PBXTextBookmark */;
+			EE0B09770E30CD9A00F54ADD /* PBXTextBookmark */ = EE0B09770E30CD9A00F54ADD /* PBXTextBookmark */;
+			EE0B09780E30CDD400F54ADD /* PBXTextBookmark */ = EE0B09780E30CDD400F54ADD /* PBXTextBookmark */;
+			EE0B09790E30CDD400F54ADD /* PBXTextBookmark */ = EE0B09790E30CDD400F54ADD /* PBXTextBookmark */;
+			EE0B097A0E30CE3F00F54ADD /* PBXTextBookmark */ = EE0B097A0E30CE3F00F54ADD /* PBXTextBookmark */;
+			EE0B097B0E30CE3F00F54ADD /* PBXTextBookmark */ = EE0B097B0E30CE3F00F54ADD /* PBXTextBookmark */;
+			EE0B097C0E30CE3F00F54ADD /* PBXTextBookmark */ = EE0B097C0E30CE3F00F54ADD /* PBXTextBookmark */;
+			EE0B097D0E30CE3F00F54ADD /* PBXTextBookmark */ = EE0B097D0E30CE3F00F54ADD /* PBXTextBookmark */;
+			EE0B097E0E30CE3F00F54ADD /* PBXTextBookmark */ = EE0B097E0E30CE3F00F54ADD /* PBXTextBookmark */;
+			EE0B097F0E30CE3F00F54ADD /* PBXTextBookmark */ = EE0B097F0E30CE3F00F54ADD /* PBXTextBookmark */;
+			EE0B09900E30F8A900F54ADD /* PBXTextBookmark */ = EE0B09900E30F8A900F54ADD /* PBXTextBookmark */;
+			EE0B09910E30F8A900F54ADD /* PBXTextBookmark */ = EE0B09910E30F8A900F54ADD /* PBXTextBookmark */;
+			EE0B09920E30F8A900F54ADD /* PBXTextBookmark */ = EE0B09920E30F8A900F54ADD /* PBXTextBookmark */;
+			EE0B09930E30F8A900F54ADD /* PlistBookmark */ = EE0B09930E30F8A900F54ADD /* PlistBookmark */;
+			EE0B09940E30F8A900F54ADD /* PBXTextBookmark */ = EE0B09940E30F8A900F54ADD /* PBXTextBookmark */;
+			EE0B09950E30F8A900F54ADD /* PBXTextBookmark */ = EE0B09950E30F8A900F54ADD /* PBXTextBookmark */;
+			EE0B09960E30F8A900F54ADD /* PBXTextBookmark */ = EE0B09960E30F8A900F54ADD /* PBXTextBookmark */;
+			EE0B09970E30F8A900F54ADD /* PlistBookmark */ = EE0B09970E30F8A900F54ADD /* PlistBookmark */;
+			EE0B09980E30F8A900F54ADD /* PBXTextBookmark */ = EE0B09980E30F8A900F54ADD /* PBXTextBookmark */;
+			EE0B09990E30F8A900F54ADD /* PlistBookmark */ = EE0B09990E30F8A900F54ADD /* PlistBookmark */;
+			EE0B099A0E30F8A900F54ADD /* PBXTextBookmark */ = EE0B099A0E30F8A900F54ADD /* PBXTextBookmark */;
+			EE0B099B0E30F8A900F54ADD /* PlistBookmark */ = EE0B099B0E30F8A900F54ADD /* PlistBookmark */;
+			EE0B099F0E3105B200F54ADD /* PlistBookmark */ = EE0B099F0E3105B200F54ADD /* PlistBookmark */;
+			EE0B09A00E3105B200F54ADD /* PBXTextBookmark */ = EE0B09A00E3105B200F54ADD /* PBXTextBookmark */;
+			EE0B09A10E3105B200F54ADD /* PlistBookmark */ = EE0B09A10E3105B200F54ADD /* PlistBookmark */;
+			EE0B09A20E3105B200F54ADD /* PBXTextBookmark */ = EE0B09A20E3105B200F54ADD /* PBXTextBookmark */;
+			EE0B09A40E3105C100F54ADD /* PBXTextBookmark */ = EE0B09A40E3105C100F54ADD /* PBXTextBookmark */;
+			EE0B09A50E3105E200F54ADD /* PBXTextBookmark */ = EE0B09A50E3105E200F54ADD /* PBXTextBookmark */;
+			EE0B09A70E3105E200F54ADD /* PBXTextBookmark */ = EE0B09A70E3105E200F54ADD /* PBXTextBookmark */;
+			EE0B09A80E3105E200F54ADD /* PBXTextBookmark */ = EE0B09A80E3105E200F54ADD /* PBXTextBookmark */;
+			EE0B09A90E3105E200F54ADD /* PBXTextBookmark */ = EE0B09A90E3105E200F54ADD /* PBXTextBookmark */;
+			EE0B09AA0E3105E200F54ADD /* PBXTextBookmark */ = EE0B09AA0E3105E200F54ADD /* PBXTextBookmark */;
+			EE0B09AB0E3105E200F54ADD /* PBXTextBookmark */ = EE0B09AB0E3105E200F54ADD /* PBXTextBookmark */;
+			EE0B09AC0E3105E200F54ADD /* PBXTextBookmark */ = EE0B09AC0E3105E200F54ADD /* PBXTextBookmark */;
+			EE0B09AE0E31061A00F54ADD /* PBXTextBookmark */ = EE0B09AE0E31061A00F54ADD /* PBXTextBookmark */;
+			EE0B09B00E31062700F54ADD /* PBXTextBookmark */ = EE0B09B00E31062700F54ADD /* PBXTextBookmark */;
+			EE0B09B20E31063F00F54ADD /* PBXTextBookmark */ = EE0B09B20E31063F00F54ADD /* PBXTextBookmark */;
+			EE0B09B30E31063F00F54ADD /* PBXTextBookmark */ = EE0B09B30E31063F00F54ADD /* PBXTextBookmark */;
+			EE0B09B40E31063F00F54ADD /* PBXTextBookmark */ = EE0B09B40E31063F00F54ADD /* PBXTextBookmark */;
+			EE0B09B50E31064B00F54ADD /* PBXTextBookmark */ = EE0B09B50E31064B00F54ADD /* PBXTextBookmark */;
+			EE0B09B60E31064B00F54ADD /* PBXTextBookmark */ = EE0B09B60E31064B00F54ADD /* PBXTextBookmark */;
+			EE0B09B70E31064B00F54ADD /* PBXTextBookmark */ = EE0B09B70E31064B00F54ADD /* PBXTextBookmark */;
+			EE0B09B80E31064B00F54ADD /* PBXTextBookmark */ = EE0B09B80E31064B00F54ADD /* PBXTextBookmark */;
+			EE0B09B90E31065900F54ADD /* PBXTextBookmark */ = EE0B09B90E31065900F54ADD /* PBXTextBookmark */;
+			EE0B09BA0E31065900F54ADD /* PBXTextBookmark */ = EE0B09BA0E31065900F54ADD /* PBXTextBookmark */;
+			EE0B09BB0E31066F00F54ADD /* PBXTextBookmark */ = EE0B09BB0E31066F00F54ADD /* PBXTextBookmark */;
+			EE0B09BC0E31066F00F54ADD /* PBXTextBookmark */ = EE0B09BC0E31066F00F54ADD /* PBXTextBookmark */;
+			EE0B09BD0E31066F00F54ADD /* PBXTextBookmark */ = EE0B09BD0E31066F00F54ADD /* PBXTextBookmark */;
+			EE0B09BE0E31066F00F54ADD /* PBXTextBookmark */ = EE0B09BE0E31066F00F54ADD /* PBXTextBookmark */;
+			EE0B09BF0E31067200F54ADD /* PBXTextBookmark */ = EE0B09BF0E31067200F54ADD /* PBXTextBookmark */;
+			EE0B09C00E31067200F54ADD /* PBXTextBookmark */ = EE0B09C00E31067200F54ADD /* PBXTextBookmark */;
+			EE0B09C10E31067D00F54ADD /* PBXTextBookmark */ = EE0B09C10E31067D00F54ADD /* PBXTextBookmark */;
+			EE0B09C20E31069200F54ADD /* PBXTextBookmark */ = EE0B09C20E31069200F54ADD /* PBXTextBookmark */;
+			EE0B09C40E3106AB00F54ADD /* PBXTextBookmark */ = EE0B09C40E3106AB00F54ADD /* PBXTextBookmark */;
+			EE0B09C90E3107F500F54ADD /* PBXTextBookmark */ = EE0B09C90E3107F500F54ADD /* PBXTextBookmark */;
+			EE0B09CB0E310A7000F54ADD /* PBXTextBookmark */ = EE0B09CB0E310A7000F54ADD /* PBXTextBookmark */;
+			EE0B09CC0E310A7000F54ADD /* PBXTextBookmark */ = EE0B09CC0E310A7000F54ADD /* PBXTextBookmark */;
+			EE0B09CD0E310A7000F54ADD /* PBXTextBookmark */ = EE0B09CD0E310A7000F54ADD /* PBXTextBookmark */;
+			EE0B09CE0E310A7000F54ADD /* PBXTextBookmark */ = EE0B09CE0E310A7000F54ADD /* PBXTextBookmark */;
+			EE0B09CF0E310A7000F54ADD /* PBXTextBookmark */ = EE0B09CF0E310A7000F54ADD /* PBXTextBookmark */;
+			EE0B09D00E310A7000F54ADD /* PBXTextBookmark */ = EE0B09D00E310A7000F54ADD /* PBXTextBookmark */;
+			EE0B09D10E310A7000F54ADD /* PBXTextBookmark */ = EE0B09D10E310A7000F54ADD /* PBXTextBookmark */;
+			EE0B09D20E310A7000F54ADD /* PBXTextBookmark */ = EE0B09D20E310A7000F54ADD /* PBXTextBookmark */;
+			EE0B09D30E310A7000F54ADD /* PBXTextBookmark */ = EE0B09D30E310A7000F54ADD /* PBXTextBookmark */;
+			EE0B09D40E310A7000F54ADD /* PBXTextBookmark */ = EE0B09D40E310A7000F54ADD /* PBXTextBookmark */;
+			EE0B09D50E310A7000F54ADD /* PBXTextBookmark */ = EE0B09D50E310A7000F54ADD /* PBXTextBookmark */;
+			EE0B09D60E310A7000F54ADD /* PBXTextBookmark */ = EE0B09D60E310A7000F54ADD /* PBXTextBookmark */;
+			EE0B09D70E310A7000F54ADD /* PBXTextBookmark */ = EE0B09D70E310A7000F54ADD /* PBXTextBookmark */;
+			EE0B09DB0E310B1000F54ADD /* PBXTextBookmark */ = EE0B09DB0E310B1000F54ADD /* PBXTextBookmark */;
 			EE1442C80E2372AB003EA64C = EE1442C80E2372AB003EA64C /* PBXBookmark */;
 			EE1442CB0E2372AB003EA64C = EE1442CB0E2372AB003EA64C /* PBXBookmark */;
 			EE1442D10E2372C2003EA64C = EE1442D10E2372C2003EA64C /* PBXBookmark */;
@@ -885,6 +1068,11 @@
 		name = EponymTextView.m;
 		path = "/Users/pp/Programming/Cocoa/eponyms-touch/Classes/../EponymTextView.m";
 		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {963, 1218}}";
+			sepNavSelRange = "{21, 0}";
+			sepNavVisRange = "{0, 1994}";
+		};
 	};
 	EE07C9120E2C910B006F7F8A /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -926,6 +1114,11 @@
 		name = EponymViewController.m;
 		path = "/Users/pp/Programming/Cocoa/eponyms-touch/Classes/EponymViewController.m";
 		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {963, 3178}}";
+			sepNavSelRange = "{6495, 0}";
+			sepNavVisRange = "{5389, 1741}";
+		};
 	};
 	EE07CA0A0E2CA56D006F7F8A /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -1012,7 +1205,7 @@
 		fRef = EE4B76160E2F4C2300F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 584";
 		rLen = 0;
-		rLoc = 18869;
+		rLoc = 18862;
 		rType = 0;
 		vrLen = 2116;
 		vrLoc = 17966;
@@ -1032,7 +1225,7 @@
 		fRef = EE4B76160E2F4C2300F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 584";
 		rLen = 0;
-		rLoc = 18869;
+		rLoc = 18862;
 		rType = 0;
 		vrLen = 2116;
 		vrLoc = 17966;
@@ -1042,7 +1235,7 @@
 		fRef = EE4B76160E2F4C2300F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 584";
 		rLen = 0;
-		rLoc = 18869;
+		rLoc = 18862;
 		rType = 0;
 		vrLen = 2111;
 		vrLoc = 17966;
@@ -1052,7 +1245,7 @@
 		fRef = EE4B76160E2F4C2300F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 584";
 		rLen = 0;
-		rLoc = 18869;
+		rLoc = 18862;
 		rType = 0;
 		vrLen = 709;
 		vrLoc = 18718;
@@ -1062,7 +1255,7 @@
 		fRef = EE4B76160E2F4C2300F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 378";
 		rLen = 66;
-		rLoc = 12077;
+		rLoc = 12070;
 		rType = 0;
 		vrLen = 1781;
 		vrLoc = 8565;
@@ -1072,7 +1265,7 @@
 		fRef = EE4B76160E2F4C2300F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 378";
 		rLen = 66;
-		rLoc = 12077;
+		rLoc = 12070;
 		rType = 0;
 		vrLen = 392;
 		vrLoc = 9954;
@@ -1082,7 +1275,7 @@
 		fRef = EE4B76160E2F4C2300F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 378";
 		rLen = 66;
-		rLoc = 12077;
+		rLoc = 12070;
 		rType = 0;
 		vrLen = 1896;
 		vrLoc = 9133;
@@ -1092,7 +1285,7 @@
 		fRef = EEAB025A0E2E5EFC00D84A8A /* InfoViewController.m */;
 		name = "InfoViewController.m: 30";
 		rLen = 8;
-		rLoc = 557;
+		rLoc = 669;
 		rType = 0;
 		vrLen = 1812;
 		vrLoc = 0;
@@ -1102,7 +1295,7 @@
 		fRef = EE4B76160E2F4C2300F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 378";
 		rLen = 66;
-		rLoc = 12077;
+		rLoc = 12070;
 		rType = 0;
 		vrLen = 1896;
 		vrLoc = 9133;
@@ -1112,7 +1305,7 @@
 		fRef = EEAB025A0E2E5EFC00D84A8A /* InfoViewController.m */;
 		name = "InfoViewController.m: 71";
 		rLen = 19;
-		rLoc = 2124;
+		rLoc = 2236;
 		rType = 0;
 		vrLen = 1597;
 		vrLoc = 1361;
@@ -1122,7 +1315,7 @@
 		fRef = EE4B76160E2F4C2300F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 378";
 		rLen = 66;
-		rLoc = 12077;
+		rLoc = 12070;
 		rType = 0;
 		vrLen = 392;
 		vrLoc = 9954;
@@ -1132,7 +1325,7 @@
 		fRef = EEAB025A0E2E5EFC00D84A8A /* InfoViewController.m */;
 		name = "InfoViewController.m: 71";
 		rLen = 19;
-		rLoc = 2124;
+		rLoc = 2236;
 		rType = 0;
 		vrLen = 280;
 		vrLoc = 1955;
@@ -1142,7 +1335,7 @@
 		fRef = EEAB025A0E2E5EFC00D84A8A /* InfoViewController.m */;
 		name = "InfoViewController.m: 78";
 		rLen = 0;
-		rLoc = 2235;
+		rLoc = 2347;
 		rType = 0;
 		vrLen = 1549;
 		vrLoc = 1361;
@@ -1152,7 +1345,7 @@
 		fRef = EEAB025A0E2E5EFC00D84A8A /* InfoViewController.m */;
 		name = "InfoViewController.m: 78";
 		rLen = 0;
-		rLoc = 2235;
+		rLoc = 2347;
 		rType = 0;
 		vrLen = 1441;
 		vrLoc = 1613;
@@ -1162,7 +1355,7 @@
 		fRef = EEAB025A0E2E5EFC00D84A8A /* InfoViewController.m */;
 		name = "InfoViewController.m: 78";
 		rLen = 0;
-		rLoc = 2235;
+		rLoc = 2347;
 		rType = 0;
 		vrLen = 255;
 		vrLoc = 1955;
@@ -1172,7 +1365,7 @@
 		fRef = EEAB025A0E2E5EFC00D84A8A /* InfoViewController.m */;
 		name = "InfoViewController.m: 78";
 		rLen = 0;
-		rLoc = 2236;
+		rLoc = 2348;
 		rType = 0;
 		vrLen = 1564;
 		vrLoc = 1613;
@@ -1182,7 +1375,7 @@
 		fRef = EE4B76160E2F4C2300F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 378";
 		rLen = 66;
-		rLoc = 12077;
+		rLoc = 12070;
 		rType = 0;
 		vrLen = 1896;
 		vrLoc = 9133;
@@ -1192,7 +1385,7 @@
 		fRef = EEAB025A0E2E5EFC00D84A8A /* InfoViewController.m */;
 		name = "InfoViewController.m: 78";
 		rLen = 0;
-		rLoc = 2236;
+		rLoc = 2348;
 		rType = 0;
 		vrLen = 1564;
 		vrLoc = 1613;
@@ -1232,7 +1425,7 @@
 		fRef = EEAB025A0E2E5EFC00D84A8A /* InfoViewController.m */;
 		name = "InfoViewController.m: 78";
 		rLen = 0;
-		rLoc = 2236;
+		rLoc = 2348;
 		rType = 0;
 		vrLen = 255;
 		vrLoc = 1955;
@@ -1256,6 +1449,1891 @@
 		rType = 0;
 		vrLen = 2035;
 		vrLoc = 8988;
+	};
+	EE0B08990E30A4E400F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE4B76160E2F4C2300F7B157 /* EponymUpdater.m */;
+		name = "EponymUpdater.m: 308";
+		rLen = 0;
+		rLoc = 10063;
+		rType = 0;
+		vrLen = 1856;
+		vrLoc = 8988;
+	};
+	EE0B089A0E30A4E400F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEAB025A0E2E5EFC00D84A8A /* InfoViewController.m */;
+		name = "InfoViewController.m: 78";
+		rLen = 0;
+		rLoc = 2348;
+		rType = 0;
+		vrLen = 1404;
+		vrLoc = 1613;
+	};
+	EE0B089B0E30A4E400F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE4B76160E2F4C2300F7B157 /* EponymUpdater.m */;
+		name = "EponymUpdater.m: 308";
+		rLen = 0;
+		rLoc = 10063;
+		rType = 0;
+		vrLen = 1856;
+		vrLoc = 8988;
+	};
+	EE0B089C0E30A4E400F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEAB025A0E2E5EFC00D84A8A /* InfoViewController.m */;
+		name = "InfoViewController.m: 192";
+		rLen = 0;
+		rLoc = 5674;
+		rType = 0;
+		vrLen = 1737;
+		vrLoc = 5371;
+	};
+	EE0B089D0E30A54E00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEAB025A0E2E5EFC00D84A8A /* InfoViewController.m */;
+		name = "InfoViewController.m: 193";
+		rLen = 0;
+		rLoc = 5674;
+		rType = 0;
+		vrLen = 1791;
+		vrLoc = 5371;
+	};
+	EE0B08BE0E30A7E500F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEAB025A0E2E5EFC00D84A8A /* InfoViewController.m */;
+		name = "InfoViewController.m: 237";
+		rLen = 0;
+		rLoc = 7331;
+		rType = 0;
+		vrLen = 2007;
+		vrLoc = 5963;
+	};
+	EE0B08C00E30A7E700F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE4B76160E2F4C2300F7B157 /* EponymUpdater.m */;
+		name = "EponymUpdater.m: 308";
+		rLen = 0;
+		rLoc = 10063;
+		rType = 0;
+		vrLen = 509;
+		vrLoc = 9810;
+	};
+	EE0B08C10E30A7E700F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEAB025A0E2E5EFC00D84A8A /* InfoViewController.m */;
+		name = "InfoViewController.m: 237";
+		rLen = 0;
+		rLoc = 7331;
+		rType = 0;
+		vrLen = 579;
+		vrLoc = 7205;
+	};
+	EE0B08C20E30A7E700F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEAB025A0E2E5EFC00D84A8A /* InfoViewController.m */;
+		name = "InfoViewController.m: 237";
+		rLen = 0;
+		rLoc = 7331;
+		rType = 0;
+		vrLen = 1395;
+		vrLoc = 6241;
+	};
+	EE0B08C30E30A7E900F54ADD /* InfoViewController.m */ = {
+		isa = PBXFileReference;
+		name = InfoViewController.m;
+		path = "/Users/pp/Programming/Cocoa/eponyms-touch/Classes/../InfoViewController.m";
+		sourceTree = "<absolute>";
+	};
+	EE0B08C50E30A7E900F54ADD /* InfoViewController.m */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.objc;
+		name = InfoViewController.m;
+		path = "/Users/pp/Programming/Cocoa/eponyms-touch/Classes/../InfoViewController.m";
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {963, 4872}}";
+			sepNavSelRange = "{7809, 0}";
+			sepNavVisRange = "{6051, 2027}";
+		};
+	};
+	EE0B08C60E30A82700F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08C30E30A7E900F54ADD /* InfoViewController.m */;
+		rLen = 0;
+		rLoc = 231;
+		rType = 1;
+	};
+	EE0B08C70E30A82700F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08C50E30A7E900F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 236";
+		rLen = 0;
+		rLoc = 7331;
+		rType = 0;
+		vrLen = 1304;
+		vrLoc = 6322;
+	};
+	EE0B08C90E30A82800F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08C50E30A7E900F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 236";
+		rLen = 0;
+		rLoc = 7331;
+		rType = 0;
+		vrLen = 434;
+		vrLoc = 7157;
+	};
+	EE0B08CA0E30A82E00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08C50E30A7E900F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 237";
+		rLen = 0;
+		rLoc = 7331;
+		rType = 0;
+		vrLen = 1095;
+		vrLoc = 6696;
+	};
+	EE0B08CC0E30A82F00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08C50E30A7E900F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 237";
+		rLen = 0;
+		rLoc = 7331;
+		rType = 0;
+		vrLen = 982;
+		vrLoc = 6809;
+	};
+	EE0B08CD0E30A84000F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08C50E30A7E900F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 237";
+		rLen = 0;
+		rLoc = 7331;
+		rType = 0;
+		vrLen = 542;
+		vrLoc = 7047;
+	};
+	EE0B08CE0E30A84C00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08C50E30A7E900F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 236";
+		rLen = 0;
+		rLoc = 7331;
+		rType = 0;
+		vrLen = 1695;
+		vrLoc = 6809;
+	};
+	EE0B08D00E30A84E00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08C50E30A7E900F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 236";
+		rLen = 0;
+		rLoc = 7331;
+		rType = 0;
+		vrLen = 1742;
+		vrLoc = 6239;
+	};
+	EE0B08D10E30A8CB00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08C50E30A7E900F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 236";
+		rLen = 0;
+		rLoc = 7331;
+		rType = 0;
+		vrLen = 438;
+		vrLoc = 7157;
+	};
+	EE0B08D30E30A8CD00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08C50E30A7E900F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 236";
+		rLen = 0;
+		rLoc = 7331;
+		rType = 0;
+		vrLen = 1847;
+		vrLoc = 6239;
+	};
+	EE0B08D40E30A91000F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08C50E30A7E900F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 236";
+		rLen = 0;
+		rLoc = 7331;
+		rType = 0;
+		vrLen = 1847;
+		vrLoc = 6239;
+	};
+	EE0B08D60E30A91200F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08C50E30A7E900F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 236";
+		rLen = 0;
+		rLoc = 7331;
+		rType = 0;
+		vrLen = 1742;
+		vrLoc = 6239;
+	};
+	EE0B08D70E30A92400F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08C50E30A7E900F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 236";
+		rLen = 0;
+		rLoc = 7331;
+		rType = 0;
+		vrLen = 437;
+		vrLoc = 7157;
+	};
+	EE0B08D80E30A9BD00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE2DE6B80E1AE38200D97653 /* InfoViewController.h */;
+		name = "InfoViewController.h: 37";
+		rLen = 0;
+		rLoc = 817;
+		rType = 0;
+		vrLen = 1491;
+		vrLoc = 363;
+	};
+	EE0B08D90E30A9BD00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08C50E30A7E900F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 193";
+		rLen = 0;
+		rLoc = 5674;
+		rType = 0;
+		vrLen = 2000;
+		vrLoc = 5429;
+	};
+	EE0B08DA0E30A9BD00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08C50E30A7E900F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 193";
+		rLen = 0;
+		rLoc = 5674;
+		rType = 0;
+		vrLen = 2000;
+		vrLoc = 5429;
+	};
+	EE0B08DB0E30A9BD00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE2DE6B80E1AE38200D97653 /* InfoViewController.h */;
+		name = "InfoViewController.h: 37";
+		rLen = 0;
+		rLoc = 817;
+		rType = 0;
+		vrLen = 1491;
+		vrLoc = 363;
+	};
+	EE0B08DC0E30A9BD00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08C50E30A7E900F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 193";
+		rLen = 0;
+		rLoc = 5674;
+		rType = 0;
+		vrLen = 2250;
+		vrLoc = 5429;
+	};
+	EE0B08DD0E30A9CD00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08C50E30A7E900F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 193";
+		rLen = 0;
+		rLoc = 5674;
+		rType = 0;
+		vrLen = 2250;
+		vrLoc = 5429;
+	};
+	EE0B08DF0E30A9CF00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08C50E30A7E900F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 193";
+		rLen = 0;
+		rLoc = 5674;
+		rType = 0;
+		vrLen = 2036;
+		vrLoc = 5044;
+	};
+	EE0B08E00E30A9ED00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08C50E30A7E900F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 193";
+		rLen = 0;
+		rLoc = 5674;
+		rType = 0;
+		vrLen = 564;
+		vrLoc = 7115;
+	};
+	EE0B08E20E30A9FD00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08C50E30A7E900F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 243";
+		rLen = 0;
+		rLoc = 7440;
+		rType = 0;
+		vrLen = 2027;
+		vrLoc = 6051;
+	};
+	EE0B08E70E30AAC300F54ADD /* InfoViewController.m */ = {
+		isa = PBXFileReference;
+		name = InfoViewController.m;
+		path = "/Users/pp/Programming/Cocoa/eponyms-touch/Classes/../InfoViewController.m";
+		sourceTree = "<absolute>";
+	};
+	EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.objc;
+		name = InfoViewController.m;
+		path = "/Users/pp/Programming/Cocoa/eponyms-touch/Classes/../InfoViewController.m";
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1202, 5418}}";
+			sepNavSelRange = "{7276, 0}";
+			sepNavVisRange = "{5557, 450}";
+		};
+	};
+	EE0B08ED0E30AAC900F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08E70E30AAC300F54ADD /* InfoViewController.m */;
+		rLen = 0;
+		rLoc = 231;
+		rType = 1;
+	};
+	EE0B08EE0E30AAC900F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 237";
+		rLen = 0;
+		rLoc = 7331;
+		rType = 0;
+		vrLen = 2100;
+		vrLoc = 6051;
+	};
+	EE0B08F00E30AAE800F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 236";
+		rLen = 0;
+		rLoc = 7329;
+		rType = 0;
+		vrLen = 2088;
+		vrLoc = 6051;
+	};
+	EE0B08F20E30AB3C00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 238";
+		rLen = 0;
+		rLoc = 7329;
+		rType = 0;
+		vrLen = 2040;
+		vrLoc = 6051;
+	};
+	EE0B08F60E30C03D00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "error: syntax error before '-' token";
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		rLen = 1;
+		rLoc = 270;
+		rType = 1;
+	};
+	EE0B08F70E30C03D00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 239";
+		rLen = 0;
+		rLoc = 7573;
+		rType = 0;
+		vrLen = 1655;
+		vrLoc = 7080;
+	};
+	EE0B08F80E30C08D00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 240";
+		rLen = 0;
+		rLoc = 7538;
+		rType = 0;
+		vrLen = 1631;
+		vrLoc = 7080;
+	};
+	EE0B08FA0E30C09200F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 240";
+		rLen = 0;
+		rLoc = 7538;
+		rType = 0;
+		vrLen = 1626;
+		vrLoc = 6871;
+	};
+	EE0B08FB0E30C09D00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 240";
+		rLen = 0;
+		rLoc = 7538;
+		rType = 0;
+		vrLen = 494;
+		vrLoc = 7115;
+	};
+	EE0B08FD0E30C10200F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 240";
+		rLen = 0;
+		rLoc = 7538;
+		rType = 0;
+		vrLen = 1911;
+		vrLoc = 6759;
+	};
+	EE0B08FF0E30C10300F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 240";
+		rLen = 0;
+		rLoc = 7538;
+		rType = 0;
+		vrLen = 1857;
+		vrLoc = 6759;
+	};
+	EE0B09000E30C12900F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 240";
+		rLen = 0;
+		rLoc = 7538;
+		rType = 0;
+		vrLen = 494;
+		vrLoc = 7115;
+	};
+	EE0B09020E30C16700F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 245";
+		rLen = 0;
+		rLoc = 7573;
+		rType = 0;
+		vrLen = 1890;
+		vrLoc = 6759;
+	};
+	EE0B09040E30C16900F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 245";
+		rLen = 0;
+		rLoc = 7573;
+		rType = 0;
+		vrLen = 1810;
+		vrLoc = 6967;
+	};
+	EE0B09050E30C17900F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 245";
+		rLen = 0;
+		rLoc = 7573;
+		rType = 0;
+		vrLen = 494;
+		vrLoc = 7115;
+	};
+	EE0B09070E30C18E00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 245";
+		rLen = 0;
+		rLoc = 7539;
+		rType = 0;
+		vrLen = 1865;
+		vrLoc = 6514;
+	};
+	EE0B09090E30C1BE00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 195";
+		rLen = 0;
+		rLoc = 5674;
+		rType = 0;
+		vrLen = 2004;
+		vrLoc = 5292;
+	};
+	EE0B090B0E30C1D300F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 196";
+		rLen = 0;
+		rLoc = 5674;
+		rType = 0;
+		vrLen = 2015;
+		vrLoc = 5292;
+	};
+	EE0B090D0E30C1E700F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 195";
+		rLen = 0;
+		rLoc = 5674;
+		rType = 0;
+		vrLen = 1894;
+		vrLoc = 5292;
+	};
+	EE0B09100E30C34300F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE2DE6B80E1AE38200D97653 /* InfoViewController.h */;
+		name = "InfoViewController.h: 37";
+		rLen = 0;
+		rLoc = 816;
+		rType = 0;
+		vrLen = 1426;
+		vrLoc = 363;
+	};
+	EE0B09110E30C34300F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 250";
+		rLen = 15;
+		rLoc = 7805;
+		rType = 0;
+		vrLen = 1544;
+		vrLoc = 7164;
+	};
+	EE0B09120E30C34300F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 250";
+		rLen = 15;
+		rLoc = 7805;
+		rType = 0;
+		vrLen = 1618;
+		vrLoc = 7164;
+	};
+	EE0B09130E30C34300F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE2DE6B80E1AE38200D97653 /* InfoViewController.h */;
+		name = "InfoViewController.h: 37";
+		rLen = 0;
+		rLoc = 816;
+		rType = 0;
+		vrLen = 1426;
+		vrLoc = 363;
+	};
+	EE0B09140E30C34300F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 229";
+		rLen = 0;
+		rLoc = 7329;
+		rType = 0;
+		vrLen = 1905;
+		vrLoc = 5483;
+	};
+	EE0B09160E30C34600F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 229";
+		rLen = 0;
+		rLoc = 7329;
+		rType = 0;
+		vrLen = 1908;
+		vrLoc = 5906;
+	};
+	EE0B09170E30C38600F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 229";
+		rLen = 0;
+		rLoc = 7329;
+		rType = 0;
+		vrLen = 660;
+		vrLoc = 5522;
+	};
+	EE0B09190E30C3A600F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 260";
+		rLen = 0;
+		rLoc = 8467;
+		rType = 0;
+		vrLen = 1469;
+		vrLoc = 6826;
+	};
+	EE0B091B0E30C3BC00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 260";
+		rLen = 0;
+		rLoc = 8466;
+		rType = 0;
+		vrLen = 1473;
+		vrLoc = 6826;
+	};
+	EE0B09220E30C6C500F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE2DE6B80E1AE38200D97653 /* InfoViewController.h */;
+		name = "InfoViewController.h: 37";
+		rLen = 0;
+		rLoc = 816;
+		rType = 0;
+		vrLen = 1426;
+		vrLoc = 363;
+	};
+	EE0B09230E30C6C500F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE07C9B30E2CA084006F7F8A /* EponymViewController.m */;
+		name = "EponymViewController.m: 186";
+		rLen = 0;
+		rLoc = 5348;
+		rType = 0;
+		vrLen = 1199;
+		vrLoc = 0;
+	};
+	EE0B09240E30C6C500F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 19";
+		rLen = 0;
+		rLoc = 434;
+		rType = 0;
+		vrLen = 1765;
+		vrLoc = 0;
+	};
+	EE0B09250E30C6C500F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 260";
+		rLen = 0;
+		rLoc = 8466;
+		rType = 0;
+		vrLen = 1650;
+		vrLoc = 0;
+	};
+	EE0B09260E30C6C500F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE2DE6B80E1AE38200D97653 /* InfoViewController.h */;
+		name = "InfoViewController.h: 37";
+		rLen = 0;
+		rLoc = 816;
+		rType = 0;
+		vrLen = 1426;
+		vrLoc = 363;
+	};
+	EE0B09270E30C6C500F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 19";
+		rLen = 0;
+		rLoc = 434;
+		rType = 0;
+		vrLen = 1562;
+		vrLoc = 0;
+	};
+	EE0B09280E30C6C500F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE07C9B30E2CA084006F7F8A /* EponymViewController.m */;
+		name = "EponymViewController.m: 186";
+		rLen = 0;
+		rLoc = 5348;
+		rType = 0;
+		vrLen = 1199;
+		vrLoc = 0;
+	};
+	EE0B09290E30C6C500F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 260";
+		rLen = 0;
+		rLoc = 8280;
+		rType = 0;
+		vrLen = 1593;
+		vrLoc = 6926;
+	};
+	EE0B092B0E30C6E300F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 254";
+		rLen = 0;
+		rLoc = 8113;
+		rType = 0;
+		vrLen = 1605;
+		vrLoc = 6926;
+	};
+	EE0B092D0E30C71100F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 254";
+		rLen = 0;
+		rLoc = 8067;
+		rType = 0;
+		vrLen = 1694;
+		vrLoc = 6926;
+	};
+	EE0B092F0E30C72B00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 263";
+		rLen = 0;
+		rLoc = 8376;
+		rType = 0;
+		vrLen = 1702;
+		vrLoc = 6926;
+	};
+	EE0B09340E30C8B800F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 263";
+		rLen = 0;
+		rLoc = 8376;
+		rType = 0;
+		vrLen = 1702;
+		vrLoc = 6926;
+	};
+	EE0B09350E30C8B800F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE4B76160E2F4C2300F7B157 /* EponymUpdater.m */;
+		name = "EponymUpdater.m: 308";
+		rLen = 0;
+		rLoc = 10063;
+		rType = 0;
+		vrLen = 1743;
+		vrLoc = 9101;
+	};
+	EE0B09360E30C8B800F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 263";
+		rLen = 0;
+		rLoc = 8376;
+		rType = 0;
+		vrLen = 1702;
+		vrLoc = 6926;
+	};
+	EE0B09370E30C8B800F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE4B76160E2F4C2300F7B157 /* EponymUpdater.m */;
+		name = "EponymUpdater.m: 339";
+		rLen = 0;
+		rLoc = 11106;
+		rType = 0;
+		vrLen = 1623;
+		vrLoc = 10265;
+	};
+	EE0B093B0E30C9EE00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE4B76160E2F4C2300F7B157 /* EponymUpdater.m */;
+		name = "EponymUpdater.m: 339";
+		rLen = 0;
+		rLoc = 11106;
+		rType = 0;
+		vrLen = 1623;
+		vrLoc = 10265;
+	};
+	EE0B093C0E30C9EE00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 263";
+		rLen = 0;
+		rLoc = 8376;
+		rType = 0;
+		vrLen = 1702;
+		vrLoc = 6926;
+	};
+	EE0B093D0E30C9EE00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE4B76160E2F4C2300F7B157 /* EponymUpdater.m */;
+		name = "EponymUpdater.m: 339";
+		rLen = 0;
+		rLoc = 11106;
+		rType = 0;
+		vrLen = 1623;
+		vrLoc = 10265;
+	};
+	EE0B093E0E30C9EE00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 216";
+		rLen = 0;
+		rLoc = 6736;
+		rType = 0;
+		vrLen = 1806;
+		vrLoc = 5378;
+	};
+	EE0B09410E30CB8300F54ADD /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/pp/Programming/Cocoa/eponyms-touch/Info.plist";
+		rLen = 0;
+		rLoc = 2147483647;
+	};
+	EE0B09420E30CB8300F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 216";
+		rLen = 0;
+		rLoc = 6736;
+		rType = 0;
+		vrLen = 1780;
+		vrLoc = 5404;
+	};
+	EE0B09430E30CB8300F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 216";
+		rLen = 0;
+		rLoc = 6736;
+		rType = 0;
+		vrLen = 1806;
+		vrLoc = 5378;
+	};
+	EE0B09440E30CB8300F54ADD /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/pp/Programming/Cocoa/eponyms-touch/Info.plist";
+		rLen = 0;
+		rLoc = 2147483647;
+	};
+	EE0B09450E30CB8300F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B08EB0E30AAC500F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 218";
+		rLen = 0;
+		rLoc = 6936;
+		rType = 0;
+		vrLen = 1835;
+		vrLoc = 5404;
+	};
+	EE0B09480E30CC0B00F54ADD /* InfoViewController.m */ = {
+		isa = PBXFileReference;
+		name = InfoViewController.m;
+		path = "/Users/pp/Programming/Cocoa/eponyms-touch/Classes/../InfoViewController.m";
+		sourceTree = "<absolute>";
+	};
+	EE0B094D0E30CC1300F54ADD /* InfoViewController.m */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.objc;
+		name = InfoViewController.m;
+		path = "/Users/pp/Programming/Cocoa/eponyms-touch/Classes/../InfoViewController.m";
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1202, 5502}}";
+			sepNavSelRange = "{7329, 0}";
+			sepNavVisRange = "{5594, 438}";
+		};
+	};
+	EE0B09500E30CC2400F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B09480E30CC0B00F54ADD /* InfoViewController.m */;
+		rLen = 1;
+		rLoc = 130;
+		rType = 1;
+	};
+	EE0B09510E30CC2400F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B094D0E30CC1300F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 131";
+		rLen = 0;
+		rLoc = 4245;
+		rType = 0;
+		vrLen = 1812;
+		vrLoc = 3013;
+	};
+	EE0B09520E30CC6F00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B094D0E30CC1300F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 131";
+		rLen = 0;
+		rLoc = 4245;
+		rType = 0;
+		vrLen = 1812;
+		vrLoc = 3013;
+	};
+	EE0B09530E30CC6F00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE64C63F0E2647C10000BC8D /* Eponym.h */;
+		name = "Eponym.h: 16";
+		rLen = 0;
+		rLoc = 306;
+		rType = 0;
+		vrLen = 1164;
+		vrLoc = 0;
+	};
+	EE0B09540E30CC6F00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE2DEA630E22186600D97653 /* Eponym.m */;
+		name = "Eponym.m: 58";
+		rLen = 0;
+		rLoc = 942;
+		rType = 0;
+		vrLen = 1166;
+		vrLoc = 464;
+	};
+	EE0B09550E30CC6F00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE4F6E6C0E2B863100D1DF40 /* ListViewController.m */;
+		name = "ListViewController.m: 189";
+		rLen = 0;
+		rLoc = 5366;
+		rType = 0;
+		vrLen = 1396;
+		vrLoc = 4740;
+	};
+	EE0B09560E30CC6F00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 297";
+		rLen = 0;
+		rLoc = 10309;
+		rType = 0;
+		vrLen = 2021;
+		vrLoc = 9300;
+	};
+	EE0B09570E30CC6F00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B094D0E30CC1300F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 131";
+		rLen = 0;
+		rLoc = 4245;
+		rType = 0;
+		vrLen = 1812;
+		vrLoc = 3013;
+	};
+	EE0B09580E30CC6F00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE64C63F0E2647C10000BC8D /* Eponym.h */;
+		name = "Eponym.h: 16";
+		rLen = 0;
+		rLoc = 306;
+		rType = 0;
+		vrLen = 1164;
+		vrLoc = 0;
+	};
+	EE0B09590E30CC6F00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE2DEA630E22186600D97653 /* Eponym.m */;
+		name = "Eponym.m: 58";
+		rLen = 0;
+		rLoc = 942;
+		rType = 0;
+		vrLen = 1166;
+		vrLoc = 464;
+	};
+	EE0B095A0E30CC6F00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 297";
+		rLen = 0;
+		rLoc = 10309;
+		rType = 0;
+		vrLen = 2021;
+		vrLoc = 9300;
+	};
+	EE0B095B0E30CC6F00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE4F6E6C0E2B863100D1DF40 /* ListViewController.m */;
+		name = "ListViewController.m: 189";
+		rLen = 0;
+		rLoc = 5366;
+		rType = 0;
+		vrLen = 1396;
+		vrLoc = 4740;
+	};
+	EE0B095C0E30CC6F00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 297";
+		rLen = 0;
+		rLoc = 10309;
+		rType = 0;
+		vrLen = 2021;
+		vrLoc = 9300;
+	};
+	EE0B095E0E30CC7300F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 297";
+		rLen = 0;
+		rLoc = 10309;
+		rType = 0;
+		vrLen = 2027;
+		vrLoc = 9387;
+	};
+	EE0B09600E30CC9200F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B094D0E30CC1300F54ADD /* InfoViewController.m */;
+		name = "InfoViewController.m: 231";
+		rLen = 0;
+		rLoc = 7329;
+		rType = 0;
+		vrLen = 438;
+		vrLoc = 5594;
+	};
+	EE0B09610E30CC9200F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 297";
+		rLen = 0;
+		rLoc = 10309;
+		rType = 0;
+		vrLen = 542;
+		vrLoc = 9961;
+	};
+	EE0B09620E30CC9200F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 297";
+		rLen = 0;
+		rLoc = 10309;
+		rType = 0;
+		vrLen = 539;
+		vrLoc = 9961;
+	};
+	EE0B09640E30CCB700F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 297";
+		rLen = 0;
+		rLoc = 10309;
+		rType = 0;
+		vrLen = 2237;
+		vrLoc = 9322;
+	};
+	EE0B09650E30CCB700F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE4F6E6C0E2B863100D1DF40 /* ListViewController.m */;
+		name = "ListViewController.m: 189";
+		rLen = 0;
+		rLoc = 5366;
+		rType = 0;
+		vrLen = 1399;
+		vrLoc = 4739;
+	};
+	EE0B09660E30CCB700F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 297";
+		rLen = 0;
+		rLoc = 10309;
+		rType = 0;
+		vrLen = 2237;
+		vrLoc = 9322;
+	};
+	EE0B09670E30CCB700F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE4F6E6C0E2B863100D1DF40 /* ListViewController.m */;
+		name = "ListViewController.m: 212";
+		rLen = 0;
+		rLoc = 6072;
+		rType = 0;
+		vrLen = 1431;
+		vrLoc = 4851;
+	};
+	EE0B096A0E30CCB800F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE4F6E6C0E2B863100D1DF40 /* ListViewController.m */;
+		name = "ListViewController.m: 212";
+		rLen = 0;
+		rLoc = 6072;
+		rType = 0;
+		vrLen = 1431;
+		vrLoc = 4851;
+	};
+	EE0B096B0E30CCBA00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE4F6E6C0E2B863100D1DF40 /* ListViewController.m */;
+		name = "ListViewController.m: 212";
+		rLen = 0;
+		rLoc = 6072;
+		rType = 0;
+		vrLen = 1449;
+		vrLoc = 5322;
+	};
+	EE0B096C0E30CD3C00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 297";
+		rLen = 0;
+		rLoc = 10309;
+		rType = 0;
+		vrLen = 607;
+		vrLoc = 9893;
+	};
+	EE0B096D0E30CD3C00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE4F6E6C0E2B863100D1DF40 /* ListViewController.m */;
+		name = "ListViewController.m: 212";
+		rLen = 0;
+		rLoc = 6072;
+		rType = 0;
+		vrLen = 322;
+		vrLoc = 5862;
+	};
+	EE0B096F0E30CD9800F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE4F6E6C0E2B863100D1DF40 /* ListViewController.m */;
+		name = "ListViewController.m: 212";
+		rLen = 0;
+		rLoc = 6072;
+		rType = 0;
+		vrLen = 1601;
+		vrLoc = 5245;
+	};
+	EE0B09700E30CD9800F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE2DEA630E22186600D97653 /* Eponym.m */;
+		name = "Eponym.m: 58";
+		rLen = 0;
+		rLoc = 942;
+		rType = 0;
+		vrLen = 1270;
+		vrLoc = 405;
+	};
+	EE0B09710E30CD9800F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 151";
+		rLen = 0;
+		rLoc = 5202;
+		rType = 0;
+		vrLen = 1562;
+		vrLoc = 4227;
+	};
+	EE0B09720E30CD9800F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE4F6E6C0E2B863100D1DF40 /* ListViewController.m */;
+		name = "ListViewController.m: 212";
+		rLen = 0;
+		rLoc = 6072;
+		rType = 0;
+		vrLen = 1601;
+		vrLoc = 5245;
+	};
+	EE0B09730E30CD9800F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 151";
+		rLen = 0;
+		rLoc = 5202;
+		rType = 0;
+		vrLen = 1654;
+		vrLoc = 4135;
+	};
+	EE0B09740E30CD9800F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE2DEA630E22186600D97653 /* Eponym.m */;
+		name = "Eponym.m: 58";
+		rLen = 0;
+		rLoc = 942;
+		rType = 0;
+		vrLen = 1270;
+		vrLoc = 405;
+	};
+	EE0B09750E30CD9800F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 153";
+		rLen = 0;
+		rLoc = 5202;
+		rType = 0;
+		vrLen = 1460;
+		vrLoc = 4227;
+	};
+	EE0B09770E30CD9A00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 153";
+		rLen = 0;
+		rLoc = 5202;
+		rType = 0;
+		vrLen = 1673;
+		vrLoc = 4518;
+	};
+	EE0B09780E30CDD400F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE4F6E6C0E2B863100D1DF40 /* ListViewController.m */;
+		name = "ListViewController.m: 212";
+		rLen = 0;
+		rLoc = 6072;
+		rType = 0;
+		vrLen = 412;
+		vrLoc = 5864;
+	};
+	EE0B09790E30CDD400F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 153";
+		rLen = 0;
+		rLoc = 5202;
+		rType = 0;
+		vrLen = 597;
+		vrLoc = 5041;
+	};
+	EE0B097A0E30CE3F00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 150";
+		rLen = 0;
+		rLoc = 5202;
+		rType = 0;
+		vrLen = 1535;
+		vrLoc = 4513;
+	};
+	EE0B097B0E30CE3F00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE64C63F0E2647C10000BC8D /* Eponym.h */;
+		name = "Eponym.h: 16";
+		rLen = 0;
+		rLoc = 306;
+		rType = 0;
+		vrLen = 1164;
+		vrLoc = 0;
+	};
+	EE0B097C0E30CE3F00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE2DEA630E22186600D97653 /* Eponym.m */;
+		name = "Eponym.m: 58";
+		rLen = 0;
+		rLoc = 942;
+		rType = 0;
+		vrLen = 1270;
+		vrLoc = 405;
+	};
+	EE0B097D0E30CE3F00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 150";
+		rLen = 0;
+		rLoc = 5202;
+		rType = 0;
+		vrLen = 1535;
+		vrLoc = 4513;
+	};
+	EE0B097E0E30CE3F00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE64C63F0E2647C10000BC8D /* Eponym.h */;
+		name = "Eponym.h: 16";
+		rLen = 0;
+		rLoc = 306;
+		rType = 0;
+		vrLen = 1164;
+		vrLoc = 0;
+	};
+	EE0B097F0E30CE3F00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE2DEA630E22186600D97653 /* Eponym.m */;
+		name = "Eponym.m: 45";
+		rLen = 0;
+		rLoc = 807;
+		rType = 0;
+		vrLen = 1292;
+		vrLoc = 405;
+	};
+	EE0B09900E30F8A900F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE2DEA630E22186600D97653 /* Eponym.m */;
+		name = "Eponym.m: 45";
+		rLen = 0;
+		rLoc = 807;
+		rType = 0;
+		vrLen = 1292;
+		vrLoc = 405;
+	};
+	EE0B09910E30F8A900F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE64C63F0E2647C10000BC8D /* Eponym.h */;
+		name = "Eponym.h: 16";
+		rLen = 0;
+		rLoc = 306;
+		rType = 0;
+		vrLen = 1164;
+		vrLoc = 0;
+	};
+	EE0B09920E30F8A900F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 366";
+		rLen = 0;
+		rLoc = 13349;
+		rType = 0;
+		vrLen = 1857;
+		vrLoc = 13243;
+	};
+	EE0B09930E30F8A900F54ADD /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/pp/Programming/Cocoa/eponyms-touch/Info.plist";
+		rLen = 0;
+		rLoc = 2147483647;
+	};
+	EE0B09940E30F8A900F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE2DEA630E22186600D97653 /* Eponym.m */;
+		name = "Eponym.m: 45";
+		rLen = 0;
+		rLoc = 807;
+		rType = 0;
+		vrLen = 1292;
+		vrLoc = 405;
+	};
+	EE0B09950E30F8A900F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE64C63F0E2647C10000BC8D /* Eponym.h */;
+		name = "Eponym.h: 16";
+		rLen = 0;
+		rLoc = 306;
+		rType = 0;
+		vrLen = 1164;
+		vrLoc = 0;
+	};
+	EE0B09960E30F8A900F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 150";
+		rLen = 0;
+		rLoc = 5202;
+		rType = 0;
+		vrLen = 1579;
+		vrLoc = 4468;
+	};
+	EE0B09970E30F8A900F54ADD /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+			SubversionRevision,
+		);
+		name = "/Users/pp/Programming/Cocoa/eponyms-touch/Info.plist";
+		rLen = 0;
+		rLoc = 2147483647;
+	};
+	EE0B09980E30F8A900F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 150";
+		rLen = 0;
+		rLoc = 5202;
+		rType = 0;
+		vrLen = 1646;
+		vrLoc = 4399;
+	};
+	EE0B09990E30F8A900F54ADD /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/pp/Programming/Cocoa/eponyms-touch/Info.plist";
+		rLen = 0;
+		rLoc = 2147483647;
+	};
+	EE0B099A0E30F8A900F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 366";
+		rLen = 0;
+		rLoc = 13349;
+		rType = 0;
+		vrLen = 1857;
+		vrLoc = 13243;
+	};
+	EE0B099B0E30F8A900F54ADD /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/pp/Programming/Cocoa/eponyms-touch/Info.plist";
+		rLen = 0;
+		rLoc = 2147483647;
+	};
+	EE0B099F0E3105B200F54ADD /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/pp/Programming/Cocoa/eponyms-touch/Info.plist";
+		rLen = 0;
+		rLoc = 2147483647;
+	};
+	EE0B09A00E3105B200F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 366";
+		rLen = 0;
+		rLoc = 13349;
+		rType = 0;
+		vrLen = 1857;
+		vrLoc = 13243;
+	};
+	EE0B09A10E3105B200F54ADD /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/pp/Programming/Cocoa/eponyms-touch/Info.plist";
+		rLen = 0;
+		rLoc = 2147483647;
+	};
+	EE0B09A20E3105B200F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 397";
+		rLen = 0;
+		rLoc = 14193;
+		rType = 0;
+		vrLen = 1470;
+		vrLoc = 13540;
+	};
+	EE0B09A40E3105C100F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 397";
+		rLen = 0;
+		rLoc = 14193;
+		rType = 0;
+		vrLen = 1470;
+		vrLoc = 13540;
+	};
+	EE0B09A50E3105E200F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE0B09A60E3105E200F54ADD /* asm objc_msgSend  0x925d06d0 */;
+		name = "asm objc_msgSend  0x925d06d0: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 685;
+		vrLoc = 0;
+	};
+	EE0B09A60E3105E200F54ADD /* asm objc_msgSend  0x925d06d0 */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = text;
+		path = "asm objc_msgSend  0x925d06d0";
+		sourceTree = "<group>";
+	};
+	EE0B09A70E3105E200F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEFC2C060E255F0E0012F1FB /* CategoriesViewController.m */;
+		name = "CategoriesViewController.m: 120";
+		rLen = 0;
+		rLoc = 3033;
+		rType = 0;
+		vrLen = 570;
+		vrLoc = 2742;
+	};
+	EE0B09A80E3105E200F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		rLen = 0;
+		rLoc = 385;
+		rType = 1;
+	};
+	EE0B09A90E3105E200F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 150";
+		rLen = 0;
+		rLoc = 5202;
+		rType = 0;
+		vrLen = 473;
+		vrLoc = 5037;
+	};
+	EE0B09AA0E3105E200F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 397";
+		rLen = 0;
+		rLoc = 14193;
+		rType = 0;
+		vrLen = 543;
+		vrLoc = 14067;
+	};
+	EE0B09AB0E3105E200F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEFC2C060E255F0E0012F1FB /* CategoriesViewController.m */;
+		name = "CategoriesViewController.m: 120";
+		rLen = 0;
+		rLoc = 3033;
+		rType = 0;
+		vrLen = 570;
+		vrLoc = 2742;
+	};
+	EE0B09AC0E3105E200F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 393";
+		rLen = 0;
+		rLoc = 14117;
+		rType = 0;
+		vrLen = 611;
+		vrLoc = 13836;
+	};
+	EE0B09AE0E31061A00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 370";
+		rLen = 0;
+		rLoc = 13530;
+		rType = 0;
+		vrLen = 1567;
+		vrLoc = 13422;
+	};
+	EE0B09B00E31062700F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 370";
+		rLen = 0;
+		rLoc = 13530;
+		rType = 0;
+		vrLen = 1567;
+		vrLoc = 13422;
+	};
+	EE0B09B20E31063F00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 370";
+		rLen = 0;
+		rLoc = 13530;
+		rType = 0;
+		vrLen = 432;
+		vrLoc = 13422;
+	};
+	EE0B09B30E31063F00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 393";
+		rLen = 0;
+		rLoc = 14117;
+		rType = 0;
+		vrLen = 611;
+		vrLoc = 13842;
+	};
+	EE0B09B40E31063F00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 370";
+		rLen = 0;
+		rLoc = 13530;
+		rType = 0;
+		vrLen = 432;
+		vrLoc = 13422;
+	};
+	EE0B09B50E31064B00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 370";
+		rLen = 0;
+		rLoc = 13530;
+		rType = 0;
+		vrLen = 2070;
+		vrLoc = 12359;
+	};
+	EE0B09B60E31064B00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE4F6E6C0E2B863100D1DF40 /* ListViewController.m */;
+		name = "ListViewController.m: 212";
+		rLen = 0;
+		rLoc = 6072;
+		rType = 0;
+		vrLen = 1601;
+		vrLoc = 5245;
+	};
+	EE0B09B70E31064B00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 370";
+		rLen = 0;
+		rLoc = 13530;
+		rType = 0;
+		vrLen = 2070;
+		vrLoc = 12359;
+	};
+	EE0B09B80E31064B00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE4F6E6C0E2B863100D1DF40 /* ListViewController.m */;
+		name = "ListViewController.m: 212";
+		rLen = 0;
+		rLoc = 6072;
+		rType = 0;
+		vrLen = 1601;
+		vrLoc = 5245;
+	};
+	EE0B09B90E31065900F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 370";
+		rLen = 0;
+		rLoc = 13530;
+		rType = 0;
+		vrLen = 479;
+		vrLoc = 13278;
+	};
+	EE0B09BA0E31065900F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE4F6E6C0E2B863100D1DF40 /* ListViewController.m */;
+		name = "ListViewController.m: 212";
+		rLen = 0;
+		rLoc = 6072;
+		rType = 0;
+		vrLen = 322;
+		vrLoc = 5862;
+	};
+	EE0B09BB0E31066F00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE4F6E6C0E2B863100D1DF40 /* ListViewController.m */;
+		name = "ListViewController.m: 212";
+		rLen = 0;
+		rLoc = 6072;
+		rType = 0;
+		vrLen = 1601;
+		vrLoc = 5245;
+	};
+	EE0B09BC0E31066F00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 370";
+		rLen = 0;
+		rLoc = 13530;
+		rType = 0;
+		vrLen = 1966;
+		vrLoc = 12463;
+	};
+	EE0B09BD0E31066F00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE4F6E6C0E2B863100D1DF40 /* ListViewController.m */;
+		name = "ListViewController.m: 212";
+		rLen = 0;
+		rLoc = 6072;
+		rType = 0;
+		vrLen = 1601;
+		vrLoc = 5245;
+	};
+	EE0B09BE0E31066F00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 370";
+		rLen = 0;
+		rLoc = 13530;
+		rType = 0;
+		vrLen = 1680;
+		vrLoc = 13309;
+	};
+	EE0B09BF0E31067200F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE4F6E6C0E2B863100D1DF40 /* ListViewController.m */;
+		name = "ListViewController.m: 212";
+		rLen = 0;
+		rLoc = 6072;
+		rType = 0;
+		vrLen = 412;
+		vrLoc = 5864;
+	};
+	EE0B09C00E31067200F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 370";
+		rLen = 0;
+		rLoc = 13530;
+		rType = 0;
+		vrLen = 493;
+		vrLoc = 13361;
+	};
+	EE0B09C10E31067D00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 370";
+		rLen = 0;
+		rLoc = 13530;
+		rType = 0;
+		vrLen = 1817;
+		vrLoc = 12764;
+	};
+	EE0B09C20E31069200F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 370";
+		rLen = 0;
+		rLoc = 13530;
+		rType = 0;
+		vrLen = 479;
+		vrLoc = 13278;
+	};
+	EE0B09C40E3106AB00F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 418";
+		rLen = 0;
+		rLoc = 14546;
+		rType = 0;
+		vrLen = 1475;
+		vrLoc = 13480;
+	};
+	EE0B09C90E3107F500F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 402";
+		rLen = 0;
+		rLoc = 14483;
+		rType = 0;
+		vrLen = 1647;
+		vrLoc = 13282;
+	};
+	EE0B09CB0E310A7000F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 262";
+		rLen = 25;
+		rLoc = 8848;
+		rType = 0;
+		vrLen = 2255;
+		vrLoc = 8884;
+	};
+	EE0B09CC0E310A7000F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE07C90A0E2C8DF8006F7F8A /* EponymTextView.m */;
+		name = "EponymTextView.m: 2";
+		rLen = 0;
+		rLoc = 21;
+		rType = 0;
+		vrLen = 1994;
+		vrLoc = 0;
+	};
+	EE0B09CD0E310A7000F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE2DE7510E1C297F00D97653 /* EponymViewController.h */;
+		name = "EponymViewController.h: 9";
+		rLen = 0;
+		rLoc = 260;
+		rType = 0;
+		vrLen = 1083;
+		vrLoc = 0;
+	};
+	EE0B09CE0E310A7000F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE07C9B30E2CA084006F7F8A /* EponymViewController.m */;
+		name = "EponymViewController.m: 238";
+		rLen = 0;
+		rLoc = 6329;
+		rType = 0;
+		vrLen = 1415;
+		vrLoc = 7171;
+	};
+	EE0B09CF0E310A7000F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 402";
+		rLen = 0;
+		rLoc = 14483;
+		rType = 0;
+		vrLen = 1647;
+		vrLoc = 13282;
+	};
+	EE0B09D00E310A7000F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE07C9B30E2CA084006F7F8A /* EponymViewController.m */;
+		name = "EponymViewController.m: 249";
+		rLen = 0;
+		rLoc = 6329;
+		rType = 0;
+		vrLen = 1425;
+		vrLoc = 7170;
+	};
+	EE0B09D10E310A7000F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 403";
+		rLen = 0;
+		rLoc = 14546;
+		rType = 0;
+		vrLen = 1810;
+		vrLoc = 13361;
+	};
+	EE0B09D20E310A7000F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE07C9B30E2CA084006F7F8A /* EponymViewController.m */;
+		name = "EponymViewController.m: 249";
+		rLen = 0;
+		rLoc = 6329;
+		rType = 0;
+		vrLen = 1077;
+		vrLoc = 7167;
+	};
+	EE0B09D30E310A7000F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
+		name = "eponyms_touchAppDelegate.m: 262";
+		rLen = 25;
+		rLoc = 8848;
+		rType = 0;
+		vrLen = 2255;
+		vrLoc = 8884;
+	};
+	EE0B09D40E310A7000F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE07C90A0E2C8DF8006F7F8A /* EponymTextView.m */;
+		name = "EponymTextView.m: 2";
+		rLen = 0;
+		rLoc = 21;
+		rType = 0;
+		vrLen = 1994;
+		vrLoc = 0;
+	};
+	EE0B09D50E310A7000F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE07C9B30E2CA084006F7F8A /* EponymViewController.m */;
+		name = "EponymViewController.m: 238";
+		rLen = 0;
+		rLoc = 6329;
+		rType = 0;
+		vrLen = 1415;
+		vrLoc = 7171;
+	};
+	EE0B09D60E310A7000F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE2DE7510E1C297F00D97653 /* EponymViewController.h */;
+		name = "EponymViewController.h: 9";
+		rLen = 0;
+		rLoc = 260;
+		rType = 0;
+		vrLen = 1083;
+		vrLoc = 0;
+	};
+	EE0B09D70E310A7000F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE07C9B30E2CA084006F7F8A /* EponymViewController.m */;
+		name = "EponymViewController.m: 192";
+		rLen = 0;
+		rLoc = 6495;
+		rType = 0;
+		vrLen = 1778;
+		vrLoc = 5389;
+	};
+	EE0B09DB0E310B1000F54ADD /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = EE07C9B30E2CA084006F7F8A /* EponymViewController.m */;
+		name = "EponymViewController.m: 192";
+		rLen = 0;
+		rLoc = 6495;
+		rType = 0;
+		vrLen = 1741;
+		vrLoc = 5389;
 	};
 	EE1442C80E2372AB003EA64C /* PBXBookmark */ = {
 		isa = PBXBookmark;
@@ -1312,7 +3390,7 @@
 		fRef = EE1443E90E23A576003EA64C /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 14";
 		rLen = 0;
-		rLoc = 24998;
+		rLoc = 24991;
 		rType = 0;
 		vrLen = 217;
 		vrLoc = 0;
@@ -1367,9 +3445,9 @@
 	};
 	EE2DE6B80E1AE38200D97653 /* InfoViewController.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {963, 1358}}";
-			sepNavSelRange = "{1265, 0}";
-			sepNavVisRange = "{363, 1595}";
+			sepNavIntBoundsRect = "{{0, 0}, {963, 1512}}";
+			sepNavSelRange = "{816, 0}";
+			sepNavVisRange = "{363, 1426}";
 		};
 	};
 	EE2DE6B90E1AE38200D97653 /* InfoViewController.m */ = {
@@ -1444,6 +3522,7 @@
 			sepNavIntBoundsRect = "{{0, 0}, {963, 746}}";
 			sepNavSelRange = "{260, 0}";
 			sepNavVisRange = "{0, 1083}";
+			sepNavWindowFrame = "{{15, 53}, {1213, 820}}";
 		};
 	};
 	EE2DE7520E1C297F00D97653 /* EponymViewController.m */ = {
@@ -1488,7 +3567,7 @@
 		fRef = EE2DE7520E1C297F00D97653 /* EponymViewController.m */;
 		name = "EponymViewController.m: 14";
 		rLen = 0;
-		rLoc = 459;
+		rLoc = 375;
 		rType = 0;
 		vrLen = 1077;
 		vrLoc = 0;
@@ -1595,6 +3674,11 @@
 		name = Eponym.m;
 		path = "/Users/pp/Programming/Cocoa/eponyms-touch/Classes/Eponym.m";
 		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {963, 1652}}";
+			sepNavSelRange = "{807, 0}";
+			sepNavVisRange = "{405, 1292}";
+		};
 	};
 	EE2DEA9C0E221B9700D97653 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -1837,7 +3921,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 284";
 		rLen = 0;
-		rLoc = 8969;
+		rLoc = 10281;
 		rType = 0;
 		vrLen = 1431;
 		vrLoc = 7931;
@@ -1847,7 +3931,7 @@
 		fRef = EE2DE8730E1C40AE00D97653 /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 499";
 		rLen = 284;
-		rLoc = 18250;
+		rLoc = 18367;
 		rType = 0;
 		vrLen = 1544;
 		vrLoc = 16325;
@@ -1857,7 +3941,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 571";
 		rLen = 0;
-		rLoc = 18868;
+		rLoc = 18861;
 		rType = 0;
 		vrLen = 1921;
 		vrLoc = 17896;
@@ -2228,7 +4312,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 180";
 		rLen = 0;
-		rLoc = 5430;
+		rLoc = 5595;
 		rType = 0;
 		vrLen = 1495;
 		vrLoc = 4508;
@@ -2248,7 +4332,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 76";
 		rLen = 11;
-		rLoc = 2158;
+		rLoc = 2270;
 		rType = 0;
 		vrLen = 1585;
 		vrLoc = 1136;
@@ -2268,7 +4352,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 51";
 		rLen = 13;
-		rLoc = 1541;
+		rLoc = 1653;
 		rType = 0;
 		vrLen = 1697;
 		vrLoc = 163;
@@ -2278,7 +4362,7 @@
 		fRef = EE2DE6B80E1AE38200D97653 /* InfoViewController.h */;
 		name = "InfoViewController.h: 49";
 		rLen = 0;
-		rLoc = 1153;
+		rLoc = 1222;
 		rType = 0;
 		vrLen = 1370;
 		vrLoc = 278;
@@ -2288,7 +4372,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 60";
 		rLen = 13;
-		rLoc = 1826;
+		rLoc = 1938;
 		rType = 0;
 		vrLen = 1636;
 		vrLoc = 777;
@@ -2308,7 +4392,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 247";
 		rLen = 0;
-		rLoc = 7638;
+		rLoc = 8950;
 		rType = 0;
 		vrLen = 1797;
 		vrLoc = 7118;
@@ -2398,7 +4482,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 264";
 		rLen = 0;
-		rLoc = 8367;
+		rLoc = 9679;
 		rType = 0;
 		vrLen = 1793;
 		vrLoc = 7118;
@@ -2418,7 +4502,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 264";
 		rLen = 0;
-		rLoc = 8367;
+		rLoc = 9679;
 		rType = 0;
 		vrLen = 1793;
 		vrLoc = 7118;
@@ -2438,7 +4522,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 76";
 		rLen = 0;
-		rLoc = 2174;
+		rLoc = 2286;
 		rType = 0;
 		vrLen = 1644;
 		vrLoc = 277;
@@ -2448,7 +4532,7 @@
 		fRef = EE2DE6B80E1AE38200D97653 /* InfoViewController.h */;
 		name = "InfoViewController.h: 78";
 		rLen = 0;
-		rLoc = 2339;
+		rLoc = 2408;
 		rType = 0;
 		vrLen = 1921;
 		vrLoc = 815;
@@ -2488,7 +4572,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 278";
 		rLen = 143;
-		rLoc = 8676;
+		rLoc = 9988;
 		rType = 0;
 		vrLen = 1403;
 		vrLoc = 8177;
@@ -2498,7 +4582,7 @@
 		fRef = EE2DE6B80E1AE38200D97653 /* InfoViewController.h */;
 		name = "InfoViewController.h: 90";
 		rLen = 0;
-		rLoc = 2972;
+		rLoc = 3041;
 		rType = 0;
 		vrLen = 2062;
 		vrLoc = 815;
@@ -2508,7 +4592,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 169";
 		rLen = 0;
-		rLoc = 5112;
+		rLoc = 5277;
 		rType = 0;
 		vrLen = 1437;
 		vrLoc = 3846;
@@ -2528,7 +4612,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 301";
 		rLen = 0;
-		rLoc = 9323;
+		rLoc = 10635;
 		rType = 0;
 		vrLen = 1417;
 		vrLoc = 8071;
@@ -2538,7 +4622,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 709";
 		rLen = 0;
-		rLoc = 23843;
+		rLoc = 23836;
 		rType = 0;
 		vrLen = 1213;
 		vrLoc = 22604;
@@ -2548,7 +4632,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 301";
 		rLen = 0;
-		rLoc = 9323;
+		rLoc = 10635;
 		rType = 0;
 		vrLen = 1416;
 		vrLoc = 8071;
@@ -2558,7 +4642,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 709";
 		rLen = 0;
-		rLoc = 23843;
+		rLoc = 23836;
 		rType = 0;
 		vrLen = 1213;
 		vrLoc = 22604;
@@ -2578,7 +4662,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 682";
 		rLen = 0;
-		rLoc = 23127;
+		rLoc = 23120;
 		rType = 0;
 		vrLen = 1792;
 		vrLoc = 15565;
@@ -2598,7 +4682,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 682";
 		rLen = 0;
-		rLoc = 23127;
+		rLoc = 23120;
 		rType = 0;
 		vrLen = 1792;
 		vrLoc = 15565;
@@ -2608,7 +4692,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 284";
 		rLen = 0;
-		rLoc = 8969;
+		rLoc = 10281;
 		rType = 0;
 		vrLen = 1433;
 		vrLoc = 7931;
@@ -2628,7 +4712,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 284";
 		rLen = 0;
-		rLoc = 8969;
+		rLoc = 10281;
 		rType = 0;
 		vrLen = 1431;
 		vrLoc = 7931;
@@ -2638,7 +4722,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 682";
 		rLen = 0;
-		rLoc = 23127;
+		rLoc = 23120;
 		rType = 0;
 		vrLen = 1792;
 		vrLoc = 15565;
@@ -2648,7 +4732,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 284";
 		rLen = 0;
-		rLoc = 8969;
+		rLoc = 10281;
 		rType = 0;
 		vrLen = 1431;
 		vrLoc = 7931;
@@ -2658,7 +4742,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 571";
 		rLen = 0;
-		rLoc = 18868;
+		rLoc = 18861;
 		rType = 0;
 		vrLen = 1921;
 		vrLoc = 17896;
@@ -2678,7 +4762,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 571";
 		rLen = 0;
-		rLoc = 18868;
+		rLoc = 18861;
 		rType = 0;
 		vrLen = 1921;
 		vrLoc = 17896;
@@ -2688,7 +4772,7 @@
 		fRef = EE2DE8730E1C40AE00D97653 /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 499";
 		rLen = 284;
-		rLoc = 18250;
+		rLoc = 18367;
 		rType = 0;
 		vrLen = 1544;
 		vrLoc = 16325;
@@ -2698,7 +4782,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 579";
 		rLen = 0;
-		rLoc = 18868;
+		rLoc = 18861;
 		rType = 0;
 		vrLen = 2099;
 		vrLoc = 17896;
@@ -2708,7 +4792,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 579";
 		rLen = 0;
-		rLoc = 18868;
+		rLoc = 18861;
 		rType = 0;
 		vrLen = 1000;
 		vrLoc = 18390;
@@ -2718,7 +4802,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 579";
 		rLen = 0;
-		rLoc = 18868;
+		rLoc = 18861;
 		rType = 0;
 		vrLen = 2144;
 		vrLoc = 17896;
@@ -2728,7 +4812,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 284";
 		rLen = 0;
-		rLoc = 8969;
+		rLoc = 10281;
 		rType = 0;
 		vrLen = 1431;
 		vrLoc = 7931;
@@ -2738,7 +4822,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 579";
 		rLen = 0;
-		rLoc = 18868;
+		rLoc = 18861;
 		rType = 0;
 		vrLen = 2144;
 		vrLoc = 17896;
@@ -2748,7 +4832,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 178";
 		rLen = 0;
-		rLoc = 5289;
+		rLoc = 5454;
 		rType = 0;
 		vrLen = 1246;
 		vrLoc = 4190;
@@ -2758,7 +4842,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 178";
 		rLen = 0;
-		rLoc = 5289;
+		rLoc = 5454;
 		rType = 0;
 		vrLen = 1158;
 		vrLoc = 4525;
@@ -2768,7 +4852,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 579";
 		rLen = 0;
-		rLoc = 18868;
+		rLoc = 18861;
 		rType = 0;
 		vrLen = 1000;
 		vrLoc = 18390;
@@ -2777,7 +4861,7 @@
 		isa = PBXTextBookmark;
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		rLen = 0;
-		rLoc = 172;
+		rLoc = 175;
 		rType = 1;
 	};
 	EE4B75770E2F3E4700F7B157 /* PBXTextBookmark */ = {
@@ -2785,7 +4869,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 178";
 		rLen = 0;
-		rLoc = 5289;
+		rLoc = 5454;
 		rType = 0;
 		vrLen = 532;
 		vrLoc = 4899;
@@ -2795,7 +4879,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 284";
 		rLen = 0;
-		rLoc = 8808;
+		rLoc = 10120;
 		rType = 0;
 		vrLen = 604;
 		vrLoc = 8514;
@@ -2805,7 +4889,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 173";
 		rLen = 0;
-		rLoc = 5110;
+		rLoc = 5275;
 		rType = 0;
 		vrLen = 601;
 		vrLoc = 8514;
@@ -2815,7 +4899,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 173";
 		rLen = 0;
-		rLoc = 5110;
+		rLoc = 5275;
 		rType = 0;
 		vrLen = 1808;
 		vrLoc = 7088;
@@ -2825,7 +4909,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 579";
 		rLen = 0;
-		rLoc = 18868;
+		rLoc = 18861;
 		rType = 0;
 		vrLen = 2053;
 		vrLoc = 18290;
@@ -2845,7 +4929,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 296";
 		rLen = 0;
-		rLoc = 9310;
+		rLoc = 10622;
 		rType = 0;
 		vrLen = 1475;
 		vrLoc = 8025;
@@ -2855,7 +4939,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 295";
 		rLen = 0;
-		rLoc = 9278;
+		rLoc = 10590;
 		rType = 0;
 		vrLen = 1466;
 		vrLoc = 7973;
@@ -2865,7 +4949,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 579";
 		rLen = 0;
-		rLoc = 18868;
+		rLoc = 18861;
 		rType = 0;
 		vrLen = 2053;
 		vrLoc = 18290;
@@ -2875,7 +4959,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 296";
 		rLen = 0;
-		rLoc = 9310;
+		rLoc = 10622;
 		rType = 0;
 		vrLen = 1477;
 		vrLoc = 8025;
@@ -2895,7 +4979,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 286";
 		rLen = 0;
-		rLoc = 8994;
+		rLoc = 10306;
 		rType = 0;
 		vrLen = 1673;
 		vrLoc = 7745;
@@ -2905,7 +4989,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 286";
 		rLen = 0;
-		rLoc = 8994;
+		rLoc = 10306;
 		rType = 0;
 		vrLen = 1646;
 		vrLoc = 7772;
@@ -2914,7 +4998,7 @@
 		isa = PBXTextBookmark;
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		rLen = 0;
-		rLoc = 283;
+		rLoc = 320;
 		rType = 1;
 	};
 	EE4B75870E2F3FE100F7B157 /* PBXTextBookmark */ = {
@@ -2922,7 +5006,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 286";
 		rLen = 0;
-		rLoc = 8994;
+		rLoc = 10306;
 		rType = 0;
 		vrLen = 535;
 		vrLoc = 8514;
@@ -2932,7 +5016,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 284";
 		rLen = 0;
-		rLoc = 8808;
+		rLoc = 10120;
 		rType = 0;
 		vrLen = 593;
 		vrLoc = 8529;
@@ -2942,7 +5026,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 286";
 		rLen = 0;
-		rLoc = 8980;
+		rLoc = 10292;
 		rType = 0;
 		vrLen = 1650;
 		vrLoc = 7772;
@@ -2952,7 +5036,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 286";
 		rLen = 0;
-		rLoc = 8980;
+		rLoc = 10292;
 		rType = 0;
 		vrLen = 1648;
 		vrLoc = 7772;
@@ -2961,7 +5045,7 @@
 		isa = PBXTextBookmark;
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		rLen = 0;
-		rLoc = 283;
+		rLoc = 320;
 		rType = 1;
 	};
 	EE4B758E0E2F402E00F7B157 /* PBXTextBookmark */ = {
@@ -2969,7 +5053,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 286";
 		rLen = 0;
-		rLoc = 8980;
+		rLoc = 10292;
 		rType = 0;
 		vrLen = 539;
 		vrLoc = 8512;
@@ -2979,7 +5063,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 284";
 		rLen = 0;
-		rLoc = 8808;
+		rLoc = 10120;
 		rType = 0;
 		vrLen = 595;
 		vrLoc = 8529;
@@ -2989,7 +5073,7 @@
 		fRef = EE2DE6B80E1AE38200D97653 /* InfoViewController.h */;
 		name = "InfoViewController.h: 91";
 		rLen = 18;
-		rLoc = 2726;
+		rLoc = 2795;
 		rType = 0;
 		vrLen = 1472;
 		vrLoc = 913;
@@ -2999,7 +5083,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 718";
 		rLen = 0;
-		rLoc = 23840;
+		rLoc = 23833;
 		rType = 0;
 		vrLen = 696;
 		vrLoc = 23291;
@@ -3009,7 +5093,7 @@
 		comments = "warning: no '-initWithTitle:message:delegate:cancelButtonTitle:' method found";
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		rLen = 1;
-		rLoc = 284;
+		rLoc = 321;
 		rType = 1;
 	};
 	EE4B75960E2F40DE00F7B157 /* PBXTextBookmark */ = {
@@ -3017,7 +5101,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 283";
 		rLen = 109;
-		rLoc = 8687;
+		rLoc = 9999;
 		rType = 0;
 		vrLen = 1818;
 		vrLoc = 7772;
@@ -3027,7 +5111,7 @@
 		fRef = EE2DE6B80E1AE38200D97653 /* InfoViewController.h */;
 		name = "InfoViewController.h: 91";
 		rLen = 18;
-		rLoc = 2726;
+		rLoc = 2795;
 		rType = 0;
 		vrLen = 1472;
 		vrLoc = 913;
@@ -3037,7 +5121,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 718";
 		rLen = 0;
-		rLoc = 23840;
+		rLoc = 23833;
 		rType = 0;
 		vrLen = 696;
 		vrLoc = 23291;
@@ -3047,7 +5131,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 285";
 		rLen = 0;
-		rLoc = 8925;
+		rLoc = 10237;
 		rType = 0;
 		vrLen = 1603;
 		vrLoc = 8148;
@@ -3057,7 +5141,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 285";
 		rLen = 0;
-		rLoc = 8925;
+		rLoc = 10237;
 		rType = 0;
 		vrLen = 1858;
 		vrLoc = 7730;
@@ -3067,7 +5151,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 285";
 		rLen = 0;
-		rLoc = 8925;
+		rLoc = 10237;
 		rType = 0;
 		vrLen = 694;
 		vrLoc = 8689;
@@ -3077,7 +5161,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 281";
 		rLen = 0;
-		rLoc = 8643;
+		rLoc = 9955;
 		rType = 0;
 		vrLen = 1591;
 		vrLoc = 7170;
@@ -3097,7 +5181,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 718";
 		rLen = 0;
-		rLoc = 23840;
+		rLoc = 23833;
 		rType = 0;
 		vrLen = 1378;
 		vrLoc = 22696;
@@ -3107,7 +5191,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 281";
 		rLen = 0;
-		rLoc = 8643;
+		rLoc = 9955;
 		rType = 0;
 		vrLen = 1591;
 		vrLoc = 7170;
@@ -3117,7 +5201,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 718";
 		rLen = 0;
-		rLoc = 23840;
+		rLoc = 23833;
 		rType = 0;
 		vrLen = 1378;
 		vrLoc = 22696;
@@ -3137,7 +5221,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 478";
 		rLen = 0;
-		rLoc = 15883;
+		rLoc = 15876;
 		rType = 0;
 		vrLen = 1625;
 		vrLoc = 14366;
@@ -3147,7 +5231,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 293";
 		rLen = 0;
-		rLoc = 8999;
+		rLoc = 10311;
 		rType = 0;
 		vrLen = 702;
 		vrLoc = 8573;
@@ -3157,7 +5241,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 478";
 		rLen = 0;
-		rLoc = 15883;
+		rLoc = 15876;
 		rType = 0;
 		vrLen = 487;
 		vrLoc = 15035;
@@ -3167,7 +5251,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 478";
 		rLen = 0;
-		rLoc = 15883;
+		rLoc = 15876;
 		rType = 0;
 		vrLen = 1833;
 		vrLoc = 14386;
@@ -3177,7 +5261,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 281";
 		rLen = 0;
-		rLoc = 8643;
+		rLoc = 9955;
 		rType = 0;
 		vrLen = 1525;
 		vrLoc = 7236;
@@ -3187,7 +5271,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 478";
 		rLen = 0;
-		rLoc = 15883;
+		rLoc = 15876;
 		rType = 0;
 		vrLen = 1833;
 		vrLoc = 14386;
@@ -3197,7 +5281,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 281";
 		rLen = 0;
-		rLoc = 8675;
+		rLoc = 9987;
 		rType = 0;
 		vrLen = 1855;
 		vrLoc = 7467;
@@ -3207,7 +5291,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 281";
 		rLen = 0;
-		rLoc = 8675;
+		rLoc = 9987;
 		rType = 0;
 		vrLen = 1858;
 		vrLoc = 7608;
@@ -3217,7 +5301,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 478";
 		rLen = 0;
-		rLoc = 15883;
+		rLoc = 15876;
 		rType = 0;
 		vrLen = 424;
 		vrLoc = 15118;
@@ -3227,7 +5311,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 281";
 		rLen = 0;
-		rLoc = 8675;
+		rLoc = 9987;
 		rType = 0;
 		vrLen = 378;
 		vrLoc = 8227;
@@ -3237,7 +5321,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 442";
 		rLen = 15;
-		rLoc = 14622;
+		rLoc = 14615;
 		rType = 0;
 		vrLen = 1889;
 		vrLoc = 13270;
@@ -3247,7 +5331,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 283";
 		rLen = 0;
-		rLoc = 8680;
+		rLoc = 9992;
 		rType = 0;
 		vrLen = 1741;
 		vrLoc = 7728;
@@ -3257,7 +5341,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 283";
 		rLen = 0;
-		rLoc = 8680;
+		rLoc = 9992;
 		rType = 0;
 		vrLen = 1844;
 		vrLoc = 7625;
@@ -3267,7 +5351,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 442";
 		rLen = 15;
-		rLoc = 14622;
+		rLoc = 14615;
 		rType = 0;
 		vrLen = 1889;
 		vrLoc = 13270;
@@ -3277,7 +5361,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 281";
 		rLen = 15;
-		rLoc = 8653;
+		rLoc = 9965;
 		rType = 0;
 		vrLen = 1741;
 		vrLoc = 7728;
@@ -3287,7 +5371,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 281";
 		rLen = 15;
-		rLoc = 8653;
+		rLoc = 9965;
 		rType = 0;
 		vrLen = 192;
 		vrLoc = 8438;
@@ -3297,7 +5381,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 173";
 		rLen = 0;
-		rLoc = 5195;
+		rLoc = 5360;
 		rType = 0;
 		vrLen = 1355;
 		vrLoc = 4073;
@@ -3307,7 +5391,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 173";
 		rLen = 0;
-		rLoc = 5195;
+		rLoc = 5360;
 		rType = 0;
 		vrLen = 1058;
 		vrLoc = 4475;
@@ -3317,7 +5401,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 173";
 		rLen = 0;
-		rLoc = 5195;
+		rLoc = 5360;
 		rType = 0;
 		vrLen = 297;
 		vrLoc = 5131;
@@ -3327,7 +5411,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 442";
 		rLen = 15;
-		rLoc = 14622;
+		rLoc = 14615;
 		rType = 0;
 		vrLen = 1889;
 		vrLoc = 13270;
@@ -3337,7 +5421,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 315";
 		rLen = 0;
-		rLoc = 9701;
+		rLoc = 11013;
 		rType = 0;
 		vrLen = 1377;
 		vrLoc = 8575;
@@ -3347,7 +5431,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 315";
 		rLen = 0;
-		rLoc = 9701;
+		rLoc = 11013;
 		rType = 0;
 		vrLen = 1412;
 		vrLoc = 8540;
@@ -3357,7 +5441,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 442";
 		rLen = 15;
-		rLoc = 14622;
+		rLoc = 14615;
 		rType = 0;
 		vrLen = 1889;
 		vrLoc = 13270;
@@ -3367,7 +5451,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 314";
 		rLen = 0;
-		rLoc = 9731;
+		rLoc = 11043;
 		rType = 0;
 		vrLen = 1368;
 		vrLoc = 8546;
@@ -3377,7 +5461,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 314";
 		rLen = 0;
-		rLoc = 9731;
+		rLoc = 11043;
 		rType = 0;
 		vrLen = 422;
 		vrLoc = 8546;
@@ -3387,7 +5471,7 @@
 		fRef = EE4B74920E2E6E1700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 314";
 		rLen = 0;
-		rLoc = 9731;
+		rLoc = 11043;
 		rType = 0;
 		vrLen = 1100;
 		vrLoc = 7903;
@@ -3410,7 +5494,7 @@
 		isa = PBXTextBookmark;
 		fRef = EE4B75C30E2F460600F7B157 /* InfoViewController.m */;
 		rLen = 1;
-		rLoc = 23;
+		rLoc = 26;
 		rType = 1;
 	};
 	EE4B75C90E2F460B00F7B157 /* PBXTextBookmark */ = {
@@ -3418,7 +5502,7 @@
 		fRef = EE4B75C70E2F460700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 23";
 		rLen = 0;
-		rLoc = 527;
+		rLoc = 639;
 		rType = 0;
 		vrLen = 1791;
 		vrLoc = 93;
@@ -3428,7 +5512,7 @@
 		fRef = EE4B75C70E2F460700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 23";
 		rLen = 0;
-		rLoc = 527;
+		rLoc = 639;
 		rType = 0;
 		vrLen = 1651;
 		vrLoc = 0;
@@ -3438,7 +5522,7 @@
 		fRef = EE4B75C70E2F460700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 23";
 		rLen = 0;
-		rLoc = 527;
+		rLoc = 639;
 		rType = 0;
 		vrLen = 790;
 		vrLoc = 1094;
@@ -3448,7 +5532,7 @@
 		fRef = EE4B75C70E2F460700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 23";
 		rLen = 0;
-		rLoc = 527;
+		rLoc = 639;
 		rType = 0;
 		vrLen = 1615;
 		vrLoc = 528;
@@ -3458,7 +5542,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 442";
 		rLen = 15;
-		rLoc = 14622;
+		rLoc = 14615;
 		rType = 0;
 		vrLen = 1886;
 		vrLoc = 13270;
@@ -3468,7 +5552,7 @@
 		fRef = EE4B75C70E2F460700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 23";
 		rLen = 0;
-		rLoc = 527;
+		rLoc = 639;
 		rType = 0;
 		vrLen = 1615;
 		vrLoc = 528;
@@ -3478,7 +5562,7 @@
 		fRef = EEAB01440E2E3BA800D84A8A /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 442";
 		rLen = 15;
-		rLoc = 14622;
+		rLoc = 14615;
 		rType = 0;
 		vrLen = 1701;
 		vrLoc = 14307;
@@ -3529,7 +5613,7 @@
 		fRef = EE4B75C70E2F460700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 23";
 		rLen = 0;
-		rLoc = 527;
+		rLoc = 639;
 		rType = 0;
 		vrLen = 790;
 		vrLoc = 1094;
@@ -3549,7 +5633,7 @@
 		fRef = EE4B75D40E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 484";
 		rLen = 0;
-		rLoc = 15965;
+		rLoc = 15958;
 		rType = 0;
 		vrLen = 1680;
 		vrLoc = 14562;
@@ -3559,7 +5643,7 @@
 		fRef = EE4B75D40E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 484";
 		rLen = 0;
-		rLoc = 15965;
+		rLoc = 15958;
 		rType = 0;
 		vrLen = 729;
 		vrLoc = 14562;
@@ -3569,7 +5653,7 @@
 		fRef = EE4B75C70E2F460700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 177";
 		rLen = 19;
-		rLoc = 5325;
+		rLoc = 5490;
 		rType = 0;
 		vrLen = 1276;
 		vrLoc = 4552;
@@ -3579,7 +5663,7 @@
 		fRef = EE4B75D40E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 445";
 		rLen = 0;
-		rLoc = 14645;
+		rLoc = 14638;
 		rType = 0;
 		vrLen = 1808;
 		vrLoc = 13812;
@@ -3589,7 +5673,7 @@
 		fRef = EE4B75D40E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 445";
 		rLen = 0;
-		rLoc = 14645;
+		rLoc = 14638;
 		rType = 0;
 		vrLen = 1810;
 		vrLoc = 13812;
@@ -3599,7 +5683,7 @@
 		fRef = EE4B75C70E2F460700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 177";
 		rLen = 19;
-		rLoc = 5325;
+		rLoc = 5490;
 		rType = 0;
 		vrLen = 1276;
 		vrLoc = 4552;
@@ -3609,7 +5693,7 @@
 		fRef = EE4B75D40E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 653";
 		rLen = 19;
-		rLoc = 21859;
+		rLoc = 21852;
 		rType = 0;
 		vrLen = 2083;
 		vrLoc = 21295;
@@ -3619,7 +5703,7 @@
 		fRef = EE4B75D40E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 653";
 		rLen = 19;
-		rLoc = 21859;
+		rLoc = 21852;
 		rType = 0;
 		vrLen = 672;
 		vrLoc = 21295;
@@ -3629,7 +5713,7 @@
 		fRef = EE4B75D40E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 361";
 		rLen = 53;
-		rLoc = 12018;
+		rLoc = 12011;
 		rType = 0;
 		vrLen = 1658;
 		vrLoc = 11555;
@@ -3639,7 +5723,7 @@
 		fRef = EE4B75D40E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 361";
 		rLen = 53;
-		rLoc = 12018;
+		rLoc = 12011;
 		rType = 0;
 		vrLen = 755;
 		vrLoc = 12458;
@@ -3649,7 +5733,7 @@
 		fRef = EE4B75D40E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 383";
 		rLen = 0;
-		rLoc = 12526;
+		rLoc = 12519;
 		rType = 0;
 		vrLen = 2065;
 		vrLoc = 7462;
@@ -3659,7 +5743,7 @@
 		fRef = EE4B75D40E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 383";
 		rLen = 0;
-		rLoc = 12526;
+		rLoc = 12519;
 		rType = 0;
 		vrLen = 693;
 		vrLoc = 8834;
@@ -3669,7 +5753,7 @@
 		fRef = EE4B75D40E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 383";
 		rLen = 0;
-		rLoc = 12526;
+		rLoc = 12519;
 		rType = 0;
 		vrLen = 1926;
 		vrLoc = 8130;
@@ -3679,7 +5763,7 @@
 		fRef = EE4B75D40E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 383";
 		rLen = 0;
-		rLoc = 12526;
+		rLoc = 12519;
 		rType = 0;
 		vrLen = 1926;
 		vrLoc = 8130;
@@ -3689,7 +5773,7 @@
 		fRef = EE4B75D40E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 383";
 		rLen = 0;
-		rLoc = 12526;
+		rLoc = 12519;
 		rType = 0;
 		vrLen = 1841;
 		vrLoc = 8130;
@@ -3699,7 +5783,7 @@
 		fRef = EE4B75D40E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 384";
 		rLen = 0;
-		rLoc = 12526;
+		rLoc = 12519;
 		rType = 0;
 		vrLen = 1856;
 		vrLoc = 8130;
@@ -3716,7 +5800,7 @@
 		fRef = EE4B75D40E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 383";
 		rLen = 0;
-		rLoc = 12526;
+		rLoc = 12519;
 		rType = 0;
 		vrLen = 693;
 		vrLoc = 8834;
@@ -3736,7 +5820,7 @@
 		fRef = EE4B75D40E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 590";
 		rLen = 0;
-		rLoc = 19427;
+		rLoc = 19420;
 		rType = 0;
 		vrLen = 762;
 		vrLoc = 19233;
@@ -3746,7 +5830,7 @@
 		fRef = EE4B75D40E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 590";
 		rLen = 0;
-		rLoc = 19427;
+		rLoc = 19420;
 		rType = 0;
 		vrLen = 2117;
 		vrLoc = 18537;
@@ -3766,7 +5850,7 @@
 		fRef = EE2DE8730E1C40AE00D97653 /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 499";
 		rLen = 284;
-		rLoc = 18250;
+		rLoc = 18367;
 		rType = 0;
 		vrLen = 1544;
 		vrLoc = 16325;
@@ -3776,7 +5860,7 @@
 		fRef = EE4B75D40E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 590";
 		rLen = 0;
-		rLoc = 19427;
+		rLoc = 19420;
 		rType = 0;
 		vrLen = 2117;
 		vrLoc = 18537;
@@ -3796,7 +5880,7 @@
 		fRef = EE2DE8730E1C40AE00D97653 /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 513";
 		rLen = 0;
-		rLoc = 18955;
+		rLoc = 19072;
 		rType = 0;
 		vrLen = 1541;
 		vrLoc = 16658;
@@ -3806,7 +5890,7 @@
 		fRef = EE2DE8730E1C40AE00D97653 /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 513";
 		rLen = 0;
-		rLoc = 18955;
+		rLoc = 19072;
 		rType = 0;
 		vrLen = 1541;
 		vrLoc = 16658;
@@ -3816,7 +5900,7 @@
 		fRef = EE2DE8730E1C40AE00D97653 /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 513";
 		rLen = 0;
-		rLoc = 18955;
+		rLoc = 19072;
 		rType = 0;
 		vrLen = 655;
 		vrLoc = 17537;
@@ -3833,7 +5917,7 @@
 		fRef = EE2DE8730E1C40AE00D97653 /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 513";
 		rLen = 0;
-		rLoc = 18955;
+		rLoc = 19072;
 		rType = 0;
 		vrLen = 655;
 		vrLoc = 17537;
@@ -3853,7 +5937,7 @@
 		fRef = EE2DE8730E1C40AE00D97653 /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 513";
 		rLen = 0;
-		rLoc = 18955;
+		rLoc = 19072;
 		rType = 0;
 		vrLen = 1541;
 		vrLoc = 16658;
@@ -4005,9 +6089,9 @@
 		path = "/Users/pp/Programming/Cocoa/eponyms-touch/Classes/EponymUpdater.m";
 		sourceTree = "<absolute>";
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {963, 11074}}";
-			sepNavSelRange = "{10063, 0}";
-			sepNavVisRange = "{8988, 2035}";
+			sepNavIntBoundsRect = "{{0, 0}, {963, 10822}}";
+			sepNavSelRange = "{11106, 0}";
+			sepNavVisRange = "{10265, 1623}";
 		};
 	};
 	EE4B761C0E2F4C2E00F7B157 /* EponymUpdater.m */ = {
@@ -4049,7 +6133,7 @@
 		fRef = EE4B75C70E2F460700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 144";
 		rLen = 0;
-		rLoc = 4560;
+		rLoc = 4725;
 		rType = 0;
 		vrLen = 397;
 		vrLoc = 4219;
@@ -4076,7 +6160,7 @@
 		fRef = EE4B75C70E2F460700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 144";
 		rLen = 0;
-		rLoc = 4560;
+		rLoc = 4725;
 		rType = 0;
 		vrLen = 397;
 		vrLoc = 4219;
@@ -4096,7 +6180,7 @@
 		fRef = EE4B75C70E2F460700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 144";
 		rLen = 0;
-		rLoc = 4560;
+		rLoc = 4725;
 		rType = 0;
 		vrLen = 397;
 		vrLoc = 4219;
@@ -4156,7 +6240,7 @@
 		fRef = EE4B75C70E2F460700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 76";
 		rLen = 11;
-		rLoc = 2209;
+		rLoc = 2321;
 		rType = 0;
 		vrLen = 1580;
 		vrLoc = 1188;
@@ -4186,7 +6270,7 @@
 		fRef = EE4B75C70E2F460700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 76";
 		rLen = 11;
-		rLoc = 2209;
+		rLoc = 2321;
 		rType = 0;
 		vrLen = 1580;
 		vrLoc = 1188;
@@ -4343,7 +6427,7 @@
 		fRef = EE4B75C70E2F460700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 306";
 		rLen = 0;
-		rLoc = 9519;
+		rLoc = 10831;
 		rType = 0;
 		vrLen = 1334;
 		vrLoc = 8726;
@@ -4373,7 +6457,7 @@
 		fRef = EE4B75C70E2F460700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 306";
 		rLen = 0;
-		rLoc = 9519;
+		rLoc = 10831;
 		rType = 0;
 		vrLen = 1334;
 		vrLoc = 8726;
@@ -4413,7 +6497,7 @@
 		fRef = EE4B761C0E2F4C2E00F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 539";
 		rLen = 25;
-		rLoc = 17508;
+		rLoc = 17501;
 		rType = 0;
 		vrLen = 2118;
 		vrLoc = 16175;
@@ -4423,7 +6507,7 @@
 		fRef = EE4B761C0E2F4C2E00F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 539";
 		rLen = 25;
-		rLoc = 17508;
+		rLoc = 17501;
 		rType = 0;
 		vrLen = 1981;
 		vrLoc = 16175;
@@ -4433,7 +6517,7 @@
 		fRef = EE4B761C0E2F4C2E00F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 539";
 		rLen = 25;
-		rLoc = 17508;
+		rLoc = 17501;
 		rType = 0;
 		vrLen = 695;
 		vrLoc = 16175;
@@ -4443,7 +6527,7 @@
 		fRef = EE4B761C0E2F4C2E00F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 539";
 		rLen = 25;
-		rLoc = 17508;
+		rLoc = 17501;
 		rType = 0;
 		vrLen = 2114;
 		vrLoc = 16175;
@@ -4453,7 +6537,7 @@
 		fRef = EE4B761C0E2F4C2E00F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 548";
 		rLen = 0;
-		rLoc = 17818;
+		rLoc = 17811;
 		rType = 0;
 		vrLen = 1708;
 		vrLoc = 16728;
@@ -4463,7 +6547,7 @@
 		fRef = EE4B761C0E2F4C2E00F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 588";
 		rLen = 0;
-		rLoc = 18869;
+		rLoc = 18862;
 		rType = 0;
 		vrLen = 2316;
 		vrLoc = 17558;
@@ -4473,7 +6557,7 @@
 		fRef = EE4B761C0E2F4C2E00F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 588";
 		rLen = 0;
-		rLoc = 18869;
+		rLoc = 18862;
 		rType = 0;
 		vrLen = 2173;
 		vrLoc = 17976;
@@ -4483,7 +6567,7 @@
 		fRef = EE4B761C0E2F4C2E00F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 588";
 		rLen = 0;
-		rLoc = 18869;
+		rLoc = 18862;
 		rType = 0;
 		vrLen = 659;
 		vrLoc = 17558;
@@ -4493,7 +6577,7 @@
 		fRef = EE4B761C0E2F4C2E00F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 543";
 		rLen = 0;
-		rLoc = 17715;
+		rLoc = 17708;
 		rType = 0;
 		vrLen = 2158;
 		vrLoc = 17045;
@@ -4503,7 +6587,7 @@
 		fRef = EE4B761C0E2F4C2E00F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 543";
 		rLen = 0;
-		rLoc = 17715;
+		rLoc = 17708;
 		rType = 0;
 		vrLen = 2059;
 		vrLoc = 18334;
@@ -4513,7 +6597,7 @@
 		fRef = EE4B761C0E2F4C2E00F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 543";
 		rLen = 0;
-		rLoc = 17715;
+		rLoc = 17708;
 		rType = 0;
 		vrLen = 1929;
 		vrLoc = 18334;
@@ -4523,7 +6607,7 @@
 		fRef = EE4B761C0E2F4C2E00F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 543";
 		rLen = 0;
-		rLoc = 17715;
+		rLoc = 17708;
 		rType = 0;
 		vrLen = 475;
 		vrLoc = 18334;
@@ -4663,7 +6747,7 @@
 		fRef = EE2DEA630E22186600D97653 /* Eponym.m */;
 		name = "Eponym.m: 45";
 		rLen = 0;
-		rLoc = 829;
+		rLoc = 806;
 		rType = 0;
 		vrLen = 921;
 		vrLoc = 0;
@@ -4693,7 +6777,7 @@
 		fRef = EE4B75C70E2F460700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 273";
 		rLen = 0;
-		rLoc = 8521;
+		rLoc = 9833;
 		rType = 0;
 		vrLen = 1849;
 		vrLoc = 7396;
@@ -4703,7 +6787,7 @@
 		fRef = EE4B761C0E2F4C2E00F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 577";
 		rLen = 0;
-		rLoc = 18806;
+		rLoc = 18799;
 		rType = 0;
 		vrLen = 2214;
 		vrLoc = 0;
@@ -4713,7 +6797,7 @@
 		fRef = EE4B761C0E2F4C2E00F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 577";
 		rLen = 0;
-		rLoc = 18806;
+		rLoc = 18799;
 		rType = 0;
 		vrLen = 2244;
 		vrLoc = 17812;
@@ -4723,7 +6807,7 @@
 		fRef = EE4B75C70E2F460700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 306";
 		rLen = 0;
-		rLoc = 9519;
+		rLoc = 10831;
 		rType = 0;
 		vrLen = 1515;
 		vrLoc = 8616;
@@ -4793,7 +6877,7 @@
 		fRef = EE2DE8730E1C40AE00D97653 /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 449";
 		rLen = 0;
-		rLoc = 16792;
+		rLoc = 16909;
 		rType = 0;
 		vrLen = 1791;
 		vrLoc = 15109;
@@ -4833,7 +6917,7 @@
 		fRef = EE2DE8730E1C40AE00D97653 /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 444";
 		rLen = 0;
-		rLoc = 16710;
+		rLoc = 16827;
 		rType = 0;
 		vrLen = 1380;
 		vrLoc = 15109;
@@ -4873,7 +6957,7 @@
 		fRef = EE2DE8730E1C40AE00D97653 /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 449";
 		rLen = 14;
-		rLoc = 16792;
+		rLoc = 16909;
 		rType = 0;
 		vrLen = 1533;
 		vrLoc = 0;
@@ -4945,7 +7029,7 @@
 		rLen = 11;
 		rLoc = 588;
 		rType = 0;
-		vrLen = 2071;
+		vrLen = 2030;
 		vrLoc = 949;
 	};
 	EE4B76890E2F5AD100F7B157 /* PBXTextBookmark */ = {
@@ -4953,7 +7037,7 @@
 		fRef = EE4B75C70E2F460700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 272";
 		rLen = 17;
-		rLoc = 8502;
+		rLoc = 9814;
 		rType = 0;
 		vrLen = 1849;
 		vrLoc = 7396;
@@ -4963,9 +7047,9 @@
 		fRef = EE2DE6B80E1AE38200D97653 /* InfoViewController.h */;
 		name = "InfoViewController.h: 80";
 		rLen = 17;
-		rLoc = 2356;
+		rLoc = 2425;
 		rType = 0;
-		vrLen = 2099;
+		vrLen = 2030;
 		vrLoc = 949;
 	};
 	EE4B768B0E2F5AD100F7B157 /* PBXTextBookmark */ = {
@@ -5063,7 +7147,7 @@
 		fRef = EE2DE6B80E1AE38200D97653 /* InfoViewController.h */;
 		name = "InfoViewController.h: 80";
 		rLen = 17;
-		rLoc = 2356;
+		rLoc = 2425;
 		rType = 0;
 		vrLen = 1256;
 		vrLoc = 0;
@@ -5073,7 +7157,7 @@
 		fRef = EE4B75C70E2F460700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 272";
 		rLen = 17;
-		rLoc = 8502;
+		rLoc = 9814;
 		rType = 0;
 		vrLen = 1822;
 		vrLoc = 0;
@@ -5093,7 +7177,7 @@
 		fRef = EE4B761C0E2F4C2E00F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 577";
 		rLen = 0;
-		rLoc = 18806;
+		rLoc = 18799;
 		rType = 0;
 		vrLen = 2214;
 		vrLoc = 0;
@@ -5173,7 +7257,7 @@
 		fRef = EE2DEA630E22186600D97653 /* Eponym.m */;
 		name = "Eponym.m: 45";
 		rLen = 0;
-		rLoc = 829;
+		rLoc = 806;
 		rType = 0;
 		vrLen = 921;
 		vrLoc = 0;
@@ -5203,7 +7287,7 @@
 		fRef = EE4B75C70E2F460700F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 273";
 		rLen = 0;
-		rLoc = 8521;
+		rLoc = 9833;
 		rType = 0;
 		vrLen = 1849;
 		vrLoc = 7396;
@@ -5244,6 +7328,11 @@
 		name = ListViewController.m;
 		path = "/Users/pp/Programming/Cocoa/eponyms-touch/Classes/ListViewController.m";
 		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1202, 3934}}";
+			sepNavSelRange = "{6072, 0}";
+			sepNavVisRange = "{5864, 412}";
+		};
 	};
 	EE64C63F0E2647C10000BC8D /* Eponym.h */ = {
 		isa = PBXFileReference;
@@ -5251,6 +7340,11 @@
 		name = Eponym.h;
 		path = "/Users/pp/Programming/Cocoa/eponyms-touch/Classes/Eponym.h";
 		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {963, 746}}";
+			sepNavSelRange = "{306, 0}";
+			sepNavVisRange = "{0, 1164}";
+		};
 	};
 	EE64C6E20E26502C0000BC8D /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -5301,7 +7395,7 @@
 		fRef = EE2DEA630E22186600D97653 /* Eponym.m */;
 		name = "Eponym.m: 90";
 		rLen = 0;
-		rLoc = 2475;
+		rLoc = 2448;
 		rType = 0;
 		vrLen = 1789;
 		vrLoc = 879;
@@ -5328,7 +7422,7 @@
 		fRef = EE07C9B30E2CA084006F7F8A /* EponymViewController.m */;
 		name = "EponymViewController.m: 181";
 		rLen = 0;
-		rLoc = 6492;
+		rLoc = 569;
 		rType = 0;
 		vrLen = 1806;
 		vrLoc = 5511;
@@ -5432,9 +7526,9 @@
 		path = "/Users/pp/Programming/Cocoa/eponyms-touch/Classes/../InfoViewController.m";
 		sourceTree = "<absolute>";
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1202, 4788}}";
-			sepNavSelRange = "{2236, 0}";
-			sepNavVisRange = "{1955, 255}";
+			sepNavIntBoundsRect = "{{0, 0}, {963, 4746}}";
+			sepNavSelRange = "{7428, 0}";
+			sepNavVisRange = "{6241, 1395}";
 		};
 	};
 	EEAB025C0E2E5F0300D84A8A /* PBXTextBookmark */ = {
@@ -5442,7 +7536,7 @@
 		fRef = EE2DE6B80E1AE38200D97653 /* InfoViewController.h */;
 		name = "InfoViewController.h: 77";
 		rLen = 0;
-		rLoc = 2237;
+		rLoc = 2306;
 		rType = 0;
 		vrLen = 1969;
 		vrLoc = 646;
@@ -5462,7 +7556,7 @@
 		fRef = EEAB025A0E2E5EFC00D84A8A /* InfoViewController.m */;
 		name = "InfoViewController.m: 43";
 		rLen = 5;
-		rLoc = 1091;
+		rLoc = 1203;
 		rType = 0;
 		vrLen = 1600;
 		vrLoc = 298;
@@ -5579,7 +7673,7 @@
 		fRef = EEAB00640E2D08FA00D84A8A /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 426";
 		rLen = 0;
-		rLoc = 15053;
+		rLoc = 15170;
 		rType = 0;
 		vrLen = 1962;
 		vrLoc = 12711;
@@ -5719,7 +7813,7 @@
 		fRef = EEAB00640E2D08FA00D84A8A /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 426";
 		rLen = 0;
-		rLoc = 15053;
+		rLoc = 15170;
 		rType = 0;
 		vrLen = 1988;
 		vrLoc = 12885;
@@ -5739,7 +7833,7 @@
 		fRef = EEAB00640E2D08FA00D84A8A /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 317";
 		rLen = 0;
-		rLoc = 11098;
+		rLoc = 11149;
 		rType = 0;
 		vrLen = 1705;
 		vrLoc = 15546;
@@ -5759,7 +7853,7 @@
 		fRef = EE2DEA630E22186600D97653 /* Eponym.m */;
 		name = "Eponym.m: 45";
 		rLen = 0;
-		rLoc = 829;
+		rLoc = 806;
 		rType = 0;
 		vrLen = 921;
 		vrLoc = 0;
@@ -5769,7 +7863,7 @@
 		fRef = EEAB00640E2D08FA00D84A8A /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 428";
 		rLen = 17;
-		rLoc = 15625;
+		rLoc = 15742;
 		rType = 0;
 		vrLen = 1503;
 		vrLoc = 14991;
@@ -5789,7 +7883,7 @@
 		fRef = EEAB00640E2D08FA00D84A8A /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 428";
 		rLen = 26;
-		rLoc = 15616;
+		rLoc = 15733;
 		rType = 0;
 		vrLen = 1523;
 		vrLoc = 14488;
@@ -5809,7 +7903,7 @@
 		fRef = EEAB00640E2D08FA00D84A8A /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 428";
 		rLen = 26;
-		rLoc = 15616;
+		rLoc = 15733;
 		rType = 0;
 		vrLen = 1280;
 		vrLoc = 14794;
@@ -5829,7 +7923,7 @@
 		fRef = EEAB00640E2D08FA00D84A8A /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 428";
 		rLen = 26;
-		rLoc = 15616;
+		rLoc = 15733;
 		rType = 0;
 		vrLen = 1503;
 		vrLoc = 14991;
@@ -5839,7 +7933,7 @@
 		fRef = EE2DEA630E22186600D97653 /* Eponym.m */;
 		name = "Eponym.m: 45";
 		rLen = 0;
-		rLoc = 829;
+		rLoc = 806;
 		rType = 0;
 		vrLen = 921;
 		vrLoc = 0;
@@ -5849,7 +7943,7 @@
 		fRef = EEAB00640E2D08FA00D84A8A /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 428";
 		rLen = 17;
-		rLoc = 15625;
+		rLoc = 15742;
 		rType = 0;
 		vrLen = 1503;
 		vrLoc = 14991;
@@ -5938,7 +8032,7 @@
 		fRef = EEAB00640E2D08FA00D84A8A /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 428";
 		rLen = 17;
-		rLoc = 15625;
+		rLoc = 15742;
 		rType = 0;
 		vrLen = 1285;
 		vrLoc = 14991;
@@ -5958,7 +8052,7 @@
 		fRef = EEAB00640E2D08FA00D84A8A /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 294";
 		rLen = 0;
-		rLoc = 10370;
+		rLoc = 10421;
 		rType = 0;
 		vrLen = 2144;
 		vrLoc = 9631;
@@ -5968,7 +8062,7 @@
 		fRef = EEAB00640E2D08FA00D84A8A /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 294";
 		rLen = 0;
-		rLoc = 10370;
+		rLoc = 10421;
 		rType = 0;
 		vrLen = 2162;
 		vrLoc = 9407;
@@ -5978,7 +8072,7 @@
 		fRef = EEAB00640E2D08FA00D84A8A /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 294";
 		rLen = 0;
-		rLoc = 10370;
+		rLoc = 10421;
 		rType = 0;
 		vrLen = 477;
 		vrLoc = 10064;
@@ -5995,7 +8089,7 @@
 		fRef = EEAB00640E2D08FA00D84A8A /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 294";
 		rLen = 0;
-		rLoc = 10370;
+		rLoc = 10421;
 		rType = 0;
 		vrLen = 477;
 		vrLoc = 10064;
@@ -6025,7 +8119,7 @@
 		fRef = EE2DE6B80E1AE38200D97653 /* InfoViewController.h */;
 		name = "InfoViewController.h: 55";
 		rLen = 0;
-		rLoc = 1279;
+		rLoc = 1348;
 		rType = 0;
 		vrLen = 1965;
 		vrLoc = 601;
@@ -6035,7 +8129,7 @@
 		fRef = EE4B75C30E2F460600F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 220";
 		rLen = 0;
-		rLoc = 6790;
+		rLoc = 7016;
 		rType = 0;
 		vrLen = 2046;
 		vrLoc = 5570;
@@ -6065,7 +8159,7 @@
 		fRef = EE4B75D20E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 628";
 		rLen = 11;
-		rLoc = 20133;
+		rLoc = 20126;
 		rType = 0;
 		vrLen = 2064;
 		vrLoc = 20242;
@@ -6125,7 +8219,7 @@
 		fRef = EE4B75D20E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 628";
 		rLen = 0;
-		rLoc = 20266;
+		rLoc = 20259;
 		rType = 0;
 		vrLen = 2095;
 		vrLoc = 19188;
@@ -6145,7 +8239,7 @@
 		fRef = EE4B75C30E2F460600F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 223";
 		rLen = 8;
-		rLoc = 6922;
+		rLoc = 7148;
 		rType = 0;
 		vrLen = 2104;
 		vrLoc = 5512;
@@ -6155,7 +8249,7 @@
 		fRef = EE2DE6B80E1AE38200D97653 /* InfoViewController.h */;
 		name = "InfoViewController.h: 55";
 		rLen = 0;
-		rLoc = 1279;
+		rLoc = 1348;
 		rType = 0;
 		vrLen = 1965;
 		vrLoc = 601;
@@ -6165,7 +8259,7 @@
 		fRef = EE4B75C30E2F460600F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 220";
 		rLen = 0;
-		rLoc = 6790;
+		rLoc = 7016;
 		rType = 0;
 		vrLen = 2046;
 		vrLoc = 5570;
@@ -6185,7 +8279,7 @@
 		fRef = EE4B75D20E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 628";
 		rLen = 0;
-		rLoc = 20133;
+		rLoc = 20126;
 		rType = 0;
 		vrLen = 1969;
 		vrLoc = 19666;
@@ -6205,7 +8299,7 @@
 		fRef = EE4B75D20E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 630";
 		rLen = 0;
-		rLoc = 20194;
+		rLoc = 20187;
 		rType = 0;
 		vrLen = 2000;
 		vrLoc = 20242;
@@ -6225,7 +8319,7 @@
 		fRef = EE4B75D20E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 628";
 		rLen = 11;
-		rLoc = 20133;
+		rLoc = 20126;
 		rType = 0;
 		vrLen = 2064;
 		vrLoc = 20242;
@@ -6245,7 +8339,7 @@
 		fRef = EE4B75D20E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 626";
 		rLen = 11;
-		rLoc = 20133;
+		rLoc = 20126;
 		rType = 0;
 		vrLen = 1761;
 		vrLoc = 19567;
@@ -6255,7 +8349,7 @@
 		fRef = EE4B75D20E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 626";
 		rLen = 11;
-		rLoc = 20133;
+		rLoc = 20126;
 		rType = 0;
 		vrLen = 1738;
 		vrLoc = 19567;
@@ -6265,7 +8359,7 @@
 		fRef = EE4B75D20E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 626";
 		rLen = 11;
-		rLoc = 20133;
+		rLoc = 20126;
 		rType = 0;
 		vrLen = 494;
 		vrLoc = 20432;
@@ -6275,7 +8369,7 @@
 		fRef = EE4B75D20E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 626";
 		rLen = 11;
-		rLoc = 20133;
+		rLoc = 20126;
 		rType = 0;
 		vrLen = 1738;
 		vrLoc = 19567;
@@ -6287,9 +8381,9 @@
 		path = "/Users/pp/Programming/Cocoa/eponyms-touch/Classes/eponyms_touchAppDelegate.m";
 		sourceTree = "<absolute>";
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {963, 7826}}";
-			sepNavSelRange = "{1706, 12}";
-			sepNavVisRange = "{1172, 2298}";
+			sepNavIntBoundsRect = "{{0, 0}, {963, 7896}}";
+			sepNavSelRange = "{8848, 25}";
+			sepNavVisRange = "{8884, 2255}";
 		};
 	};
 	EEE6CF9A0E2F79CE00271CDD /* eponyms_touchAppDelegate.m */ = {
@@ -6304,7 +8398,7 @@
 		fRef = EE4B75D20E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 626";
 		rLen = 11;
-		rLoc = 20133;
+		rLoc = 20126;
 		rType = 0;
 		vrLen = 1160;
 		vrLoc = 19567;
@@ -6313,7 +8407,7 @@
 		isa = PBXTextBookmark;
 		fRef = EEE6CF960E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
 		rLen = 1;
-		rLoc = 493;
+		rLoc = 498;
 		rType = 1;
 	};
 	EEE6CF9E0E2F79D600271CDD /* PBXTextBookmark */ = {
@@ -6321,7 +8415,7 @@
 		fRef = EE4B75D20E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 626";
 		rLen = 11;
-		rLoc = 20133;
+		rLoc = 20126;
 		rType = 0;
 		vrLen = 1160;
 		vrLoc = 19567;
@@ -6331,7 +8425,7 @@
 		fRef = EEE6CF9A0E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 478";
 		rLen = 0;
-		rLoc = 17237;
+		rLoc = 17354;
 		rType = 0;
 		vrLen = 1573;
 		vrLoc = 16172;
@@ -6359,7 +8453,7 @@
 		fRef = EE4B75D20E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 626";
 		rLen = 11;
-		rLoc = 20133;
+		rLoc = 20126;
 		rType = 0;
 		vrLen = 494;
 		vrLoc = 20432;
@@ -6369,7 +8463,7 @@
 		fRef = EE4B75D20E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 626";
 		rLen = 11;
-		rLoc = 20133;
+		rLoc = 20126;
 		rType = 0;
 		vrLen = 494;
 		vrLoc = 20432;
@@ -6546,7 +8640,7 @@
 		fRef = EE4B75C30E2F460600F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 308";
 		rLen = 0;
-		rLoc = 9601;
+		rLoc = 10913;
 		rType = 0;
 		vrLen = 383;
 		vrLoc = 4939;
@@ -6583,7 +8677,7 @@
 		fRef = EE4B75C30E2F460600F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 177";
 		rLen = 0;
-		rLoc = 5320;
+		rLoc = 5485;
 		rType = 0;
 		vrLen = 332;
 		vrLoc = 9202;
@@ -6593,7 +8687,7 @@
 		fRef = EE4B75C30E2F460600F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 308";
 		rLen = 0;
-		rLoc = 9601;
+		rLoc = 10913;
 		rType = 0;
 		vrLen = 383;
 		vrLoc = 4939;
@@ -6623,7 +8717,7 @@
 		fRef = EEE6CF9A0E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 441";
 		rLen = 0;
-		rLoc = 15748;
+		rLoc = 15865;
 		rType = 0;
 		vrLen = 1406;
 		vrLoc = 15053;
@@ -6633,7 +8727,7 @@
 		fRef = EE4B75C30E2F460600F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 220";
 		rLen = 0;
-		rLoc = 6790;
+		rLoc = 7016;
 		rType = 0;
 		vrLen = 2046;
 		vrLoc = 5570;
@@ -6643,7 +8737,7 @@
 		fRef = EEE6CF9A0E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 441";
 		rLen = 0;
-		rLoc = 15748;
+		rLoc = 15865;
 		rType = 0;
 		vrLen = 1406;
 		vrLoc = 15053;
@@ -6653,7 +8747,7 @@
 		fRef = EE4B75C30E2F460600F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 220";
 		rLen = 0;
-		rLoc = 6790;
+		rLoc = 7016;
 		rType = 0;
 		vrLen = 2046;
 		vrLoc = 5570;
@@ -6663,7 +8757,7 @@
 		fRef = EE4B75C30E2F460600F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 220";
 		rLen = 0;
-		rLoc = 6790;
+		rLoc = 7016;
 		rType = 0;
 		vrLen = 1961;
 		vrLoc = 5427;
@@ -6683,7 +8777,7 @@
 		fRef = EE4B75C30E2F460600F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 220";
 		rLen = 0;
-		rLoc = 6790;
+		rLoc = 7016;
 		rType = 0;
 		vrLen = 641;
 		vrLoc = 6415;
@@ -6693,7 +8787,7 @@
 		fRef = EE4B75C30E2F460600F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 220";
 		rLen = 0;
-		rLoc = 6790;
+		rLoc = 7016;
 		rType = 0;
 		vrLen = 2069;
 		vrLoc = 5427;
@@ -6703,7 +8797,7 @@
 		fRef = EEE6CF9A0E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 441";
 		rLen = 0;
-		rLoc = 15748;
+		rLoc = 15865;
 		rType = 0;
 		vrLen = 1363;
 		vrLoc = 15053;
@@ -6713,7 +8807,7 @@
 		fRef = EE4B75C30E2F460600F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 220";
 		rLen = 0;
-		rLoc = 6790;
+		rLoc = 7016;
 		rType = 0;
 		vrLen = 2069;
 		vrLoc = 5427;
@@ -6743,7 +8837,7 @@
 		fRef = EE4B75C30E2F460600F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 272";
 		rLen = 17;
-		rLoc = 8502;
+		rLoc = 9814;
 		rType = 0;
 		vrLen = 1849;
 		vrLoc = 7386;
@@ -6753,7 +8847,7 @@
 		fRef = EE4B75D20E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 626";
 		rLen = 11;
-		rLoc = 20133;
+		rLoc = 20126;
 		rType = 0;
 		vrLen = 1982;
 		vrLoc = 19041;
@@ -6773,7 +8867,7 @@
 		fRef = EE4B75C30E2F460600F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 272";
 		rLen = 17;
-		rLoc = 8502;
+		rLoc = 9814;
 		rType = 0;
 		vrLen = 1849;
 		vrLoc = 7386;
@@ -6803,7 +8897,7 @@
 		fRef = EE4B75C30E2F460600F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 220";
 		rLen = 0;
-		rLoc = 6790;
+		rLoc = 7016;
 		rType = 0;
 		vrLen = 561;
 		vrLoc = 6403;
@@ -6853,7 +8947,7 @@
 		fRef = EE4B75C30E2F460600F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 272";
 		rLen = 17;
-		rLoc = 8502;
+		rLoc = 9814;
 		rType = 0;
 		vrLen = 1847;
 		vrLoc = 7388;
@@ -6893,7 +8987,7 @@
 		fRef = EEE6CF9A0E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 469";
 		rLen = 0;
-		rLoc = 16597;
+		rLoc = 16714;
 		rType = 0;
 		vrLen = 1204;
 		vrLoc = 15444;
@@ -6913,7 +9007,7 @@
 		fRef = EEE6CF9A0E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 472";
 		rLen = 0;
-		rLoc = 16597;
+		rLoc = 16714;
 		rType = 0;
 		vrLen = 1225;
 		vrLoc = 15444;
@@ -6953,7 +9047,7 @@
 		fRef = EE4B75C30E2F460600F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 272";
 		rLen = 17;
-		rLoc = 8502;
+		rLoc = 9814;
 		rType = 0;
 		vrLen = 1849;
 		vrLoc = 7386;
@@ -6973,7 +9067,7 @@
 		fRef = EE4B75C30E2F460600F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 272";
 		rLen = 17;
-		rLoc = 8502;
+		rLoc = 9814;
 		rType = 0;
 		vrLen = 1847;
 		vrLoc = 7388;
@@ -7023,7 +9117,7 @@
 		fRef = EE4B75D20E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 398";
 		rLen = 0;
-		rLoc = 12547;
+		rLoc = 12540;
 		rType = 0;
 		vrLen = 1323;
 		vrLoc = 11504;
@@ -7033,7 +9127,7 @@
 		fRef = EE4B75D20E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 398";
 		rLen = 0;
-		rLoc = 12547;
+		rLoc = 12540;
 		rType = 0;
 		vrLen = 1323;
 		vrLoc = 11504;
@@ -7053,7 +9147,7 @@
 		fRef = EE4B75D20E2F472900F7B157 /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 460";
 		rLen = 0;
-		rLoc = 14706;
+		rLoc = 14699;
 		rType = 0;
 		vrLen = 1841;
 		vrLoc = 13512;
@@ -7083,7 +9177,7 @@
 		fRef = EE4B75C30E2F460600F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 30";
 		rLen = 8;
-		rLoc = 557;
+		rLoc = 669;
 		rType = 0;
 		vrLen = 1812;
 		vrLoc = 0;
@@ -7093,7 +9187,7 @@
 		fRef = EE2DE6B80E1AE38200D97653 /* InfoViewController.h */;
 		name = "InfoViewController.h: 55";
 		rLen = 0;
-		rLoc = 1279;
+		rLoc = 1348;
 		rType = 0;
 		vrLen = 1595;
 		vrLoc = 363;
@@ -7133,7 +9227,7 @@
 		fRef = EE2DE6B80E1AE38200D97653 /* InfoViewController.h */;
 		name = "InfoViewController.h: 55";
 		rLen = 0;
-		rLoc = 1279;
+		rLoc = 1348;
 		rType = 0;
 		vrLen = 1595;
 		vrLoc = 364;
@@ -7143,7 +9237,7 @@
 		fRef = EE4B75C30E2F460600F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 272";
 		rLen = 17;
-		rLoc = 8502;
+		rLoc = 9814;
 		rType = 0;
 		vrLen = 1659;
 		vrLoc = 380;
@@ -7153,7 +9247,7 @@
 		fRef = EE2DE6B80E1AE38200D97653 /* InfoViewController.h */;
 		name = "InfoViewController.h: 55";
 		rLen = 0;
-		rLoc = 1279;
+		rLoc = 1348;
 		rType = 0;
 		vrLen = 1596;
 		vrLoc = 363;
@@ -7163,7 +9257,7 @@
 		fRef = EE4B75C30E2F460600F7B157 /* InfoViewController.m */;
 		name = "InfoViewController.m: 30";
 		rLen = 8;
-		rLoc = 557;
+		rLoc = 669;
 		rType = 0;
 		vrLen = 1812;
 		vrLoc = 0;
@@ -7173,7 +9267,7 @@
 		fRef = EE2DE6B80E1AE38200D97653 /* InfoViewController.h */;
 		name = "InfoViewController.h: 55";
 		rLen = 0;
-		rLoc = 1265;
+		rLoc = 1334;
 		rType = 0;
 		vrLen = 1539;
 		vrLoc = 363;
@@ -7183,7 +9277,7 @@
 		fRef = EE2DE6B80E1AE38200D97653 /* InfoViewController.h */;
 		name = "InfoViewController.h: 55";
 		rLen = 0;
-		rLoc = 1265;
+		rLoc = 1334;
 		rType = 0;
 		vrLen = 1595;
 		vrLoc = 363;
@@ -7203,7 +9297,7 @@
 		fRef = EE2DEA630E22186600D97653 /* Eponym.m */;
 		name = "Eponym.m: 45";
 		rLen = 0;
-		rLoc = 829;
+		rLoc = 806;
 		rType = 0;
 		vrLen = 1767;
 		vrLoc = 1037;
@@ -7213,7 +9307,7 @@
 		fRef = EE2DE6B80E1AE38200D97653 /* InfoViewController.h */;
 		name = "InfoViewController.h: 55";
 		rLen = 0;
-		rLoc = 1265;
+		rLoc = 1334;
 		rType = 0;
 		vrLen = 1595;
 		vrLoc = 363;
@@ -7223,7 +9317,7 @@
 		fRef = EE2DEA630E22186600D97653 /* Eponym.m */;
 		name = "Eponym.m: 45";
 		rLen = 0;
-		rLoc = 829;
+		rLoc = 806;
 		rType = 0;
 		vrLen = 921;
 		vrLoc = 0;
@@ -7243,7 +9337,7 @@
 		fRef = EE2DEA630E22186600D97653 /* Eponym.m */;
 		name = "Eponym.m: 45";
 		rLen = 0;
-		rLoc = 829;
+		rLoc = 806;
 		rType = 0;
 		vrLen = 1724;
 		vrLoc = 1080;
@@ -7263,7 +9357,7 @@
 		fRef = EE2DEA630E22186600D97653 /* Eponym.m */;
 		name = "Eponym.m: 45";
 		rLen = 0;
-		rLoc = 829;
+		rLoc = 806;
 		rType = 0;
 		vrLen = 921;
 		vrLoc = 0;
@@ -7283,7 +9377,7 @@
 		fRef = EE2DEA630E22186600D97653 /* Eponym.m */;
 		name = "Eponym.m: 45";
 		rLen = 0;
-		rLoc = 829;
+		rLoc = 806;
 		rType = 0;
 		vrLen = 295;
 		vrLoc = 588;
@@ -7293,7 +9387,7 @@
 		fRef = EE2DEA630E22186600D97653 /* Eponym.m */;
 		name = "Eponym.m: 58";
 		rLen = 0;
-		rLoc = 968;
+		rLoc = 941;
 		rType = 0;
 		vrLen = 1257;
 		vrLoc = 312;
@@ -7303,7 +9397,7 @@
 		fRef = EE2DEA630E22186600D97653 /* Eponym.m */;
 		name = "Eponym.m: 58";
 		rLen = 0;
-		rLoc = 968;
+		rLoc = 941;
 		rType = 0;
 		vrLen = 1342;
 		vrLoc = 548;
@@ -7313,7 +9407,7 @@
 		fRef = EE2DEA630E22186600D97653 /* Eponym.m */;
 		name = "Eponym.m: 58";
 		rLen = 0;
-		rLoc = 968;
+		rLoc = 941;
 		rType = 0;
 		vrLen = 193;
 		vrLoc = 727;
@@ -7323,7 +9417,7 @@
 		fRef = EE2DEA630E22186600D97653 /* Eponym.m */;
 		name = "Eponym.m: 58";
 		rLen = 0;
-		rLoc = 968;
+		rLoc = 941;
 		rType = 0;
 		vrLen = 1736;
 		vrLoc = 548;
@@ -7343,7 +9437,7 @@
 		fRef = EE2DEA630E22186600D97653 /* Eponym.m */;
 		name = "Eponym.m: 58";
 		rLen = 0;
-		rLoc = 968;
+		rLoc = 941;
 		rType = 0;
 		vrLen = 1736;
 		vrLoc = 548;
@@ -7373,7 +9467,7 @@
 		fRef = EE2DEA630E22186600D97653 /* Eponym.m */;
 		name = "Eponym.m: 58";
 		rLen = 0;
-		rLoc = 968;
+		rLoc = 941;
 		rType = 0;
 		vrLen = 192;
 		vrLoc = 727;
@@ -7473,7 +9567,7 @@
 		fRef = EEE6CF9A0E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 547";
 		rLen = 14;
-		rLoc = 18694;
+		rLoc = 18811;
 		rType = 0;
 		vrLen = 1560;
 		vrLoc = 17551;
@@ -7483,7 +9577,7 @@
 		fRef = EEE6CF9A0E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 471";
 		rLen = 0;
-		rLoc = 16419;
+		rLoc = 16536;
 		rType = 0;
 		vrLen = 1421;
 		vrLoc = 15571;
@@ -7503,7 +9597,7 @@
 		fRef = EEE6CF9A0E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 468";
 		rLen = 27;
-		rLoc = 16361;
+		rLoc = 16478;
 		rType = 0;
 		vrLen = 1591;
 		vrLoc = 15703;
@@ -7523,7 +9617,7 @@
 		fRef = EEE6CF9A0E2F79CE00271CDD /* eponyms_touchAppDelegate.m */;
 		name = "eponyms_touchAppDelegate.m: 547";
 		rLen = 14;
-		rLoc = 18694;
+		rLoc = 18811;
 		rType = 0;
 		vrLen = 1537;
 		vrLoc = 17574;
@@ -7793,7 +9887,7 @@
 		fRef = EE2DEA630E22186600D97653 /* Eponym.m */;
 		name = "Eponym.m: 58";
 		rLen = 0;
-		rLoc = 968;
+		rLoc = 941;
 		rType = 0;
 		vrLen = 1736;
 		vrLoc = 548;
@@ -7823,7 +9917,7 @@
 		fRef = EE2DEA630E22186600D97653 /* Eponym.m */;
 		name = "Eponym.m: 58";
 		rLen = 0;
-		rLoc = 969;
+		rLoc = 942;
 		rType = 0;
 		vrLen = 1662;
 		vrLoc = 548;
@@ -7847,7 +9941,7 @@
 		fRef = EE2DEA630E22186600D97653 /* Eponym.m */;
 		name = "Eponym.m: 58";
 		rLen = 0;
-		rLoc = 969;
+		rLoc = 942;
 		rType = 0;
 		vrLen = 934;
 		vrLoc = 548;
@@ -7864,7 +9958,7 @@
 		fRef = EE2DEA630E22186600D97653 /* Eponym.m */;
 		name = "Eponym.m: 58";
 		rLen = 0;
-		rLoc = 969;
+		rLoc = 942;
 		rType = 0;
 		vrLen = 934;
 		vrLoc = 548;
@@ -7874,7 +9968,7 @@
 		fRef = EEE6D0610E2F8B8C00271CDD /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 461";
 		rLen = 0;
-		rLoc = 14706;
+		rLoc = 14699;
 		rType = 0;
 		vrLen = 1774;
 		vrLoc = 14067;
@@ -7884,7 +9978,7 @@
 		fRef = EEE6D0610E2F8B8C00271CDD /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 461";
 		rLen = 0;
-		rLoc = 14706;
+		rLoc = 14699;
 		rType = 0;
 		vrLen = 1779;
 		vrLoc = 14067;
@@ -7894,7 +9988,7 @@
 		fRef = EEE6D0610E2F8B8C00271CDD /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 461";
 		rLen = 0;
-		rLoc = 14706;
+		rLoc = 14699;
 		rType = 0;
 		vrLen = 1779;
 		vrLoc = 14067;
@@ -7914,7 +10008,7 @@
 		fRef = EEE6D0610E2F8B8C00271CDD /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 461";
 		rLen = 0;
-		rLoc = 14706;
+		rLoc = 14699;
 		rType = 0;
 		vrLen = 1779;
 		vrLoc = 14067;
@@ -7984,7 +10078,7 @@
 		fRef = EEE6D0610E2F8B8C00271CDD /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 461";
 		rLen = 0;
-		rLoc = 14706;
+		rLoc = 14699;
 		rType = 0;
 		vrLen = 1779;
 		vrLoc = 14067;
@@ -8014,7 +10108,7 @@
 		fRef = EEE6D0610E2F8B8C00271CDD /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 457";
 		rLen = 0;
-		rLoc = 14617;
+		rLoc = 14610;
 		rType = 0;
 		vrLen = 1786;
 		vrLoc = 14067;
@@ -8024,7 +10118,7 @@
 		fRef = EEE6D0610E2F8B8C00271CDD /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 457";
 		rLen = 0;
-		rLoc = 14617;
+		rLoc = 14610;
 		rType = 0;
 		vrLen = 1851;
 		vrLoc = 13750;
@@ -8044,7 +10138,7 @@
 		fRef = EEE6D0610E2F8B8C00271CDD /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 457";
 		rLen = 0;
-		rLoc = 14617;
+		rLoc = 14610;
 		rType = 0;
 		vrLen = 480;
 		vrLoc = 14239;
@@ -8064,7 +10158,7 @@
 		fRef = EEE6D0610E2F8B8C00271CDD /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 584";
 		rLen = 0;
-		rLoc = 18867;
+		rLoc = 18860;
 		rType = 0;
 		vrLen = 1914;
 		vrLoc = 18427;
@@ -8074,7 +10168,7 @@
 		fRef = EEE6D0610E2F8B8C00271CDD /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 584";
 		rLen = 0;
-		rLoc = 18867;
+		rLoc = 18860;
 		rType = 0;
 		vrLen = 1914;
 		vrLoc = 18427;
@@ -8094,7 +10188,7 @@
 		fRef = EEE6D0610E2F8B8C00271CDD /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 584";
 		rLen = 0;
-		rLoc = 18867;
+		rLoc = 18860;
 		rType = 0;
 		vrLen = 1938;
 		vrLoc = 18427;
@@ -8104,7 +10198,7 @@
 		fRef = EEE6D0610E2F8B8C00271CDD /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 584";
 		rLen = 0;
-		rLoc = 18867;
+		rLoc = 18860;
 		rType = 0;
 		vrLen = 2114;
 		vrLoc = 17966;
@@ -8114,7 +10208,7 @@
 		fRef = EEE6D0610E2F8B8C00271CDD /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 584";
 		rLen = 0;
-		rLoc = 18867;
+		rLoc = 18860;
 		rType = 0;
 		vrLen = 578;
 		vrLoc = 18540;
@@ -8124,7 +10218,7 @@
 		fRef = EEE6D0610E2F8B8C00271CDD /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 584";
 		rLen = 0;
-		rLoc = 18867;
+		rLoc = 18860;
 		rType = 0;
 		vrLen = 578;
 		vrLoc = 18540;
@@ -8134,7 +10228,7 @@
 		fRef = EEE6D0610E2F8B8C00271CDD /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 584";
 		rLen = 0;
-		rLoc = 18867;
+		rLoc = 18860;
 		rType = 0;
 		vrLen = 2251;
 		vrLoc = 17966;
@@ -8144,7 +10238,7 @@
 		fRef = EEE6D0610E2F8B8C00271CDD /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 584";
 		rLen = 0;
-		rLoc = 18867;
+		rLoc = 18860;
 		rType = 0;
 		vrLen = 2251;
 		vrLoc = 17966;
@@ -8154,7 +10248,7 @@
 		fRef = EEE6D0610E2F8B8C00271CDD /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 584";
 		rLen = 0;
-		rLoc = 18867;
+		rLoc = 18860;
 		rType = 0;
 		vrLen = 832;
 		vrLoc = 18720;
@@ -8164,7 +10258,7 @@
 		fRef = EEE6D0610E2F8B8C00271CDD /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 584";
 		rLen = 0;
-		rLoc = 18869;
+		rLoc = 18862;
 		rType = 0;
 		vrLen = 2116;
 		vrLoc = 17966;
@@ -8174,7 +10268,7 @@
 		fRef = EEE6D0610E2F8B8C00271CDD /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 584";
 		rLen = 0;
-		rLoc = 18869;
+		rLoc = 18862;
 		rType = 0;
 		vrLen = 2111;
 		vrLoc = 17966;
@@ -8184,7 +10278,7 @@
 		fRef = EEE6D0610E2F8B8C00271CDD /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 584";
 		rLen = 0;
-		rLoc = 18869;
+		rLoc = 18862;
 		rType = 0;
 		vrLen = 2111;
 		vrLoc = 17966;
@@ -8194,7 +10288,7 @@
 		fRef = EEE6D0610E2F8B8C00271CDD /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 584";
 		rLen = 0;
-		rLoc = 18869;
+		rLoc = 18862;
 		rType = 0;
 		vrLen = 709;
 		vrLoc = 18718;
@@ -8217,7 +10311,7 @@
 		fRef = EEE6D0610E2F8B8C00271CDD /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 583";
 		rLen = 0;
-		rLoc = 18867;
+		rLoc = 18860;
 		rType = 0;
 		vrLen = 709;
 		vrLoc = 18718;
@@ -8227,7 +10321,7 @@
 		fRef = EEE6D0610E2F8B8C00271CDD /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 584";
 		rLen = 0;
-		rLoc = 18869;
+		rLoc = 18862;
 		rType = 0;
 		vrLen = 709;
 		vrLoc = 18718;
@@ -8253,7 +10347,7 @@
 		fRef = EEE6D0610E2F8B8C00271CDD /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 584";
 		rLen = 0;
-		rLoc = 18869;
+		rLoc = 18862;
 		rType = 0;
 		vrLen = 2082;
 		vrLoc = 17998;
@@ -8273,7 +10367,7 @@
 		fRef = EEE6D0610E2F8B8C00271CDD /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 584";
 		rLen = 0;
-		rLoc = 18869;
+		rLoc = 18862;
 		rType = 0;
 		vrLen = 2082;
 		vrLoc = 17998;
@@ -8313,7 +10407,7 @@
 		fRef = EEE6D0610E2F8B8C00271CDD /* EponymUpdater.m */;
 		name = "EponymUpdater.m: 584";
 		rLen = 0;
-		rLoc = 18869;
+		rLoc = 18862;
 		rType = 0;
 		vrLen = 709;
 		vrLoc = 18718;
@@ -8344,5 +10438,10 @@
 		name = CategoriesViewController.m;
 		path = "/Users/pp/Programming/Cocoa/eponyms-touch/Classes/CategoriesViewController.m";
 		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1202, 2086}}";
+			sepNavSelRange = "{3033, 0}";
+			sepNavVisRange = "{2742, 570}";
+		};
 	};
 }

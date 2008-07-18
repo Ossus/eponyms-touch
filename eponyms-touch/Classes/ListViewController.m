@@ -208,7 +208,8 @@ static NSString *MyCellIdentifier = @"EponymCell";
 #pragma mark UITableView datasource methods
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-	return [eponymArrayCache count];
+	NSUInteger count = [eponymArrayCache count];
+	return (count < 1) ? 1 : count;
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView

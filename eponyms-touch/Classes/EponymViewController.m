@@ -15,13 +15,13 @@
 #import "EponymTextView.h"
 
 
-#define kSideMargin 10.0
-#define kLabelSideMargin 5.0
-#define kHeightTitle 40.0
-#define kDistanceTextFromTitle 10.0
-#define kDistanceCatLabelFromText 10.0
-#define kDistanceDateLabelsFromCat 8.0
-#define kTotalSizeBottomMargin 10.0
+#define pSideMargin 10.0
+#define pLabelSideMargin 5.0
+#define pHeightTitle 40.0
+#define pDistanceTextFromTitle 10.0
+#define pDistanceCatLabelFromText 10.0
+#define pDistanceDateLabelsFromCat 8.0
+#define pTotalSizeBottomMargin 10.0
 
 
 @interface EponymViewController (Private)
@@ -69,7 +69,7 @@
 - (void) loadView
 {
 	CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
-	CGFloat fullWidth = screenRect.size.width - 2 * kSideMargin;
+	CGFloat fullWidth = screenRect.size.width - 2 * pSideMargin;
 	UIColor *transparentColor = [UIColor clearColor];
 	
 	// The main view
@@ -82,7 +82,7 @@
 	
 	// ****
 	// Format the title label
-	CGRect titleRect = CGRectMake(kSideMargin, kSideMargin, fullWidth, kHeightTitle);
+	CGRect titleRect = CGRectMake(pSideMargin, pSideMargin, fullWidth, pHeightTitle);
 	self.eponymTitleLabel = [[[UILabel alloc] initWithFrame:titleRect] autorelease];
 	eponymTitleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	eponymTitleLabel.userInteractionEnabled = NO;
@@ -98,7 +98,7 @@
 	
 	// ****
 	// Compose the container
-	CGRect containerRect = CGRectMake(kSideMargin, kSideMargin + kHeightTitle + kDistanceTextFromTitle, fullWidth, 0.0);
+	CGRect containerRect = CGRectMake(pSideMargin, pSideMargin + pHeightTitle + pDistanceTextFromTitle, fullWidth, 0.0);
 	
 	UIView *container = [[[UIView alloc] initWithFrame:containerRect] autorelease];
 	container.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -114,8 +114,8 @@
 	[container addSubview:eponymTextView];
 	
 	// Categories Label
-	CGFloat labelWidth = fullWidth - 2 * kLabelSideMargin;
-	CGRect catRect = CGRectMake(kLabelSideMargin, eponymTextView.bounds.size.height + kDistanceCatLabelFromText, labelWidth, 20.0);
+	CGFloat labelWidth = fullWidth - 2 * pLabelSideMargin;
+	CGRect catRect = CGRectMake(pLabelSideMargin, eponymTextView.bounds.size.height + pDistanceCatLabelFromText, labelWidth, 20.0);
 	
 	self.eponymCategoriesLabel = [[[UILabel alloc] initWithFrame:catRect] autorelease];
 	eponymCategoriesLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
@@ -127,14 +127,14 @@
 	[container addSubview:eponymCategoriesLabel];
 	
 	// Date labels
-	CGRect createdRect = CGRectMake(kLabelSideMargin, catRect.origin.y + catRect.size.height + kDistanceDateLabelsFromCat, labelWidth, 15.0);
+	CGRect createdRect = CGRectMake(pLabelSideMargin, catRect.origin.y + catRect.size.height + pDistanceDateLabelsFromCat, labelWidth, 15.0);
 	self.dateCreatedLabel = [[[UILabel alloc] initWithFrame:createdRect] autorelease];
 	dateCreatedLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
 	dateCreatedLabel.textColor = [UIColor darkGrayColor]; 
 	dateCreatedLabel.font = [UIFont systemFontOfSize:[UIFont smallSystemFontSize]];
 	dateCreatedLabel.backgroundColor = transparentColor;
 	
-	CGRect updatedRect = CGRectMake(kLabelSideMargin, createdRect.origin.y + createdRect.size.height, labelWidth, 15.0);
+	CGRect updatedRect = CGRectMake(pLabelSideMargin, createdRect.origin.y + createdRect.size.height, labelWidth, 15.0);
 	self.dateUpdatedLabel = [[[UILabel alloc] initWithFrame:updatedRect] autorelease];
 	dateUpdatedLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
 	dateUpdatedLabel.textColor = dateCreatedLabel.textColor;
@@ -150,56 +150,6 @@
 {
 	[self adjustDisplayToContent];
 }
-
-- (void) adjustDisplayToContent
-{
-	// Size needed to fit all text
-	CGRect currRect = eponymTextView.bounds;
-	CGSize szMaxHeight = CGSizeMake(currRect.size.width - 20.0, 100000.0);
-	CGSize optimalSize = [eponymToBeShown.text sizeWithFont:eponymTextView.font constrainedToSize:szMaxHeight];
-	
-	CGRect newRect = CGRectMake(0.0, 0.0, currRect.size.width, optimalSize.height + 20.0);
-	eponymTextView.frame = newRect;
-	
-	// Align the labels below
-	CGRect catRect = eponymCategoriesLabel.frame;
-	catRect.origin.y = newRect.size.height + kDistanceCatLabelFromText;
-	eponymCategoriesLabel.frame = catRect;
-	
-	CGFloat newHeight = catRect.origin.y + catRect.size.height;
-	
-	if(!dateCreatedLabel.hidden) {
-		CGRect creaRect = dateCreatedLabel.frame;
-		creaRect.origin.y = newHeight + kDistanceDateLabelsFromCat;
-		dateCreatedLabel.frame = creaRect;
-		newHeight = creaRect.origin.y + creaRect.size.height;
-	}
-	
-	if(!dateUpdatedLabel.hidden) {
-		CGRect updRect = dateUpdatedLabel.frame;
-		updRect.origin.y = newHeight;
-		dateUpdatedLabel.frame = updRect;
-		newHeight = updRect.origin.y + updRect.size.height;
-	}
-	
-	// tell the container view his new height
-	newHeight += kTotalSizeBottomMargin;
-	CGRect superRect = eponymTextView.superview.frame;
-	superRect.size.height = 10000.0;					// using newHeight here gives strange results
-	eponymTextView.superview.frame = superRect;
-	
-	// tell eponymView our size so that scrolling is possible
-	newHeight = eponymTextView.superview.frame.origin.y + newHeight;
-	CGFloat minHeight = [[UIScreen mainScreen] applicationFrame].size.height;
-	CGSize contSize = CGSizeMake(eponymView.contentSize.width, newHeight);
-	eponymView.contentSize = contSize;
-	
-	// scroll to top when needed
-	if(newHeight < minHeight) {
-		[eponymView scrollRectToVisible:CGRectMake(0.0, 0.0, 10.0, 10.0) animated:NO];
-	}
-}
-
 
 - (void) viewWillAppear:(BOOL)animated
 {
@@ -235,7 +185,56 @@
 }
 
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation
+- (void) adjustDisplayToContent
+{
+	// Size needed to fit all text
+	CGRect currRect = eponymTextView.bounds;
+	CGSize szMaxHeight = CGSizeMake(currRect.size.width - 18.0, 100000.0);
+	CGSize optimalSize = [eponymToBeShown.text sizeWithFont:eponymTextView.font constrainedToSize:szMaxHeight];
+	
+	CGRect newRect = CGRectMake(0.0, 0.0, currRect.size.width, optimalSize.height + 20.0);
+	eponymTextView.frame = newRect;
+	
+	// Align the labels below
+	CGRect catRect = eponymCategoriesLabel.frame;
+	catRect.origin.y = newRect.size.height + pDistanceCatLabelFromText;
+	eponymCategoriesLabel.frame = catRect;
+	
+	CGFloat newHeight = catRect.origin.y + catRect.size.height;
+	
+	if(!dateCreatedLabel.hidden) {
+		CGRect creaRect = dateCreatedLabel.frame;
+		creaRect.origin.y = newHeight + pDistanceDateLabelsFromCat;
+		dateCreatedLabel.frame = creaRect;
+		newHeight = creaRect.origin.y + creaRect.size.height;
+	}
+	
+	if(!dateUpdatedLabel.hidden) {
+		CGRect updRect = dateUpdatedLabel.frame;
+		updRect.origin.y = newHeight;
+		dateUpdatedLabel.frame = updRect;
+		newHeight = updRect.origin.y + updRect.size.height;
+	}
+	
+	// tell the container view his new height
+	newHeight += pTotalSizeBottomMargin;
+	CGRect superRect = eponymTextView.superview.frame;
+	superRect.size.height = 10000.0;					// using newHeight here gives strange results
+	eponymTextView.superview.frame = superRect;
+	
+	// tell eponymView our size so that scrolling is possible
+	newHeight = eponymTextView.superview.frame.origin.y + newHeight;
+	CGFloat minHeight = [[UIScreen mainScreen] applicationFrame].size.height;
+	CGSize contSize = CGSizeMake(eponymView.contentSize.width, newHeight);
+	eponymView.contentSize = contSize;
+	
+	// scroll to top when needed
+	if(newHeight < minHeight) {
+		[eponymView scrollRectToVisible:CGRectMake(0.0, 0.0, 10.0, 10.0) animated:NO];
+	}
+}
+
+- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation
 {
 	return YES;		//(interfaceOrientation == UIInterfaceOrientationPortrait);
 }
@@ -245,18 +244,10 @@
 	[self adjustDisplayToContent];
 }
 
-
 - (void) didReceiveMemoryWarning
 {
 	[super didReceiveMemoryWarning];	// Releases the view if it doesn't have a superview
 }
-#pragma mark -
-
-
-
-#pragma mark Eponym
-#pragma mark -
-
 
 
 @end

@@ -294,6 +294,7 @@ static sqlite3_stmt *load_all_eponyms_query_with_search = nil;
 	
 	[eponymArray removeAllObjects];
 	[eponymSectionArray removeAllObjects];
+	[listController cacheEponyms:nil andHeaders:nil];
 	
 	if(nil == database) {			// may happen after we abort the import
 		[self showInfoPanelAsFirstTimeLaunch:YES];
@@ -365,7 +366,7 @@ static sqlite3_stmt *load_all_eponyms_query_with_search = nil;
 	NSMutableString *title = [NSMutableString string];
 	NSMutableString *oldFirstLetter = [NSMutableString string];
 	NSMutableString *firstLetter = [NSMutableString string];
-	NSMutableArray *sectionArray = [NSMutableArray array];
+	NSMutableArray *sectionArray = [[NSMutableArray alloc] init];
 	
 	
 	// ***
@@ -383,9 +384,11 @@ static sqlite3_stmt *load_all_eponyms_query_with_search = nil;
 		// new first letter!
 		if(NSOrderedSame != [firstLetter caseInsensitiveCompare:oldFirstLetter]) {
 			if([sectionArray count] > 0) {
-				[eponymArray addObject:[sectionArray copy]];
+				[eponymArray addObject:sectionArray];
+				[sectionArray release];
+				sectionArray = [[NSMutableArray alloc] init];
+				
 				[eponymSectionArray addObject:[oldFirstLetter uppercaseString]];
-				[sectionArray removeAllObjects];
 			}
 		}
 		
@@ -396,7 +399,9 @@ static sqlite3_stmt *load_all_eponyms_query_with_search = nil;
 	}
 	
 	// add last section
-	[eponymArray addObject:[sectionArray copy]];
+	[eponymArray addObject:sectionArray];
+	[sectionArray release];
+	
 	[eponymSectionArray addObject:[oldFirstLetter uppercaseString]];
 	self.shownCategoryTitle = [self categoryTitleForId:category_id];	
 	

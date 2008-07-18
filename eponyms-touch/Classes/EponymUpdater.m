@@ -336,7 +336,7 @@ static sqlite3_stmt *insert_linker_query = nil;
 		
 		// *****
 		// new eponyms available, show the button to download them
-		if(YES || hasNew) {
+		if(hasNew) {
 			finalMessage = @"New eponyms are available!";
 			[delegate setUpdateButtonTitle:@"Download New Eponyms"];
 			[delegate setUpdateButtonTitleColor:[UIColor redColor]];

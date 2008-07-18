@@ -33,6 +33,9 @@
 	NSInteger usingEponymsOf;
 	NSUInteger readyToLoadNumEponyms;
 	
+	IBOutlet UIView *topContainer;
+	IBOutlet UIView *bottomContainer;
+	
 	IBOutlet UILabel *versionLabel;
 	IBOutlet UILabel *usingEponymsLabel;
 	IBOutlet UILabel *lastCheckLabel;
