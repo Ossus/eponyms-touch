@@ -56,7 +56,6 @@ static sqlite3_stmt *load_all_eponyms_query_with_search = nil;
 	
 	NSNumber *testValue = [[NSUserDefaults standardUserDefaults] objectForKey:@"usingEponymsOf"];
 	if(nil == testValue) {
-		NSLog(@"standardUserDefaults not found!");
 		NSDictionary *appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
 									 [NSNumber numberWithInt:0], @"lastEponymCheck",
 									 [NSNumber numberWithInt:0], @"lastEponymUpdate",
@@ -75,6 +74,7 @@ static sqlite3_stmt *load_all_eponyms_query_with_search = nil;
 	
 	// Prefs were there
 	else {
+		usingEponymsOf = [testValue intValue];
 		shownCategoryAtQuit = [[NSUserDefaults standardUserDefaults] integerForKey:@"shownCategoryAtQuit"];
 		shownEponymAtQuit = [[NSUserDefaults standardUserDefaults] integerForKey:@"shownEponymAtQuit"];
 		scrollPositionAtQuit = [[NSUserDefaults standardUserDefaults] floatForKey:@"scrollPositionAtQuit"];

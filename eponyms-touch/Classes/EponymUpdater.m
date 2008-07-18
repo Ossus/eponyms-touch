@@ -303,9 +303,9 @@ static sqlite3_stmt *insert_linker_query = nil;
 	[delegate setStatusMessage:finalMessage];
 	[delegate setProgress:-1.0];
 	
-	[myAutoreleasePool release];
-	
 	[delegate setIAmUpdating:NO];
+	
+	[myAutoreleasePool release];
 }
 
 
@@ -458,7 +458,7 @@ static sqlite3_stmt *insert_linker_query = nil;
 				[parser abortParsing];
 			}
 			
-			self.numEponymsParsed++;
+			self.numEponymsParsed += 1;
 			
 			// insert into database *****
 			[self insertEponymIntoDatabase:currentlyParsedEponym withCategories:categoriesOfCurrentEponym];

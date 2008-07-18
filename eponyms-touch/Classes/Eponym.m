@@ -55,7 +55,6 @@ static sqlite3_stmt *load_query = nil;
 #pragma mark loading/unloading
 - (void) load
 {
-	NSLog(@"want to load id %i, retainCount %i", eponym_id, [self retainCount]);
 	if(loaded) {
 		return;
 	}
