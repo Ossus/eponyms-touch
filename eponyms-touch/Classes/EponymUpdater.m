@@ -20,7 +20,7 @@
 @interface EponymUpdater (Private)
 
 // Download delegate
-- (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse;
+- (NSURLRequest *) connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse;
 - (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;
 - (void) connection:(NSURLConnection *)connection didReceiveData:(NSData *)data;
 - (void) connectionDidFinishLoading:(NSURLConnection *)connection;
@@ -137,7 +137,7 @@ static sqlite3_stmt *insert_linker_query = nil;
 }
 
 // called right before we send a request
-- (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse
+- (NSURLRequest *) connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse
 {
 	NSURLRequest *newRequest = request;
 	
@@ -285,7 +285,8 @@ static sqlite3_stmt *insert_linker_query = nil;
 			
 			// update time in GUI and save it in the prefs
 			NSDate *nowDate = [NSDate date];
-			[delegate updateLabelsWithDateForLastCheck:nil lastUpdate:nowDate usingEponyms:nil];
+			NSDate *eponymCreaDate = [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)[eponymCreationDate intValue]];
+			[delegate updateLabelsWithDateForLastCheck:nil lastUpdate:nowDate usingEponyms:eponymCreaDate];
 			
 			NSTimeInterval nowInEpoch = [nowDate timeIntervalSince1970];
 			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(NSInteger)nowInEpoch] forKey:@"lastEponymUpdate"];

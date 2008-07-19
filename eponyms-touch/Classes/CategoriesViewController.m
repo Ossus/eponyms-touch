@@ -68,7 +68,7 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 }
 
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation
+- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation
 {
 	return YES;
 }
@@ -92,7 +92,7 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 
 
 #pragma mark KVC
-- (NSArray *)categoryArrayCache
+- (NSArray *) categoryArrayCache
 {
 	return categoryArrayCache;
 }

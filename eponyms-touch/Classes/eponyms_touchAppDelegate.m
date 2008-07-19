@@ -32,7 +32,7 @@ static sqlite3_stmt *load_all_eponyms_query_with_search = nil;
 @interface eponyms_touchAppDelegate (Private)
 
 - (void) loadEponymWithId:(NSUInteger) eponym_id animated:(BOOL)animated;
-- (NSString *)categoryTitleForId:(NSUInteger) category_id;
+- (NSString *) categoryTitleForId:(NSUInteger) category_id;
 - (Eponym *)eponymWithId:(NSUInteger) eponym_id;
 - (void) showInfoPanelAsFirstTimeLaunch:(BOOL)firstTimeLaunch;
 
@@ -507,7 +507,7 @@ static sqlite3_stmt *load_all_eponyms_query_with_search = nil;
 
 
 #pragma mark Utilities
-- (NSString *)categoryTitleForId:(NSUInteger) category_id
+- (NSString *) categoryTitleForId:(NSUInteger) category_id
 {
 	if(category_id > 0) {
 		for(NSDictionary *catDict in categoryArray) {
@@ -535,7 +535,7 @@ static sqlite3_stmt *load_all_eponyms_query_with_search = nil;
 }
 
 
-- (NSString *)databaseFilePath
+- (NSString *) databaseFilePath
 {
 	NSString *sqlFilename = @"eponyms.sqlite";
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -546,7 +546,7 @@ static sqlite3_stmt *load_all_eponyms_query_with_search = nil;
 }
 
 
-- (NSDictionary *)databaseCreationQueries
+- (NSDictionary *) databaseCreationQueries
 {
 	NSDictionary *queries = [NSDictionary dictionaryWithObjectsAndKeys:
 							 @"CREATE TABLE IF NOT EXISTS categories (category_id INTEGER PRIMARY KEY, category_en VARCHAR)", @"createCatTable",

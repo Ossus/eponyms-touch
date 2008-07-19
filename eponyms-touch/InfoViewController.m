@@ -71,7 +71,7 @@
 
 
 #pragma mark KVC
-- (BOOL)iAmUpdating
+- (BOOL) iAmUpdating
 {
 	return iAmUpdating;
 }
@@ -215,7 +215,7 @@
 	// version
 	[versionLabel setFont:[UIFont boldSystemFontOfSize:[UIFont smallSystemFontSize]]];
 	
-	NSString *version = [NSString stringWithFormat:@"Version %@ (%@)", [infoPlistDict objectForKey:@"CFBundleVersion"], [infoPlistDict objectForKey:@"SubversionRevision"]];
+	NSString *version = [NSString stringWithFormat:@"Version %@  (%@)", [infoPlistDict objectForKey:@"CFBundleVersion"], [infoPlistDict objectForKey:@"SubversionRevision"]];
 	[versionLabel setText:version];
 }
 

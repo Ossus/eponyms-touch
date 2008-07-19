@@ -162,7 +162,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 	}
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation
+- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation
 {
 	return YES;
 }
@@ -212,7 +212,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 	return (count < 1) ? 1 : count;
 }
 
-- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+- (NSArray *) sectionIndexTitlesForTableView:(UITableView *)tableView
 {
 	return eponymSectionArrayCache;
 }
@@ -221,7 +221,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 {
 }*/
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger) section
+- (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger) section
 {
 	return [eponymSectionArrayCache objectAtIndex:section];
 }
