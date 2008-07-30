@@ -92,6 +92,7 @@ static sqlite3_stmt *load_all_eponyms_query_with_search = nil;
 	[listController setDelegate:self];
 	eponymController = [[EponymViewController alloc] initWithNibName:nil bundle:nil];
 	[eponymController setDelegate:self];
+	infoController = nil;
 	
 	[window addSubview:[navigationController view]];
 	[window makeKeyAndVisible];
@@ -490,12 +491,14 @@ static sqlite3_stmt *load_all_eponyms_query_with_search = nil;
 
 - (void) showInfoPanelAsFirstTimeLaunch:(BOOL)firstTimeLaunch
 {
-	infoController = [[InfoViewController alloc] initWithNibName:@"InfoView" bundle:nil];
+	if(!infoController) {
+		infoController = [[InfoViewController alloc] initWithNibName:@"InfoView" bundle:nil];
+		infoController.delegate = self;
+	}
 	
 	infoController.lastEponymCheck = [[NSUserDefaults standardUserDefaults] integerForKey:@"lastEponymCheck"];
 	infoController.lastEponymUpdate = [[NSUserDefaults standardUserDefaults] integerForKey:@"lastEponymUpdate"];
 	infoController.usingEponymsOf = [[NSUserDefaults standardUserDefaults] integerForKey:@"usingEponymsOf"];
-	infoController.delegate = self;
 	infoController.firstTimeLaunch = firstTimeLaunch;
 	
 	UINavigationController *tempNaviController = [[UINavigationController alloc] initWithRootViewController:infoController];

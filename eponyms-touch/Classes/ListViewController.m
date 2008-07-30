@@ -143,7 +143,12 @@ static NSString *MyCellIdentifier = @"EponymCell";
 	
 	// adjust the searchBar to the reotation (if necessary)
 	if(mySearchBar == self.navigationItem.titleView) {
-		CGFloat barHeight = self.navigationItem.titleView.superview.bounds.size.height;
+		// The following does not really work. Any other way to determine the navigationItem's height?
+		//CGFloat barHeight = self.navigationItem.titleView.superview.bounds.size.height;
+		// temporary method:
+		UIInterfaceOrientation orientation = [self interfaceOrientation];
+		CGFloat barHeight = (UIInterfaceOrientationPortrait == orientation || UIInterfaceOrientationPortraitUpsideDown == orientation) ? 44 : 32;
+		
 		CGRect searchBarRect = CGRectMake(0.0, 0.0, self.view.bounds.size.width, barHeight);
 		mySearchBar.bounds = searchBarRect;
 	}
@@ -181,8 +186,6 @@ static NSString *MyCellIdentifier = @"EponymCell";
 	self.eponymArrayCache = eponyms;
 	self.eponymSectionArrayCache = sections	;
 	
-	// !! reload section headers somehow!
-	//[self didChangeValueForKey:@"eponymSectionArrayCache"];		// does not work
 	[myTableView reloadData];
 }
 #pragma mark -
