@@ -76,8 +76,8 @@
 
 - (void) dealloc
 {
-	[borderColor release];
-	[fillColor release];
+	[borderColor release];			borderColor = nil;
+	[fillColor release];			fillColor = nil;
 	
 	[super dealloc];
 }

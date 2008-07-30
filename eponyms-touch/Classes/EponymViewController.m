@@ -49,14 +49,14 @@
 
 - (void) dealloc
 {
-	[eponymTitleLabel release];
-	[eponymTextView release];
-	[eponymCategoriesLabel release];
-	[dateCreatedLabel release];
-	[dateUpdatedLabel release];
+	[eponymTitleLabel release];					eponymTitleLabel = nil;
+	[eponymTextView release];					eponymTextView = nil;
+	[eponymCategoriesLabel release];			eponymCategoriesLabel = nil;
+	[dateCreatedLabel release];					dateCreatedLabel = nil;
+	[dateUpdatedLabel release];					dateUpdatedLabel = nil;
 	
 	if(eponymView) {
-		[eponymView release];
+		[eponymView release];					eponymView = nil;
 	}
 	
 	[super dealloc];

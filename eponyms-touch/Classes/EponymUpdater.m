@@ -145,7 +145,7 @@ static sqlite3_stmt *insert_linker_query = nil;
 	if(redirectResponse) {
 		newRequest = nil;
 		
-		[myConnection release];
+		self.myConnection = nil;
 		[self downloadFailedWithMessage:@"Server sent a redirect response I don't understand"];
 	}
 	return newRequest;
@@ -175,7 +175,7 @@ static sqlite3_stmt *insert_linker_query = nil;
 	else {
 		[[challenge sender] cancelAuthenticationChallenge:challenge];
 		
-		[myConnection release];
+		self.myConnection = nil;
 		[self downloadFailedWithMessage:@"Server needs authentification which is not currently supported"];
 	}
 }
@@ -224,13 +224,13 @@ static sqlite3_stmt *insert_linker_query = nil;
 		[self downloadFailedWithMessage:@"No statusCode received"];
 	}
 	
-	[myConnection release];
+	self.myConnection = nil;
 }
 
 
 - (void) connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-	[myConnection release];
+	self.myConnection = nil;
 	[self downloadFailedWithMessage:[NSString stringWithFormat:@"Error - %@ %@", [error localizedDescription], [[error userInfo] objectForKey:NSErrorFailingURLStringKey]]];
 }
 #pragma mark -
@@ -763,9 +763,10 @@ static sqlite3_stmt *insert_linker_query = nil;
 		NSCalendar *gregorianCalendar = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
 		NSDate *date = [gregorianCalendar dateFromComponents:components];
 		
-		[stringDate release];
 		epoch = [date timeIntervalSince1970];
 	}
+	
+	[stringDate release];
 	
 	return epoch;
 }

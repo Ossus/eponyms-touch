@@ -181,7 +181,7 @@
 		}
 		
 		if(myUpdater) {
-			[myUpdater release];
+			self.myUpdater = nil;
 		}
 	}
 }
@@ -217,6 +217,11 @@
 	
 	NSString *version = [NSString stringWithFormat:@"Version %@  (%@)", [infoPlistDict objectForKey:@"CFBundleVersion"], [infoPlistDict objectForKey:@"SubversionRevision"]];
 	[versionLabel setText:version];
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+	[self setStatusMessage:nil];
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -271,7 +276,7 @@
 - (void) didReceiveMemoryWarning
 {
 	[self dismissMe:nil];
-	[super didReceiveMemoryWarning];		// Releases the view if it doesn't have a superview !! (still needed after a dismiss??)
+	[super didReceiveMemoryWarning];		// Releases the view if it doesn't have a superview !!
 }
 #pragma mark -
 
@@ -343,9 +348,10 @@
 			[self abortUpdateAction];
 			[self dismissMe:nil];
 		}
+		askingToAbortImport = NO;
 	}
 	
-	// first import alert (can only be accepted ATM)
+	// first import alert (can only be accepted at the moment)
 	else if(firstTimeLaunch) {
 		[self loadEponymXMLFromDisk];
 		firstTimeLaunch = NO;
