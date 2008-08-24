@@ -11,10 +11,10 @@
 
 
 #import <UIKit/UIKit.h>
-#import "TouchTableView.h"
+#import "TouchTableViewDelegate.h"
 
 
-@interface ListViewController : UIViewController <UITableViewDelegate, TouchTableViewDelegate, UITableViewDataSource, UISearchBarDelegate> {
+@interface ListViewController : UIViewController <TouchTableViewDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate> {
 	id delegate;
 	
 	NSArray *eponymArrayCache;

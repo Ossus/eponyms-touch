@@ -10,13 +10,10 @@
 // 
 
 #import <UIKit/UIKit.h>
+@class TouchTableView;
 
+@protocol TouchTableViewDelegate <NSObject>
 
-@interface TouchTableView : UITableView {
-	CGFloat topOffsetAfterLastTouchEvent;				// needed to determine whether the table was scrolling or not
-}
-
-- (void) singleTapEndedWithObjects:(NSArray *)objects;
+- (void) tableView:(TouchTableView *)tableView didDoubleTapRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
-

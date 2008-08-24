@@ -103,7 +103,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	[window addSubview:[navigationController view]];
 	[window makeKeyAndVisible];
 	
-	self.starImage = [UIImage imageNamed:@"Star.png"];
+	self.starImage = [UIImage imageNamed:@"Star_list_active.png"];
 	
 	
 	// **** Data
@@ -296,7 +296,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	starredEponyms.sqlOrderStatement = [NSString stringWithFormat:@"%@ COLLATE NOCASE ASC", EPONYM_TITLE_FIELD];
 	
 	EponymCategory *recentEponyms =	[EponymCategory eponymCategoryWithID:-2 tag:@"Recent" title:@"Recent Eponyms" whereStatement:@"lastaccess > 0"];
-	recentEponyms.hint = @"Seems you haven't yet read an eponym :-)";
+	recentEponyms.hint = @"Seems you haven't yet read any eponym :-)";
 	recentEponyms.sqlOrderStatement = @"lastaccess DESC";
 	recentEponyms.sqlLimitTo = 25;
 	

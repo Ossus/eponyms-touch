@@ -23,7 +23,7 @@
 	<key>CFBundleVersion</key>
 	<string>1.0.1</string>
 	<key>SubversionRevision</key>
-	<string>r12</string>
+	<string>r19</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMainNibFile</key>
