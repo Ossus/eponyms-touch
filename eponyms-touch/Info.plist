@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.0.1</string>
 	<key>SubversionRevision</key>
 	<string>r12</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -35,6 +35,6 @@
 	<key>eponymXMLURL</key>
 	<string>http://help.you.i.can.googlepages.com/eponyms.xml</string>
 	<key>numberOfIncludedEponyms</key>
-	<string>1623</string>
+	<string>1634</string>
 </dict>
 </plist>

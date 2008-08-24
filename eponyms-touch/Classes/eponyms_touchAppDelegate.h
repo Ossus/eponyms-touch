@@ -17,6 +17,7 @@
 @class ListViewController;
 @class EponymViewController;
 @class InfoViewController;
+@class EponymCategory;
 @class Eponym;
 
 
@@ -25,11 +26,11 @@
 	sqlite3 *database;
 	
 	// Eponyms
-	NSInteger categoryShown;
+	EponymCategory *categoryShown;
+	NSInteger categoryIDShown;				// not unsigned! -100 = no category, -2 = recent, -1 = starred, 0 = all
 	NSUInteger eponymShown;
 	
-	NSString *shownCategoryTitle;
-	NSMutableArray *categoryArray;			// 1D	
+	NSMutableArray *categoryArray;			// 2D	
 	NSMutableArray *eponymArray;			// 2D!!	(for the table sections)
 	NSMutableArray *eponymSectionArray;		// 1D	(holds the section titles - letters A..Z in our case)
 	
@@ -39,31 +40,40 @@
 	ListViewController *listController;
 	EponymViewController *eponymController;
 	InfoViewController *infoController;
+	
+	// GUI
+	UIImage *starImage;
 }
 
 @property (nonatomic, retain) UIWindow *window;
 @property (nonatomic, assign) sqlite3 *database;
 
-@property (nonatomic, assign) NSInteger categoryShown;				// not unsigned since we will be using -1 for no category and 0 for all eponyms
+@property (nonatomic, retain) EponymCategory *categoryShown;
+@property (nonatomic, assign) NSInteger categoryIDShown;
 @property (nonatomic, assign) NSUInteger eponymShown;
 
-@property (nonatomic, retain) NSString *shownCategoryTitle;
 @property (nonatomic, retain) NSMutableArray *categoryArray;
 @property (nonatomic, retain) NSMutableArray *eponymArray;
 @property (nonatomic, retain) NSMutableArray *eponymSectionArray;
 
 @property (nonatomic, retain) UINavigationController *navigationController;
 
+@property (nonatomic, retain) UIImage *starImage;
+
 
 - (BOOL) connectToDBAndCreateIfNeeded;
 - (void) loadDatabaseAnimated:(BOOL)animated reload:(BOOL)as_reload;
-- (void) loadEponymsOfCategory:(NSUInteger) category_id containingString:(NSString *)searchString animated:(BOOL)animated;
+- (void) loadEponymsOfCurrentCategoryContainingString:(NSString *)searchString animated:(BOOL)animated;
+- (void) loadEponymsOfCategoryID:(NSInteger)category_id containingString:(NSString *)searchString animated:(BOOL)animated;
+- (void) loadEponymsOfCategory:(EponymCategory *)category containingString:(NSString *)searchString animated:(BOOL)animated;
 - (void) loadEponym:(Eponym *)eponym animated:(BOOL)animated;
 - (void) closeMainDatabase;
 - (void) eponymImportFailed;
 
 - (NSString *) databaseFilePath;
 - (NSDictionary *) databaseCreationQueries;
+
+- (EponymCategory *) categoryWithID:(NSInteger)identifier;
 
 
 @end

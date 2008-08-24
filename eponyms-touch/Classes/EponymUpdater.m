@@ -411,6 +411,7 @@ static sqlite3_stmt *insert_linker_query = nil;
 		// Start an eponym  <eponym id="id_string">
 		if([elementName isEqualToString:@"eponym"]) {
 			self.currentlyParsedEponym = [NSMutableDictionary dictionary];
+			//self.currentlyParsedEponym = [NSMutableDictionary dictionaryWithObject:[attributeDict valueForKey:@"id"] forKey:@"identifier"];
 			self.categoriesOfCurrentEponym = [NSMutableArray array];
 		}
 		
@@ -465,7 +466,7 @@ static sqlite3_stmt *insert_linker_query = nil;
 			[self insertEponymIntoDatabase:currentlyParsedEponym withCategories:categoriesOfCurrentEponym];
 			
 			// show progress
-			if(0 == numEponymsParsed % 100) {
+			if(0 == numEponymsParsed % 50) {
 				CGFloat fraction = numEponymsParsed / (CGFloat) readyToLoadNumEponyms;
 				[self performSelectorOnMainThread:@selector(updateProgress:) withObject:[NSNumber numberWithFloat:fraction] waitUntilDone:NO];
 			}
@@ -518,15 +519,10 @@ static sqlite3_stmt *insert_linker_query = nil;
 	// Insert the eponym **
 	sqlite3_bind_text(insert_eponym_query, 1, [[eponymDict objectForKey:@"name"] UTF8String], -1, SQLITE_TRANSIENT);
 	sqlite3_bind_text(insert_eponym_query, 2, [[eponymDict objectForKey:@"desc"] UTF8String], -1, SQLITE_TRANSIENT);
-	if([eponymDict objectForKey:@"c"]) {
-		sqlite3_bind_int(insert_eponym_query, 3, [self epochForStringDate:[eponymDict objectForKey:@"c"]]);
-	}
-	if([eponymDict objectForKey:@"e"]) {
-		sqlite3_bind_int(insert_eponym_query, 4, [self epochForStringDate:[eponymDict objectForKey:@"e"]]);
-	}
+	sqlite3_bind_int(insert_eponym_query, 3, [eponymDict objectForKey:@"c"] ? [self epochForStringDate:[eponymDict objectForKey:@"c"]] : 0);
+	sqlite3_bind_int(insert_eponym_query, 4, [eponymDict objectForKey:@"e"] ? [self epochForStringDate:[eponymDict objectForKey:@"e"]] : 0);
 	
-	NSInteger success = sqlite3_step(insert_eponym_query);
-	if(success == SQLITE_DONE) {
+	if(SQLITE_DONE == sqlite3_step(insert_eponym_query)) {
 		insert_eponym_id = sqlite3_last_insert_rowid(memory_database);
 	}
 	else {
@@ -554,8 +550,8 @@ static sqlite3_stmt *insert_linker_query = nil;
 		// new category - insert and remember for later
 		if(0 == insert_category_id) {
 			sqlite3_bind_text(insert_category_query, 1, [category UTF8String], -1, SQLITE_TRANSIENT);
-			int success = sqlite3_step(insert_category_query);
-			if(SQLITE_DONE == success) {
+			
+			if(SQLITE_DONE == sqlite3_step(insert_category_query)) {
 				insert_category_id = sqlite3_last_insert_rowid(memory_database);
 				[categoriesAlreadyInserted setObject:[NSNumber numberWithInt:insert_category_id] forKey:category];
 			}
@@ -568,8 +564,8 @@ static sqlite3_stmt *insert_linker_query = nil;
 		// link eponyms to category
 		sqlite3_bind_int(insert_linker_query, 1, insert_category_id);
 		sqlite3_bind_int(insert_linker_query, 2, insert_eponym_id);
-		int success = sqlite3_step(insert_linker_query);
-		if(SQLITE_DONE != success) {
+		
+		if(SQLITE_DONE != sqlite3_step(insert_linker_query)) {
 			NSAssert1(0, @"Error: Failed to link eponym to category: '%s'.", sqlite3_errmsg(memory_database));
 		}
 		sqlite3_reset(insert_linker_query);
@@ -578,6 +574,8 @@ static sqlite3_stmt *insert_linker_query = nil;
 	[eponymDict release];
 	[categoryArray release];
 }
+
+
 
 - (void) createInMemoryDatabase
 {
@@ -641,12 +639,12 @@ static sqlite3_stmt *insert_linker_query = nil;
 	}
 	
 	// prepare statements
-	const char *qry1 = "INSERT INTO eponyms (eponym_en, text, created, lastedit) VALUES (?, ?, ? ,?)";
+	const char *qry1 = "INSERT INTO eponyms (eponym_en, text_en, created, lastedit) VALUES (?, ?, ? ,?)";
 	if(sqlite3_prepare_v2(memory_database, qry1, -1, &insert_eponym_query, NULL) != SQLITE_OK) {
 		NSAssert1(0, @"Error: failed to prepare insert_eponym_query: '%s'.", sqlite3_errmsg(memory_database));
 	}
 	
-	const char *qry2 = "INSERT INTO categories (category_en) VALUES (?)";
+	const char *qry2 = "INSERT INTO categories (tag) VALUES (?)";
 	if(sqlite3_prepare_v2(memory_database, qry2, -1, &insert_category_query, NULL) != SQLITE_OK) {
 		NSAssert1(0, @"Error: failed to prepare insert_category_query: '%s'.", sqlite3_errmsg(memory_database));
 	}
@@ -747,11 +745,11 @@ static sqlite3_stmt *insert_linker_query = nil;
 	// split the date
 	NSArray *dateParts = [stringDate componentsSeparatedByString:@"/"];
 	if([dateParts count] >= 3) {
-		NSUInteger day = [[dateParts objectAtIndex:0] intValue];
-		NSUInteger month = [[dateParts objectAtIndex:1] intValue];
+		NSUInteger month = [[dateParts objectAtIndex:0] intValue];
+		NSUInteger day = [[dateParts objectAtIndex:1] intValue];
 		NSUInteger year = [[dateParts objectAtIndex:2] intValue];
 		
-		year = (year < 100) ? (year += 1900) : year;
+		year = (year < 100) ? ((year < 90) ? (year += 2000) : (year += 1900)) : year;
 		
 		// compose the date
 		NSDateComponents *components = [[[NSDateComponents alloc] init] autorelease];

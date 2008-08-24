@@ -13,11 +13,13 @@
 #import "Eponym.h"
 
 static sqlite3_stmt *load_query = nil;
+static sqlite3_stmt *mark_accessed_query = nil;
+static sqlite3_stmt *toggle_starred_query = nil;
 
 
 @implementation Eponym
 
-@synthesize eponym_id, title, created, lastedit, text, categories;
+@synthesize eponym_id, title, text, categories, created, lastedit, lastaccess, starred;
 
 
 // finalizes the compiled queries (needed before quitting)
@@ -25,6 +27,15 @@ static sqlite3_stmt *load_query = nil;
 {
 	if(load_query) {
 		sqlite3_finalize(load_query);
+		load_query = nil;
+	}
+	if(mark_accessed_query) {
+		sqlite3_finalize(mark_accessed_query);
+		mark_accessed_query = nil;
+	}
+	if(toggle_starred_query) {
+		sqlite3_finalize(toggle_starred_query);
+		toggle_starred_query = nil;
 	}
 }
 
@@ -54,16 +65,18 @@ static sqlite3_stmt *load_query = nil;
 #pragma mark loading/unloading
 - (void) load
 {
+	[self markAccessed];
 	if(loaded) {
 		return;
 	}
 	
 	// load query
-	if(load_query == nil) {
-		NSString *categoryName = @"category_en";
-		const char *qry = [[NSString stringWithFormat:@"SELECT created, lastedit, text, %@ FROM eponyms LEFT JOIN category_eponym_linker USING (eponym_id) LEFT JOIN categories USING (category_id) WHERE eponym_id = ?", categoryName] UTF8String];
-		if(sqlite3_prepare_v2(database, qry, -1, &load_query, NULL) != SQLITE_OK) {
-			NSAssert1(0, @"Error: failed to prepare query: '%s'.", sqlite3_errmsg(database));
+	if(!load_query) {
+		NSString *textName = @"text_en";
+		NSString *categoryName = @"tag";
+		const char *qry = [[NSString stringWithFormat:@"SELECT created, lastedit, %@, %@, starred FROM eponyms LEFT JOIN category_eponym_linker USING (eponym_id) LEFT JOIN categories USING (category_id) WHERE eponym_id = ?", textName, categoryName] UTF8String];
+		if(SQLITE_OK != sqlite3_prepare_v2(database, qry, -1, &load_query, NULL)) {
+			NSAssert1(0, @"Error: failed to prepare load_query: '%s'.", sqlite3_errmsg(database));
 		}
 	}
 	
@@ -111,5 +124,50 @@ static sqlite3_stmt *load_query = nil;
 	
 	loaded = NO;
 }
+#pragma mark -
+
+
+
+#pragma mark Other
+- (void) toggleStarred
+{
+	if(!toggle_starred_query) {
+		const char *qry = "UPDATE eponyms SET starred = ? WHERE eponym_id = ?";
+		if(sqlite3_prepare_v2(database, qry, -1, &toggle_starred_query, NULL) != SQLITE_OK) {
+			NSAssert1(0, @"Error: failed to prepare toggle_starred_query: '%s'.", sqlite3_errmsg(database));
+		}
+	}
+	
+	// bind
+	sqlite3_bind_int(toggle_starred_query, 1, starred ? 0 : 1);
+	sqlite3_bind_int(toggle_starred_query, 2, eponym_id);
+	
+	// execute
+	if(SQLITE_DONE != sqlite3_step(toggle_starred_query)) {
+		NSAssert1(0, @"Error: failed to execute toggle_starred_query: '%s'.", sqlite3_errmsg(database));
+	}
+	sqlite3_reset(toggle_starred_query);
+	starred = !starred;
+}
+
+- (void) markAccessed
+{
+	if(!mark_accessed_query) {
+		const char *qry = "UPDATE eponyms SET lastaccess = ? WHERE eponym_id = ?";
+		if(sqlite3_prepare_v2(database, qry, -1, &mark_accessed_query, NULL) != SQLITE_OK) {
+			NSAssert1(0, @"Error: failed to prepare mark_accessed_query: '%s'.", sqlite3_errmsg(database));
+		}
+	}
+	
+	sqlite3_bind_int(mark_accessed_query, 1, [[NSDate date] timeIntervalSince1970]);
+	sqlite3_bind_int(mark_accessed_query, 2, eponym_id);
+	
+	if(SQLITE_DONE != sqlite3_step(mark_accessed_query)) {
+		NSAssert1(0, @"Error: failed to execute mark_accessed_query: '%s'.", sqlite3_errmsg(database));
+	}
+	sqlite3_reset(mark_accessed_query);
+}
+
+
 
 @end

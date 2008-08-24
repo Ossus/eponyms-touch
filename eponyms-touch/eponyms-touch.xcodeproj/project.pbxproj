@@ -27,6 +27,9 @@
 		EE4B74EA0E2EB35500F7B157 /* NOTICE.txt in Resources */ = {isa = PBXBuildFile; fileRef = EE4B74E90E2EB35500F7B157 /* NOTICE.txt */; };
 		EE4B74F00E2EB53800F7B157 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = EE4B74EF0E2EB53800F7B157 /* LICENSE.txt */; };
 		EE64C7C00E2680D40000BC8D /* eponyms.xml in Resources */ = {isa = PBXBuildFile; fileRef = EE64C7BF0E2680D40000BC8D /* eponyms.xml */; };
+		EE89CA000E6059280016A781 /* EponymCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = EE89C9FF0E6059280016A781 /* EponymCategory.m */; };
+		EE89CD5F0E6170EE0016A781 /* TouchTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE89CD5E0E6170EE0016A781 /* TouchTableView.m */; };
+		EE89CE9D0E618B2C0016A781 /* Star.png in Resources */ = {isa = PBXBuildFile; fileRef = EE89CE9C0E618B2C0016A781 /* Star.png */; };
 		EEAB00FA0E2E2F3E00D84A8A /* Info.txt in Resources */ = {isa = PBXBuildFile; fileRef = EEAB00F90E2E2F3E00D84A8A /* Info.txt */; };
 		EED69F830E2BF41900BEF0C4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED69F820E2BF41900BEF0C4 /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
@@ -63,6 +66,11 @@
 		EE4B74E90E2EB35500F7B157 /* NOTICE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NOTICE.txt; sourceTree = "<group>"; };
 		EE4B74EF0E2EB53800F7B157 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		EE64C7BF0E2680D40000BC8D /* eponyms.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = eponyms.xml; sourceTree = "<group>"; };
+		EE89C9E70E6058A60016A781 /* EponymCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EponymCategory.h; sourceTree = "<group>"; };
+		EE89C9FF0E6059280016A781 /* EponymCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EponymCategory.m; sourceTree = "<group>"; };
+		EE89CD5D0E6170EE0016A781 /* TouchTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchTableView.h; sourceTree = "<group>"; };
+		EE89CD5E0E6170EE0016A781 /* TouchTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchTableView.m; sourceTree = "<group>"; };
+		EE89CE9C0E618B2C0016A781 /* Star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Star.png; sourceTree = "<group>"; };
 		EEAB00F90E2E2F3E00D84A8A /* Info.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Info.txt; sourceTree = "<group>"; };
 		EED69F820E2BF41900BEF0C4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -87,12 +95,13 @@
 			children = (
 				1D3623240D0F684500981E51 /* eponyms_touchAppDelegate.h */,
 				1D3623250D0F684500981E51 /* eponyms_touchAppDelegate.m */,
+				EE89C9E70E6058A60016A781 /* EponymCategory.h */,
+				EE89C9FF0E6059280016A781 /* EponymCategory.m */,
 				EE2DE9DC0E2125C700D97653 /* Eponym.h */,
 				EE2DE9DD0E2125C700D97653 /* Eponym.m */,
 				EE2DE7AD0E1C2F8600D97653 /* View Controllers */,
 				EE64C7570E2674EF0000BC8D /* Info Window */,
-				EE07C8B10E2C7FA3006F7F8A /* EponymTextView.h */,
-				EE07C8B20E2C7FA3006F7F8A /* EponymTextView.m */,
+				EE89CD880E6174C00016A781 /* Subclasses */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -155,6 +164,7 @@
 		EE2DE6B30E1AE30C00D97653 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				EE89CE9C0E618B2C0016A781 /* Star.png */,
 				EE2DEDF90E229B9B00D97653 /* Icon.png */,
 				EE2DE6B40E1AE31800D97653 /* Eponyms.png */,
 				EE2DEDFE0E229DB700D97653 /* Default.png */,
@@ -184,6 +194,17 @@
 				EE1443E90E23A576003EA64C /* EponymUpdater.m */,
 			);
 			name = "Info Window";
+			sourceTree = "<group>";
+		};
+		EE89CD880E6174C00016A781 /* Subclasses */ = {
+			isa = PBXGroup;
+			children = (
+				EE89CD5D0E6170EE0016A781 /* TouchTableView.h */,
+				EE89CD5E0E6170EE0016A781 /* TouchTableView.m */,
+				EE07C8B10E2C7FA3006F7F8A /* EponymTextView.h */,
+				EE07C8B20E2C7FA3006F7F8A /* EponymTextView.m */,
+			);
+			name = Subclasses;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,6 +258,7 @@
 				EEAB00FA0E2E2F3E00D84A8A /* Info.txt in Resources */,
 				EE4B74EA0E2EB35500F7B157 /* NOTICE.txt in Resources */,
 				EE4B74F00E2EB53800F7B157 /* LICENSE.txt in Resources */,
+				EE89CE9D0E618B2C0016A781 /* Star.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +278,8 @@
 				EE2DE9DE0E2125C700D97653 /* Eponym.m in Sources */,
 				EE1443EA0E23A576003EA64C /* EponymUpdater.m in Sources */,
 				EE07C8B30E2C7FA3006F7F8A /* EponymTextView.m in Sources */,
+				EE89CA000E6059280016A781 /* EponymCategory.m in Sources */,
+				EE89CD5F0E6170EE0016A781 /* TouchTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

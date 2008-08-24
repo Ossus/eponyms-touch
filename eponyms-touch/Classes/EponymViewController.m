@@ -189,8 +189,8 @@
 {
 	// Size needed to fit all text
 	CGRect currRect = eponymTextView.bounds;
-	CGSize szMaxHeight = CGSizeMake(currRect.size.width - 20.0, 100000.0);
-	CGSize optimalSize = [eponymToBeShown.text sizeWithFont:eponymTextView.font constrainedToSize:szMaxHeight];
+	CGSize szMax = CGSizeMake(currRect.size.width - 21.0, 100000.0);
+	CGSize optimalSize = [eponymToBeShown.text sizeWithFont:eponymTextView.font constrainedToSize:szMax];
 	
 	CGRect newRect = CGRectMake(0.0, 0.0, currRect.size.width, optimalSize.height + 20.0);
 	eponymTextView.frame = newRect;

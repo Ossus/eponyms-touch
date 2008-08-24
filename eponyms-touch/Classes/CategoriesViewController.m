@@ -12,6 +12,7 @@
 
 #import "CategoriesViewController.h"
 #import "eponyms_touchAppDelegate.h"
+#import "EponymCategory.h"
 
 
 static NSString *MyCellIdentifier = @"MyIdentifier";
@@ -27,7 +28,7 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 	if(self) {
-		self.title = @"Categories";
+		self.title = @"Eponyms";
 	}
 	return self;
 }
@@ -56,7 +57,7 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 	NSIndexPath *tableSelection = [myTableView indexPathForSelectedRow];
 	[myTableView deselectRowAtIndexPath:tableSelection animated:NO];
 	
-	[delegate setCategoryShown:-1];
+	[delegate setCategoryShown:nil];
 	[delegate setEponymShown:0];
 	
 	if(atLaunchScrollTo > 0.0) {
@@ -98,12 +99,16 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 }
 - (void) setCategoryArrayCache:(NSArray *)categories
 {
-	[categories retain];
-	[categoryArrayCache release];
-	categoryArrayCache = categories;
+	if(categories != categoryArrayCache) {
+		[categoryArrayCache release];
+		categoryArrayCache = [categories retain];
+	}
 	
-	[myTableView reloadData];
+	if(categories) {
+		[myTableView reloadData];
+	}
 }
+#pragma mark -
 
 
 
@@ -116,7 +121,7 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 // table selection changed
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSUInteger selectedCategory = [[[categoryArrayCache objectAtIndex:indexPath.row] objectForKey:@"id"] intValue];
+	EponymCategory *selectedCategory = [[categoryArrayCache objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	[delegate loadEponymsOfCategory:selectedCategory containingString:nil animated:YES];
 }
 #pragma mark -
@@ -124,9 +129,27 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 
 
 #pragma mark UITableView datasource methods
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
+{
+	NSUInteger count = [categoryArrayCache count];
+	return (count < 1) ? 1 : count;
+}
+- (NSArray *) sectionIndexTitlesForTableView:(UITableView *)tableView
+{
+	return [NSArray array];
+}
+
+/*- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger) section
+ {
+ }*/
+- (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger) section
+{
+	return (1 == section) ? @"Categories" : nil;
+}
+
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger) section
 {
-	return [categoryArrayCache count];
+	return [[categoryArrayCache objectAtIndex:section] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -136,7 +159,10 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 		cell = [[[UITableViewCell alloc] initWithFrame:CGRectMake(0,0,0,0) reuseIdentifier:MyCellIdentifier] autorelease];
 	}
 	
-	cell.text = [[categoryArrayCache objectAtIndex:indexPath.row] objectForKey:@"title"];
+	cell.text = [[[categoryArrayCache objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] title];
+	//if(0 == indexPath.section && 1 == indexPath.row) {
+	//	cell.image = [delegate starImage];
+	//}
 	
 	return cell;
 }

@@ -22,10 +22,12 @@
 	
 	// Eponym Attributes.
 	NSString *title;
-	NSDate *created;
-	NSDate *lastedit;
 	NSString *text;
 	NSArray *categories;
+	NSDate *created;
+	NSDate *lastedit;
+	NSDate *lastaccess;
+	NSUInteger starred;
 	
 	BOOL loaded;
 }
@@ -33,10 +35,12 @@
 // KVC
 @property (readonly, nonatomic) NSUInteger eponym_id;
 @property (copy, nonatomic) NSString *title;
-@property (copy, nonatomic) NSDate *created;
-@property (copy, nonatomic) NSDate *lastedit;
 @property (copy, nonatomic) NSString *text;
 @property (copy, nonatomic) NSArray *categories;
+@property (copy, nonatomic) NSDate *created;
+@property (copy, nonatomic) NSDate *lastedit;
+@property (copy, nonatomic) NSDate *lastaccess;
+@property (nonatomic, assign) NSUInteger starred;
 
 // Finalize (delete) all of the SQLite compiled queries.
 + (void) finalizeQueries;
@@ -47,5 +51,8 @@
 // Loading and unloading. Everything but key and title are wiped from memory on unload
 - (void) load;
 - (void) unload;
+
+- (void) toggleStarred;
+- (void) markAccessed;
 
 @end

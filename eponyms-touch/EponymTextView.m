@@ -74,6 +74,11 @@
 }
 
 
+/*- (CGSize) sizeThatFits:(CGSize)size
+{
+}*/
+
+
 - (void) dealloc
 {
 	[borderColor release];			borderColor = nil;
