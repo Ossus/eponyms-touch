@@ -161,7 +161,7 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 	
 	cell.text = [[[categoryArrayCache objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] title];
 	//if(0 == indexPath.section && 1 == indexPath.row) {
-	//	cell.image = [delegate starImage];
+	//	cell.image = [delegate starImageListActive];
 	//}
 	
 	return cell;

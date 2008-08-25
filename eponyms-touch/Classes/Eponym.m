@@ -19,7 +19,7 @@ static sqlite3_stmt *toggle_starred_query = nil;
 
 @implementation Eponym
 
-@synthesize eponym_id, title, text, categories, created, lastedit, lastaccess, starred;
+@synthesize eponym_id, title, text, categories, created, lastedit, lastaccess, starred, eponymCell;
 
 
 // finalizes the compiled queries (needed before quitting)

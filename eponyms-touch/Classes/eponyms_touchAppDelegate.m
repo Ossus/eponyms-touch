@@ -45,7 +45,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 @synthesize window, database;
 @dynamic categoryShown;
 @synthesize categoryIDShown, eponymShown;
-@synthesize categoryArray, eponymArray, eponymSectionArray, navigationController, starImage;
+@synthesize categoryArray, eponymArray, eponymSectionArray, navigationController, starImageListActive, starImageEponymActive, starImageEponymInactive;
 
 
 - (void) applicationDidFinishLaunching:(UIApplication *)application
@@ -103,7 +103,9 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	[window addSubview:[navigationController view]];
 	[window makeKeyAndVisible];
 	
-	self.starImage = [UIImage imageNamed:@"Star_list_active.png"];
+	self.starImageListActive = [UIImage imageNamed:@"Star_list_active.png"];
+	self.starImageEponymActive = [UIImage imageNamed:@"Star_eponym_active.png"];
+	self.starImageEponymInactive = [UIImage imageNamed:@"Star_eponym_inactive.png"];
 	
 	
 	// **** Data

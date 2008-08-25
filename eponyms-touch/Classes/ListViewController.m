@@ -74,8 +74,8 @@ static NSString *MyCellIdentifier = @"EponymCell";
 	self.view = myTableView;
 	
 	// Create the buttons to toggle search
-	initSearchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(initSearch)];
-	abortSearchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(abortSearch)];
+	self.initSearchButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(initSearch)] autorelease];
+	self.abortSearchButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(abortSearch)] autorelease];
 	self.navigationItem.rightBarButtonItem = initSearchButton;
 }
 
@@ -140,8 +140,8 @@ static NSString *MyCellIdentifier = @"EponymCell";
 - (void) viewWillAppear:(BOOL)animated
 {
 	// deselect the previously shown eponym
-	NSIndexPath *tableSelection = [myTableView indexPathForSelectedRow];
-	[myTableView deselectRowAtIndexPath:tableSelection animated:NO];
+	NSIndexPath *selectedCellIndexPath = [myTableView indexPathForSelectedRow];
+	[myTableView deselectRowAtIndexPath:selectedCellIndexPath animated:NO];
 	
 	[delegate setEponymShown:0];
 	
@@ -232,7 +232,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 			// show/hide the star
 			UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
 			if(selectedCell) {
-				selectedCell.image = selectedEponym.starred ? [delegate starImage] : nil;
+				selectedCell.image = selectedEponym.starred ? [delegate starImageListActive] : nil;
 			}
 		}
 	}
@@ -310,7 +310,8 @@ static NSString *MyCellIdentifier = @"EponymCell";
 		
 		Eponym *thisEponym = [[eponymArrayCache objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 		cell.text = [thisEponym title];
-		cell.image = thisEponym.starred ? [delegate starImage] : nil;
+		cell.image = thisEponym.starred ? [delegate starImageListActive] : nil;
+		thisEponym.eponymCell = cell;
 	}
 	
 	return cell;

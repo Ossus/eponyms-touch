@@ -10,6 +10,7 @@
 //  
 
 
+#import "eponyms_touchAppDelegate.h"
 #import "EponymViewController.h"
 #import "Eponym.h"
 #import "EponymTextView.h"
@@ -35,6 +36,7 @@
 @implementation EponymViewController
 
 @synthesize delegate, eponymToBeShown;
+@synthesize rightBarButtonStarredItem, rightBarButtonNotStarredItem;
 @synthesize eponymView, eponymTitleLabel, eponymTextView, eponymCategoriesLabel, dateCreatedLabel, dateUpdatedLabel;
 
 
@@ -72,6 +74,27 @@
 	CGFloat fullWidth = screenRect.size.width - 2 * pSideMargin;
 	UIColor *transparentColor = [UIColor clearColor];
 	
+	// ****
+	// Create the images for the navi bar button (star)
+	CGRect buttonSize = CGRectMake(0.0, 0.0, 30.0, 26.0);
+
+	UIButton *isStarredButton = [UIButton buttonWithType:UIButtonTypeCustom];
+	[isStarredButton setImage:[delegate starImageEponymActive] forState:(UIControlStateNormal & UIControlStateHighlighted & UIControlStateDisabled & UIControlStateSelected & UIControlStateApplication & UIControlStateReserved)];
+	[isStarredButton addTarget:self action:@selector(toggleEponymStarred) forControlEvents:UIControlEventTouchUpInside];
+	isStarredButton.showsTouchWhenHighlighted = YES;
+	isStarredButton.frame = buttonSize;
+	
+	UIButton *notStarredButton = [UIButton buttonWithType:UIButtonTypeCustom];
+	[notStarredButton setImage:[delegate starImageEponymInactive] forState:(UIControlStateNormal & UIControlStateHighlighted & UIControlStateDisabled & UIControlStateSelected & UIControlStateApplication & UIControlStateReserved)];
+	[notStarredButton addTarget:self action:@selector(toggleEponymStarred) forControlEvents:UIControlEventTouchUpInside];
+	notStarredButton.showsTouchWhenHighlighted = YES;
+	notStarredButton.frame = buttonSize;
+	
+	self.rightBarButtonStarredItem = [[[UIBarButtonItem alloc] initWithCustomView:isStarredButton] autorelease];
+	self.rightBarButtonNotStarredItem = [[[UIBarButtonItem alloc] initWithCustomView:notStarredButton] autorelease];
+	
+	
+	// ****
 	// The main view
 	self.eponymView = [[[UIScrollView alloc] initWithFrame:screenRect] autorelease];
 	eponymView.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -80,7 +103,7 @@
 	
 	self.view = eponymView;
 	
-	// ****
+	// **
 	// Format the title label
 	CGRect titleRect = CGRectMake(pSideMargin, pSideMargin, fullWidth, pHeightTitle);
 	self.eponymTitleLabel = [[[UILabel alloc] initWithFrame:titleRect] autorelease];
@@ -96,7 +119,7 @@
 	
 	[eponymView addSubview:eponymTitleLabel];
 	
-	// ****
+	// **
 	// Compose the container
 	CGRect containerRect = CGRectMake(pSideMargin, pSideMargin + pHeightTitle + pDistanceTextFromTitle, fullWidth, 0.0);
 	
@@ -153,6 +176,9 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
+	// starred or not starred, that's the question
+	self.navigationItem.rightBarButtonItem = eponymToBeShown.starred ? self.rightBarButtonStarredItem : self.rightBarButtonNotStarredItem;
+	
 	// title and text
 	eponymTitleLabel.text = eponymToBeShown.title;
 	eponymTextView.text = eponymToBeShown.text;
@@ -247,6 +273,19 @@
 - (void) didReceiveMemoryWarning
 {
 	[super didReceiveMemoryWarning];	// Releases the view if it doesn't have a superview
+}
+#pragma mark -
+
+
+
+#pragma mark Toggle Starred
+- (void) toggleEponymStarred
+{
+	[eponymToBeShown toggleStarred];
+	self.navigationItem.rightBarButtonItem = eponymToBeShown.starred ? self.rightBarButtonStarredItem : self.rightBarButtonNotStarredItem;
+	if(eponymToBeShown.eponymCell) {
+		eponymToBeShown.eponymCell.image = eponymToBeShown.starred ? [delegate starImageListActive] : nil;
+	}
 }
 
 

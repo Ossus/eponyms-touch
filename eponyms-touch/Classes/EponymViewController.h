@@ -20,6 +20,9 @@
 	id delegate;
 	Eponym *eponymToBeShown;
 	
+	UIBarButtonItem *rightBarButtonStarredItem;
+	UIBarButtonItem *rightBarButtonNotStarredItem;
+	
 	UIScrollView *eponymView;
 	UILabel *eponymTitleLabel;
 	EponymTextView *eponymTextView;
@@ -31,12 +34,17 @@
 @property (nonatomic, retain) id delegate;
 @property (nonatomic, retain) Eponym *eponymToBeShown;
 
+@property (nonatomic, retain) UIBarButtonItem *rightBarButtonStarredItem;
+@property (nonatomic, retain) UIBarButtonItem *rightBarButtonNotStarredItem;
+
 @property (nonatomic, retain) UIScrollView *eponymView;
 @property (nonatomic, retain) UILabel *eponymTitleLabel;
 @property (nonatomic, retain) EponymTextView *eponymTextView;
 @property (nonatomic, retain) UILabel *eponymCategoriesLabel;
 @property (nonatomic, retain) UILabel *dateCreatedLabel;
 @property (nonatomic, retain) UILabel *dateUpdatedLabel;
+
+- (void) toggleEponymStarred;
 
 
 @end

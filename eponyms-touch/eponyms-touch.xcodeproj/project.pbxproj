@@ -27,6 +27,8 @@
 		EE4B74EA0E2EB35500F7B157 /* NOTICE.txt in Resources */ = {isa = PBXBuildFile; fileRef = EE4B74E90E2EB35500F7B157 /* NOTICE.txt */; };
 		EE4B74F00E2EB53800F7B157 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = EE4B74EF0E2EB53800F7B157 /* LICENSE.txt */; };
 		EE64C7C00E2680D40000BC8D /* eponyms.xml in Resources */ = {isa = PBXBuildFile; fileRef = EE64C7BF0E2680D40000BC8D /* eponyms.xml */; };
+		EE66414F0E62A2220047D7ED /* Star_eponym_active.png in Resources */ = {isa = PBXBuildFile; fileRef = EE66414D0E62A2220047D7ED /* Star_eponym_active.png */; };
+		EE6641500E62A2220047D7ED /* Star_eponym_inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = EE66414E0E62A2220047D7ED /* Star_eponym_inactive.png */; };
 		EE89CA000E6059280016A781 /* EponymCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = EE89C9FF0E6059280016A781 /* EponymCategory.m */; };
 		EE89CD5F0E6170EE0016A781 /* TouchTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE89CD5E0E6170EE0016A781 /* TouchTableView.m */; };
 		EE89CE9D0E618B2C0016A781 /* Star_list_active.png in Resources */ = {isa = PBXBuildFile; fileRef = EE89CE9C0E618B2C0016A781 /* Star_list_active.png */; };
@@ -67,6 +69,8 @@
 		EE4B74E90E2EB35500F7B157 /* NOTICE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NOTICE.txt; sourceTree = "<group>"; };
 		EE4B74EF0E2EB53800F7B157 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		EE64C7BF0E2680D40000BC8D /* eponyms.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = eponyms.xml; sourceTree = "<group>"; };
+		EE66414D0E62A2220047D7ED /* Star_eponym_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Star_eponym_active.png; sourceTree = "<group>"; };
+		EE66414E0E62A2220047D7ED /* Star_eponym_inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Star_eponym_inactive.png; sourceTree = "<group>"; };
 		EE89C9E70E6058A60016A781 /* EponymCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EponymCategory.h; sourceTree = "<group>"; };
 		EE89C9FF0E6059280016A781 /* EponymCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EponymCategory.m; sourceTree = "<group>"; };
 		EE89CD5D0E6170EE0016A781 /* TouchTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchTableView.h; sourceTree = "<group>"; };
@@ -165,6 +169,8 @@
 		EE2DE6B30E1AE30C00D97653 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				EE66414D0E62A2220047D7ED /* Star_eponym_active.png */,
+				EE66414E0E62A2220047D7ED /* Star_eponym_inactive.png */,
 				EE89CE9C0E618B2C0016A781 /* Star_list_active.png */,
 				EE2DEDF90E229B9B00D97653 /* Icon.png */,
 				EE2DE6B40E1AE31800D97653 /* Eponyms.png */,
@@ -261,6 +267,8 @@
 				EE4B74EA0E2EB35500F7B157 /* NOTICE.txt in Resources */,
 				EE4B74F00E2EB53800F7B157 /* LICENSE.txt in Resources */,
 				EE89CE9D0E618B2C0016A781 /* Star_list_active.png in Resources */,
+				EE66414F0E62A2220047D7ED /* Star_eponym_active.png in Resources */,
+				EE6641500E62A2220047D7ED /* Star_eponym_inactive.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -42,7 +42,9 @@
 	InfoViewController *infoController;
 	
 	// GUI
-	UIImage *starImage;
+	UIImage *starImageListActive;
+	UIImage *starImageEponymActive;
+	UIImage *starImageEponymInactive;
 }
 
 @property (nonatomic, retain) UIWindow *window;
@@ -58,7 +60,9 @@
 
 @property (nonatomic, retain) UINavigationController *navigationController;
 
-@property (nonatomic, retain) UIImage *starImage;
+@property (nonatomic, retain) UIImage *starImageListActive;
+@property (nonatomic, retain) UIImage *starImageEponymActive;
+@property (nonatomic, retain) UIImage *starImageEponymInactive;
 
 
 - (BOOL) connectToDBAndCreateIfNeeded;
