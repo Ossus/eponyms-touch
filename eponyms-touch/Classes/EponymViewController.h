@@ -31,7 +31,7 @@
 	UILabel *dateUpdatedLabel;
 }
 
-@property (nonatomic, retain) id delegate;
+@property (nonatomic, assign) id delegate;
 @property (nonatomic, retain) Eponym *eponymToBeShown;
 
 @property (nonatomic, retain) UIBarButtonItem *rightBarButtonStarredItem;

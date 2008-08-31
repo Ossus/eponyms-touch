@@ -50,12 +50,12 @@ static NSString *MyCellIdentifier = @"EponymCell";
 
 - (void) dealloc
 {
-	[eponymArrayCache release];				eponymArrayCache = nil;
-	[eponymSectionArrayCache release];		eponymSectionArrayCache = nil;
-	[myTableView release];					myTableView = nil;
-	[mySearchBar release];					mySearchBar = nil;
-	[initSearchButton release];				initSearchButton = nil;
-	[abortSearchButton release];			abortSearchButton = nil;
+	self.eponymArrayCache = nil;
+	self.eponymSectionArrayCache = nil;
+	self.myTableView = nil;
+	self.mySearchBar = nil;
+	self.initSearchButton = nil;
+	self.abortSearchButton = nil;
 	
 	[super dealloc];
 }
@@ -212,7 +212,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 - (NSIndexPath *) tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	if([eponymArrayCache count] < 1) {
-		return [NSIndexPath indexPathWithIndexes:0 length:0];
+		return nil;
 	}
 	return indexPath;
 }
@@ -287,6 +287,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 	// if we have no eponyms, display a hint instead
 	if([eponymArrayCache count] < 1) {
 		cell = [[[UITableViewCell alloc] initWithFrame:CGRectMake(0,0,0,0) reuseIdentifier:nil] autorelease];
+		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 		
 		if(indexPath.row == DISPLAY_HINT_IN_CELL) {
 			UILabel *label = [[[UILabel alloc] initWithFrame:[cell bounds]] autorelease];

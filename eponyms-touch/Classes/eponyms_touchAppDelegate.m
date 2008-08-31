@@ -69,7 +69,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 									 [NSNumber numberWithInt:0], @"lastEponymUpdate",
 									 [NSNumber numberWithInt:0], @"usingEponymsOf",
 									 [NSNumber numberWithBool:NO], @"shouldAutoCheck",
-									 [NSNumber numberWithInt:-1], @"shownCategoryAtQuit",
+									 [NSNumber numberWithInt:-100], @"shownCategoryAtQuit",
 									 [NSNumber numberWithInt:0], @"shownEponymAtQuit",
 									 [NSNumber numberWithFloat:0.0], @"scrollPositionAtQuit", nil];
 		[[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
@@ -626,7 +626,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 }
 
 // accessory method to load the eponym last shown. Calls loadEponym:animated:
-- (void) loadEponymWithId:(NSUInteger) eponym_id animated:(BOOL)animated
+- (void) loadEponymWithId:(NSUInteger)eponym_id animated:(BOOL)animated
 {
 	Eponym *eponym = [self eponymWithId:eponym_id];
 	[self loadEponym:eponym animated:animated];
@@ -726,7 +726,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 }
 
 // might be expensive; will only be used after a relaunch and an eponym was shown (ok, not expensive. Takes 3ms on the simulator to find eponym 1623)
-- (Eponym *) eponymWithId:(NSUInteger) eponym_id
+- (Eponym *) eponymWithId:(NSUInteger)eponym_id
 {
 	for(NSArray *sectionArr in eponymArray) {
 		for(Eponym *eponym in sectionArr) {

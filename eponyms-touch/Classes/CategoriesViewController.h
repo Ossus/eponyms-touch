@@ -22,7 +22,7 @@
 	CGFloat atLaunchScrollTo;
 }
 
-@property (nonatomic, retain) id delegate;
+@property (nonatomic, assign) id delegate;
 @property (nonatomic, retain) NSArray *categoryArrayCache;
 @property (nonatomic, retain) UITableView *myTableView;
 

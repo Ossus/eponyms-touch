@@ -28,7 +28,7 @@
 	CGFloat atLaunchScrollTo;
 }
 
-@property (nonatomic, retain) id delegate;
+@property (nonatomic, assign) id delegate;
 
 @property (nonatomic, retain) NSArray *eponymArrayCache;				// 2 dimensional array, 1st dimension first letter, 2nd dimension its eponyms
 @property (nonatomic, retain) NSArray *eponymSectionArrayCache;			// 1 dimensional, first letters

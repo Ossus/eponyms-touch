@@ -78,8 +78,8 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 
 - (void) dealloc
 {
-	[categoryArrayCache release];		categoryArrayCache = nil;
-	[myTableView release];				myTableView = nil;
+	self.categoryArrayCache = nil;
+	self.myTableView = nil;
 	
 	[super dealloc];
 }
