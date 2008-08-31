@@ -28,4 +28,7 @@
 
 @property (nonatomic, assign) CGFloat atLaunchScrollTo;
 
+
+- (void) showNewEponymsAvailable:(BOOL)hasNew;
+
 @end

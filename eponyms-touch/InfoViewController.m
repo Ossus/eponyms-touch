@@ -22,7 +22,9 @@
 
 @interface InfoViewController (Private)
 - (void) adjustContentToOrientation;
-- (void) loadEponymXMLFromDisk;
+- (void) switchToTab:(NSUInteger)tab;
+- (void) lockGUI:(BOOL)lock;
+- (void) newEponymsAreAvailable:(BOOL)available;
 @end
 
 
@@ -30,39 +32,40 @@
 
 @implementation InfoViewController
 
-@synthesize delegate, needToReloadEponyms, firstTimeLaunch, newEponymsAvailable, myUpdater;
-@synthesize lastEponymCheck, lastEponymUpdate, usingEponymsOf, readyToLoadNumEponyms, progressText, progressView, updateButton;
-@synthesize infoPlistDict, projectWebsiteURL, eponymUpdateCheckURL, eponymXMLURL;
-
-@dynamic iAmUpdating;
+@synthesize delegate, firstTimeLaunch, lastEponymCheck, lastEponymUpdate, tabSegments, infoPlistDict, projectWebsiteURL;
 
 
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 	if(self) {
-		iAmUpdating = NO;
 		askingToAbortImport = NO;
-		self.needToReloadEponyms = NO;
-		self.newEponymsAvailable = NO;
-		self.title = @"About Eponyms";
+		
+		// compose the navigation bar
+		NSArray *possibleTabs = [NSArray arrayWithObjects:@"About", @"Update", nil];
+		self.tabSegments = [[UISegmentedControl alloc] initWithItems:possibleTabs];
+		tabSegments.selectedSegmentIndex = 0;
+		tabSegments.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+		tabSegments.segmentedControlStyle = UISegmentedControlStyleBar;
+		tabSegments.frame = CGRectMake(0.0, 0.0, 200.0, 30.0);
+		//tabSegments.tintColor = [UIColor lightGrayColor];
+		[tabSegments addTarget:self action:@selector(tabChanged:) forControlEvents:UIControlEventValueChanged];
+		
+		self.navigationItem.titleView = tabSegments;
 		self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(dismissMe:)] autorelease];
 		
 		// NSBundle Info.plist
 		self.infoPlistDict = [[NSBundle mainBundle] infoDictionary];		// !! could use the supplied NSBundle or the mainBundle on nil
 		self.projectWebsiteURL = [NSURL URLWithString:[infoPlistDict objectForKey:@"projectWebsite"]];
-		self.eponymUpdateCheckURL = [NSURL URLWithString:[infoPlistDict objectForKey:@"eponymUpdateCheckURL"]];
-		self.eponymXMLURL = [NSURL URLWithString:[infoPlistDict objectForKey:@"eponymXMLURL"]];
 	}
 	return self;
 }
 
 - (void) dealloc
 {
-	[infoPlistDict release];				infoPlistDict = nil;
-	[projectWebsiteURL release];			projectWebsiteURL = nil;
-	[eponymUpdateCheckURL release];			eponymUpdateCheckURL = nil;
-	[eponymXMLURL release];					eponymXMLURL = nil;
+	self.infoPlistDict = nil;
+	self.projectWebsiteURL = nil;
+	self.tabSegments = nil;
 	
 	[super dealloc];
 }
@@ -70,26 +73,111 @@
 
 
 
-#pragma mark KVC
-- (BOOL) iAmUpdating
+#pragma mark View Controller Delegate
+- (void) viewDidLoad
 {
-	return iAmUpdating;
-}
-- (void) setIAmUpdating:(BOOL)updating
-{
-	iAmUpdating = updating;
+	self.view = infoView;
+	[self switchToTab:0];
 	
-	if(updating) {			// lock GUI (because we're not showing a modal sheet)
-		updateButton.enabled = NO;
-		projectWebsiteButton.enabled = NO;
-		eponymsDotNetButton.enabled = NO;
-		self.navigationItem.rightBarButtonItem.title = @"Abort";
+	// hide progress stuff
+	progressText.hidden = YES;
+	progressView.hidden = YES;
+	updateButton.enabled = YES;
+	[self setUpdateButtonTitle:@"Check for Eponym Updates"];
+	
+	// last update date/time
+	NSDate *lastCheckDate = [NSDate dateWithTimeIntervalSince1970:lastEponymCheck];
+	NSDate *lastUpdateDate = [NSDate dateWithTimeIntervalSince1970:lastEponymUpdate];
+	NSDate *usingEponymsDate = [NSDate dateWithTimeIntervalSince1970:[delegate usingEponymsOf]];
+	[self updateLabelsWithDateForLastCheck:lastCheckDate lastUpdate:lastUpdateDate usingEponyms:usingEponymsDate];
+	
+	// version
+	NSString *version = [NSString stringWithFormat:@"Version %@  (%@)", [infoPlistDict objectForKey:@"CFBundleVersion"], [infoPlistDict objectForKey:@"SubversionRevision"]];
+	[versionLabel setText:version];
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+	BOOL mustSeeProgress = firstTimeLaunch || [delegate newEponymsAvailable];
+	
+	[self setStatusMessage:nil];
+	if(mustSeeProgress) {
+		[self switchToTab:1];
 	}
-	else {					// release GUI
-		updateButton.enabled = YES;
-		projectWebsiteButton.enabled = YES;
-		eponymsDotNetButton.enabled = YES;
-		self.navigationItem.rightBarButtonItem.title = @"Done";
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+	if(firstTimeLaunch) {
+		NSString *title = @"First Launch";
+		NSString *message = @"Welcome to Eponyms!\nBefore using Eponyms, the database must be created.";
+		
+		[self alertViewWithTitle:title message:message cancelTitle:@"OK"];		// maybe allow postponing first import?
+	}
+	
+	// Adjust options
+	autocheckSwitch.on = [delegate shouldAutoCheck];
+	
+	[self adjustContentToOrientation];
+}
+
+- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+	return YES;
+}
+
+- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+	[self adjustContentToOrientation];
+}
+
+- (void) adjustContentToOrientation
+{
+	/*
+	UIInterfaceOrientation orientation = [self interfaceOrientation];
+	CGFloat screenWidth = topContainer.superview.frame.size.width;
+	CGRect topRect = topContainer.frame;
+	CGRect bottomRect = bottomContainer.frame;
+	
+	// Portrait
+	if((UIInterfaceOrientationPortrait == orientation) || (UIInterfaceOrientationPortraitUpsideDown == orientation)) {
+		topRect.size.width = screenWidth - 2 * pPortraitContentMargin;
+		topRect.origin.x = pPortraitContentMargin;
+		bottomRect.size.width = screenWidth - 2 * pPortraitContentMargin;
+		bottomRect.origin.x = pPortraitContentMargin;
+	}
+	
+	// Landscape
+	else {
+		topRect.size.width = screenWidth / 2 - 2 * pLandscapeContentMargin;
+		topRect.origin.x = pLandscapeContentMargin;
+		bottomRect.size.width = screenWidth / 2 - 2 * pLandscapeContentMargin;
+		bottomRect.origin.x = screenWidth / 2 + pLandscapeContentMargin;
+	}
+	
+	topContainer.frame = topRect;
+	bottomContainer.frame = bottomRect;
+	 */
+}
+
+- (void) didReceiveMemoryWarning
+{
+	[self dismissMe:nil];
+	[super didReceiveMemoryWarning];		// Releases the view if it doesn't have a superview !!
+}
+
+- (void) dismissMe:(id)sender
+{
+	// warning when closing during import
+	if([delegate iAmUpdating]) {
+		askingToAbortImport = YES;
+		NSString *warning = @"Are you sure you want to abort the eponym import? This will discard any imported eponyms.";
+		[self alertViewWithTitle:CANCEL_IMPORT_TITLE message:warning cancelTitle:@"Continue" otherTitle:@"Abort Import"];
+	}
+	
+	// not importing
+	else {
+		[self.parentViewController dismissModalViewControllerAnimated:YES];
 	}
 }
 #pragma mark -
@@ -97,6 +185,74 @@
 
 
 #pragma mark GUI
+- (void) tabChanged:(id)sender
+{
+	UISegmentedControl *segment = sender;
+	[self switchToTab:segment.selectedSegmentIndex];
+}
+
+- (void) switchToTab:(NSUInteger)tab
+{
+	tabSegments.selectedSegmentIndex = tab;
+	
+	// Show the About page
+	if(0 == tab) {
+		self.view = infoView;
+		
+		/*CGRect newFrame = self.view.frame;
+		 newFrame.origin.x = 0.0;
+		 [self.view setFrame:newFrame];*/
+	}
+	
+	// Show the options
+	else {
+		self.view = optionsView;
+		
+		// adjust the elements
+		if([delegate didCheckForNewEponyms]) {
+			[self newEponymsAreAvailable:[delegate newEponymsAvailable]];
+		}
+	}
+	
+	[self.view insertSubview:backgroundImage atIndex:0];
+}
+
+- (void) newEponymsAreAvailable:(BOOL)available
+{
+	NSString *statusMessage = nil;
+	if(available) {
+		statusMessage = @"New eponyms are available!";
+		[self setUpdateButtonTitle:@"Download New Eponyms"];
+		[self setUpdateButtonTitleColor:[UIColor redColor]];
+	}
+	else {
+		statusMessage = @"You are up to date";
+		[self setUpdateButtonTitle:@"Check for Eponym Updates"];
+		[self setUpdateButtonTitleColor:nil];
+	}
+	
+	[self setStatusMessage:statusMessage];
+	[self setProgress:-1.0];
+}
+
+- (void) lockGUI:(BOOL)lock
+{
+	if(lock) {
+		updateButton.enabled = NO;
+		projectWebsiteButton.enabled = NO;
+		eponymsDotNetButton.enabled = NO;
+		autocheckSwitch.enabled = NO;
+		self.navigationItem.rightBarButtonItem.title = @"Abort";
+	}
+	else {
+		updateButton.enabled = YES;
+		projectWebsiteButton.enabled = YES;
+		eponymsDotNetButton.enabled = YES;
+		autocheckSwitch.enabled = YES;
+		self.navigationItem.rightBarButtonItem.title = @"Done";
+	}
+}
+
 - (void) updateLabelsWithDateForLastCheck:(NSDate *)lastCheck lastUpdate:(NSDate *)lastUpdate usingEponyms:(NSDate *)usingEponyms
 {
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -105,14 +261,12 @@
 	
 	// last check
 	if(lastCheck) {
-		NSString *lastCheckString = ([lastCheck timeIntervalSince1970] > 10.0) ? [dateFormatter stringFromDate:lastCheck] : @"Never";
-		[lastCheckLabel setText:[NSString stringWithFormat:@"Last Eponym Check: %@", lastCheckString]];
+		[lastCheckLabel setText:([lastCheck timeIntervalSince1970] > 10.0) ? [dateFormatter stringFromDate:lastCheck] : @"Never"];
 	}
 	
 	// last update
 	if(lastUpdate) {
-		NSString *lastUpdateString = ([lastUpdate timeIntervalSince1970] > 10.0) ? [dateFormatter stringFromDate:lastUpdate] : @"Never";
-		[lastUpdateLabel setText:[NSString stringWithFormat:@"Last Eponym Update: %@", lastUpdateString]];
+		[lastUpdateLabel setText:([lastUpdate timeIntervalSince1970] > 10.0) ? [dateFormatter stringFromDate:lastUpdate] : @"Never"];
 	}
 	
 	// using eponyms
@@ -142,182 +296,91 @@
 - (void) setStatusMessage:(NSString *)message
 {
 	if(message) {
-		self.progressText.hidden = NO;
-		self.progressText.text = message;
+		progressText.hidden = NO;
+		progressText.text = message;
 	}
 	else {
-		self.progressText.hidden = YES;
+		progressText.hidden = YES;
 	}
 }
 
 - (void) setProgress:(CGFloat)progress
 {
 	if(progress >= 0.0) {
-		self.progressView.hidden = NO;
-		self.progressView.progress = progress;
+		progressView.hidden = NO;
+		progressView.progress = progress;
 	}
 	else {
-		self.progressView.hidden = YES;
+		progressView.hidden = YES;
 	}
 }
 
-
-- (void) dismissMe:(id)sender
+- (IBAction) autoCheckSwitchToggled:(id)sender
 {
-	// warning when closing during import
-	if(iAmUpdating) {
-		askingToAbortImport = YES;
-		NSString *warning = @"Are you sure you want to abort the eponym import? This will discard any imported eponyms.";
-		[self alertViewWithTitle:CANCEL_IMPORT_TITLE message:warning cancelTitle:@"Continue" otherTitle:@"Abort Import"];
-	}
-	
-	// not importing
-	else {
-		[[self parentViewController] dismissModalViewControllerAnimated:YES];
-		
-		// New Eponyms - update
-		if(needToReloadEponyms) {
-			[delegate loadDatabaseAnimated:YES reload:YES];
-		}
-		
-		if(myUpdater) {
-			self.myUpdater = nil;
-		}
-	}
+	UISwitch *mySwitch = sender;
+	[delegate setShouldAutoCheck:mySwitch.on];
 }
 #pragma mark -
 
 
 
-#pragma mark View Controller Delegate
-- (void) viewDidLoad
+#pragma mark Updater Delegate
+- (void) updaterDidStartAction:(EponymUpdater *)updater
 {
-	// hide progress stuff
-	progressText.hidden = YES;
-	progressView.hidden = YES;
-	updateButton.enabled = YES;
-	[self setUpdateButtonTitle:@"Check for Eponym Updates"];
-	
-	// text
-	[infoTextView setFont:[UIFont systemFontOfSize:[UIFont smallSystemFontSize]]];
-	infoTextView.text = [infoTextView.text stringByAppendingString:[projectWebsiteURL absoluteString]];
-	
-	// last update date/time
-	[lastCheckLabel setFont:[UIFont systemFontOfSize:[UIFont smallSystemFontSize]]];
-	[lastUpdateLabel setFont:[UIFont systemFontOfSize:[UIFont smallSystemFontSize]]];
-	[usingEponymsLabel setFont:[UIFont systemFontOfSize:[UIFont smallSystemFontSize]]];
-	
-	NSDate *lastCheckDate = [NSDate dateWithTimeIntervalSince1970:lastEponymCheck];
-	NSDate *lastUpdateDate = [NSDate dateWithTimeIntervalSince1970:lastEponymUpdate];
-	NSDate *usingEponymsDate = [NSDate dateWithTimeIntervalSince1970:usingEponymsOf];
-	[self updateLabelsWithDateForLastCheck:lastCheckDate lastUpdate:lastUpdateDate usingEponyms:usingEponymsDate];
-	
-	// version
-	[versionLabel setFont:[UIFont boldSystemFontOfSize:[UIFont smallSystemFontSize]]];
-	
-	NSString *version = [NSString stringWithFormat:@"Version %@  (%@)", [infoPlistDict objectForKey:@"CFBundleVersion"], [infoPlistDict objectForKey:@"SubversionRevision"]];
-	[versionLabel setText:version];
+	[updater retain];
+	[self lockGUI:YES];
+	[self setStatusMessage:updater.statusMessage];
+	[updater release];
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (void) updater:(EponymUpdater *)updater didEndActionSuccessful:(BOOL)success
 {
-	[self setStatusMessage:nil];
-}
-
-- (void) viewDidAppear:(BOOL)animated
-{
-	if(firstTimeLaunch) {
-		NSString *title = @"First Launch";
-		NSString *message = @"Welcome to Eponyms!\nBefore using Eponyms, the database must be created.";
+	[updater retain];
+	[self lockGUI:NO];
+	
+	if(success) {
 		
-		[self alertViewWithTitle:title message:message cancelTitle:@"OK"];		// maybe allow postponing first import?
+		// did check for updates
+		if(1 == updater.updateAction) {
+			[self newEponymsAreAvailable:updater.newEponymsAvailable];
+			[self updateLabelsWithDateForLastCheck:[NSDate date] lastUpdate:nil usingEponyms:nil];
+		}
+		
+		// did actually update eponyms
+		else {
+			NSString *statusMessage;
+			
+			if(updater.numEponymsParsed > 0) {
+				statusMessage = [NSString stringWithFormat:@"Created %u eponyms", updater.numEponymsParsed];
+				[self updateLabelsWithDateForLastCheck:nil lastUpdate:[NSDate date] usingEponyms:updater.eponymCreationDate];
+			}
+			else {
+				statusMessage = @"No eponyms were created";
+			}
+			
+			[self setStatusMessage:statusMessage];
+			[self setUpdateButtonTitle:@"Check for Eponym Updates"];
+			[self setUpdateButtonTitleColor:nil];
+			[self setProgress:-1.0];
+		}
 	}
 	
-	[self adjustContentToOrientation];
-}
-
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-	return YES;
-}
-
-- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-	[self adjustContentToOrientation];
-}
-
-- (void) adjustContentToOrientation
-{
-	UIInterfaceOrientation orientation = [self interfaceOrientation];
-	CGFloat screenWidth = topContainer.superview.frame.size.width;
-	CGRect topRect = topContainer.frame;
-	CGRect bottomRect = bottomContainer.frame;
-	
-	// Portrait
-	if((UIInterfaceOrientationPortrait == orientation) || (UIInterfaceOrientationPortraitUpsideDown == orientation)) {
-		topRect.size.width = screenWidth - 2 * pPortraitContentMargin;
-		topRect.origin.x = pPortraitContentMargin;
-		bottomRect.size.width = screenWidth - 2 * pPortraitContentMargin;
-		bottomRect.origin.x = pPortraitContentMargin;
-	}
-	
-	// Landscape
+	// an error occurred
 	else {
-		topRect.size.width = screenWidth / 2 - 2 * pLandscapeContentMargin;
-		topRect.origin.x = pLandscapeContentMargin;
-		bottomRect.size.width = screenWidth / 2 - 2 * pLandscapeContentMargin;
-		bottomRect.origin.x = screenWidth / 2 + pLandscapeContentMargin;
+		if(updater.downloadFailed && updater.statusMessage) {
+			[self alertViewWithTitle:@"Download Failed" message:updater.statusMessage cancelTitle:@"OK"];
+		}
+		if(updater.parseFailed) {
+			[self setStatusMessage:updater.statusMessage];
+		}
 	}
-	
-	topContainer.frame = topRect;
-	bottomContainer.frame = bottomRect;
+
+	[updater release];
 }
 
-- (void) didReceiveMemoryWarning
+- (void) updater:(EponymUpdater *)updater progress:(CGFloat)progress
 {
-	[self dismissMe:nil];
-	[super didReceiveMemoryWarning];		// Releases the view if it doesn't have a superview !!
-}
-#pragma mark -
-
-
-
-#pragma mark EponymUpdater
-- (void) loadEponymXMLFromDisk
-{
-	self.myUpdater = [[[EponymUpdater alloc] initWithDelegate:self] autorelease];
-	myUpdater.updateAction = 2;
-	
-	// Info.plist
-	myUpdater.readyToLoadNumEponyms = [[infoPlistDict objectForKey:@"numberOfIncludedEponyms"] intValue];
-	
-	// read the XML into data
-	NSString *eponymXMLPath = [NSBundle pathForResource:@"eponyms" ofType:@"xml" inDirectory:[[NSBundle mainBundle] bundlePath]];
-	NSData *includedXMLData = [NSData dataWithContentsOfFile:eponymXMLPath];
-	[myUpdater createEponymsWithData:includedXMLData];
-}
-
-- (IBAction) performUpdateAction:(id) sender
-{
-	NSUInteger updateAction = newEponymsAvailable ? 2 : 1;				// 1: check  2: download new
-	self.myUpdater = [[[EponymUpdater alloc] initWithDelegate:self] autorelease];
-	myUpdater.updateAction = updateAction;
-	
-	// We are going to update the eponyms - tell the updater how many eponyms to expect
-	if(2 == updateAction) {
-		myUpdater.readyToLoadNumEponyms = readyToLoadNumEponyms;
-	}
-	
-	[myUpdater startDownloadingWithAction:updateAction];
-}
-
-- (void) abortUpdateAction
-{
-	if(myUpdater) {
-		myUpdater.mustAbortImport = YES;
-	}
-	
-	self.iAmUpdating = NO;
+	[self setProgress:progress];
 }
 #pragma mark -
 
@@ -345,7 +408,7 @@
 	// abort import alert
 	if(askingToAbortImport) {
 		if(buttonIndex == alertView.firstOtherButtonIndex) {
-			[self abortUpdateAction];
+			[delegate abortUpdateAction];
 			[self dismissMe:nil];
 		}
 		askingToAbortImport = NO;
@@ -353,7 +416,7 @@
 	
 	// first import alert (can only be accepted at the moment)
 	else if(firstTimeLaunch) {
-		[self loadEponymXMLFromDisk];
+		[(eponyms_touchAppDelegate *)delegate loadEponymXMLFromDisk];
 		firstTimeLaunch = NO;
 	}
 }
@@ -362,6 +425,11 @@
 
 
 #pragma mark Online Access
+- (IBAction) performUpdateAction:(id)sender
+{
+	[delegate checkForUpdates:sender];
+}
+
 - (void) openWebsite:(NSURL *)url fromButton:(id) button
 {
 	if(![[UIApplication sharedApplication] openURL:url]) {

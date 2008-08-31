@@ -74,8 +74,12 @@ static NSString *MyCellIdentifier = @"EponymCell";
 	self.view = myTableView;
 	
 	// Create the buttons to toggle search
-	self.initSearchButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(initSearch)] autorelease];
-	self.abortSearchButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(abortSearch)] autorelease];
+	self.initSearchButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch
+																		   target:self
+																		   action:@selector(initSearch)] autorelease];
+	self.abortSearchButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+																			target:self
+																			action:@selector(abortSearch)] autorelease];
 	self.navigationItem.rightBarButtonItem = initSearchButton;
 }
 

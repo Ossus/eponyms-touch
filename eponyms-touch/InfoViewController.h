@@ -13,80 +13,70 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
+#import "EponymUpdaterDelegate.h"
 
 
-@class EponymUpdater;
 
-
-@interface InfoViewController : UIViewController <UIAlertViewDelegate> {
+@interface InfoViewController : UIViewController <UIAlertViewDelegate, EponymUpdaterDelegate> {
 	id delegate;
 	
-	EponymUpdater *myUpdater;
-	BOOL needToReloadEponyms;
 	BOOL firstTimeLaunch;
-	BOOL newEponymsAvailable;
-	BOOL iAmUpdating;
 	BOOL askingToAbortImport;
 	
 	NSInteger lastEponymCheck;
 	NSInteger lastEponymUpdate;
-	NSInteger usingEponymsOf;
-	NSUInteger readyToLoadNumEponyms;
+	NSDictionary *infoPlistDict;
+	NSURL *projectWebsiteURL;
 	
-	IBOutlet UIView *topContainer;
-	IBOutlet UIView *bottomContainer;
+	UISegmentedControl *tabSegments;
+	IBOutlet UIView *infoView;
+	IBOutlet UIView *optionsView;
+	IBOutlet UIImageView *backgroundImage;
 	
+	// Info
 	IBOutlet UILabel *versionLabel;
 	IBOutlet UILabel *usingEponymsLabel;
-	IBOutlet UILabel *lastCheckLabel;
-	IBOutlet UILabel *lastUpdateLabel;
 	IBOutlet UITextView *infoTextView;
 	
-	IBOutlet UIButton *updateButton;
 	IBOutlet UIButton *projectWebsiteButton;
 	IBOutlet UIButton *eponymsDotNetButton;
+	
+	// Options
+	IBOutlet UILabel *lastCheckLabel;
+	IBOutlet UILabel *lastUpdateLabel;
 	
 	IBOutlet UILabel *progressText;
 	IBOutlet UIProgressView *progressView;
 	
-	NSDictionary *infoPlistDict;
-	NSURL *projectWebsiteURL;
-	NSURL *eponymUpdateCheckURL;
-	NSURL *eponymXMLURL;
+	IBOutlet UIButton *updateButton;
+	IBOutlet UISwitch *autocheckSwitch;
 }
 
 @property (nonatomic, assign) id delegate;
-@property (nonatomic, assign) BOOL needToReloadEponyms;
 @property (nonatomic, assign) BOOL firstTimeLaunch;
-@property (nonatomic, assign) BOOL newEponymsAvailable;
-@property (nonatomic, assign) BOOL iAmUpdating;
 
-@property (nonatomic, retain) EponymUpdater *myUpdater;
 @property (nonatomic, assign) NSInteger lastEponymCheck;
 @property (nonatomic, assign) NSInteger lastEponymUpdate;
-@property (nonatomic, assign) NSInteger usingEponymsOf;
-@property (nonatomic, assign) NSUInteger readyToLoadNumEponyms;
-
-@property (nonatomic, readonly) UILabel *progressText;
-@property (nonatomic, readonly) UIProgressView *progressView;
-@property (nonatomic, readonly) UIButton *updateButton;
-
 @property (nonatomic, retain) NSDictionary *infoPlistDict;
 @property (nonatomic, retain) NSURL *projectWebsiteURL;
-@property (nonatomic, retain) NSURL *eponymUpdateCheckURL;
-@property (nonatomic, retain) NSURL *eponymXMLURL;
 
+@property (nonatomic, retain) UISegmentedControl *tabSegments;
+
+
+- (void) tabChanged:(id)sender;
 - (void) updateLabelsWithDateForLastCheck:(NSDate *)lastCheck lastUpdate:(NSDate *)lastUpdate usingEponyms:(NSDate *)usingEponyms;
 - (void) dismissMe:(id)sender;
-- (void) abortUpdateAction;
 
 - (void) setUpdateButtonTitle:(NSString *)title;
 - (void) setUpdateButtonTitleColor:(UIColor *)color;
 - (void) setStatusMessage:(NSString *)message;
 - (void) setProgress:(CGFloat) progress;
 
-// Online Access
+// Options
 - (IBAction) performUpdateAction:(id)sender;
+- (IBAction) autoCheckSwitchToggled:(id)sender;
+
+// Links
 - (IBAction) openProjectWebsite:(id)sender;
 - (IBAction) openEponymsDotNet:(id)sender;
 

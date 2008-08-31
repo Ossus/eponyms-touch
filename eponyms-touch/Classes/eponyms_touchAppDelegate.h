@@ -11,8 +11,10 @@
 
 #import <UIKit/UIKit.h>
 #import <sqlite3.h>
+#import "EponymUpdaterDelegate.h"
 
 
+@class EponymUpdater;
 @class CategoriesViewController;
 @class ListViewController;
 @class EponymViewController;
@@ -21,9 +23,12 @@
 @class Eponym;
 
 
-@interface eponyms_touchAppDelegate : NSObject <UIApplicationDelegate> {
+@interface eponyms_touchAppDelegate : NSObject <UIApplicationDelegate, EponymUpdaterDelegate> {
 	IBOutlet UIWindow *window;
 	sqlite3 *database;
+	
+	// Prefs
+	BOOL shouldAutoCheck;
 	
 	// Eponyms
 	EponymCategory *categoryShown;
@@ -45,10 +50,19 @@
 	UIImage *starImageListActive;
 	UIImage *starImageEponymActive;
 	UIImage *starImageEponymInactive;
+	
+	// Updating
+	EponymUpdater *myUpdater;
+	BOOL iAmUpdating;
+	BOOL didCheckForNewEponyms;
+	BOOL newEponymsAvailable;
+	NSInteger usingEponymsOf;
 }
 
 @property (nonatomic, retain) UIWindow *window;
 @property (nonatomic, assign) sqlite3 *database;
+
+@property (nonatomic, assign) BOOL shouldAutoCheck;
 
 @property (nonatomic, retain) EponymCategory *categoryShown;
 @property (nonatomic, assign) NSInteger categoryIDShown;
@@ -59,10 +73,21 @@
 @property (nonatomic, retain) NSMutableArray *eponymSectionArray;
 
 @property (nonatomic, retain) UINavigationController *navigationController;
+@property (nonatomic, retain) CategoriesViewController *categoriesController;
+@property (nonatomic, retain) ListViewController *listController;
+@property (nonatomic, retain) EponymViewController *eponymController;
+@property (nonatomic, retain) InfoViewController *infoController;
 
 @property (nonatomic, retain) UIImage *starImageListActive;
 @property (nonatomic, retain) UIImage *starImageEponymActive;
 @property (nonatomic, retain) UIImage *starImageEponymInactive;
+
+// Updating
+@property (nonatomic, retain) EponymUpdater *myUpdater;
+@property (nonatomic, assign) BOOL iAmUpdating;
+@property (nonatomic, assign) BOOL didCheckForNewEponyms;
+@property (nonatomic, assign) BOOL newEponymsAvailable;
+@property (nonatomic, assign) NSInteger usingEponymsOf;
 
 
 - (BOOL) connectToDBAndCreateIfNeeded;
@@ -72,12 +97,19 @@
 - (void) loadEponymsOfCategory:(EponymCategory *)category containingString:(NSString *)searchString animated:(BOOL)animated;
 - (void) loadEponym:(Eponym *)eponym animated:(BOOL)animated;
 - (void) closeMainDatabase;
-- (void) eponymImportFailed;
+- (void) deleteDatabaseFile;
 
 - (NSString *) databaseFilePath;
 - (NSDictionary *) databaseCreationQueries;
 
 - (EponymCategory *) categoryWithID:(NSInteger)identifier;
+
+// Updating
+- (void) checkForUpdates:(id)sender;
+- (void) loadEponymXMLFromDisk;
+- (void) abortUpdateAction;
+
+
 
 
 @end

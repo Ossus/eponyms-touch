@@ -24,6 +24,8 @@
 		EE2DEAF20E22302500D97653 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EE2DEAF10E22302500D97653 /* libsqlite3.dylib */; };
 		EE2DEDFA0E229B9B00D97653 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EE2DEDF90E229B9B00D97653 /* Icon.png */; };
 		EE2DEDFF0E229DB700D97653 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = EE2DEDFE0E229DB700D97653 /* Default.png */; };
+		EE3BC3C10E6ACEBF0051B69D /* Badge_new_eponyms.png in Resources */ = {isa = PBXBuildFile; fileRef = EE3BC3C00E6ACEBF0051B69D /* Badge_new_eponyms.png */; };
+		EE3BC4430E6ADECB0051B69D /* InfoBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = EE3BC4420E6ADECB0051B69D /* InfoBackground.png */; };
 		EE4B74EA0E2EB35500F7B157 /* NOTICE.txt in Resources */ = {isa = PBXBuildFile; fileRef = EE4B74E90E2EB35500F7B157 /* NOTICE.txt */; };
 		EE4B74F00E2EB53800F7B157 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = EE4B74EF0E2EB53800F7B157 /* LICENSE.txt */; };
 		EE64C7C00E2680D40000BC8D /* eponyms.xml in Resources */ = {isa = PBXBuildFile; fileRef = EE64C7BF0E2680D40000BC8D /* eponyms.xml */; };
@@ -66,6 +68,8 @@
 		EE2DEAF10E22302500D97653 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = /usr/lib/libsqlite3.dylib; sourceTree = "<absolute>"; };
 		EE2DEDF90E229B9B00D97653 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		EE2DEDFE0E229DB700D97653 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		EE3BC3C00E6ACEBF0051B69D /* Badge_new_eponyms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Badge_new_eponyms.png; sourceTree = "<group>"; };
+		EE3BC4420E6ADECB0051B69D /* InfoBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InfoBackground.png; sourceTree = "<group>"; };
 		EE4B74E90E2EB35500F7B157 /* NOTICE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NOTICE.txt; sourceTree = "<group>"; };
 		EE4B74EF0E2EB53800F7B157 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		EE64C7BF0E2680D40000BC8D /* eponyms.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = eponyms.xml; sourceTree = "<group>"; };
@@ -77,6 +81,7 @@
 		EE89CD5E0E6170EE0016A781 /* TouchTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchTableView.m; sourceTree = "<group>"; };
 		EE89CE9C0E618B2C0016A781 /* Star_list_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Star_list_active.png; sourceTree = "<group>"; };
 		EEAB00F90E2E2F3E00D84A8A /* Info.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Info.txt; sourceTree = "<group>"; };
+		EEBA8F120E66E727002D6DDC /* EponymUpdaterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EponymUpdaterDelegate.h; sourceTree = "<group>"; };
 		EED69F820E2BF41900BEF0C4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -104,8 +109,10 @@
 				EE89C9FF0E6059280016A781 /* EponymCategory.m */,
 				EE2DE9DC0E2125C700D97653 /* Eponym.h */,
 				EE2DE9DD0E2125C700D97653 /* Eponym.m */,
+				EE1443E80E23A576003EA64C /* EponymUpdater.h */,
+				EE1443E90E23A576003EA64C /* EponymUpdater.m */,
+				EEBA8F120E66E727002D6DDC /* EponymUpdaterDelegate.h */,
 				EE2DE7AD0E1C2F8600D97653 /* View Controllers */,
-				EE64C7570E2674EF0000BC8D /* Info Window */,
 				EE89CD880E6174C00016A781 /* Subclasses */,
 			);
 			path = Classes;
@@ -169,6 +176,8 @@
 		EE2DE6B30E1AE30C00D97653 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				EE3BC4420E6ADECB0051B69D /* InfoBackground.png */,
+				EE3BC3C00E6ACEBF0051B69D /* Badge_new_eponyms.png */,
 				EE66414D0E62A2220047D7ED /* Star_eponym_active.png */,
 				EE66414E0E62A2220047D7ED /* Star_eponym_inactive.png */,
 				EE89CE9C0E618B2C0016A781 /* Star_list_active.png */,
@@ -188,19 +197,10 @@
 				EE2DE74D0E1C297200D97653 /* ListViewController.m */,
 				EE2DE7510E1C297F00D97653 /* EponymViewController.h */,
 				EE2DE7520E1C297F00D97653 /* EponymViewController.m */,
-			);
-			name = "View Controllers";
-			sourceTree = "<group>";
-		};
-		EE64C7570E2674EF0000BC8D /* Info Window */ = {
-			isa = PBXGroup;
-			children = (
 				EE2DE6B80E1AE38200D97653 /* InfoViewController.h */,
 				EE2DE6B90E1AE38200D97653 /* InfoViewController.m */,
-				EE1443E80E23A576003EA64C /* EponymUpdater.h */,
-				EE1443E90E23A576003EA64C /* EponymUpdater.m */,
 			);
-			name = "Info Window";
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 		EE89CD880E6174C00016A781 /* Subclasses */ = {
@@ -269,6 +269,8 @@
 				EE89CE9D0E618B2C0016A781 /* Star_list_active.png in Resources */,
 				EE66414F0E62A2220047D7ED /* Star_eponym_active.png in Resources */,
 				EE6641500E62A2220047D7ED /* Star_eponym_inactive.png in Resources */,
+				EE3BC3C10E6ACEBF0051B69D /* Badge_new_eponyms.png in Resources */,
+				EE3BC4430E6ADECB0051B69D /* InfoBackground.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,7 +334,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DD13AC8D-5B95-44A5-ACD2-E8C7A7F145C4";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C224819D-8EFC-4F16-9CFB-0BA8A9E05D42";
 				SDKROOT = iphoneos2.0;
 			};
 			name = Debug;
@@ -350,30 +352,29 @@
 			};
 			name = Release;
 		};
-		EE0B09FB0E31186B00F54ADD /* Distribution */ = {
+		EEB1E3FD0E62DB10006E112F /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B92082B9-42E5-4FDE-AABA-9D095E84A190";
 				SDKROOT = iphoneos2.0;
 			};
 			name = Distribution;
 		};
-		EE0B09FC0E31186B00F54ADD /* Distribution */ = {
+		EEB1E3FE0E62DB10006E112F /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = "eponyms-touch";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B92082B9-42E5-4FDE-AABA-9D095E84A190";
 			};
 			name = Distribution;
 		};
@@ -385,7 +386,7 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
-				EE0B09FC0E31186B00F54ADD /* Distribution */,
+				EEB1E3FE0E62DB10006E112F /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -395,7 +396,7 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
-				EE0B09FB0E31186B00F54ADD /* Distribution */,
+				EEB1E3FD0E62DB10006E112F /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

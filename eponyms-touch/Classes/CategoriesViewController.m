@@ -44,12 +44,7 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 	self.view = myTableView;
 	
 	// add the info panel button
-	UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
-	[infoButton addTarget:delegate action:@selector(showInfoPanel:) forControlEvents:UIControlEventTouchUpInside];
-	UIBarButtonItem *infoBarButton = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
-	
-	self.navigationItem.rightBarButtonItem = infoBarButton;
-	[infoBarButton release];
+	[self showNewEponymsAvailable:NO];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -107,6 +102,35 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 	if(categories) {
 		[myTableView reloadData];
 	}
+}
+#pragma mark -
+
+
+
+#pragma mark GUI
+- (void) showNewEponymsAvailable:(BOOL)hasNew
+{
+	UIButton *infoButton;
+	CGRect buttonSize = CGRectMake(0.0, 0.0, 30.0, 26.0);
+	
+	if(hasNew) {
+		infoButton = [UIButton buttonWithType:UIButtonTypeCustom];
+		[infoButton setImage:[UIImage imageNamed:@"Badge_new_eponyms.png"] forState:(UIControlStateNormal & UIControlStateHighlighted & UIControlStateDisabled & UIControlStateSelected & UIControlStateApplication & UIControlStateReserved)];
+		infoButton.showsTouchWhenHighlighted = YES;
+		infoButton.frame = buttonSize;
+	}
+	
+	else {
+		infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+		infoButton.frame = buttonSize;
+	}
+	
+	// compose and add to navigation bar
+	[infoButton addTarget:delegate action:@selector(showInfoPanel:) forControlEvents:UIControlEventTouchUpInside];
+	
+	UIBarButtonItem *infoBarButton = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
+	self.navigationItem.rightBarButtonItem = infoBarButton;
+	[infoBarButton release];
 }
 #pragma mark -
 

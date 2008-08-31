@@ -12,6 +12,7 @@
 #import "eponyms_touchAppDelegate.h"
 #import "EponymCategory.h"
 #import "Eponym.h"
+#import "EponymUpdater.h"
 #import "InfoViewController.h"
 #import "CategoriesViewController.h"
 #import "ListViewController.h"
@@ -33,6 +34,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 
 @interface eponyms_touchAppDelegate (Private)
 
+- (void) showNewEponymsAreAvailable:(BOOL)available;
 - (void) loadEponymWithId:(NSUInteger)eponym_id animated:(BOOL)animated;
 - (Eponym *) eponymWithId:(NSUInteger)eponym_id;
 - (void) showInfoPanelAsFirstTimeLaunch:(BOOL)firstTimeLaunch;
@@ -40,19 +42,21 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 @end
 
 
+#pragma mark -
+
 @implementation eponyms_touchAppDelegate
 
-@synthesize window, database;
+@synthesize window, database, myUpdater, usingEponymsOf, shouldAutoCheck, iAmUpdating, didCheckForNewEponyms, newEponymsAvailable;
 @dynamic categoryShown;
-@synthesize categoryIDShown, eponymShown;
-@synthesize categoryArray, eponymArray, eponymSectionArray, navigationController, starImageListActive, starImageEponymActive, starImageEponymInactive;
+@synthesize navigationController, categoriesController, listController, eponymController, infoController;
+@synthesize categoryIDShown, eponymShown, categoryArray, eponymArray, eponymSectionArray, starImageListActive, starImageEponymActive, starImageEponymInactive;
 
 
 - (void) applicationDidFinishLaunching:(UIApplication *)application
-{
+{	
 	// **** Prefs
 	NSUInteger lastUsedDBVersion;
-	NSUInteger usingEponymsOf;
+	NSInteger lastEponymCheck;
 	NSInteger shownCategoryAtQuit;
 	NSUInteger shownEponymAtQuit;
 	CGFloat scrollPositionAtQuit;
@@ -60,18 +64,21 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	NSNumber *testValue = [[NSUserDefaults standardUserDefaults] objectForKey:@"usingEponymsOf"];
 	if(nil == testValue) {
 		NSDictionary *appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
-									 [NSNumber numberWithInt:0], @"lastUsedDBVersion",
 									 [NSNumber numberWithInt:0], @"lastEponymCheck",
+									 [NSNumber numberWithInt:0], @"lastUsedDBVersion",
 									 [NSNumber numberWithInt:0], @"lastEponymUpdate",
 									 [NSNumber numberWithInt:0], @"usingEponymsOf",
+									 [NSNumber numberWithBool:NO], @"shouldAutoCheck",
 									 [NSNumber numberWithInt:-1], @"shownCategoryAtQuit",
 									 [NSNumber numberWithInt:0], @"shownEponymAtQuit",
 									 [NSNumber numberWithFloat:0.0], @"scrollPositionAtQuit", nil];
 		[[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
 		[[NSUserDefaults standardUserDefaults] synchronize];
 		
+		self.usingEponymsOf = 0;
+		self.shouldAutoCheck = NO;
 		lastUsedDBVersion = THIS_DB_VERSION;
-		usingEponymsOf = 0;
+		lastEponymCheck = 0;
 		shownCategoryAtQuit = -100;
 		shownEponymAtQuit = 0;
 		scrollPositionAtQuit = 0.0;
@@ -79,8 +86,10 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	
 	// Prefs were there
 	else {
+		self.usingEponymsOf = [testValue intValue];
+		self.shouldAutoCheck = [[NSUserDefaults standardUserDefaults] boolForKey:@"shouldAutoCheck"];
+		lastEponymCheck = [[NSUserDefaults standardUserDefaults] integerForKey:@"lastEponymCheck"];
 		lastUsedDBVersion = [[NSUserDefaults standardUserDefaults] integerForKey:@"lastUsedDBVersion"];
-		usingEponymsOf = [testValue intValue];
 		shownCategoryAtQuit = [[NSUserDefaults standardUserDefaults] integerForKey:@"shownCategoryAtQuit"];
 		shownEponymAtQuit = [[NSUserDefaults standardUserDefaults] integerForKey:@"shownEponymAtQuit"];
 		scrollPositionAtQuit = [[NSUserDefaults standardUserDefaults] floatForKey:@"scrollPositionAtQuit"];
@@ -89,16 +98,16 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	
 	// **** GUI
 	// create the NavigationController and the first ViewController (categoryController)
-	categoriesController = [[CategoriesViewController alloc] initWithNibName:nil bundle:nil];
+	self.categoriesController = [[[CategoriesViewController alloc] initWithNibName:nil bundle:nil] autorelease];
 	[categoriesController setDelegate:self];
-	navigationController = [[UINavigationController alloc] initWithRootViewController:categoriesController];
+	self.navigationController = [[[UINavigationController alloc] initWithRootViewController:categoriesController] autorelease];
 	
 	// create the view controllers for the Eponym list and the Eponym details
-	listController = [[ListViewController alloc] initWithNibName:nil bundle:nil];
+	self.listController = [[[ListViewController alloc] initWithNibName:nil bundle:nil] autorelease];
 	[listController setDelegate:self];
-	eponymController = [[EponymViewController alloc] initWithNibName:nil bundle:nil];
+	self.eponymController = [[[EponymViewController alloc] initWithNibName:nil bundle:nil] autorelease];
 	[eponymController setDelegate:self];
-	infoController = nil;
+	self.infoController = nil;
 	
 	[window addSubview:[navigationController view]];
 	[window makeKeyAndVisible];
@@ -109,14 +118,17 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	
 	
 	// **** Data
-	// If we updated from version 1.0.x, we must re-create the database
-	if(lastUsedDBVersion < THIS_DB_VERSION) {
-		[self eponymImportFailed];									// we hijack this method to delete the sql file
+	// If we updated from version 1.0.x, we must create a new one. We can delete the old one since no personal data was stored back then.
+	if(lastUsedDBVersion < 1) {
+		[self deleteDatabaseFile];
 	}
 	
 	// connect to the database and load the categories
 	BOOL databaseCreated = [self connectToDBAndCreateIfNeeded];		// returns a BOOL whether the database had to be created
 	[self loadDatabaseAnimated:NO reload:NO];
+	
+	self.iAmUpdating = NO;
+	self.newEponymsAvailable = NO;
 	
 	
 	// **** Restore State
@@ -138,22 +150,34 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	if(databaseCreated || (usingEponymsOf < 1)) {
 		[self showInfoPanelAsFirstTimeLaunch:YES];
 	}
+	
+	// perform auto update check every week (if enabled)
+	else if(shouldAutoCheck) {
+		NSTimeInterval nowInEpoch = [[NSDate date] timeIntervalSince1970];
+		if(nowInEpoch > (lastEponymCheck + 7 * 24 * 3600)) {
+			NSLog(@"Will perform auto check");
+			[self performSelector:@selector(checkForUpdates:) withObject:nil afterDelay:2.0];
+		}
+	}
 }
 
 
 - (void) dealloc
 {
-	[categoryShown release];			categoryShown = nil;
-	[categoryArray release];			categoryArray = nil;
-	[eponymArray release];				eponymArray = nil;
-	[eponymSectionArray release];		eponymSectionArray = nil;
+	self.categoryShown = nil;
+	self.categoryArray = nil;
+	self.eponymArray = nil;
+	self.eponymSectionArray = nil;
 	
-	[navigationController release];		navigationController = nil;
-	[listController release];			listController = nil;
-	[eponymController release];			eponymController = nil;
-	
+	self.navigationController = nil;
+	self.listController = nil;
+	self.eponymController = nil;
 	if(infoController) {
-		[infoController release];		infoController = nil;
+		self.infoController = nil;
+	}
+	
+	if(myUpdater) {
+		self.myUpdater = nil;
 	}
 	
 	[window release];
@@ -171,18 +195,18 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 // save our currently displayed view and close the database
 - (void) applicationWillTerminate:(UIApplication *)application
 {
-	// Are we updating? Abort that
-	if(infoController && infoController.iAmUpdating) {
-		[infoController abortUpdateAction];
-		[self eponymImportFailed];
-	}
-	
 	[self closeMainDatabase];
+	
+	// Are we updating? Abort that
+	if(iAmUpdating) {
+		[self abortUpdateAction];
+	}
 	
 	// Save state
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	CGRect bnds = [[[navigationController topViewController] view] bounds];
 	[defaults setInteger:THIS_DB_VERSION forKey:@"lastUsedDBVersion"];
+	[defaults setBool:shouldAutoCheck forKey:@"shouldAutoCheck"];
 	[defaults setInteger:categoryIDShown forKey:@"shownCategoryAtQuit"];
 	[defaults setInteger:eponymShown forKey:@"shownEponymAtQuit"];
 	[defaults setFloat:bnds.origin.y forKey:@"scrollPositionAtQuit"];
@@ -205,6 +229,115 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	}
 	
 	categoryIDShown = catShown ? [catShown myID] : -100;
+}
+#pragma mark -
+
+
+
+#pragma mark Updater Delegate
+- (void) updaterDidStartAction:(EponymUpdater *)updater
+{
+	self.iAmUpdating = YES;
+}
+
+- (void) updater:(EponymUpdater *)updater didEndActionSuccessful:(BOOL)success
+{
+	[updater retain];
+	self.iAmUpdating = NO;
+	BOOL mayReleaseUpdater = YES;
+	
+	if(success) {
+		NSTimeInterval nowInEpoch = [[NSDate date] timeIntervalSince1970];
+		
+		// did check for updates
+		if(1 == updater.updateAction) {
+			self.newEponymsAvailable = updater.newEponymsAvailable;
+			[self showNewEponymsAreAvailable:updater.newEponymsAvailable];
+			mayReleaseUpdater = !updater.newEponymsAvailable;
+			
+			if(!updater.newEponymsAvailable) {	
+				[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(NSInteger)nowInEpoch] forKey:@"lastEponymCheck"];
+			}
+		}
+		
+		// did actually update eponyms
+		else {
+			if(updater.numEponymsParsed > 0) {
+				[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(NSInteger)nowInEpoch]
+														  forKey:@"lastEponymUpdate"];
+				[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(NSInteger)[updater.eponymCreationDate timeIntervalSince1970]]
+														  forKey:@"usingEponymsOf"];
+			}
+			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(NSInteger)nowInEpoch] forKey:@"lastEponymCheck"];
+			
+			self.newEponymsAvailable;
+			[self showNewEponymsAreAvailable:NO];
+			[self loadDatabaseAnimated:YES reload:YES];
+		}
+	}
+	// else an error occurred, no need to do anything
+	
+	[updater release];
+	if(mayReleaseUpdater) {
+		self.myUpdater = nil;
+	}
+}
+#pragma mark -
+
+
+
+#pragma mark Updating
+- (void) checkForUpdates:(id)sender
+{
+	NSUInteger updateAction = 1;				// 1: check  2: download new
+	if(myUpdater) {
+		if(myUpdater.newEponymsAvailable) {
+			updateAction = 2;
+		}
+	}
+	else {
+		self.myUpdater = [[[EponymUpdater alloc] initWithDelegate:self] autorelease];
+	}
+	
+	if(infoController) {
+		myUpdater.viewController = infoController;
+	}
+	[myUpdater startUpdaterAction:updateAction];
+}
+
+- (void) showNewEponymsAreAvailable:(BOOL)available
+{
+	[categoriesController showNewEponymsAvailable:available];
+	//navigationController.navigationBar.tintColor = [UIColor colorWithWhite:0.2 alpha:1.0];
+}
+
+- (void) loadEponymXMLFromDisk
+{
+	self.myUpdater = [[[EponymUpdater alloc] initWithDelegate:self] autorelease];
+	myUpdater.updateAction = 2;
+	if(infoController) {
+		myUpdater.viewController = infoController;
+	}
+	
+	// Info.plist
+	myUpdater.readyToLoadNumEponyms = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"numberOfIncludedEponyms"] intValue];
+	
+	// read the XML into data
+	NSString *eponymXMLPath = [NSBundle pathForResource:@"eponyms" ofType:@"xml" inDirectory:[[NSBundle mainBundle] bundlePath]];
+	NSData *includedXMLData = [NSData dataWithContentsOfFile:eponymXMLPath];
+	[myUpdater createEponymsWithData:includedXMLData];
+}
+
+- (void) abortUpdateAction
+{
+	if(myUpdater) {
+		myUpdater.mustAbortImport = YES;
+		
+		// if we are parsing and abort here, the database is most likely corrupt. Delete it
+		if(myUpdater.isParsing) {
+			[self deleteDatabaseFile];
+		}
+	}
 }
 #pragma mark -
 
@@ -238,7 +371,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		NSString *createEpoTable = [creationQueries objectForKey:@"createEpoTable"];
 		
 		// Create the real database (still empty)
-		if(SQLITE_OK == sqlite3_open([sqlPath UTF8String], &database)) {		// sqlite3_open_v2([sqlPath UTF8String], &database, SQLITE_OPEN_CREATE, NULL)
+		if(SQLITE_OK == sqlite3_open([sqlPath UTF8String], &database)) {	// sqlite3_open_v2([sqlPath UTF8String], &database, SQLITE_OPEN_CREATE, NULL)
 			sqlite3_exec(database, [createCatTable UTF8String], NULL, NULL, &err);
 			if(err) {
 				NSAssert1(0, @"Error: Failed to execute createCatTable: '%s'.", sqlite3_errmsg(database));
@@ -274,15 +407,9 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	[navigationController popToRootViewControllerAnimated:animated];
 	
 	// empty eponyms and categories
-	NSMutableArray *foo = [[NSMutableArray alloc] initWithCapacity:10];
-	NSMutableArray *bar = [[NSMutableArray alloc] initWithCapacity:10];
-	NSMutableArray *hat = [[NSMutableArray alloc] initWithCapacity:10];
-	self.categoryArray = foo;
-	self.eponymArray = bar;
-	self.eponymSectionArray = hat;
-	[foo release];
-	[bar release];
-	[hat release];
+	self.categoryArray = [NSMutableArray arrayWithCapacity:10];
+	self.eponymArray = [NSMutableArray arrayWithCapacity:10];
+	self.eponymSectionArray = [NSMutableArray arrayWithCapacity:10];
 	
 	if(as_reload) {
 		self.categoryShown = nil;
@@ -298,7 +425,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	starredEponyms.sqlOrderStatement = [NSString stringWithFormat:@"%@ COLLATE NOCASE ASC", EPONYM_TITLE_FIELD];
 	
 	EponymCategory *recentEponyms =	[EponymCategory eponymCategoryWithID:-2 tag:@"Recent" title:@"Recent Eponyms" whereStatement:@"lastaccess > 0"];
-	recentEponyms.hint = @"Seems you haven't yet read any eponym :-)";
+	recentEponyms.hint = @"Seems you haven't yet read any eponym";
 	recentEponyms.sqlOrderStatement = @"lastaccess DESC";
 	recentEponyms.sqlLimitTo = 25;
 	
@@ -308,10 +435,11 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	// Fetch the "real" categories
 	NSMutableArray *normalCats = [NSMutableArray arrayWithCapacity:20];
 	if(database) {
+		
 		// prepare the query
 		if(load_all_categories_query == nil) {
 			NSString *categoryTitle = @"category_en";
-			const char *qry = [[NSString stringWithFormat:@"SELECT category_id, tag, %@ FROM categories ORDER BY %@ COLLATE NOCASE", categoryTitle, categoryTitle] UTF8String];
+			const char *qry = [[NSString stringWithFormat:@"SELECT category_id, tag, %@ FROM categories ORDER BY %@, tag COLLATE NOCASE ASC", categoryTitle, categoryTitle] UTF8String];
 			if(sqlite3_prepare_v2(database, qry, -1, &load_all_categories_query, NULL) != SQLITE_OK) {
 				NSAssert1(0, @"Error: failed to prepare load_all_categories_query: '%s'.", sqlite3_errmsg(database));
 			}
@@ -438,7 +566,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		int starred = sqlite3_column_int(query, 2);
 		
 		[title setString:[NSString stringWithUTF8String:eponymTitle]];
-		Eponym *eponym = [[Eponym alloc] initWithID:eid title:title fromDatabase:database];
+		Eponym *eponym = [[Eponym alloc] initWithID:eid title:title delegate:self];
 		eponym.starred = starred ? YES : NO;
 		
 		// determine the first letter and create the eponym (for all eponyms or eponyms from the real categories)
@@ -539,11 +667,8 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	}
 }
 
-- (void) eponymImportFailed
+- (void) deleteDatabaseFile
 {
-	[self closeMainDatabase];
-	
-	// delete the (most likely corrupted or empty) database file
 	NSString *sqlPath = [self databaseFilePath];
 	[[NSFileManager defaultManager] removeItemAtPath:sqlPath error:nil];
 }
@@ -560,13 +685,12 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 - (void) showInfoPanelAsFirstTimeLaunch:(BOOL)firstTimeLaunch
 {
 	if(!infoController) {
-		infoController = [[InfoViewController alloc] initWithNibName:@"InfoView" bundle:nil];
+		self.infoController = [[[InfoViewController alloc] initWithNibName:@"InfoView" bundle:nil] autorelease];
 		infoController.delegate = self;
 	}
 	
 	infoController.lastEponymCheck = [[NSUserDefaults standardUserDefaults] integerForKey:@"lastEponymCheck"];
 	infoController.lastEponymUpdate = [[NSUserDefaults standardUserDefaults] integerForKey:@"lastEponymUpdate"];
-	infoController.usingEponymsOf = [[NSUserDefaults standardUserDefaults] integerForKey:@"usingEponymsOf"];
 	infoController.firstTimeLaunch = firstTimeLaunch;
 	
 	UINavigationController *tempNaviController = [[UINavigationController alloc] initWithRootViewController:infoController];
@@ -632,7 +756,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	NSDictionary *queries = [NSDictionary dictionaryWithObjectsAndKeys:
 							 @"CREATE TABLE IF NOT EXISTS categories (category_id INTEGER PRIMARY KEY, tag VARCHAR UNIQUE, category_en VARCHAR)", @"createCatTable",
 							 @"CREATE TABLE IF NOT EXISTS category_eponym_linker (category_id INTEGER, eponym_id INTEGER)", @"createLinkTable",
-							 @"CREATE TABLE IF NOT EXISTS eponyms (eponym_id INTEGER PRIMARY KEY, eponym_en VARCHAR, text_en TEXT, created INTEGER, lastedit INTEGER, lastaccess INTEGER, starred INTEGER DEFAULT 0)", @"createEpoTable", nil];
+							 @"CREATE TABLE IF NOT EXISTS eponyms (eponym_id INTEGER PRIMARY KEY, identifier VARCHAR UNIQUE, eponym_en VARCHAR, text_en TEXT, created INTEGER, lastedit INTEGER, lastaccess INTEGER, starred INTEGER DEFAULT 0)", @"createEpoTable", nil];
 	
 	return queries;
 }

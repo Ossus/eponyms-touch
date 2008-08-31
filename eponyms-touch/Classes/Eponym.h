@@ -11,11 +11,10 @@
 
 
 #import <Foundation/Foundation.h>
-#import <sqlite3.h>
 
 
 @interface Eponym : NSObject {
-	sqlite3 *database;
+	id delegate;
 	
 	// Primary key
 	NSUInteger eponym_id;
@@ -51,7 +50,7 @@
 + (void) finalizeQueries;
 
 // Init the Eponym with the desired key
-- (id) initWithID:(NSUInteger) eid title:(NSString*) ttl fromDatabase:(sqlite3 *)db;
+- (id) initWithID:(NSUInteger) eid title:(NSString*) ttl delegate:(id)myDelegate;
 
 // Loading and unloading. Everything but key and title are wiped from memory on unload
 - (void) load;
