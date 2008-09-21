@@ -107,7 +107,6 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	[listController setDelegate:self];
 	self.eponymController = [[[EponymViewController alloc] initWithNibName:nil bundle:nil] autorelease];
 	[eponymController setDelegate:self];
-	self.infoController = nil;
 	
 	[window addSubview:[navigationController view]];
 	[window makeKeyAndVisible];
@@ -155,8 +154,11 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	else if(shouldAutoCheck) {
 		NSTimeInterval nowInEpoch = [[NSDate date] timeIntervalSince1970];
 		if(nowInEpoch > (lastEponymCheck + 7 * 24 * 3600)) {
-			NSLog(@"Will perform auto check");
+			NSLog(@"Will perform auto check (last check: %@)", [NSDate dateWithTimeIntervalSince1970:lastEponymCheck]);
 			[self performSelector:@selector(checkForUpdates:) withObject:nil afterDelay:2.0];
+		}
+		else {
+			NSLog(@"Will NOT perform auto check (last check: %@)", [NSDate dateWithTimeIntervalSince1970:lastEponymCheck]);
 		}
 	}
 }
@@ -255,7 +257,8 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 			[self showNewEponymsAreAvailable:updater.newEponymsAvailable];
 			mayReleaseUpdater = !updater.newEponymsAvailable;
 			
-			if(!updater.newEponymsAvailable) {	
+			if(!updater.newEponymsAvailable) {
+				NSLog(@"marking lastEponymCheck as now since we checked and there are no new eponyms");
 				[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(NSInteger)nowInEpoch] forKey:@"lastEponymCheck"];
 			}
 		}
@@ -268,6 +271,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 				[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(NSInteger)[updater.eponymCreationDate timeIntervalSince1970]]
 														  forKey:@"usingEponymsOf"];
 			}
+			NSLog(@"marking lastEponymCheck as now since we successfully parsed the eponyms");
 			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(NSInteger)nowInEpoch] forKey:@"lastEponymCheck"];
 			
 			self.newEponymsAvailable;
@@ -332,11 +336,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 {
 	if(myUpdater) {
 		myUpdater.mustAbortImport = YES;
-		
-		// if we are parsing and abort here, the database is most likely corrupt. Delete it
-		if(myUpdater.isParsing) {
-			[self deleteDatabaseFile];
-		}
+		self.iAmUpdating = NO;
 	}
 }
 #pragma mark -

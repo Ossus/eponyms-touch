@@ -34,6 +34,7 @@
 		EE89CA000E6059280016A781 /* EponymCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = EE89C9FF0E6059280016A781 /* EponymCategory.m */; };
 		EE89CD5F0E6170EE0016A781 /* TouchTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE89CD5E0E6170EE0016A781 /* TouchTableView.m */; };
 		EE89CE9D0E618B2C0016A781 /* Star_list_active.png in Resources */ = {isa = PBXBuildFile; fileRef = EE89CE9C0E618B2C0016A781 /* Star_list_active.png */; };
+		EE8E56750E6CA69600928D90 /* ElevatedBar.png in Resources */ = {isa = PBXBuildFile; fileRef = EE8E56740E6CA69600928D90 /* ElevatedBar.png */; };
 		EEAB00FA0E2E2F3E00D84A8A /* Info.txt in Resources */ = {isa = PBXBuildFile; fileRef = EEAB00F90E2E2F3E00D84A8A /* Info.txt */; };
 		EED69F830E2BF41900BEF0C4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED69F820E2BF41900BEF0C4 /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
@@ -80,6 +81,7 @@
 		EE89CD5D0E6170EE0016A781 /* TouchTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchTableView.h; sourceTree = "<group>"; };
 		EE89CD5E0E6170EE0016A781 /* TouchTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchTableView.m; sourceTree = "<group>"; };
 		EE89CE9C0E618B2C0016A781 /* Star_list_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Star_list_active.png; sourceTree = "<group>"; };
+		EE8E56740E6CA69600928D90 /* ElevatedBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ElevatedBar.png; sourceTree = "<group>"; };
 		EEAB00F90E2E2F3E00D84A8A /* Info.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Info.txt; sourceTree = "<group>"; };
 		EEBA8F120E66E727002D6DDC /* EponymUpdaterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EponymUpdaterDelegate.h; sourceTree = "<group>"; };
 		EED69F820E2BF41900BEF0C4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -181,6 +183,7 @@
 				EE66414D0E62A2220047D7ED /* Star_eponym_active.png */,
 				EE66414E0E62A2220047D7ED /* Star_eponym_inactive.png */,
 				EE89CE9C0E618B2C0016A781 /* Star_list_active.png */,
+				EE8E56740E6CA69600928D90 /* ElevatedBar.png */,
 				EE2DEDF90E229B9B00D97653 /* Icon.png */,
 				EE2DE6B40E1AE31800D97653 /* Eponyms.png */,
 				EE2DEDFE0E229DB700D97653 /* Default.png */,
@@ -271,6 +274,7 @@
 				EE6641500E62A2220047D7ED /* Star_eponym_inactive.png in Resources */,
 				EE3BC3C10E6ACEBF0051B69D /* Badge_new_eponyms.png in Resources */,
 				EE3BC4430E6ADECB0051B69D /* InfoBackground.png in Resources */,
+				EE8E56750E6CA69600928D90 /* ElevatedBar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,11 +356,36 @@
 			};
 			name = Release;
 		};
+		EE2E2B9A0E6C98C7004A22D6 /* Ad Hoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos2.0;
+			};
+			name = "Ad Hoc";
+		};
+		EE2E2B9B0E6C98C7004A22D6 /* Ad Hoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = "eponyms-touch";
+			};
+			name = "Ad Hoc";
+		};
 		EEB1E3FD0E62DB10006E112F /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -386,6 +415,7 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
+				EE2E2B9B0E6C98C7004A22D6 /* Ad Hoc */,
 				EEB1E3FE0E62DB10006E112F /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -396,6 +426,7 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
+				EE2E2B9A0E6C98C7004A22D6 /* Ad Hoc */,
 				EEB1E3FD0E62DB10006E112F /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;

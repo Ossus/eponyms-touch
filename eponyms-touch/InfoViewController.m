@@ -25,6 +25,7 @@
 - (void) switchToTab:(NSUInteger)tab;
 - (void) lockGUI:(BOOL)lock;
 - (void) newEponymsAreAvailable:(BOOL)available;
+- (void) resetStatusElements;
 @end
 
 
@@ -80,10 +81,8 @@
 	[self switchToTab:0];
 	
 	// hide progress stuff
-	progressText.hidden = YES;
-	progressView.hidden = YES;
-	updateButton.enabled = YES;
-	[self setUpdateButtonTitle:@"Check for Eponym Updates"];
+	[self setStatusMessage:nil];
+	[self resetStatusElements];
 	
 	// last update date/time
 	NSDate *lastCheckDate = [NSDate dateWithTimeIntervalSince1970:lastEponymCheck];
@@ -100,7 +99,6 @@
 {
 	BOOL mustSeeProgress = firstTimeLaunch || [delegate newEponymsAvailable];
 	
-	[self setStatusMessage:nil];
 	if(mustSeeProgress) {
 		[self switchToTab:1];
 	}
@@ -224,14 +222,20 @@
 		statusMessage = @"New eponyms are available!";
 		[self setUpdateButtonTitle:@"Download New Eponyms"];
 		[self setUpdateButtonTitleColor:[UIColor redColor]];
+		[self setProgress:-1.0];
 	}
 	else {
 		statusMessage = @"You are up to date";
-		[self setUpdateButtonTitle:@"Check for Eponym Updates"];
-		[self setUpdateButtonTitleColor:nil];
+		[self resetStatusElements];
 	}
 	
 	[self setStatusMessage:statusMessage];
+}
+
+- (void) resetStatusElements
+{
+	[self setUpdateButtonTitle:@"Check for Eponym Updates"];
+	[self setUpdateButtonTitleColor:nil];
 	[self setProgress:-1.0];
 }
 
@@ -296,11 +300,12 @@
 - (void) setStatusMessage:(NSString *)message
 {
 	if(message) {
-		progressText.hidden = NO;
+		progressText.textColor = [UIColor blackColor];
 		progressText.text = message;
 	}
 	else {
-		progressText.hidden = YES;
+		progressText.textColor = [UIColor grayColor];
+		progressText.text = @"Ready";
 	}
 }
 
@@ -339,14 +344,13 @@
 	[self lockGUI:NO];
 	
 	if(success) {
-		
 		// did check for updates
 		if(1 == updater.updateAction) {
 			[self newEponymsAreAvailable:updater.newEponymsAvailable];
 			[self updateLabelsWithDateForLastCheck:[NSDate date] lastUpdate:nil usingEponyms:nil];
 		}
 		
-		// did actually update eponyms
+		// did update eponyms
 		else {
 			NSString *statusMessage;
 			
@@ -359,22 +363,23 @@
 			}
 			
 			[self setStatusMessage:statusMessage];
-			[self setUpdateButtonTitle:@"Check for Eponym Updates"];
-			[self setUpdateButtonTitleColor:nil];
-			[self setProgress:-1.0];
+			[self resetStatusElements];
 		}
 	}
 	
 	// an error occurred
 	else {
+		[self resetStatusElements];
+		
 		if(updater.downloadFailed && updater.statusMessage) {
+			[self setStatusMessage:nil];
 			[self alertViewWithTitle:@"Download Failed" message:updater.statusMessage cancelTitle:@"OK"];
 		}
 		if(updater.parseFailed) {
 			[self setStatusMessage:updater.statusMessage];
 		}
 	}
-
+	
 	[updater release];
 }
 

@@ -27,15 +27,10 @@
 }
 
 - (void) touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event
-{
-	UITouch *touch = [touches anyObject];
-	CGFloat topOffset = [self bounds].origin.y;
-	if(!topOffsetAfterLastTouchEvent) {
-		topOffsetAfterLastTouchEvent = topOffset;
-	}
-	
-	// we have a first or second touch NOT after a swipe event
-	if((topOffset == topOffsetAfterLastTouchEvent) && (touch.tapCount < 3 && touch.tapCount > 0)) {
+{	
+	// we have a touch NOT after initiating or stopping scrolling
+	if(!self.dragging && !self.decelerating) {
+		UITouch *touch = [touches anyObject];
 		
 		// second tap - perform action and de-select the cell selected on first tap
 		if(2 == touch.tapCount) {
@@ -63,8 +58,6 @@
 	else {
 		[super touchesEnded:touches withEvent:event];
 	}
-	
-	topOffsetAfterLastTouchEvent = topOffset;
 }
 
 - (void) singleTapEndedWithObjects:(NSArray *)objects

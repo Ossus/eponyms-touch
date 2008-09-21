@@ -13,7 +13,6 @@
 
 
 @interface TouchTableView : UITableView {
-	CGFloat topOffsetAfterLastTouchEvent;				// needed to determine whether the table was scrolling or not
 }
 
 - (void) singleTapEndedWithObjects:(NSArray *)objects;

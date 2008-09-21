@@ -294,7 +294,7 @@ static sqlite3_stmt *star_eponym_query = nil;
 {
 	if(self.mustAbortImport) {
 		[connection cancel];
-		[self downloadFailedWithMessage:@"Download aborted"];
+		[self downloadFailedWithMessage:nil];
 		return;
 	}
 	
