@@ -24,6 +24,7 @@
 		EE2DEAF20E22302500D97653 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EE2DEAF10E22302500D97653 /* libsqlite3.dylib */; };
 		EE2DEDFA0E229B9B00D97653 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EE2DEDF90E229B9B00D97653 /* Icon.png */; };
 		EE2DEDFF0E229DB700D97653 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = EE2DEDFE0E229DB700D97653 /* Default.png */; };
+		EE380FA60E97B3180066BA6E /* eponyms_info.xml in Resources */ = {isa = PBXBuildFile; fileRef = EE380FA50E97B3180066BA6E /* eponyms_info.xml */; };
 		EE3BC3C10E6ACEBF0051B69D /* Badge_new_eponyms.png in Resources */ = {isa = PBXBuildFile; fileRef = EE3BC3C00E6ACEBF0051B69D /* Badge_new_eponyms.png */; };
 		EE3BC4430E6ADECB0051B69D /* InfoBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = EE3BC4420E6ADECB0051B69D /* InfoBackground.png */; };
 		EE4B74EA0E2EB35500F7B157 /* NOTICE.txt in Resources */ = {isa = PBXBuildFile; fileRef = EE4B74E90E2EB35500F7B157 /* NOTICE.txt */; };
@@ -69,6 +70,7 @@
 		EE2DEAF10E22302500D97653 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = /usr/lib/libsqlite3.dylib; sourceTree = "<absolute>"; };
 		EE2DEDF90E229B9B00D97653 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		EE2DEDFE0E229DB700D97653 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		EE380FA50E97B3180066BA6E /* eponyms_info.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = eponyms_info.xml; sourceTree = "<group>"; };
 		EE3BC3C00E6ACEBF0051B69D /* Badge_new_eponyms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Badge_new_eponyms.png; sourceTree = "<group>"; };
 		EE3BC4420E6ADECB0051B69D /* InfoBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InfoBackground.png; sourceTree = "<group>"; };
 		EE4B74E90E2EB35500F7B157 /* NOTICE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NOTICE.txt; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				EE4B74E90E2EB35500F7B157 /* NOTICE.txt */,
 				EEAB00F90E2E2F3E00D84A8A /* Info.txt */,
 				EE64C7BF0E2680D40000BC8D /* eponyms.xml */,
+				EE380FA50E97B3180066BA6E /* eponyms_info.xml */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				EE3BC3C10E6ACEBF0051B69D /* Badge_new_eponyms.png in Resources */,
 				EE3BC4430E6ADECB0051B69D /* InfoBackground.png in Resources */,
 				EE8E56750E6CA69600928D90 /* ElevatedBar.png in Resources */,
+				EE380FA60E97B3180066BA6E /* eponyms_info.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

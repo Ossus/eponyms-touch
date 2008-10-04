@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.02">
 	<data>
 		<int key="IBDocument.SystemTarget">512</int>
-		<string key="IBDocument.SystemVersion">9E17</string>
+		<string key="IBDocument.SystemVersion">9F33</string>
 		<string key="IBDocument.InterfaceBuilderVersion">670</string>
-		<string key="IBDocument.AppKitVersion">949.33</string>
+		<string key="IBDocument.AppKitVersion">949.34</string>
 		<string key="IBDocument.HIToolboxVersion">352.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -23,15 +23,42 @@
 				<string key="IBProxiedObjectIdentifier">IBFirstResponder</string>
 			</object>
 			<object class="IBUIView" id="451520814">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
+					<object class="IBUITextView" id="320771339">
+						<reference key="NSNextResponder" ref="451520814"/>
+						<int key="NSvFlags">276</int>
+						<string key="NSFrame">{{20, 123}, {280, 278}}</string>
+						<reference key="NSSuperview" ref="451520814"/>
+						<reference key="NSWindow"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<bool key="IBUIShowsHorizontalScrollIndicator">NO</bool>
+						<bool key="IBUIDelaysContentTouches">NO</bool>
+						<bool key="IBUICanCancelContentTouches">NO</bool>
+						<float key="IBUIMinimumZoomScale">0.000000e+00</float>
+						<float key="IBUIMaximumZoomScale">0.000000e+00</float>
+						<bool key="IBUIBouncesZoom">NO</bool>
+						<bool key="IBUIEditable">NO</bool>
+						<string type="base64-UTF8" key="IBUIText">RXBvbnltIERhdGFiYXNlIGJ5IEFuZHJldyBKLiBZZWUKaVBob25lIENsaWVudCBieSBQYXNjYWwgUGZp
+ZmZuZXIKCkZvciBtb3JlIGluZm9ybWF0aW9uIHZpc2l0IHRoZSBwcm9qZWN0IHdlYnNpdGUgYnkgdGFw
+cGluZyB0aGUgIldlYnNpdGUiIGJ1dHRvbi4</string>
+						<object class="NSFont" key="IBUIFont" id="941133211">
+							<string key="NSName">Helvetica</string>
+							<double key="NSSize">1.300000e+01</double>
+							<int key="NSfFlags">16</int>
+						</object>
+						<int key="IBUIMarginTop">0</int>
+					</object>
 					<object class="IBUIButton" id="180654234">
 						<reference key="NSNextResponder" ref="451520814"/>
-						<int key="NSvFlags">270</int>
-						<string key="NSFrame">{{20, 359}, {135, 37}}</string>
+						<int key="NSvFlags">265</int>
+						<string key="NSFrame">{{20, 359}, {136, 37}}</string>
 						<reference key="NSSuperview" ref="451520814"/>
+						<reference key="NSWindow"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -57,9 +84,10 @@
 					</object>
 					<object class="IBUIButton" id="593346689">
 						<reference key="NSNextResponder" ref="451520814"/>
-						<int key="NSvFlags">267</int>
+						<int key="NSvFlags">265</int>
 						<string key="NSFrame">{{164, 359}, {136, 37}}</string>
 						<reference key="NSSuperview" ref="451520814"/>
+						<reference key="NSWindow"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -76,36 +104,12 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MyAwLjMwOTgwMzkzIDAuNTIxNTY4NjYAA</bytes>
 						</object>
 					</object>
-					<object class="IBUITextView" id="320771339">
-						<reference key="NSNextResponder" ref="451520814"/>
-						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{20, 123}, {280, 228}}</string>
-						<reference key="NSSuperview" ref="451520814"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<bool key="IBUIShowsHorizontalScrollIndicator">NO</bool>
-						<bool key="IBUIDelaysContentTouches">NO</bool>
-						<bool key="IBUICanCancelContentTouches">NO</bool>
-						<float key="IBUIMinimumZoomScale">0.000000e+00</float>
-						<float key="IBUIMaximumZoomScale">0.000000e+00</float>
-						<bool key="IBUIBouncesZoom">NO</bool>
-						<bool key="IBUIEditable">NO</bool>
-						<string type="base64-UTF8" key="IBUIText">RXBvbnltIERhdGFiYXNlIGJ5IEFuZHJldyBKLiBZZWUKaVBob25lIENsaWVudCBieSBQYXNjYWwgUGZp
-ZmZuZXIKCkZvciBtb3JlIGluZm9ybWF0aW9uIHZpc2l0IHRoZSBwcm9qZWN0IHdlYnNpdGUgYnkgdGFw
-cGluZyB0aGUgYnV0dG9uIGJlbG93Lg</string>
-						<object class="NSFont" key="IBUIFont" id="941133211">
-							<string key="NSName">Helvetica</string>
-							<double key="NSSize">1.300000e+01</double>
-							<int key="NSfFlags">16</int>
-						</object>
-						<int key="IBUIMarginTop">0</int>
-					</object>
 					<object class="IBUILabel" id="425766387">
 						<reference key="NSNextResponder" ref="451520814"/>
 						<int key="NSvFlags">290</int>
 						<string key="NSFrame">{{140, 94}, {160, 21}}</string>
 						<reference key="NSSuperview" ref="451520814"/>
+						<reference key="NSWindow"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -124,6 +128,7 @@ cGluZyB0aGUgYnV0dG9uIGJlbG93Lg</string>
 						<int key="NSvFlags">290</int>
 						<string key="NSFrame">{{140, 76}, {160, 21}}</string>
 						<reference key="NSSuperview" ref="451520814"/>
+						<reference key="NSWindow"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -143,6 +148,7 @@ cGluZyB0aGUgYnV0dG9uIGJlbG93Lg</string>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 20}, {100, 100}}</string>
 						<reference key="NSSuperview" ref="451520814"/>
+						<reference key="NSWindow"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">1</int>
@@ -156,6 +162,7 @@ cGluZyB0aGUgYnV0dG9uIGJlbG93Lg</string>
 						<int key="NSvFlags">290</int>
 						<string key="NSFrame">{{140, 20}, {160, 48}}</string>
 						<reference key="NSSuperview" ref="451520814"/>
+						<reference key="NSWindow"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -178,6 +185,8 @@ cGluZyB0aGUgYnV0dG9uIGJlbG93Lg</string>
 					</object>
 				</object>
 				<string key="NSFrameSize">{320, 416}</string>
+				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MSAwAA</bytes>
@@ -275,7 +284,7 @@ cGluZyB0aGUgYnV0dG9uIGJlbG93Lg</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="IBUIText">A check causes less than 200 bytes of traffic</string>
+						<string key="IBUIText">One check causes less than 200 bytes of traffic</string>
 						<reference key="IBUIFont" ref="941133211"/>
 						<reference key="IBUITextColor" ref="52765207"/>
 						<nil key="IBUIHighlightedColor"/>
@@ -587,11 +596,11 @@ cGluZyB0aGUgYnV0dG9uIGJlbG93Lg</string>
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="593346689"/>
 							<reference ref="180654234"/>
-							<reference ref="320771339"/>
 							<reference ref="425766387"/>
 							<reference ref="359595946"/>
 							<reference ref="927041423"/>
 							<reference ref="178896287"/>
+							<reference ref="320771339"/>
 						</object>
 						<reference key="parent" ref="360949347"/>
 						<string key="objectName">InfoView</string>

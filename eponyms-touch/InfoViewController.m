@@ -16,12 +16,10 @@
 
 
 #define CANCEL_IMPORT_TITLE @"Cancel import?"
-#define pPortraitContentMargin 20.0;
-#define pLandscapeContentMargin 10.0;
 
 
 @interface InfoViewController (Private)
-- (void) adjustContentToOrientation;
+- (void) adjustContentToOrientation:(UIInterfaceOrientation)newOrientation animated:(BOOL)animated;
 - (void) switchToTab:(NSUInteger)tab;
 - (void) lockGUI:(BOOL)lock;
 - (void) newEponymsAreAvailable:(BOOL)available;
@@ -48,7 +46,7 @@
 		tabSegments.selectedSegmentIndex = 0;
 		tabSegments.autoresizingMask = UIViewAutoresizingFlexibleHeight;
 		tabSegments.segmentedControlStyle = UISegmentedControlStyleBar;
-		tabSegments.frame = CGRectMake(0.0, 0.0, 200.0, 30.0);
+		tabSegments.frame = CGRectMake(0.0, 0.0, 180.0, 30.0);
 		//tabSegments.tintColor = [UIColor lightGrayColor];
 		[tabSegments addTarget:self action:@selector(tabChanged:) forControlEvents:UIControlEventValueChanged];
 		
@@ -84,6 +82,11 @@
 	[self setStatusMessage:nil];
 	[self resetStatusElements];
 	
+	// ---
+	projectWebsiteButton.autoresizingMask = UIViewAutoresizingNone;
+	eponymsDotNetButton.autoresizingMask = UIViewAutoresizingNone;
+	// ---
+	
 	// last update date/time
 	NSDate *lastCheckDate = [NSDate dateWithTimeIntervalSince1970:lastEponymCheck];
 	NSDate *lastUpdateDate = [NSDate dateWithTimeIntervalSince1970:lastEponymUpdate];
@@ -116,46 +119,55 @@
 	// Adjust options
 	autocheckSwitch.on = [delegate shouldAutoCheck];
 	
-	[self adjustContentToOrientation];
+	[self adjustContentToOrientation:[self interfaceOrientation] animated:NO];
 }
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
+	[self adjustContentToOrientation:interfaceOrientation animated:YES];
+	
 	return YES;
 }
 
 - (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-	[self adjustContentToOrientation];
 }
 
-- (void) adjustContentToOrientation
+- (void) adjustContentToOrientation:(UIInterfaceOrientation)newOrientation animated:(BOOL)animated
 {
-	/*
 	UIInterfaceOrientation orientation = [self interfaceOrientation];
-	CGFloat screenWidth = topContainer.superview.frame.size.width;
-	CGRect topRect = topContainer.frame;
-	CGRect bottomRect = bottomContainer.frame;
-	
-	// Portrait
-	if((UIInterfaceOrientationPortrait == orientation) || (UIInterfaceOrientationPortraitUpsideDown == orientation)) {
-		topRect.size.width = screenWidth - 2 * pPortraitContentMargin;
-		topRect.origin.x = pPortraitContentMargin;
-		bottomRect.size.width = screenWidth - 2 * pPortraitContentMargin;
-		bottomRect.origin.x = pPortraitContentMargin;
+	if(newOrientation != orientation) {
+		CGPoint websiteCenter;
+		CGPoint eponymsNetCenter;
+		
+		// to Portrait
+		if((UIInterfaceOrientationPortrait == newOrientation) || (UIInterfaceOrientationPortraitUpsideDown == newOrientation)) {
+			CGSize screenSize = CGSizeMake(320, 416);
+			websiteCenter = CGPointMake(roundf(screenSize.width / 4), screenSize.height - 39.5);
+			eponymsNetCenter = CGPointMake(roundf(screenSize.width / 4 * 3), screenSize.height - 39.5);
+		}
+		
+		// Landscape
+		else {
+			CGSize screenSize = CGSizeMake(480, 268);
+			websiteCenter = CGPointMake(screenSize.width - roundf((projectWebsiteButton.bounds.size.width / 2) + 20), screenSize.height - 86.5);
+			eponymsNetCenter = CGPointMake(screenSize.width - roundf((eponymsDotNetButton.bounds.size.width / 2) + 20), screenSize.height - 38.5);
+		}
+		
+		// Start animation
+		if(animated) {
+			[UIView beginAnimations:nil context:nil];
+			
+			projectWebsiteButton.center = websiteCenter;
+			eponymsDotNetButton.center = eponymsNetCenter;
+			
+			[UIView commitAnimations];
+		}
+		else {
+			projectWebsiteButton.center = websiteCenter;
+			eponymsDotNetButton.center = eponymsNetCenter;
+		}
 	}
-	
-	// Landscape
-	else {
-		topRect.size.width = screenWidth / 2 - 2 * pLandscapeContentMargin;
-		topRect.origin.x = pLandscapeContentMargin;
-		bottomRect.size.width = screenWidth / 2 - 2 * pLandscapeContentMargin;
-		bottomRect.origin.x = screenWidth / 2 + pLandscapeContentMargin;
-	}
-	
-	topContainer.frame = topRect;
-	bottomContainer.frame = bottomRect;
-	 */
 }
 
 - (void) didReceiveMemoryWarning
@@ -196,10 +208,6 @@
 	// Show the About page
 	if(0 == tab) {
 		self.view = infoView;
-		
-		/*CGRect newFrame = self.view.frame;
-		 newFrame.origin.x = 0.0;
-		 [self.view setFrame:newFrame];*/
 	}
 	
 	// Show the options
