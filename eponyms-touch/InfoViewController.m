@@ -44,7 +44,6 @@
 		NSArray *possibleTabs = [NSArray arrayWithObjects:@"About", @"Update", nil];
 		self.tabSegments = [[UISegmentedControl alloc] initWithItems:possibleTabs];
 		tabSegments.selectedSegmentIndex = 0;
-		tabSegments.autoresizingMask = UIViewAutoresizingFlexibleHeight;
 		tabSegments.segmentedControlStyle = UISegmentedControlStyleBar;
 		tabSegments.frame = CGRectMake(0.0, 0.0, 180.0, 30.0);
 		//tabSegments.tintColor = [UIColor lightGrayColor];

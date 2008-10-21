@@ -19,6 +19,7 @@
 #import "EponymViewController.h"
 
 #define EPONYM_TITLE_FIELD @"eponym_en"
+#define EPONYM_TEXT_FIELD @"text_en"
 #define THIS_DB_VERSION 1
 
 
@@ -154,11 +155,8 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	else if(shouldAutoCheck) {
 		NSTimeInterval nowInEpoch = [[NSDate date] timeIntervalSince1970];
 		if(nowInEpoch > (lastEponymCheck + 7 * 24 * 3600)) {
-			NSLog(@"Will perform auto check (last check: %@)", [NSDate dateWithTimeIntervalSince1970:lastEponymCheck]);
+		//	NSLog(@"Will perform auto check (last check: %@)", [NSDate dateWithTimeIntervalSince1970:lastEponymCheck]);
 			[self performSelector:@selector(checkForUpdates:) withObject:nil afterDelay:2.0];
-		}
-		else {
-			NSLog(@"Will NOT perform auto check (last check: %@)", [NSDate dateWithTimeIntervalSince1970:lastEponymCheck]);
 		}
 	}
 }
@@ -258,7 +256,6 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 			mayReleaseUpdater = !updater.newEponymsAvailable;
 			
 			if(!updater.newEponymsAvailable) {
-				NSLog(@"marking lastEponymCheck as now since we checked and there are no new eponyms");
 				[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(NSInteger)nowInEpoch] forKey:@"lastEponymCheck"];
 			}
 		}
@@ -271,7 +268,6 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 				[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(NSInteger)[updater.eponymCreationDate timeIntervalSince1970]]
 														  forKey:@"usingEponymsOf"];
 			}
-			NSLog(@"marking lastEponymCheck as now since we successfully parsed the eponyms");
 			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(NSInteger)nowInEpoch] forKey:@"lastEponymCheck"];
 			
 			self.newEponymsAvailable;
@@ -487,66 +483,95 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	[eponymSectionArray removeAllObjects];
 	[listController cacheEponyms:nil andHeaders:nil];
 	
-	if(nil == database) {			// may happen after we abort the import
-		[self showInfoPanelAsFirstTimeLaunch:YES];
-		return;
+	if(nil == database) {
+		[self connectToDBAndCreateIfNeeded];
 	}
 	
 	sqlite3_stmt *query;
-	BOOL doSearch = ![searchString isEqualToString:@""] && (nil != searchString);
+	NSInteger category_id = [category myID];
+	BOOL doSearch = (nil != searchString) && ![searchString isEqualToString:@""];
 	
 	// ***
-	// compile query for the categories (always compile two queries, an additional one used while searching)
-	if([category myID] > 0) {
-		if(!load_eponyms_of_category_query) {
-			const char *sql = [[NSString stringWithFormat:@"SELECT eponyms.eponym_id, %@, eponyms.starred FROM category_eponym_linker LEFT JOIN eponyms USING (eponym_id) WHERE (category_id = ?) ORDER BY %@ COLLATE NOCASE ASC", EPONYM_TITLE_FIELD, EPONYM_TITLE_FIELD] UTF8String];
-			const char *sql2 = [[NSString stringWithFormat:@"SELECT eponyms.eponym_id, %@, eponyms.starred FROM category_eponym_linker LEFT JOIN eponyms USING (eponym_id) WHERE (category_id = ? AND %@ LIKE ?) ORDER BY %@ COLLATE NOCASE ASC", EPONYM_TITLE_FIELD, EPONYM_TITLE_FIELD, EPONYM_TITLE_FIELD] UTF8String];
-			
-			if(sqlite3_prepare_v2(database, sql, -1, &load_eponyms_of_category_query, NULL) != SQLITE_OK) {
-				NSAssert1(0, @"Error: Failed to prepare load_eponyms_of_category_query: '%s'.", sqlite3_errmsg(database));
-			}
-			if(sqlite3_prepare_v2(database, sql2, -1, &load_eponyms_of_category_search_query, NULL) != SQLITE_OK) {
-				NSAssert1(0, @"Error: Failed to prepare load_eponyms_of_category_search_query: '%s'.", sqlite3_errmsg(database));
-			}
-		}
+	// compile query for the categories
+	if(category_id > 0) {
 		
-		// bind the category id and the searchstring
+		// search query
 		if(doSearch) {
+			if(!load_eponyms_of_category_search_query) {
+				NSString *sql = [NSString stringWithFormat:@"SELECT eponyms.eponym_id, %@, eponyms.starred FROM category_eponym_linker LEFT JOIN eponyms USING (eponym_id) WHERE (category_id = ? AND (%@ LIKE ? OR %@ LIKE ?)) ORDER BY %@ COLLATE NOCASE ASC",
+								  EPONYM_TITLE_FIELD,
+								  EPONYM_TITLE_FIELD,
+								  EPONYM_TEXT_FIELD,
+								  EPONYM_TITLE_FIELD ];
+				
+				if(sqlite3_prepare_v2(database, [sql UTF8String], -1, &load_eponyms_of_category_search_query, NULL) != SQLITE_OK) {
+					NSAssert1(0, @"Error: Failed to prepare load_eponyms_of_category_search_query: '%s'.", sqlite3_errmsg(database));
+				}
+			}
+			
 			query = load_eponyms_of_category_search_query;
 			sqlite3_bind_text(query, 2, [[NSString stringWithFormat:@"%%%@%%", searchString] UTF8String], -1, SQLITE_TRANSIENT);
+			sqlite3_bind_text(query, 3, [[NSString stringWithFormat:@"%%%@%%", searchString] UTF8String], -1, SQLITE_TRANSIENT);
 		}
+		
+		// standard query
 		else {
+			if(!load_eponyms_of_category_query) {
+				NSString *sql = [NSString stringWithFormat:@"SELECT eponyms.eponym_id, %@, eponyms.starred FROM category_eponym_linker LEFT JOIN eponyms USING (eponym_id) WHERE (category_id = ?) ORDER BY %@ COLLATE NOCASE ASC",
+								 EPONYM_TITLE_FIELD,
+								 EPONYM_TITLE_FIELD ];
+				
+				if(sqlite3_prepare_v2(database, [sql UTF8String], -1, &load_eponyms_of_category_query, NULL) != SQLITE_OK) {
+					NSAssert1(0, @"Error: Failed to prepare load_eponyms_of_category_query: '%s'.", sqlite3_errmsg(database));
+				}
+			}
+			
 			query = load_eponyms_of_category_query;
 		}
-		sqlite3_bind_int(query, 1, [category myID]);
+		sqlite3_bind_int(query, 1, category_id);
 	}
 		
 	// compile the queries for the special "categories" (all, starred and last accessed eponyms)
 	else {
-		if(category != categoryShown) {			// currently always evaluates to true because 'categoryShown' at this point is nil
+		if(category != categoryShown) {
 			sqlite3_finalize(load_eponyms_query);			load_eponyms_query = nil;
 			sqlite3_finalize(load_eponyms_search_query);	load_eponyms_search_query = nil;
 		}
 		
-		if(!load_eponyms_query) {
-			const char *sql = [[NSString stringWithFormat:@"SELECT eponyms.eponym_id, %@, eponyms.starred FROM eponyms WHERE (%@) ORDER BY %@ LIMIT ?", EPONYM_TITLE_FIELD, [category sqlWhereStatement], [category sqlOrderStatement]] UTF8String];
-			const char *sql2 = [[NSString stringWithFormat:@"SELECT eponyms.eponym_id, %@, eponyms.starred FROM eponyms WHERE (%@ AND %@ LIKE ?) ORDER BY %@ LIMIT ?", EPONYM_TITLE_FIELD, [category sqlWhereStatement], EPONYM_TITLE_FIELD, [category sqlOrderStatement]] UTF8String];
-			
-			if(sqlite3_prepare_v2(database, sql, -1, &load_eponyms_query, NULL) != SQLITE_OK) {
-				NSAssert1(0, @"Error: Failed to prepare load_eponyms_query: '%s'.", sqlite3_errmsg(database));
-			}
-			if(sqlite3_prepare_v2(database, sql2, -1, &load_eponyms_search_query, NULL) != SQLITE_OK) {
-				NSAssert1(0, @"Error: Failed to prepare load_eponyms_search_query: '%s'.", sqlite3_errmsg(database));
-			}
-		}
-		
-		// bind the searchstring
+		// search query
 		if(doSearch) {
+			if(!load_eponyms_search_query) {
+				NSString *sql = [NSString stringWithFormat:@"SELECT eponyms.eponym_id, %@, eponyms.starred FROM eponyms WHERE (%@ AND (%@ LIKE ? OR %@ LIKE ?)) ORDER BY %@ LIMIT ?",
+								  EPONYM_TITLE_FIELD,
+								  [category sqlWhereStatement],
+								  EPONYM_TITLE_FIELD,
+								  EPONYM_TEXT_FIELD,
+								  [category sqlOrderStatement]];
+				
+				if(sqlite3_prepare_v2(database, [sql UTF8String], -1, &load_eponyms_search_query, NULL) != SQLITE_OK) {
+					NSAssert1(0, @"Error: Failed to prepare load_eponyms_search_query: '%s'.", sqlite3_errmsg(database));
+				}
+			}
+			
 			query = load_eponyms_search_query;
 			sqlite3_bind_text(query, 1, [[NSString stringWithFormat:@"%%%@%%", searchString] UTF8String], -1, SQLITE_TRANSIENT);
-			sqlite3_bind_int(query, 2, [category sqlLimitTo]);
+			sqlite3_bind_text(query, 2, [[NSString stringWithFormat:@"%%%@%%", searchString] UTF8String], -1, SQLITE_TRANSIENT);
+			sqlite3_bind_int(query, 3, [category sqlLimitTo]);
 		}
+		
+		// standard query
 		else {
+			if(!load_eponyms_query) {
+				NSString *sql = [NSString stringWithFormat:@"SELECT eponyms.eponym_id, %@, eponyms.starred FROM eponyms WHERE (%@) ORDER BY %@ LIMIT ?",
+								 EPONYM_TITLE_FIELD,
+								 [category sqlWhereStatement],
+								 [category sqlOrderStatement]];
+				
+				if(sqlite3_prepare_v2(database, [sql UTF8String], -1, &load_eponyms_query, NULL) != SQLITE_OK) {
+					NSAssert1(0, @"Error: Failed to prepare load_eponyms_query: '%s'.", sqlite3_errmsg(database));
+				}
+			}
+			
 			query = load_eponyms_query;
 			sqlite3_bind_int(query, 1, [category sqlLimitTo]);
 		}
@@ -569,10 +594,9 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		Eponym *eponym = [[Eponym alloc] initWithID:eid title:title delegate:self];
 		eponym.starred = starred ? YES : NO;
 		
-		// determine the first letter and create the eponym (for all eponyms or eponyms from the real categories)
-		if([category myID] >= 0) {
+		// determine the first letter and create the eponym (for all eponyms, starred eponyms or eponyms from the real categories)
+		if(category_id >= -1) {
 			[firstLetter setString:[title stringByPaddingToLength:1 withString:nil startingAtIndex:0]];
-			
 			
 			// new first letter!
 			if(NSOrderedSame != [firstLetter caseInsensitiveCompare:oldFirstLetter]) {
@@ -595,9 +619,9 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	// add last section
 	if([sectionArray count] > 0) {
 		[eponymArray addObject:sectionArray];
-		[sectionArray release];
 		[eponymSectionArray addObject:[oldFirstLetter uppercaseString]];
 	}
+	[sectionArray release];
 	
 	sqlite3_reset(query);
 	
