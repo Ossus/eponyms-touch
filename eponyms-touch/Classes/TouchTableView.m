@@ -31,25 +31,26 @@
 	// we have a touch NOT after initiating or stopping scrolling
 	if(!self.dragging && !self.decelerating) {
 		UITouch *touch = [touches anyObject];
+		NSIndexPath *touchedRow = [self indexPathForRowAtPoint:[touch locationInView:self]];
 		
 		// second tap - perform action and de-select the cell selected on first tap
 		if(2 == touch.tapCount) {
-			NSIndexPath *doubleTappedRow = [self indexPathForRowAtPoint:[touch locationInView:self]];
-			[self selectRowAtIndexPath:doubleTappedRow animated:NO scrollPosition:UITableViewScrollPositionNone];
+			[self selectRowAtIndexPath:touchedRow animated:NO scrollPosition:UITableViewScrollPositionNone];
 			// otherwise, for too fast double taps, the cell will not visually update, not even after calling setNeedsDisplay
 			
 			id tempDelegate = self.delegate;		// to circumvent a compiler warning (method not found in protocol)
 			if(tempDelegate && [tempDelegate conformsToProtocol:@protocol(TouchTableViewDelegate)]) {
-				[tempDelegate tableView:self didDoubleTapRowAtIndexPath:doubleTappedRow];
+				[tempDelegate tableView:self didDoubleTapRowAtIndexPath:touchedRow];
 			}
 			
-			[self deselectRowAtIndexPath:doubleTappedRow animated:NO];
+			[self deselectRowAtIndexPath:touchedRow animated:NO];
 		}
 		
 		// first tap
 		else {
 			if(touch.window) {			// the method seems to be called 2 times, but once with window=nil, so just ignore that second call
-				[self performSelector:@selector(singleTapEndedWithObjects:) withObject:[NSArray arrayWithObjects:touches, event, nil] afterDelay:0.25];
+				[super touchesEnded:nil withEvent:event];
+				[self performSelector:@selector(didSelectRowAtIndexPath:) withObject:touchedRow afterDelay:0.25];
 			}
 		}
 	}
@@ -60,12 +61,13 @@
 	}
 }
 
-- (void) singleTapEndedWithObjects:(NSArray *)objects
+- (void) didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	NSSet *touches = [objects objectAtIndex:0];
-	UIEvent *event = [objects objectAtIndex:1];
+	[self selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
 	
-	[super touchesEnded:touches withEvent:event];
+	if(self.delegate) {
+		[self.delegate tableView:self didSelectRowAtIndexPath:indexPath];
+	}
 }
 
 

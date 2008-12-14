@@ -64,17 +64,8 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	
 	NSNumber *testValue = [[NSUserDefaults standardUserDefaults] objectForKey:@"usingEponymsOf"];
 	if(nil == testValue) {
-		NSDictionary *appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
-									 [NSNumber numberWithInt:0], @"lastEponymCheck",
-									 [NSNumber numberWithInt:0], @"lastUsedDBVersion",
-									 [NSNumber numberWithInt:0], @"lastEponymUpdate",
-									 [NSNumber numberWithInt:0], @"usingEponymsOf",
-									 [NSNumber numberWithBool:NO], @"shouldAutoCheck",
-									 [NSNumber numberWithInt:-100], @"shownCategoryAtQuit",
-									 [NSNumber numberWithInt:0], @"shownEponymAtQuit",
-									 [NSNumber numberWithFloat:0.0], @"scrollPositionAtQuit", nil];
+		NSDictionary *appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:0], @"lastEponymUpdate", nil];
 		[[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
-		[[NSUserDefaults standardUserDefaults] synchronize];
 		
 		self.usingEponymsOf = 0;
 		self.shouldAutoCheck = NO;

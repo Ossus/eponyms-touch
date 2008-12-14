@@ -36,7 +36,8 @@
 	// Info
 	IBOutlet UILabel *versionLabel;
 	IBOutlet UILabel *usingEponymsLabel;
-	IBOutlet UITextView *infoTextView;
+	IBOutlet UITextView *authorTextView;
+	IBOutlet UITextView *propsTextView;
 	
 	IBOutlet UIButton *projectWebsiteButton;
 	IBOutlet UIButton *eponymsDotNetButton;

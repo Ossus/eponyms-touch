@@ -15,7 +15,5 @@
 @interface TouchTableView : UITableView {
 }
 
-- (void) singleTapEndedWithObjects:(NSArray *)objects;
-
 @end
 

@@ -16,14 +16,16 @@
 #import "Eponym.h"
 #import "TouchTableView.h"
 
-#define DISPLAY_HINT_IN_CELL 2			// if we have no eponyms to display, show a hint in this table cell (starting at ZERO)
-
 
 static NSString *MyCellIdentifier = @"EponymCell";
 
 
 @interface ListViewController (Private)
+
 - (void) abortSearch;
+- (void) registerForKeyboardNotifications;
+- (void) forgetAboutKeyboardNotifications;
+
 @end
 
 
@@ -174,6 +176,13 @@ static NSString *MyCellIdentifier = @"EponymCell";
 		[myTableView setBounds:rct];
 		atLaunchScrollTo = 0.0;
 	}
+	
+	[self registerForKeyboardNotifications];
+}
+
+- (void) viewDidDisappear:(BOOL)animated
+{
+	[self forgetAboutKeyboardNotifications];
 }
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation
@@ -275,9 +284,18 @@ static NSString *MyCellIdentifier = @"EponymCell";
 {
 	// if we have no eponyms, display a hint instead
 	if([eponymArrayCache count] < 1) {
-		return DISPLAY_HINT_IN_CELL + 1;
+		return 1;
 	}
 	return [[eponymArrayCache objectAtIndex:section] count];
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	if([eponymArrayCache count] < 1) {
+		CGFloat tableHeight = tableView.frame.size.height;
+		return tableHeight;
+	}
+	return tableView.rowHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -289,11 +307,15 @@ static NSString *MyCellIdentifier = @"EponymCell";
 		cell = [[[UITableViewCell alloc] initWithFrame:CGRectMake(0,0,0,0) reuseIdentifier:nil] autorelease];
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 		
-		if(indexPath.row == DISPLAY_HINT_IN_CELL) {
-			UILabel *label = [[[UILabel alloc] initWithFrame:[cell bounds]] autorelease];
+		if(0 == indexPath.row) {
+			CGRect cellBounds = [cell bounds];
+			cellBounds.size.width -= 40.0;
+			cellBounds.origin.x += 20.0;
+			cellBounds.size.height = 0.7 * cellBounds.size.height;
+			UILabel *label = [[[UILabel alloc] initWithFrame:cellBounds] autorelease];
 			
 			label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-			label.font = [UIFont systemFontOfSize:[UIFont smallSystemFontSize]];
+			label.font = [UIFont systemFontOfSize:15.0];
 			label.textAlignment = UITextAlignmentCenter;
 			label.textColor = [UIColor grayColor];
 			label.lineBreakMode = UILineBreakModeWordWrap;
@@ -351,6 +373,59 @@ static NSString *MyCellIdentifier = @"EponymCell";
 - (void) searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
 	[self abortSearch];
+}
+#pragma mark -
+
+
+
+#pragma mark UIKeyboardNotifications
+- (void) registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(keyboardDidShow:)
+												 name:UIKeyboardDidShowNotification object:nil];
+	
+    [[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(keyboardDidHide:)
+												 name:UIKeyboardDidHideNotification object:nil];
+}
+
+- (void) forgetAboutKeyboardNotifications
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+- (void) keyboardDidShow:(NSNotification*)aNotification
+{
+	if(keyboardShown)
+		return;
+	
+	NSDictionary* info = [aNotification userInfo];
+	NSValue* boundsValue = [info objectForKey:UIKeyboardBoundsUserInfoKey];
+	CGSize keyboardSize = [boundsValue CGRectValue].size;
+	
+	// Resize the table view view
+	CGRect viewFrame = [myTableView frame];
+	viewFrame.size.height -= keyboardSize.height;
+	myTableView.frame = viewFrame;
+	
+	keyboardShown = YES;
+}
+
+
+- (void) keyboardDidHide:(NSNotification*)aNotification
+{
+	NSDictionary* info = [aNotification userInfo];
+	NSValue* boundsValue = [info objectForKey:UIKeyboardBoundsUserInfoKey];
+	CGSize keyboardSize = [boundsValue CGRectValue].size;
+	
+	// adjust table view height to full height again
+	CGRect viewFrame = [myTableView frame];
+	viewFrame.size.height += keyboardSize.height;
+	myTableView.frame = viewFrame;
+	
+	keyboardShown = NO;
 }
 
 

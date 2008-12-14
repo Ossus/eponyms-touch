@@ -26,6 +26,7 @@
 	UIBarButtonItem *abortSearchButton;
 	
 	CGFloat atLaunchScrollTo;
+	BOOL keyboardShown;
 }
 
 @property (nonatomic, assign) id delegate;

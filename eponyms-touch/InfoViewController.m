@@ -81,10 +81,9 @@
 	[self setStatusMessage:nil];
 	[self resetStatusElements];
 	
-	// ---
 	projectWebsiteButton.autoresizingMask = UIViewAutoresizingNone;
 	eponymsDotNetButton.autoresizingMask = UIViewAutoresizingNone;
-	// ---
+	propsTextView.autoresizingMask = UIViewAutoresizingNone;
 	
 	// last update date/time
 	NSDate *lastCheckDate = [NSDate dateWithTimeIntervalSince1970:lastEponymCheck];
@@ -138,19 +137,38 @@
 	if(newOrientation != orientation) {
 		CGPoint websiteCenter;
 		CGPoint eponymsNetCenter;
+		CGRect propsFrame;
+		
+		// get dimensions
+		CGSize screenSize;// = infoView.frame.size;		// can't use this here since upon calling infoView still has the old dimensions
+		CGRect foo = authorTextView.frame;
+		CGPoint authorsOrigin = foo.origin;
+		CGFloat authorsHeight = foo.size.height;
 		
 		// to Portrait
 		if((UIInterfaceOrientationPortrait == newOrientation) || (UIInterfaceOrientationPortraitUpsideDown == newOrientation)) {
-			CGSize screenSize = CGSizeMake(320, 416);
-			websiteCenter = CGPointMake(roundf(screenSize.width / 4), screenSize.height - 39.5);
-			eponymsNetCenter = CGPointMake(roundf(screenSize.width / 4 * 3), screenSize.height - 39.5);
+			screenSize = CGSizeMake(320, 416);
+			websiteCenter = CGPointMake(roundf((screenSize.width - 48.0) / 4) + 20.0,			// - 48 = - 2*20 (margin) + -8 (space between buttons)
+										authorsOrigin.y + authorsHeight + (projectWebsiteButton.bounds.size.height / 2) + 10);
+			eponymsNetCenter = CGPointMake(roundf((screenSize.width - 48.0) / 4 * 3) + 28.0,	// + 28 = + 20 (margin) + 8 (space between buttons)
+										   authorsOrigin.y + authorsHeight + (projectWebsiteButton.bounds.size.height / 2) + 10);
+			CGFloat propsFrameY = authorsOrigin.y + authorsHeight + projectWebsiteButton.bounds.size.height + 20;
+			propsFrame = CGRectMake(20,
+									propsFrameY,
+									screenSize.width - 40,
+									screenSize.height - propsFrameY - 20);
 		}
 		
 		// Landscape
 		else {
-			CGSize screenSize = CGSizeMake(480, 268);
-			websiteCenter = CGPointMake(screenSize.width - roundf((projectWebsiteButton.bounds.size.width / 2) + 20), screenSize.height - 86.5);
-			eponymsNetCenter = CGPointMake(screenSize.width - roundf((eponymsDotNetButton.bounds.size.width / 2) + 20), screenSize.height - 38.5);
+			screenSize = CGSizeMake(480, 268);
+			websiteCenter = CGPointMake(screenSize.width - roundf((projectWebsiteButton.bounds.size.width / 2) + 20), 38.5);
+			eponymsNetCenter = CGPointMake(screenSize.width - roundf((eponymsDotNetButton.bounds.size.width / 2) + 20), 86.5);
+			CGFloat propsFrameY = authorsOrigin.y + authorsHeight + 10;
+			propsFrame = CGRectMake(20,
+									propsFrameY,
+									screenSize.width - 40,
+									screenSize.height - propsFrameY - 20);
 		}
 		
 		// Start animation
@@ -159,12 +177,14 @@
 			
 			projectWebsiteButton.center = websiteCenter;
 			eponymsDotNetButton.center = eponymsNetCenter;
+			propsTextView.frame = propsFrame;
 			
 			[UIView commitAnimations];
 		}
 		else {
 			projectWebsiteButton.center = websiteCenter;
 			eponymsDotNetButton.center = eponymsNetCenter;
+			propsTextView.frame = propsFrame;
 		}
 	}
 }
