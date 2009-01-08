@@ -111,7 +111,7 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 - (void) showNewEponymsAvailable:(BOOL)hasNew
 {
 	UIButton *infoButton;
-	CGRect buttonSize = CGRectMake(0.0, 0.0, 30.0, 26.0);
+	CGRect buttonSize = CGRectMake(0.0, 0.0, 30.0, 30.0);
 	
 	if(hasNew) {
 		infoButton = [UIButton buttonWithType:UIButtonTypeCustom];

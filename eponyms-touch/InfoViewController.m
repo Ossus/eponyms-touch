@@ -23,7 +23,7 @@
 - (void) switchToTab:(NSUInteger)tab;
 - (void) lockGUI:(BOOL)lock;
 - (void) newEponymsAreAvailable:(BOOL)available;
-- (void) resetStatusElements;
+- (void) resetStatusElementsWithButtonTitle:(NSString *)buttonTitle;
 @end
 
 
@@ -65,6 +65,28 @@
 	self.projectWebsiteURL = nil;
 	self.tabSegments = nil;
 	
+	// IBOutlets
+	[infoView release];
+	[optionsView release];
+	[backgroundImage release];
+	
+	[versionLabel release];
+	[usingEponymsLabel release];
+	[authorTextView release];
+	[propsTextView release];
+	
+	[projectWebsiteButton release];
+	[eponymsDotNetButton release];
+	
+	[lastCheckLabel release];
+	[lastUpdateLabel release];
+	
+	[progressText release];
+	[progressView release];
+	
+	[updateButton release];
+	[autocheckSwitch release];
+	
 	[super dealloc];
 }
 #pragma mark -
@@ -76,10 +98,11 @@
 {
 	self.view = infoView;
 	[self switchToTab:0];
+	lastInterfaceOrientation = UIInterfaceOrientationPortrait;
 	
 	// hide progress stuff
 	[self setStatusMessage:nil];
-	[self resetStatusElements];
+	[self resetStatusElementsWithButtonTitle:nil];
 	
 	projectWebsiteButton.autoresizingMask = UIViewAutoresizingNone;
 	eponymsDotNetButton.autoresizingMask = UIViewAutoresizingNone;
@@ -133,8 +156,7 @@
 
 - (void) adjustContentToOrientation:(UIInterfaceOrientation)newOrientation animated:(BOOL)animated
 {
-	UIInterfaceOrientation orientation = [self interfaceOrientation];
-	if(newOrientation != orientation) {
+	if(newOrientation != lastInterfaceOrientation) {
 		CGPoint websiteCenter;
 		CGPoint eponymsNetCenter;
 		CGRect propsFrame;
@@ -187,6 +209,8 @@
 			propsTextView.frame = propsFrame;
 		}
 	}
+	
+	lastInterfaceOrientation = newOrientation;
 }
 
 - (void) didReceiveMemoryWarning
@@ -253,15 +277,15 @@
 	}
 	else {
 		statusMessage = @"You are up to date";
-		[self resetStatusElements];
+		[self resetStatusElementsWithButtonTitle:nil];
 	}
 	
 	[self setStatusMessage:statusMessage];
 }
 
-- (void) resetStatusElements
+- (void) resetStatusElementsWithButtonTitle:(NSString *)buttonTitle
 {
-	[self setUpdateButtonTitle:@"Check for Eponym Updates"];
+	[self setUpdateButtonTitle:(buttonTitle ? buttonTitle : @"Check for Eponym Updates")];
 	[self setUpdateButtonTitleColor:nil];
 	[self setProgress:-1.0];
 }
@@ -390,21 +414,19 @@
 			}
 			
 			[self setStatusMessage:statusMessage];
-			[self resetStatusElements];
+			[self resetStatusElementsWithButtonTitle:nil];
 		}
 	}
 	
 	// an error occurred
 	else {
-		[self resetStatusElements];
+		[self resetStatusElementsWithButtonTitle:@"Try Again"];		
 		
 		if(updater.downloadFailed && updater.statusMessage) {
-			[self setStatusMessage:nil];
 			[self alertViewWithTitle:@"Download Failed" message:updater.statusMessage cancelTitle:@"OK"];
 		}
-		if(updater.parseFailed) {
-			[self setStatusMessage:updater.statusMessage];
-		}
+		
+		[self setStatusMessage:updater.statusMessage];
 	}
 	
 	[updater release];
@@ -449,7 +471,6 @@
 	// first import alert (can only be accepted at the moment)
 	else if(firstTimeLaunch) {
 		[(eponyms_touchAppDelegate *)delegate loadEponymXMLFromDisk];
-		firstTimeLaunch = NO;
 	}
 }
 #pragma mark -

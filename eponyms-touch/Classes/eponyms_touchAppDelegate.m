@@ -50,7 +50,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 @synthesize window, database, myUpdater, usingEponymsOf, shouldAutoCheck, iAmUpdating, didCheckForNewEponyms, newEponymsAvailable;
 @dynamic categoryShown;
 @synthesize navigationController, categoriesController, listController, eponymController, infoController;
-@synthesize categoryIDShown, eponymShown, categoryArray, eponymArray, eponymSectionArray, starImageListActive, starImageEponymActive, starImageEponymInactive;
+@synthesize categoryIDShown, eponymShown, categoryArray, eponymArray, eponymSectionArray, loadedEponyms, starImageListActive, starImageEponymActive, starImageEponymInactive;
 
 
 - (void) applicationDidFinishLaunching:(UIApplication *)application
@@ -159,6 +159,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	self.categoryArray = nil;
 	self.eponymArray = nil;
 	self.eponymSectionArray = nil;
+	self.loadedEponyms = nil;
 	
 	self.navigationController = nil;
 	self.listController = nil;
@@ -178,8 +179,22 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 
 - (void) applicationDidReceiveMemoryWarning:(UIApplication *)application
 {	
-	// drop back to category selection (smallest memory footprint). Releases all eponyms
-	[self loadDatabaseAnimated:YES reload:YES];
+	// what we can do is aborting an eventually running import...
+	if(myUpdater) {
+		if(iAmUpdating) {
+			[self abortUpdateAction];
+		}
+		self.myUpdater = nil;
+	}
+	
+	// ...and unloading no longer displayed eponyms
+	NSArray *loadedEponymsCopy = [loadedEponyms copy];
+	for(Eponym *eponym in loadedEponymsCopy) {
+		if(eponym.eponym_id != eponymShown) {
+			[eponym unload];
+		}
+	}
+	[loadedEponymsCopy release];
 }
 
 
@@ -225,7 +240,39 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 
 
 
-#pragma mark Updater Delegate
+#pragma mark Updating
+- (void) checkForUpdates:(id)sender
+{
+	if(!myUpdater) {
+		self.myUpdater = [[[EponymUpdater alloc] initWithDelegate:self] autorelease];
+	}
+	
+	if(infoController) {
+		myUpdater.viewController = infoController;
+	}
+	[myUpdater startUpdaterAction];
+}
+
+// called on first launch
+- (void) loadEponymXMLFromDisk
+{
+	self.myUpdater = [[[EponymUpdater alloc] initWithDelegate:self] autorelease];
+	myUpdater.updateAction = 3;
+	if(infoController) {
+		myUpdater.viewController = infoController;
+	}
+	
+	[myUpdater startUpdaterAction];
+}
+
+- (void) abortUpdateAction
+{
+	if(myUpdater) {
+		myUpdater.mustAbortImport = YES;
+		self.iAmUpdating = NO;
+	}
+}
+
 - (void) updaterDidStartAction:(EponymUpdater *)updater
 {
 	self.iAmUpdating = YES;
@@ -235,7 +282,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 {
 	[updater retain];
 	self.iAmUpdating = NO;
-	BOOL mayReleaseUpdater = YES;
+	BOOL mayReleaseUpdater = NO;
 	
 	if(success) {
 		NSTimeInterval nowInEpoch = [[NSDate date] timeIntervalSince1970];
@@ -254,14 +301,15 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		// did actually update eponyms
 		else {
 			if(updater.numEponymsParsed > 0) {
+				self.usingEponymsOf = (NSInteger)[updater.eponymCreationDate timeIntervalSince1970];
 				[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(NSInteger)nowInEpoch]
 														  forKey:@"lastEponymUpdate"];
-				[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(NSInteger)[updater.eponymCreationDate timeIntervalSince1970]]
+				[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:usingEponymsOf]
 														  forKey:@"usingEponymsOf"];
 			}
 			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(NSInteger)nowInEpoch] forKey:@"lastEponymCheck"];
 			
-			self.newEponymsAvailable;
+			mayReleaseUpdater = !updater.parseFailed;
 			[self showNewEponymsAreAvailable:NO];
 			[self loadDatabaseAnimated:YES reload:YES];
 		}
@@ -273,58 +321,10 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		self.myUpdater = nil;
 	}
 }
-#pragma mark -
-
-
-
-#pragma mark Updating
-- (void) checkForUpdates:(id)sender
-{
-	NSUInteger updateAction = 1;				// 1: check  2: download new
-	if(myUpdater) {
-		if(myUpdater.newEponymsAvailable) {
-			updateAction = 2;
-		}
-	}
-	else {
-		self.myUpdater = [[[EponymUpdater alloc] initWithDelegate:self] autorelease];
-	}
-	
-	if(infoController) {
-		myUpdater.viewController = infoController;
-	}
-	[myUpdater startUpdaterAction:updateAction];
-}
 
 - (void) showNewEponymsAreAvailable:(BOOL)available
 {
 	[categoriesController showNewEponymsAvailable:available];
-	//navigationController.navigationBar.tintColor = [UIColor colorWithWhite:0.2 alpha:1.0];
-}
-
-- (void) loadEponymXMLFromDisk
-{
-	self.myUpdater = [[[EponymUpdater alloc] initWithDelegate:self] autorelease];
-	myUpdater.updateAction = 2;
-	if(infoController) {
-		myUpdater.viewController = infoController;
-	}
-	
-	// Info.plist
-	myUpdater.readyToLoadNumEponyms = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"numberOfIncludedEponyms"] intValue];
-	
-	// read the XML into data
-	NSString *eponymXMLPath = [NSBundle pathForResource:@"eponyms" ofType:@"xml" inDirectory:[[NSBundle mainBundle] bundlePath]];
-	NSData *includedXMLData = [NSData dataWithContentsOfFile:eponymXMLPath];
-	[myUpdater createEponymsWithData:includedXMLData];
-}
-
-- (void) abortUpdateAction
-{
-	if(myUpdater) {
-		myUpdater.mustAbortImport = YES;
-		self.iAmUpdating = NO;
-	}
 }
 #pragma mark -
 
@@ -397,6 +397,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	self.categoryArray = [NSMutableArray arrayWithCapacity:10];
 	self.eponymArray = [NSMutableArray arrayWithCapacity:10];
 	self.eponymSectionArray = [NSMutableArray arrayWithCapacity:10];
+	self.loadedEponyms = [NSMutableArray array];
 	
 	if(as_reload) {
 		self.categoryShown = nil;
@@ -635,6 +636,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 - (void) loadEponym:(Eponym *)eponym animated:(BOOL)animated
 {
 	[eponym load];
+	
 	eponymController.eponymToBeShown = eponym;
 	eponymShown = eponym.eponym_id;
 	[navigationController pushViewController:eponymController animated:animated];

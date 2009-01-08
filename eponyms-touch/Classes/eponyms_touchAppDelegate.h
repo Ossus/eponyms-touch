@@ -38,6 +38,7 @@
 	NSMutableArray *categoryArray;			// 2D	
 	NSMutableArray *eponymArray;			// 2D!!	(for the table sections)
 	NSMutableArray *eponymSectionArray;		// 1D	(holds the section titles - letters A..Z in our case)
+	NSMutableArray *loadedEponyms;			// 1D, used if a memory warning occurs
 	
 	// View Controllers
 	UINavigationController *navigationController;
@@ -71,6 +72,7 @@
 @property (nonatomic, retain) NSMutableArray *categoryArray;
 @property (nonatomic, retain) NSMutableArray *eponymArray;
 @property (nonatomic, retain) NSMutableArray *eponymSectionArray;
+@property (nonatomic, retain) NSMutableArray *loadedEponyms;
 
 @property (nonatomic, retain) UINavigationController *navigationController;
 @property (nonatomic, retain) CategoriesViewController *categoriesController;

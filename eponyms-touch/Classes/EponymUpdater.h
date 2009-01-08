@@ -95,7 +95,7 @@
 @property (nonatomic, assign) NSUInteger numEponymsParsed;
 
 - (id) initWithDelegate:(id) myDelegate;
-- (void) startUpdaterAction:(NSUInteger) myAction;
+- (void) startUpdaterAction;
 - (void) createEponymsWithData:(NSData *)XMLData;
 
 @end

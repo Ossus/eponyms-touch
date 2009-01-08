@@ -36,6 +36,10 @@ eponyms.xml
 	<!ELEMENT e (#PCDATA)>
 ]>
 <root created="1215525044">
+
+<category tag="ATAG" title="Category Title" />
+...
+
 <eponym id="AnEponymID">
 	<name>Eponym Title</name>
 	<desc>The Eponym Description</desc>
@@ -50,6 +54,8 @@ eponyms.xml
 *****
 
 - The <root> node has the attribute "created" which should match the "epoch" attribute of eponyms_info.lastupdate and is the creation date of this file in epoch time. The root node might contain as many <eponym> elements as desired.
+
+- The <category> node has the names belonging to a given category tag
 
 - The <eponym> node has the "id" attribute which is not currently in use. Each <eponym> should contain at least a <name> and a <desc> node.
 

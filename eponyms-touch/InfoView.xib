@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.03">
 	<data>
 		<int key="IBDocument.SystemTarget">512</int>
-		<string key="IBDocument.SystemVersion">9F2114</string>
+		<string key="IBDocument.SystemVersion">9G55</string>
 		<string key="IBDocument.InterfaceBuilderVersion">677</string>
-		<string key="IBDocument.AppKitVersion">949.41</string>
-		<string key="IBDocument.HIToolboxVersion">352.00</string>
+		<string key="IBDocument.AppKitVersion">949.43</string>
+		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<integer value="3"/>
@@ -228,7 +228,8 @@
 						<bool key="IBUICanCancelContentTouches">NO</bool>
 						<bool key="IBUIBouncesZoom">NO</bool>
 						<bool key="IBUIEditable">NO</bool>
-						<string type="base64-UTF8" key="IBUIText">VGhhbmtzIGZvciB0aGUgdmFsdWFibGUgZmVlZGJhY2s6CmE</string>
+						<string type="base64-UTF8" key="IBUIText">VGhhbmtzIGZvciB0aGUgdmFsdWFibGUgZmVlZGJhY2s6CkxvcmVueiBQb2xsYWNrCkxvcmkgRGFuaWVs
+cw</string>
 						<reference key="IBUIFont" ref="941133211"/>
 					</object>
 				</object>

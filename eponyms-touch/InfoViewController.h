@@ -22,6 +22,7 @@
 	
 	BOOL firstTimeLaunch;
 	BOOL askingToAbortImport;
+	UIInterfaceOrientation lastInterfaceOrientation;
 	
 	NSInteger lastEponymCheck;
 	NSInteger lastEponymUpdate;

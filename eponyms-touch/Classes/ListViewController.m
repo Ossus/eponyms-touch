@@ -25,6 +25,8 @@ static NSString *MyCellIdentifier = @"EponymCell";
 - (void) abortSearch;
 - (void) registerForKeyboardNotifications;
 - (void) forgetAboutKeyboardNotifications;
+- (void) keyboardDidShow:(NSNotification*)aNotification;
+- (void) keyboardWillHide:(NSNotification*)aNotification;
 
 @end
 
@@ -180,7 +182,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 	[self registerForKeyboardNotifications];
 }
 
-- (void) viewDidDisappear:(BOOL)animated
+- (void) viewWillDisappear:(BOOL)animated
 {
 	[self forgetAboutKeyboardNotifications];
 }
@@ -263,7 +265,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 
 - (NSArray *) sectionIndexTitlesForTableView:(UITableView *)tableView
 {
-	return eponymSectionArrayCache;
+	return keyboardShown ? nil : eponymSectionArrayCache;
 }
 
 /*- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger) section
@@ -335,9 +337,10 @@ static NSString *MyCellIdentifier = @"EponymCell";
 			cell = [[[UITableViewCell alloc] initWithFrame:CGRectMake(0,0,0,0) reuseIdentifier:MyCellIdentifier] autorelease];
 		}
 		
+		BOOL isStarredList = (-1 == [delegate categoryIDShown]);
 		Eponym *thisEponym = [[eponymArrayCache objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 		cell.text = [thisEponym title];
-		cell.image = thisEponym.starred ? [delegate starImageListActive] : nil;
+		cell.image = (!isStarredList && thisEponym.starred) ? [delegate starImageListActive] : nil;
 		thisEponym.eponymCell = cell;
 	}
 	
@@ -386,8 +389,8 @@ static NSString *MyCellIdentifier = @"EponymCell";
 												 name:UIKeyboardDidShowNotification object:nil];
 	
     [[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(keyboardDidHide:)
-												 name:UIKeyboardDidHideNotification object:nil];
+											 selector:@selector(keyboardWillHide:)
+												 name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void) forgetAboutKeyboardNotifications
@@ -411,10 +414,11 @@ static NSString *MyCellIdentifier = @"EponymCell";
 	myTableView.frame = viewFrame;
 	
 	keyboardShown = YES;
+	[myTableView reloadData];
 }
 
 
-- (void) keyboardDidHide:(NSNotification*)aNotification
+- (void) keyboardWillHide:(NSNotification*)aNotification
 {
 	NSDictionary* info = [aNotification userInfo];
 	NSValue* boundsValue = [info objectForKey:UIKeyboardBoundsUserInfoKey];
@@ -426,6 +430,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 	myTableView.frame = viewFrame;
 	
 	keyboardShown = NO;
+	[myTableView reloadData];
 }
 
 

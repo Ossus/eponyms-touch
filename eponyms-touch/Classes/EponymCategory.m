@@ -33,6 +33,19 @@
 	return self;
 }
 
+- (void) dealloc
+{
+	self.tag = nil;
+	self.title = nil;
+	self.hint = nil;
+	
+	self.sqlWhereStatement = nil;
+	self.sqlOrderStatement = nil;
+	
+	[super dealloc];
+}
+
+
 + (id) eponymCategoryWithID:(NSInteger)thisID tag:(NSString *)myTag title:(NSString *)myTitle whereStatement:(NSString *)myStatement;
 {
 	return [[[EponymCategory alloc] initWithID:thisID tag:myTag title:myTitle whereStatement:myStatement] autorelease];
@@ -84,7 +97,7 @@
 }
 - (void) setSqlOrderStatement:(NSString *)stmt
 {
-	if(stmt != sqlWhereStatement) {
+	if(stmt != sqlOrderStatement) {
 		[sqlOrderStatement release];
 		sqlOrderStatement = [stmt retain];
 	}

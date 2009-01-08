@@ -51,15 +51,15 @@
 
 - (void) dealloc
 {
+	self.eponymToBeShown = nil;
+	
 	self.eponymTitleLabel = nil;
 	self.eponymTextView = nil;
 	self.eponymCategoriesLabel = nil;
 	self.dateCreatedLabel = nil;
 	self.dateUpdatedLabel = nil;
 	
-	if(eponymView) {
-		self.eponymView = nil;
-	}
+	self.eponymView = nil;
 	
 	[super dealloc];
 }

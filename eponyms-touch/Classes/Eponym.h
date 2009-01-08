@@ -19,7 +19,7 @@
 	// Primary key
 	NSUInteger eponym_id;
 	
-	// Eponym Attributes.
+	// Eponym Attributes
 	NSString *title;
 	NSString *text;
 	NSArray *categories;

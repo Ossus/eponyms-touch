@@ -61,12 +61,12 @@ static sqlite3_stmt *star_eponym_query = nil;
 @synthesize isParsing, mustAbortImport, parseFailed, eponymCheck_eponymUpdateTime, eponymCheckFileSize, readyToLoadNumEponyms, eponymCreationDate, currentlyParsedNode, contentOfCurrentXMLNode, categoriesOfCurrentEponym, categoriesAlreadyInserted, numEponymsParsed;
 
 
-
 - (id) initWithDelegate:(id)myDelegate
 {
 	self = [super init];
 	if(self) {
 		self.delegate = myDelegate;
+		self.updateAction = 1;							// 1 = load new check, 2 = download and install XML, 3 = load and install local XML
 		self.receivedData = [NSMutableData data];
 		mustAbortImport = NO;
 		
@@ -83,15 +83,18 @@ static sqlite3_stmt *star_eponym_query = nil;
 - (void) dealloc
 {
 	self.delegate = nil;
+	self.myConnection = nil;
 	self.receivedData = nil;
+	
+	self.statusMessage = nil;
+	self.eponymUpdateCheckURL = nil;
+	self.eponymXMLURL = nil;
 	
 	self.eponymCreationDate = nil;
 	self.currentlyParsedNode = nil;
 	self.contentOfCurrentXMLNode = nil;
 	self.categoriesOfCurrentEponym = nil;
-	if(categoriesAlreadyInserted) {
-		self.categoriesAlreadyInserted = nil;
-	}
+	self.categoriesAlreadyInserted = nil;
 	
 	// SQLite
 	[self finalizeQueries];
@@ -103,35 +106,50 @@ static sqlite3_stmt *star_eponym_query = nil;
 
 
 #pragma mark Workhorse
-- (void) startUpdaterAction:(NSUInteger) myAction
+- (void) startUpdaterAction
 {
-	self.updateAction = myAction;
-	self.isDownloading = YES;
-	self.statusMessage = @"Downloading...";
+	self.mustAbortImport = NO;
 	
-	[delegate updaterDidStartAction:self];
-	if(viewController) {
-		[viewController updaterDidStartAction:self];
-		if([viewController respondsToSelector:@selector(updater:progress:)]) {
-			[viewController updater:self progress:0.0];
+	// action 1 and 2 start with a download
+	if(updateAction <= 2) {
+		self.isDownloading = YES;
+		self.statusMessage = @"Downloading...";
+		
+		[delegate updaterDidStartAction:self];
+		if(viewController) {
+			[viewController updaterDidStartAction:self];
+			if([viewController respondsToSelector:@selector(updater:progress:)]) {
+				[viewController updater:self progress:0.0];
+			}
+		}
+		
+		// check desired action: 1 = check for updates, 2 = download and install eponyms, 3 = install local eponyms
+		NSURL *url;
+		if(2 == updateAction) {
+			url = self.eponymXMLURL;
+			//		url = [NSURL URLWithString:@"http://127.0.0.1/pp/Projects/Eponyms/XML/eponyms.xml"];			// DEBUG
+		}
+		else {
+			url = self.eponymUpdateCheckURL;
+			//		url = [NSURL URLWithString:@"http://127.0.0.1/pp/Projects/Eponyms/XML/eponyms_info.xml"];		// DEBUG
+		}
+		
+		// create the request and start downloading by making the connection
+		NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+		self.myConnection = [[[NSURLConnection alloc] initWithRequest:urlRequest delegate:self] autorelease];
+		
+		if(!myConnection) {
+			[self downloadFailedWithMessage:@"Could not create the NSURLConnection object"];
 		}
 	}
 	
-	// check desired action: 1 = check for updates, 2 = download and install eponyms
-	NSURL *url;
-	if(2 == updateAction) {
-		url = self.eponymXMLURL;
-	}
+	// action 3 loads XML from disk
 	else {
-		url = self.eponymUpdateCheckURL;
-	}
-	
-	// create the request and start downloading by making the connection
-	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
-	self.myConnection = [[[NSURLConnection alloc] initWithRequest:urlRequest delegate:self] autorelease];
-	
-	if(!myConnection) {
-		[self downloadFailedWithMessage:@"Could not create the NSURLConnection object"];
+		readyToLoadNumEponyms = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"numberOfIncludedEponyms"] intValue];
+		
+		NSString *eponymXMLPath = [NSBundle pathForResource:@"eponyms" ofType:@"xml" inDirectory:[[NSBundle mainBundle] bundlePath]];
+		NSData *includedXMLData = [NSData dataWithContentsOfFile:eponymXMLPath];
+		[self createEponymsWithData:includedXMLData];
 	}
 }
 
@@ -174,6 +192,7 @@ static sqlite3_stmt *star_eponym_query = nil;
 		[viewController updater:self didEndActionSuccessful:!self.parseFailed];
 	}
 	[delegate updater:self didEndActionSuccessful:!self.parseFailed];
+	self.updateAction = newEponymsAvailable ? 2 : 1;
 }
 
 
@@ -216,7 +235,7 @@ static sqlite3_stmt *star_eponym_query = nil;
 	// Error occurred (we also end up here if mustAbortImport was set to true)
 	if(parseError) {
 		self.parseFailed = YES;
-		self.statusMessage = @"Parser Error";
+		self.statusMessage = mustAbortImport ? @"Import Aborted" : @"Parser Error";
 		numEponymsParsed = 0;
 		database = nil;
 	}
@@ -237,6 +256,7 @@ static sqlite3_stmt *star_eponym_query = nil;
 		[viewController updater:self didEndActionSuccessful:!self.parseFailed];
 	}
 	[delegate updater:self didEndActionSuccessful:!self.parseFailed];
+	self.updateAction = parseFailed ? updateAction : 1;
 	
 	[myAutoreleasePool release];
 }
@@ -264,6 +284,7 @@ static sqlite3_stmt *star_eponym_query = nil;
 // called whenever we receive a response from the server following our request
 - (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	[receivedData setLength:0];
 	self.expectedContentLength = [response expectedContentLength];
 	
@@ -292,9 +313,9 @@ static sqlite3_stmt *star_eponym_query = nil;
 
 - (void) connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-	if(self.mustAbortImport) {
+	if(mustAbortImport) {
 		[connection cancel];
-		[self downloadFailedWithMessage:nil];
+		[self downloadFailedWithMessage:@"Download Aborted"];
 		return;
 	}
 	
@@ -312,18 +333,14 @@ static sqlite3_stmt *star_eponym_query = nil;
 {
 	self.isDownloading = NO;
 	self.myConnection = nil;
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	
 	if(statusCode) {
 		if(200 == statusCode) {
 			self.downloadFailed = NO;
 			
-			// parse the data - we received the eponyms, hooray!
-			if(2 == updateAction) {
-				[self createEponymsWithData:receivedData];
-			}
-			
 			// the update-check file, let's see if we need to update
-			else {
+			if(1 == updateAction) {
 				if([delegate respondsToSelector:@selector(updater:progress:)]) {
 					[delegate updater:self progress:-1.0];
 				}
@@ -331,6 +348,11 @@ static sqlite3_stmt *star_eponym_query = nil;
 					[viewController updater:self progress:-1.0];
 				}
 				[self parseNewEponymCheck:receivedData];
+			}
+			
+			// parse the data - we received the eponyms, hooray!
+			else {
+				[self createEponymsWithData:receivedData];
 			}
 		}
 		
@@ -403,7 +425,7 @@ static sqlite3_stmt *star_eponym_query = nil;
 	
 	// ****
 	// parsing eponyms.xml
-	if(2 == updateAction) {
+	if(updateAction >= 2) {
 		
 		// Start an eponym  <eponym id="id_string">
 		if([elementName isEqualToString:@"eponym"]) {
@@ -455,11 +477,11 @@ static sqlite3_stmt *star_eponym_query = nil;
 	
 	// ****
 	// parsing the EPONYMS
-	if(2 == updateAction) {
+	if(updateAction >= 2) {
 		
 		// Ended an eponym - insert the eponym and the categories into the database
 		if([elementName isEqualToString:@"eponym"]) {
-			if(self.mustAbortImport) {
+			if(mustAbortImport) {
 				[parser abortParsing];
 			}
 			
@@ -785,6 +807,7 @@ static sqlite3_stmt *star_eponym_query = nil;
 	self.isDownloading = NO;
 	self.downloadFailed = YES;
 	self.statusMessage = message;
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	
 	if(viewController) {
 		[viewController updater:self didEndActionSuccessful:NO];
