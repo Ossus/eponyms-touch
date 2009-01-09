@@ -309,7 +309,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>3</integer>
+									<integer>19</integer>
+									<integer>11</integer>
 									<integer>1</integer>
 									<integer>0</integer>
 								</array>
@@ -352,7 +353,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>EE2DE69A0E1ADE1800D97653</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>eponyms_touchAppDelegate.m</string>
+								<string>InfoViewController.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -360,11 +361,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>EE2DE69B0E1ADE1800D97653</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>eponyms_touchAppDelegate.m</string>
+										<string>InfoViewController.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>EEE8FC580F157B3B0081E83D</string>
+										<string>EE00642D0F180ECC0089BBE1</string>
 										<key>history</key>
 										<array>
 											<string>EE64C73C0E2673360000BC8D</string>
@@ -375,8 +376,6 @@
 											<string>EE69FAAC0E406F9400A3C34B</string>
 											<string>EE89CB900E60B71A0016A781</string>
 											<string>EE89CEA50E618B430016A781</string>
-											<string>EE89CEA80E618B430016A781</string>
-											<string>EE6641640E62A6110047D7ED</string>
 											<string>EE0689E00E675AE00014FFDC</string>
 											<string>EE3BC3C70E6ACEF20051B69D</string>
 											<string>EE3BC3C80E6ACEF20051B69D</string>
@@ -392,24 +391,26 @@
 											<string>EEE8FAE70F155E930081E83D</string>
 											<string>EEE8FAE80F155E930081E83D</string>
 											<string>EEE8FAFA0F155EDB0081E83D</string>
-											<string>EEE8FB890F1572230081E83D</string>
 											<string>EEE8FB8A0F1572230081E83D</string>
 											<string>EEE8FB8C0F1572230081E83D</string>
-											<string>EEE8FB8D0F1572230081E83D</string>
 											<string>EEE8FBA60F1574830081E83D</string>
-											<string>EEE8FBA70F1574830081E83D</string>
 											<string>EEE8FBA90F1574830081E83D</string>
-											<string>EEE8FBC10F1574CA0081E83D</string>
 											<string>EEE8FBC20F1574CA0081E83D</string>
-											<string>EEE8FBC80F1576D80081E83D</string>
 											<string>EEE8FBCA0F1576D80081E83D</string>
 											<string>EEE8FBCC0F1576D80081E83D</string>
 											<string>EEE8FBCD0F1576D80081E83D</string>
 											<string>EEE8FBCE0F1576D80081E83D</string>
 											<string>EEE8FBFD0F1579920081E83D</string>
 											<string>EEE8FC170F1579E30081E83D</string>
-											<string>EEE8FC3E0F157ABF0081E83D</string>
-											<string>EEE8FC550F157B390081E83D</string>
+											<string>EE00636A0F17EF710089BBE1</string>
+											<string>EE0063BD0F17F9C00089BBE1</string>
+											<string>EE0063C80F17FA460089BBE1</string>
+											<string>EE0063C90F17FA460089BBE1</string>
+											<string>EE0063EC0F17FDDE0089BBE1</string>
+											<string>EE0063FA0F1804160089BBE1</string>
+											<string>EE0064020F1805490089BBE1</string>
+											<string>EE0064030F1805490089BBE1</string>
+											<string>EE0064290F180EA00089BBE1</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -456,149 +457,30 @@
 											<string>EE8E568B0E6CB15600928D90</string>
 											<string>EE380FC30E9925F70066BA6E</string>
 											<string>EEF9F2A00EA757A3002F024E</string>
-											<string>EEE8FABD0F155C3C0081E83D</string>
-											<string>EEE8FABE0F155C3C0081E83D</string>
-											<string>EEE8FABF0F155C3C0081E83D</string>
-											<string>EEE8FAC50F155C850081E83D</string>
-											<string>EEE8FAC60F155C850081E83D</string>
-											<string>EEE8FAD90F155D8D0081E83D</string>
-											<string>EEE8FADA0F155D8D0081E83D</string>
-											<string>EEE8FADB0F155D8D0081E83D</string>
-											<string>EEE8FAEA0F155E930081E83D</string>
-											<string>EEE8FAEB0F155E930081E83D</string>
-											<string>EEE8FAEC0F155E930081E83D</string>
-											<string>EEE8FAED0F155E930081E83D</string>
-											<string>EEE8FAEE0F155E930081E83D</string>
-											<string>EEE8FAEF0F155E930081E83D</string>
-											<string>EEE8FAF00F155E930081E83D</string>
-											<string>EEE8FAF10F155E930081E83D</string>
-											<string>EEE8FAF20F155E930081E83D</string>
-											<string>EEE8FAF30F155E930081E83D</string>
-											<string>EEE8FAF40F155E930081E83D</string>
-											<string>EEE8FAF50F155E930081E83D</string>
-											<string>EEE8FAFC0F155EDB0081E83D</string>
-											<string>EEE8FB0A0F1561800081E83D</string>
-											<string>EEE8FB2F0F1563200081E83D</string>
-											<string>EEE8FB300F1563200081E83D</string>
-											<string>EEE8FB310F1563200081E83D</string>
-											<string>EEE8FB320F1563200081E83D</string>
-											<string>EEE8FB330F1563200081E83D</string>
-											<string>EEE8FB340F1563200081E83D</string>
-											<string>EEE8FB350F1563200081E83D</string>
-											<string>EEE8FB360F1563200081E83D</string>
-											<string>EEE8FB370F1563200081E83D</string>
-											<string>EEE8FB380F1563200081E83D</string>
-											<string>EEE8FB480F1564510081E83D</string>
-											<string>EEE8FB490F1564510081E83D</string>
-											<string>EEE8FB4A0F1564510081E83D</string>
-											<string>EEE8FB5E0F1569B60081E83D</string>
-											<string>EEE8FB5F0F1569B60081E83D</string>
-											<string>EEE8FB600F1569B60081E83D</string>
-											<string>EEE8FB610F1569B60081E83D</string>
-											<string>EEE8FB620F1569B60081E83D</string>
-											<string>EEE8FB630F1569B60081E83D</string>
-											<string>EEE8FB640F1569B60081E83D</string>
-											<string>EEE8FB650F1569B60081E83D</string>
-											<string>EEE8FB660F1569B60081E83D</string>
-											<string>EEE8FB670F1569B60081E83D</string>
-											<string>EEE8FB680F1569B60081E83D</string>
-											<string>EEE8FB690F1569B60081E83D</string>
-											<string>EEE8FB6A0F1569B60081E83D</string>
-											<string>EEE8FB6B0F1569B60081E83D</string>
-											<string>EEE8FB6C0F1569B60081E83D</string>
-											<string>EEE8FB6D0F1569B60081E83D</string>
-											<string>EEE8FB7B0F156C5E0081E83D</string>
-											<string>EEE8FB7C0F156C5E0081E83D</string>
-											<string>EEE8FB7D0F156C5E0081E83D</string>
-											<string>EEE8FB830F156E260081E83D</string>
-											<string>EEE8FB8F0F1572230081E83D</string>
-											<string>EEE8FB900F1572230081E83D</string>
-											<string>EEE8FB910F1572230081E83D</string>
-											<string>EEE8FB920F1572230081E83D</string>
-											<string>EEE8FB930F1572230081E83D</string>
-											<string>EEE8FB940F1572230081E83D</string>
-											<string>EEE8FB950F1572230081E83D</string>
-											<string>EEE8FB960F1572230081E83D</string>
-											<string>EEE8FB970F1572230081E83D</string>
-											<string>EEE8FB980F1572230081E83D</string>
-											<string>EEE8FB990F1572230081E83D</string>
-											<string>EEE8FBAB0F1574830081E83D</string>
-											<string>EEE8FBAC0F1574830081E83D</string>
-											<string>EEE8FBAD0F1574830081E83D</string>
-											<string>EEE8FBAE0F1574830081E83D</string>
-											<string>EEE8FBAF0F1574830081E83D</string>
-											<string>EEE8FBB00F1574830081E83D</string>
-											<string>EEE8FBB10F1574830081E83D</string>
-											<string>EEE8FBB20F1574830081E83D</string>
-											<string>EEE8FBB30F1574830081E83D</string>
-											<string>EEE8FBB40F1574830081E83D</string>
-											<string>EEE8FBB50F1574830081E83D</string>
-											<string>EEE8FBB60F1574830081E83D</string>
-											<string>EEE8FBB70F1574830081E83D</string>
-											<string>EEE8FBB80F1574830081E83D</string>
-											<string>EEE8FBB90F1574830081E83D</string>
-											<string>EEE8FBBA0F1574830081E83D</string>
-											<string>EEE8FBBB0F1574830081E83D</string>
-											<string>EEE8FBBC0F1574830081E83D</string>
-											<string>EEE8FBBD0F1574830081E83D</string>
-											<string>EEE8FBC40F1574CA0081E83D</string>
-											<string>EEE8FBC50F1574CA0081E83D</string>
-											<string>EEE8FBC60F1574CA0081E83D</string>
-											<string>EEE8FBD10F1576D80081E83D</string>
-											<string>EEE8FBD20F1576D80081E83D</string>
-											<string>EEE8FBD30F1576D80081E83D</string>
-											<string>EEE8FBD40F1576D80081E83D</string>
-											<string>EEE8FBD50F1576D80081E83D</string>
-											<string>EEE8FBD60F1576D80081E83D</string>
-											<string>EEE8FBD70F1576D80081E83D</string>
-											<string>EEE8FBD80F1576D80081E83D</string>
-											<string>EEE8FBD90F1576D80081E83D</string>
-											<string>EEE8FBDA0F1576D80081E83D</string>
-											<string>EEE8FBDB0F1576D80081E83D</string>
-											<string>EEE8FBDC0F1576D80081E83D</string>
-											<string>EEE8FBDD0F1576D80081E83D</string>
-											<string>EEE8FBDE0F1576D80081E83D</string>
-											<string>EEE8FBDF0F1576D80081E83D</string>
-											<string>EEE8FBE00F1576D80081E83D</string>
-											<string>EEE8FBE10F1576D80081E83D</string>
-											<string>EEE8FBE20F1576D80081E83D</string>
-											<string>EEE8FBE30F1576D80081E83D</string>
-											<string>EEE8FBE40F1576D80081E83D</string>
-											<string>EEE8FBE50F1576D80081E83D</string>
-											<string>EEE8FBE60F1576D80081E83D</string>
-											<string>EEE8FBE70F1576D80081E83D</string>
-											<string>EEE8FBE80F1576D80081E83D</string>
-											<string>EEE8FBE90F1576D80081E83D</string>
-											<string>EEE8FBEA0F1576D80081E83D</string>
-											<string>EEE8FC000F1579920081E83D</string>
-											<string>EEE8FC010F1579920081E83D</string>
-											<string>EEE8FC020F1579920081E83D</string>
-											<string>EEE8FC030F1579920081E83D</string>
-											<string>EEE8FC040F1579920081E83D</string>
-											<string>EEE8FC050F1579920081E83D</string>
-											<string>EEE8FC060F1579920081E83D</string>
-											<string>EEE8FC070F1579920081E83D</string>
-											<string>EEE8FC080F1579920081E83D</string>
-											<string>EEE8FC090F1579920081E83D</string>
-											<string>EEE8FC0A0F1579920081E83D</string>
-											<string>EEE8FC0B0F1579920081E83D</string>
-											<string>EEE8FC0C0F1579920081E83D</string>
-											<string>EEE8FC0D0F1579920081E83D</string>
-											<string>EEE8FC0E0F1579920081E83D</string>
-											<string>EEE8FC0F0F1579920081E83D</string>
-											<string>EEE8FC100F1579920081E83D</string>
-											<string>EEE8FC110F1579920081E83D</string>
-											<string>EEE8FC190F1579E30081E83D</string>
-											<string>EEE8FC1A0F1579E30081E83D</string>
-											<string>EEE8FC1B0F1579E30081E83D</string>
-											<string>EEE8FC2B0F157A340081E83D</string>
-											<string>EEE8FC2C0F157A340081E83D</string>
-											<string>EEE8FC2D0F157A340081E83D</string>
-											<string>EEE8FC2E0F157A340081E83D</string>
-											<string>EEE8FC400F157ABF0081E83D</string>
-											<string>EEE8FC410F157ABF0081E83D</string>
-											<string>EEE8FC420F157ABF0081E83D</string>
-											<string>EEE8FC430F157ABF0081E83D</string>
+											<string>EE00636C0F17EF710089BBE1</string>
+											<string>EE00637A0F17EFF30089BBE1</string>
+											<string>EE0063810F17F0870089BBE1</string>
+											<string>EE00639A0F17F7220089BBE1</string>
+											<string>EE0063A10F17F7790089BBE1</string>
+											<string>EE0063AA0F17F8810089BBE1</string>
+											<string>EE0063AB0F17F8810089BBE1</string>
+											<string>EE0063B60F17F9220089BBE1</string>
+											<string>EE0063B70F17F9220089BBE1</string>
+											<string>EE0063C00F17F9C00089BBE1</string>
+											<string>EE0063C10F17F9C00089BBE1</string>
+											<string>EE0063C20F17F9C00089BBE1</string>
+											<string>EE0063C30F17F9C00089BBE1</string>
+											<string>EE0063C40F17F9C00089BBE1</string>
+											<string>EE0063C50F17F9C00089BBE1</string>
+											<string>EE0063CB0F17FA460089BBE1</string>
+											<string>EE0063CC0F17FA460089BBE1</string>
+											<string>EE0063CD0F17FA460089BBE1</string>
+											<string>EE0063DD0F17FBF20089BBE1</string>
+											<string>EE0063EE0F17FDDE0089BBE1</string>
+											<string>EE0063EF0F17FDDE0089BBE1</string>
+											<string>EE0063FC0F1804160089BBE1</string>
+											<string>EE0064050F1805490089BBE1</string>
+											<string>EE0064060F1805490089BBE1</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -638,8 +520,6 @@
 									<dict>
 										<key>Frame</key>
 										<string>{{10, 27}, {993, -27}}</string>
-										<key>RubberWindowFrame</key>
-										<string>56 69 1263 809 0 0 1440 878 </string>
 									</dict>
 									<key>Module</key>
 									<string>XCDetailModule</string>
@@ -656,6 +536,8 @@
 									<dict>
 										<key>Frame</key>
 										<string>{{10, 27}, {993, -27}}</string>
+										<key>RubberWindowFrame</key>
+										<string>56 69 1263 809 0 0 1440 878 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXProjectFindModule</string>
@@ -742,11 +624,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>EEE8FA9F0F154FC40081E83D</string>
+				<string>EE00636E0F17EF710089BBE1</string>
 				<string>1CA23ED40692098700951B8B</string>
-				<string>EEE8FAA00F154FC40081E83D</string>
+				<string>EE00636F0F17EF710089BBE1</string>
 				<string>EE2DE69A0E1ADE1800D97653</string>
-				<string>EEE8FAA10F154FC40081E83D</string>
+				<string>EE0063700F17EF710089BBE1</string>
 				<string>1CA23EDF0692099D00951B8B</string>
 				<string>1CA23EE00692099D00951B8B</string>
 				<string>1CA23EE10692099D00951B8B</string>
@@ -892,14 +774,14 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>EEE8FAC80F155C850081E83D</string>
+				<string>EE0063710F17EF710089BBE1</string>
 				<string>1CCC7628064C1048000F2A68</string>
 				<string>1CCC7629064C1048000F2A68</string>
-				<string>EEE8FAC90F155C850081E83D</string>
-				<string>EEE8FACA0F155C850081E83D</string>
-				<string>EEE8FACB0F155C850081E83D</string>
-				<string>EEE8FACC0F155C850081E83D</string>
-				<string>EE2DE69A0E1ADE1800D97653</string>
+				<string>EE0063720F17EF710089BBE1</string>
+				<string>EE0063730F17EF710089BBE1</string>
+				<string>EE0063740F17EF710089BBE1</string>
+				<string>EE0063750F17EF710089BBE1</string>
+				<string>EE0063760F17EF710089BBE1</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -914,7 +796,7 @@
 	<key>StatusbarIsVisible</key>
 	<true/>
 	<key>TimeStamp</key>
-	<real>253066043.98826301</real>
+	<real>253234892.277585</real>
 	<key>ToolbarDisplayMode</key>
 	<integer>2</integer>
 	<key>ToolbarIsVisible</key>
@@ -929,8 +811,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>EEE8FB410F15632B0081E83D</string>
-		<string>EEE8FB430F15632B0081E83D</string>
 		<string>/Users/pp/Programming/Cocoa/eponyms-touch/eponyms-touch.xcodeproj</string>
 	</array>
 	<key>WindowString</key>

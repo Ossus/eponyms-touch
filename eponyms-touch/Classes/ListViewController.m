@@ -91,13 +91,15 @@ static NSString *MyCellIdentifier = @"EponymCell";
 {
 	// Create the search bar
 	self.mySearchBar = [[UISearchBar alloc] initWithFrame:CGRectZero];
-	//	mySearchBar.tintColor = [[UIColor alloc] initWithRed:0.75 green:0.80 blue:0.80 alpha:1.0];
+//	mySearchBar.tintColor = [delegate naviBarTintColor];
 	mySearchBar.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 	mySearchBar.delegate = self;
 	mySearchBar.showsCancelButton = NO;
 	mySearchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
 	mySearchBar.autocorrectionType = UITextAutocorrectionTypeNo;
 	mySearchBar.placeholder = @"Search";
+	
+	//mySearchBar.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 }
 #pragma mark -
 
@@ -112,9 +114,11 @@ static NSString *MyCellIdentifier = @"EponymCell";
 		self.navigationItem.hidesBackButton = YES;
 		self.navigationItem.titleView = mySearchBar;
 		
-		CGFloat barHeight = self.navigationItem.titleView.superview.bounds.size.height;
+		BOOL isSideways = (UIInterfaceOrientationLandscapeLeft == [self interfaceOrientation] || UIInterfaceOrientationLandscapeRight == [self interfaceOrientation]);
+		CGFloat barHeight = isSideways ? 32 : 44;
 		CGRect searchBarRect = CGRectMake(0.0, 0.0, self.view.bounds.size.width, barHeight);
 		mySearchBar.bounds = searchBarRect;
+//		mySearchBar.tintColor = self.navigationController.navigationBar.tintColor = isSideways ? nil : [delegate naviBarTintColor];
 		
 		[mySearchBar becomeFirstResponder];
 	}
@@ -128,6 +132,8 @@ static NSString *MyCellIdentifier = @"EponymCell";
 			mySearchBar.text = @"";
 			[mySearchBar resignFirstResponder];
 		}
+		
+//		mySearchBar.tintColor = self.navigationController.navigationBar.tintColor = [delegate naviBarTintColor];
 		
 		self.navigationItem.rightBarButtonItem = initSearchButton;
 		self.navigationItem.hidesBackButton = NO;
@@ -153,18 +159,6 @@ static NSString *MyCellIdentifier = @"EponymCell";
 	
 	[delegate setEponymShown:0];
 	
-	// adjust the searchBar to the rotation (if necessary)
-	if(mySearchBar == self.navigationItem.titleView) {
-		// The following does not really work. Any other way to determine the navigationItem's height?
-		//CGFloat barHeight = self.navigationItem.titleView.superview.bounds.size.height;
-		// temporary method:
-		UIInterfaceOrientation orientation = [self interfaceOrientation];
-		CGFloat barHeight = (UIInterfaceOrientationPortrait == orientation || UIInterfaceOrientationPortraitUpsideDown == orientation) ? 44 : 32;
-		
-		CGRect searchBarRect = CGRectMake(0.0, 0.0, self.view.bounds.size.width, barHeight);
-		mySearchBar.bounds = searchBarRect;
-	}
-	
 	// set the Title and the back button title
 	if(delegate) {
 		self.title = [[delegate categoryShown] title];
@@ -187,14 +181,24 @@ static NSString *MyCellIdentifier = @"EponymCell";
 	[self forgetAboutKeyboardNotifications];
 }
 
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation
+- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return YES;
 }
 
-- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation) fromInterfaceOrientation
+- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-	//self.view.frame = [[UIScreen mainScreen] applicationFrame];
+	// adjust searchbar if necessary
+	if(self.navigationItem.titleView == mySearchBar) {
+		BOOL wasSideways = (UIInterfaceOrientationLandscapeLeft == fromInterfaceOrientation || UIInterfaceOrientationLandscapeRight == fromInterfaceOrientation);
+		
+		CGRect searchBarRect = mySearchBar.bounds;
+		searchBarRect.size.height = wasSideways ? 44 : 32;
+		mySearchBar.bounds = searchBarRect;
+		
+		// workaround to the tintColoring bug (bad color alignment) -> un-tint the bar!
+//		mySearchBar.tintColor = self.navigationController.navigationBar.tintColor = wasSideways ? [delegate naviBarTintColor] : nil;
+	}
 }
 #pragma mark -
 

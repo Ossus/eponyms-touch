@@ -46,7 +46,6 @@
 		tabSegments.selectedSegmentIndex = 0;
 		tabSegments.segmentedControlStyle = UISegmentedControlStyleBar;
 		tabSegments.frame = CGRectMake(0.0, 0.0, 180.0, 30.0);
-		//tabSegments.tintColor = [UIColor lightGrayColor];
 		[tabSegments addTarget:self action:@selector(tabChanged:) forControlEvents:UIControlEventValueChanged];
 		
 		self.navigationItem.titleView = tabSegments;
@@ -97,6 +96,8 @@
 - (void) viewDidLoad
 {
 	self.view = infoView;
+	
+	tabSegments.tintColor = [delegate naviBarTintColor];
 	[self switchToTab:0];
 	lastInterfaceOrientation = UIInterfaceOrientationPortrait;
 	
@@ -351,6 +352,16 @@
 - (void) setStatusMessage:(NSString *)message
 {
 	if(message) {
+		// check message length
+		CGFloat maxPossibleWidth = progressText.bounds.size.width * 1.1;		// text will be squeezed, so we allow a little overhead
+		CGFloat isWidth = [message sizeWithFont:progressText.font].width;
+		if(isWidth > maxPossibleWidth) {
+			CGFloat fraction = maxPossibleWidth / isWidth;
+			NSUInteger useNumChars = roundf([message length] * fraction);
+			
+			message = [NSString stringWithFormat:@"%@...", [message stringByPaddingToLength:useNumChars withString:@"X" startingAtIndex:0]];
+		}
+		
 		progressText.textColor = [UIColor blackColor];
 		progressText.text = message;
 	}

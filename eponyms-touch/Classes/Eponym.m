@@ -72,7 +72,6 @@ static sqlite3_stmt *toggle_starred_query = nil;
 		return;
 	}
 	
-	NSLog(@"LOAD");
 	[[delegate loadedEponyms] addObject:self];
 	
 	if([delegate database]) {
@@ -125,7 +124,6 @@ static sqlite3_stmt *toggle_starred_query = nil;
 
 - (void) unload
 {
-	NSLog(@"UNLOAD");
 	[[delegate loadedEponyms] removeObject:self];
 	
 	self.text = nil;

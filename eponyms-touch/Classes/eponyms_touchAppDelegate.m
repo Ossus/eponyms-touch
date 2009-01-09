@@ -54,7 +54,9 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 
 
 - (void) applicationDidFinishLaunching:(UIApplication *)application
-{	
+{
+//	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+	
 	// **** Prefs
 	NSUInteger lastUsedDBVersion;
 	NSInteger lastEponymCheck;
@@ -93,6 +95,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	self.categoriesController = [[[CategoriesViewController alloc] initWithNibName:nil bundle:nil] autorelease];
 	[categoriesController setDelegate:self];
 	self.navigationController = [[[UINavigationController alloc] initWithRootViewController:categoriesController] autorelease];
+//	navigationController.navigationBar.tintColor = [self naviBarTintColor];
 	
 	// create the view controllers for the Eponym list and the Eponym details
 	self.listController = [[[ListViewController alloc] initWithNibName:nil bundle:nil] autorelease];
@@ -178,7 +181,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 
 
 - (void) applicationDidReceiveMemoryWarning:(UIApplication *)application
-{	
+{
 	// what we can do is aborting an eventually running import...
 	if(myUpdater) {
 		if(iAmUpdating) {
@@ -471,6 +474,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 
 - (void) loadEponymsOfCategory:(EponymCategory *)category containingString:(NSString *)searchString animated:(BOOL)animated
 {
+	NSLog(@"load eponyms of cat %@", category);
 	[eponymArray removeAllObjects];
 	[eponymSectionArray removeAllObjects];
 	[listController cacheEponyms:nil andHeaders:nil];
@@ -712,6 +716,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	
 	UINavigationController *tempNaviController = [[UINavigationController alloc] initWithRootViewController:infoController];
 	[navigationController presentModalViewController:tempNaviController animated:YES];
+//	tempNaviController.navigationBar.tintColor = [self naviBarTintColor];
 	[tempNaviController release];
 }
 #pragma mark -
@@ -776,6 +781,11 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 							 @"CREATE TABLE IF NOT EXISTS eponyms (eponym_id INTEGER PRIMARY KEY, identifier VARCHAR UNIQUE, eponym_en VARCHAR, text_en TEXT, created INTEGER, lastedit INTEGER, lastaccess INTEGER, starred INTEGER DEFAULT 0)", @"createEpoTable", nil];
 	
 	return queries;
+}
+
+- (UIColor *) naviBarTintColor
+{
+	return nil;	//[UIColor colorWithRed:0.1 green:0.22 blue:0.55 alpha:1.0];
 }
 
 

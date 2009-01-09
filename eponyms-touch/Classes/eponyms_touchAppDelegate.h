@@ -111,6 +111,7 @@
 - (void) loadEponymXMLFromDisk;
 - (void) abortUpdateAction;
 
+- (UIColor *) naviBarTintColor;
 
 
 
