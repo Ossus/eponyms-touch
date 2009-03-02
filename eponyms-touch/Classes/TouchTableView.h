@@ -13,7 +13,12 @@
 
 
 @interface TouchTableView : UITableView {
+	NSIndexPath *indexPathOfLastSelectedRow;
 }
 
-@end
+@property (nonatomic, retain) NSIndexPath *indexPathOfLastSelectedRow;
 
+- (void) immediatelySelectRowAtIndexPath:(NSIndexPath *)indexPath;
+
+
+@end

@@ -187,7 +187,7 @@
 			screenSize = CGSizeMake(480, 268);
 			websiteCenter = CGPointMake(screenSize.width - roundf((projectWebsiteButton.bounds.size.width / 2) + 20), 38.5);
 			eponymsNetCenter = CGPointMake(screenSize.width - roundf((eponymsDotNetButton.bounds.size.width / 2) + 20), 86.5);
-			CGFloat propsFrameY = authorsOrigin.y + authorsHeight + 10;
+			CGFloat propsFrameY = authorsOrigin.y + authorsHeight;
 			propsFrame = CGRectMake(20,
 									propsFrameY,
 									screenSize.width - 40,

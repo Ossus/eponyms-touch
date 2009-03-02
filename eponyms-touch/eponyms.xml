@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE eponyms [
-	<!ELEMENT eponym (name, desc, cat*, c?, e?)>
+	<!ELEMENT category (tag, title)>
+	<!ELEMENT eponym (id, name, desc, cat*, c?, e?)>
 	<!ELEMENT name (#PCDATA)>
 	<!ELEMENT desc (#PCDATA)>
 	<!ELEMENT cat (#PCDATA)>
 	<!ELEMENT c (#PCDATA)>
 	<!ELEMENT e (#PCDATA)>
 ]>
-<root created="1219916270">
+<root created="1236006311">
 
 <category tag="ANAT" title="Anatomy" />
 <category tag="GI" title="Gastroenterology" />
@@ -44,7 +45,7 @@
 </eponym>
 <eponym id="Achenbachssyndrome">
 	<name>Achenbach’s syndrome</name>
-	<desc>Rare entity of spontaneous or mechanically-induced hematomas on the volar aspect of fingers associated with burning pain and swelling of the digits</desc>
+	<desc>rare entity of spontaneous or mechanically-induced hematomas on the volar aspect of fingers associated with burning pain and swelling of the digits</desc>
 	<cat>SYND</cat>
 	<cat>DERM</cat>
 	<c>4/5/2007</c>
@@ -129,14 +130,16 @@
 	<name>Albert’s test</name>
 	<desc>for diagnosing hemineglect; patient presented with multiple lines on a page and asked to cross them out; if &gt;70% of crossed out lines are ipsilateral to motor deficit, hemineglect is diagnosed; described in Neurology 1973; 23:658-64</desc>
 	<cat>NEURO</cat>
+	<cat>PROC</cat>
 	<c>4/27/2003</c>
-	<e>6/2/2005</e>
+	<e>8/31/2008</e>
 </eponym>
 <eponym id="Albrightshereditaryosteodystrophy">
 	<name>Albright’s hereditary osteodystrophy</name>
-	<desc>polyostotic fibrous dysplasia, short stature, round face, skeletal anomalies (brachydactyly, also see Archibald’s sign), and heterotopic calcification, precocious puberty, café-au-lait spots on skin, low calcium, high phosphate, resistance to elevated PTH levels from mutation in Gsalpha coupling PTH receptor to adenylyl cyclase</desc>
+	<desc>pseudohypoparathyroidism type 1a, from lack of renal responsiveness to parathyroid hormone, resulting in low serum calcium, high serum phosphate, and appropriately high serum parathyroid hormone.  Associated short stature, characteristically shortened fourth and fifth metacarpals, and rounded facies.</desc>
 	<cat>ENDO</cat>
 	<c>3/21/1998</c>
+	<e>2/15/2009</e>
 </eponym>
 <eponym id="AlderReillyanomaly">
 	<name>Alder-Reilly anomaly</name>
@@ -327,8 +330,16 @@
 	<cat>OB</cat>
 	<cat>PATH</cat>
 	<cat>HEME</cat>
+	<cat>PROC</cat>
 	<c>2/28/2000</c>
-	<e>8/21/2008</e>
+	<e>8/31/2008</e>
+</eponym>
+<eponym id="Arantiusduct">
+	<name>Arantius duct</name>
+	<desc>ductus venosus, described by Giulio Cesare Aranzio</desc>
+	<cat>ANAT</cat>
+	<cat>GI</cat>
+	<c>1/24/2009</c>
 </eponym>
 <eponym id="Archibaldssign">
 	<name>Archibald’s sign</name>
@@ -484,11 +495,12 @@
 </eponym>
 <eponym id="Babinskisign">
 	<name>Babinski sign</name>
-	<desc>upper motor sign that indicates dysfunction of fibers within the pyramidal system; described in 1896 by Babinski, student of Charcot</desc>
+	<desc>normally plantar response where toes flex in response to sole of foot being stroked; upgoing toes are an upper motor sign that indicates dysfunction of fibers within the pyramidal system; described in 1896 by Babinski, student of Charcot</desc>
 	<cat>NEURO</cat>
 	<cat>SIGN</cat>
 	<cat>PROC</cat>
 	<c>3/25/2000</c>
+	<e>1/23/2009</e>
 </eponym>
 <eponym id="Bachmannsbundle">
 	<name>Bachmann’s bundle</name>
@@ -686,9 +698,10 @@
 	<desc>infantile X-linked dilated cardiomyopathy, short stature, myopathy, cyclic neutropenia; from mutation in G4.5 which encodes for tafazzin (a putative acyl transferase that has been associated with altered metabolism of the mitochondrial phospholipid cardiolipin)</desc>
 	<cat>NEURO</cat>
 	<cat>CV</cat>
+	<cat>HEME</cat>
 	<cat>SYND</cat>
 	<c>7/7/2001</c>
-	<e>7/20/2006</e>
+	<e>10/13/2008</e>
 </eponym>
 <eponym id="Bartholingland">
 	<name>Bartholin gland</name>
@@ -1010,9 +1023,11 @@
 </eponym>
 <eponym id="BickersAdamssyndrome">
 	<name>Bickers-Adams syndrome</name>
-	<desc>Sex-linked hydrocephalus, aqueductal stenosis, mental deficiency, and flexion deformities and spasticity of the extremities.  X-linked (Xq28)</desc>
+	<desc>sex-linked hydrocephalus, aqueductal stenosis, mental deficiency, and flexion deformities and spasticity of the extremities.  X-linked (Xq28)</desc>
 	<cat>SYND</cat>
+	<cat>NEURO</cat>
 	<c>7/19/2006</c>
+	<e>1/23/2009</e>
 </eponym>
 <eponym id="Bickerstaffsencephalitis">
 	<name>Bickerstaff’s encephalitis</name>
@@ -1514,10 +1529,11 @@
 </eponym>
 <eponym id="BrownSquardsyndrome">
 	<name>Brown-Séquard syndrome</name>
-	<desc>loss of tactile sense, vibration sense, and limb position sense on the ipsilateral side and loss of pain and temperature sense on the contralateral side</desc>
+	<desc>loss of tactile sense, vibration sense, and limb position sense on the ipsilateral side and loss of pain and temperature sense on the contralateral side; due to lesion involving only one side of the spinal cord</desc>
 	<cat>NEURO</cat>
 	<cat>SYND</cat>
 	<c>3/21/1998</c>
+	<e>1/23/2009</e>
 </eponym>
 <eponym id="Bruceprotocol">
 	<name>Bruce protocol</name>
@@ -1826,11 +1842,12 @@
 </eponym>
 <eponym id="Capgrassyndrome">
 	<name>Capgras syndrome</name>
-	<desc>delusional belief that one or a few highly familiar people have been replaced by impostors who are physically very similar to the originals; seen rarely in schizophrenia.</desc>
+	<desc>delusional belief that one or a few highly familiar people have been replaced by impostors who are physically very similar to the originals; seen rarely in schizophrenia; see also Fregoli syndrome</desc>
 	<cat>NEURO</cat>
 	<cat>SYND</cat>
 	<cat>PSYCH</cat>
 	<c>3/20/2000</c>
+	<e>2/15/2009</e>
 </eponym>
 <eponym id="Caplanssyndrome">
 	<name>Caplan’s syndrome</name>
@@ -2209,6 +2226,13 @@
 	<cat>SYND</cat>
 	<c>3/21/1998</c>
 </eponym>
+<eponym id="Cobbsyndrome">
+	<name>Cobb syndrome</name>
+	<desc>assocation between cutaneous hemangiomas and intramedullary and paraspinal arteriovenous malformations at the same metamere; not familial; first reported by Cobb in 1915</desc>
+	<cat>NEURO</cat>
+	<cat>DERM</cat>
+	<c>1/20/2009</c>
+</eponym>
 <eponym id="Cockaynessyndrome">
 	<name>Cockayne’s syndrome</name>
 	<desc>a form of progeria characterized by dwarfism, pigmentary degeneration of the retina, optic atrophy, deafness, sensitivity to sunlight, and mental retardation; autosomal recessive inheritance defect in DNA repair</desc>
@@ -2317,15 +2341,18 @@
 	<desc>direct, ability of anti-IgG or anti-C3 antisera to agglutinate the patient’s red blood cells; cold reacting antibodies react with anti-C3 (mostly drug-related antibodies, IgM antibodies (generally to polysaccharide), IgG antibodies of low affinity); indirect Coombs, serum of the patient is incubated with normal red cells, though IgM antibodies may agglutinate directly</desc>
 	<cat>HEME</cat>
 	<cat>PATH</cat>
+	<cat>PROC</cat>
 	<c>3/21/1998</c>
-	<e>8/23/2008</e>
+	<e>8/31/2008</e>
 </eponym>
 <eponym id="Coopernailssign">
 	<name>Coopernail’s sign</name>
 	<desc>ecchymosis of the perineum and scrotum or labia, reflecting pelvic fracture; after George Peter Coopernail, American physician (1876-1962).</desc>
 	<cat>SIGN</cat>
 	<cat>ORTHO</cat>
+	<cat>URO</cat>
 	<c>11/8/2006</c>
+	<e>1/23/2009</e>
 </eponym>
 <eponym id="Coopershernia">
 	<name>Cooper's hernia</name>
@@ -2835,11 +2862,12 @@
 </eponym>
 <eponym id="Dicktest">
 	<name>Dick test</name>
-	<desc>injection of erythogenic toxin of Strep. pyogenes, positive result in those lacking antitoxin</desc>
+	<desc>Injection of erythogenic toxin of Strep. pyogenes; erythematous reaction in individuals lacking antitoxin/exposure to Strep. pyognes.  Used in the past to identify children susceptible to scarlet fever.  See also Schultz-Charlton phenomenon.</desc>
 	<cat>ID</cat>
 	<cat>PATH</cat>
 	<cat>PROC</cat>
 	<c>3/21/1998</c>
+	<e>8/31/2008</e>
 </eponym>
 <eponym id="Dieulafoylesion">
 	<name>Dieulafoy lesion</name>
@@ -3079,9 +3107,11 @@
 </eponym>
 <eponym id="Dupuytrenscontracture">
 	<name>Dupuytren’s contracture</name>
-	<desc>palmar fibromatosis</desc>
+	<desc>Palmar fibromatosis or flexion contracture; most commonly affects ring finger and little finger.  Described by Baron Guillaume Dupuytren, a surgeon who developed a procedure to correct it.</desc>
 	<cat>DERM</cat>
+	<cat>ORTHO</cat>
 	<c>3/21/1998</c>
+	<e>8/31/2008</e>
 </eponym>
 <eponym id="Durantsmaneuver">
 	<name>Durant’s maneuver</name>
@@ -3095,6 +3125,13 @@
 	<desc>hemorrhage from uncal herniation</desc>
 	<cat>NEURO</cat>
 	<c>3/4/2000</c>
+</eponym>
+<eponym id="Durkanstest">
+	<name>Durkan's test</name>
+	<desc>for testing of carpal tunnel syndrome, direct compression of median nerve to 150 mm Hg via bulb for 30 seconds; alternatively using both thumbs</desc>
+	<cat>ORTHO</cat>
+	<cat>PROC</cat>
+	<c>1/23/2009</c>
 </eponym>
 <eponym id="Duroziezssign">
 	<name>Duroziez’s sign</name>
@@ -3227,7 +3264,9 @@
 	<name>Ellsworth-Howard test</name>
 	<desc>for diagnosis of pseudohypoparathyroidism by assessing response to exogenous PTH</desc>
 	<cat>ENDO</cat>
+	<cat>PROC</cat>
 	<c>3/21/1998</c>
+	<e>8/31/2008</e>
 </eponym>
 <eponym id="Elschnigspots">
 	<name>Elschnig spots</name>
@@ -3674,6 +3713,13 @@
 	<c>12/15/2002</c>
 	<e>8/23/2008</e>
 </eponym>
+<eponym id="Fregolisyndrome">
+	<name>Fregoli syndrome</name>
+	<desc>delusional belief that a single person can assume the identity of different people through disguise; after Italian actor Fregoli; see also Capgras syndrome</desc>
+	<cat>PSYCH</cat>
+	<cat>NEURO</cat>
+	<c>2/15/2009</c>
+</eponym>
 <eponym id="Freibergdisease">
 	<name>Freiberg disease</name>
 	<desc>osteochondrosis of second metatarsal head; associated with avascular necrosis of metatarsal head; most patients are female</desc>
@@ -4036,6 +4082,12 @@
 	<cat>PATH</cat>
 	<c>7/20/2005</c>
 </eponym>
+<eponym id="Goltzsyndrome">
+	<name>Goltz syndrome</name>
+	<desc>focal dermal hypoplasia, X-linked dominant disease characterized by patchy dermal hypoplasia, herniation of fat into the dermis, dystrophic nails, sprase, brittle hair; due to mutation in PORCN mutations, which affect regulation of Wnt signaling</desc>
+	<cat>DERM</cat>
+	<c>12/6/2008</c>
+</eponym>
 <eponym id="Gondasmaneuver">
 	<name>Gonda’s maneuver</name>
 	<desc>extensor plant response by flicking the little toe suggesting upper motor neuron defect</desc>
@@ -4093,10 +4145,11 @@
 </eponym>
 <eponym id="GorhamStoutdisease">
 	<name>Gorham-Stout disease</name>
-	<desc>vanishing or disappearing bone disease; IL-6 has pathogenetic role</desc>
-	<cat>ENDO</cat>
+	<desc>Non-malignant osteolysis from intraosseous proliferation of vascular tissue; also known as vanishing or disappearing bone disease; IL-6 v. PDGF signaling felt to have pathogenic role</desc>
 	<cat>SYND</cat>
+	<cat>ORTHO</cat>
 	<c>3/21/1998</c>
+	<e>9/13/2008</e>
 </eponym>
 <eponym id="Gorlinssyndrome">
 	<name>Gorlin’s syndrome</name>
@@ -4196,10 +4249,11 @@
 </eponym>
 <eponym id="Greigcephalopolydactylysyndrome">
 	<name>Greig cephalopolydactyly syndrome</name>
-	<desc>rare autosomal dominant developmental disorder characterized by craniofacial abnormalities and post-axial and pre-axial polydactyly as well as syndactyly of hands and feet from mutation in GLI3</desc>
+	<desc>rare autosomal dominant developmental disorder characterized by craniofacial abnormalities and post-axial and pre-axial polydactyly as well as syndactyly of hands and feet from mutation in GLI3.  See also Pallister-Hall syndrome.</desc>
 	<cat>ORTHO</cat>
 	<cat>SYND</cat>
 	<c>4/18/2000</c>
+	<e>8/29/2008</e>
 </eponym>
 <eponym id="GreyTurnerssign">
 	<name>Grey Turner’s sign</name>
@@ -4267,18 +4321,22 @@
 </eponym>
 <eponym id="Gunthersdisease">
 	<name>Gunther’s disease</name>
-	<desc>AR congenital erythropoietic porphyria from decreased URO synthase activity, hemolytic anemia, cutaneous lesions</desc>
+	<desc>AR congenital erythropoietic porphyria from decreased URO synthase activity, hemolytic anemia, cutaneous lesions characterized by mutilating phtodermatitis</desc>
 	<cat>HEME</cat>
 	<cat>SYND</cat>
 	<cat>BIOCHEM</cat>
+	<cat>DERM</cat>
 	<c>2/28/2000</c>
-	<e>8/23/2008</e>
+	<e>10/12/2008</e>
 </eponym>
 <eponym id="Guthrietest">
 	<name>Guthrie test</name>
-	<desc>for diagnosis of PKU, a bacterial assay for phenylalanine</desc>
+	<desc>For diagnosis of phenylketonuria, a bacterial assay for presence of high levelso f phenylalanine in serum which supports the growth of bacteria in the presence of an inhibitor.  Developed by Guthrie in 1962.</desc>
 	<cat>PATH</cat>
+	<cat>PROC</cat>
+	<cat>BIOCHEM</cat>
 	<c>3/21/1998</c>
+	<e>8/31/2008</e>
 </eponym>
 <eponym id="Guyonstunnel">
 	<name>Guyon’s tunnel</name>
@@ -4349,8 +4407,9 @@
 	<desc>for diagnosing paroxysmal nocturnal hemoglobinuria, uses increased sensitivity of PNH-affected RBCs to lysis by complement; introduced in late 1930s</desc>
 	<cat>HEME</cat>
 	<cat>PATH</cat>
+	<cat>PROC</cat>
 	<c>3/21/1998</c>
-	<e>8/23/2008</e>
+	<e>8/31/2008</e>
 </eponym>
 <eponym id="Hamburgershift">
 	<name>Hamburger shift</name>
@@ -4386,9 +4445,11 @@
 </eponym>
 <eponym id="Hamptonsline">
 	<name>Hampton’s line</name>
-	<desc>radiolucent collar of granulation tissue across the base of an ulcer</desc>
+	<desc>Radiolucent collar of granulation tissue across the base of a gastric ulcer</desc>
 	<cat>GI</cat>
+	<cat>RAYS</cat>
 	<c>3/21/1998</c>
+	<e>9/14/2008</e>
 </eponym>
 <eponym id="HandSchllerChristiantriad">
 	<name>Hand-Schüller-Christian triad</name>
@@ -4568,11 +4629,12 @@
 	<c>11/18/2002</c>
 </eponym>
 <eponym id="HeinekeMukuliczpyloroplasty">
-	<name>Heineke-Mukulicz pyloroplasty</name>
+	<name>Heineke-Mikulicz pyloroplasty</name>
 	<desc>longitudinal incision through all layers of the pylorus, sewed closed in a transverse direction to make the pylorus nonfunctional (used after truncal vagotomy)</desc>
 	<cat>GI</cat>
 	<cat>PROC</cat>
 	<c>2/28/2000</c>
+	<e>12/27/2008</e>
 </eponym>
 <eponym id="Heinersyndrome">
 	<name>Heiner syndrome</name>
@@ -4641,12 +4703,12 @@
 </eponym>
 <eponym id="hemoglobinPortland">
 	<name>hemoglobin Portland</name>
-	<desc>zeta2gamma2, primitive embryonic hemoglobin</desc>
+	<desc>zeta2gamma2, primitive embryonic hemoglobin, can be seen more prominently in e.g. hemoglobin Bart hydrops fetalis</desc>
 	<cat>HEME</cat>
 	<cat>PATH</cat>
 	<cat>BIOCHEM</cat>
 	<c>3/21/1998</c>
-	<e>8/23/2008</e>
+	<e>10/13/2008</e>
 </eponym>
 <eponym id="HEMPAS">
 	<name>HEMPAS</name>
@@ -4761,11 +4823,24 @@
 	<c>9/11/2002</c>
 	<e>8/23/2008</e>
 </eponym>
+<eponym id="Hibernianfeverfamilial">
+	<name>Hibernian fever, familial</name>
+	<desc>TNF receptor-1 associated periodic syndrome (TRAPS), autosomal dominant.  From mutation in TNFR1.  Characterized by recurrent fevers, myalgias, conjunctivitis, periorbital edema, abdominal pain, arthritis, rash (single or multiple erythematous patches that spread distally down an extremity)</desc>
+	<cat>SYND</cat>
+	<c>1/24/2009</c>
+</eponym>
+<eponym id="Hickamsdictum">
+	<name>Hickam's dictum</name>
+	<desc>a "patient can have as many diseases as they damn well please", attributed to John Hickam, a faculty member at Duke University in the 1950's, and was later chairman of medicine at Indiana University; see also Occam's razor</desc>
+	<c>12/6/2008</c>
+</eponym>
 <eponym id="HickeyHaretest">
 	<name>Hickey-Hare test</name>
 	<desc>in evaluating hypernatremia, 5% NaCl infused at a rate of 0.05 mL/kg/min followed by measurements of urine volume and Uosm</desc>
 	<cat>RENAL</cat>
+	<cat>PROC</cat>
 	<c>11/5/2002</c>
+	<e>8/31/2008</e>
 </eponym>
 <eponym id="Hillssign">
 	<name>Hill’s sign</name>
@@ -4784,7 +4859,9 @@
 	<name>Hinton test</name>
 	<desc>test for diagnosing syphilis using a precipitin of glycerol, cholesterol, and beef heart extract; developed in 1927</desc>
 	<cat>ID</cat>
+	<cat>PROC</cat>
 	<c>11/25/2003</c>
+	<e>8/31/2008</e>
 </eponym>
 <eponym id="Hippocraticfingers">
 	<name>Hippocratic fingers</name>
@@ -4815,14 +4892,17 @@
 	<name>Hirschberg test</name>
 	<desc>corneal light reflex test</desc>
 	<cat>OPHTH</cat>
+	<cat>PROC</cat>
 	<c>1/25/2004</c>
+	<e>8/31/2008</e>
 </eponym>
 <eponym id="Hirschprungsdisease">
-	<name>Hirschprung’s disease</name>
+	<name>Hirschsprung's disease</name>
 	<desc>congenital aganglionic megacolon; colonic dilatation proximal to an aganglionic, contracted distal colon and rectum; caused by gestational failure of neural crest cells to migrate to distal colon; AD form associated with mutations of the RET gene, AR form associated with mutations of the endothelin-B-receptor gene</desc>
 	<cat>GI</cat>
 	<cat>SYND</cat>
 	<c>3/21/1998</c>
+	<e>12/27/2008</e>
 </eponym>
 <eponym id="Hitzigzones">
 	<name>Hitzig zones</name>
@@ -4840,12 +4920,13 @@
 	<c>3/8/2000</c>
 	<e>8/23/2008</e>
 </eponym>
-<eponym id="Hoffmanssign">
-	<name>Hoffman’s sign</name>
-	<desc>involuntary flexion of the digits when tapping or striking over the plamar digital aspects of the 2nd, 3rd, and 4th digits in upper motor neuron defect</desc>
-	<cat>NEURO</cat>
-	<cat>SIGN</cat>
-	<c>3/21/1998</c>
+<eponym id="Hoeschtest">
+	<name>Hoesch test</name>
+	<desc>diagnostic test for urinary porphobilinogen for porphyria; see also Watson-Schwartz test</desc>
+	<cat>HEME</cat>
+	<cat>BIOCHEM</cat>
+	<cat>PROC</cat>
+	<c>10/12/2008</c>
 </eponym>
 <eponym id="Hoffmanssyndrome">
 	<name>Hoffman’s syndrome</name>
@@ -4853,6 +4934,14 @@
 	<cat>ENDO</cat>
 	<cat>SYND</cat>
 	<c>11/12/2000</c>
+</eponym>
+<eponym id="Hoffmanssign">
+	<name>Hoffmann’s sign</name>
+	<desc>involuntary flexion of the digits when tapping or striking over the plamar digital aspects of the 2nd, 3rd, and 4th digits in upper motor neuron defect</desc>
+	<cat>NEURO</cat>
+	<cat>SIGN</cat>
+	<c>3/21/1998</c>
+	<e>12/27/2008</e>
 </eponym>
 <eponym id="Hoignereaction">
 	<name>Hoigne reaction</name>
@@ -5128,10 +5217,11 @@
 	<c>2/28/2000</c>
 </eponym>
 <eponym id="HutchinsonGuilfordsyndrome">
-	<name>Hutchinson-Guilford syndrome</name>
+	<name>Hutchinson-Gilford syndrome</name>
 	<desc>aka progeria a condition in which the normal development of the first year is followed by gross retardation of growth, with a senile appearance characterized by dry wrinkled skin, total alopecia, and bird-like facies; genetics unclear</desc>
 	<cat>SYND</cat>
 	<c>3/21/1998</c>
+	<e>12/27/2008</e>
 </eponym>
 <eponym id="Huxleyslayer">
 	<name>Huxley’s layer</name>
@@ -5335,6 +5425,12 @@
 	<cat>ENDO</cat>
 	<cat>SIGN</cat>
 	<c>2/28/2000</c>
+</eponym>
+<eponym id="JohansonBlizzardsyndrome">
+	<name>Johanson-Blizzard syndrome</name>
+	<desc>syndrome of nasal alar hypoplasia, hypothyroidism, pancreatic achylia, and congenital deafness; due to defect in UBR1 gene</desc>
+	<cat>SYND</cat>
+	<c>1/29/2009</c>
 </eponym>
 <eponym id="JohnThomassign">
 	<name>John Thomas sign</name>
@@ -5699,8 +5795,9 @@
 	<cat>HEME</cat>
 	<cat>OB</cat>
 	<cat>PATH</cat>
+	<cat>PROC</cat>
 	<c>3/21/1998</c>
-	<e>8/24/2008</e>
+	<e>8/31/2008</e>
 </eponym>
 <eponym id="KleineLevinsyndrome">
 	<name>Kleine-Levin syndrome</name>
@@ -5820,7 +5917,9 @@
 	<desc>compression of lateral lobes of thyroid causing stridor; associated with thyroid carcinoma, goiter, or thyroiditis</desc>
 	<cat>ENDO</cat>
 	<cat>SIGN</cat>
+	<cat>PROC</cat>
 	<c>12/8/2002</c>
+	<e>8/31/2008</e>
 </eponym>
 <eponym id="Koebnersphenomenon">
 	<name>Koebner’s phenomenon</name>
@@ -5890,12 +5989,12 @@
 </eponym>
 <eponym id="Kostmannsyndrome">
 	<name>Kostmann syndrome</name>
-	<desc>inherited neutropenia, responds to G-CSF, may be due to environmental insults in bone marrow, characterized typically by a granulopoeisis impairment at the promyelocyte stage</desc>
+	<desc>severe congenital neutropenia, responds to G-CSF, may be due to environmental insults in bone marrow, characterized typically by a granulopoeisis impairment at the promyelocyte stage; risk of evolution to MDS or AML</desc>
 	<cat>ID</cat>
 	<cat>SYND</cat>
 	<cat>HEME</cat>
 	<c>3/21/1998</c>
-	<e>8/25/2008</e>
+	<e>10/13/2008</e>
 </eponym>
 <eponym id="Kounissyndrome">
 	<name>Kounis syndrome</name>
@@ -6005,7 +6104,9 @@
 	<cat>SIGN</cat>
 	<cat>PULM</cat>
 	<cat>RHEUM</cat>
+	<cat>PROC</cat>
 	<c>2/28/2000</c>
+	<e>8/31/2008</e>
 </eponym>
 <eponym id="Kyrledisease">
 	<name>Kyrle disease</name>
@@ -6254,10 +6355,11 @@
 </eponym>
 <eponym id="LeggCalvPerthesdisease">
 	<name>Legg-Calvé-Perthes disease</name>
-	<desc>self-limiting hip disorder of children, 4-8 y.o. (M:F 8:1) involving vascular compromise of the capital femoral epiphysis; perhaps some aseptic necrosis action too</desc>
+	<desc>Self-limiting hip disorder of children, 4-8 y.o. (M:F 8:1) involving vascular compromise of the capital femoral epiphysis and leading to aseptic necrosis.  Also can affect small dogs</desc>
 	<cat>ORTHO</cat>
 	<cat>SYND</cat>
 	<c>3/21/1998</c>
+	<e>9/14/2008</e>
 </eponym>
 <eponym id="Legionnairesdisease">
 	<name>Legionnaire’s disease</name>
@@ -6294,11 +6396,12 @@
 	<c>3/2/2000</c>
 </eponym>
 <eponym id="Lenkstriad">
-	<name>Lenks triad</name>
+	<name>Lenk's triad</name>
 	<desc>in retroperitoneal hemorrhage, flank pain, a palpable tender mass, and signs of internal bleeding (e.g. hematuria)</desc>
 	<cat>URO</cat>
 	<cat>SIGN</cat>
 	<c>7/19/2006</c>
+	<e>1/23/2009</e>
 </eponym>
 <eponym id="LennoxGastautsyndrome">
 	<name>Lennox-Gastaut syndrome</name>
@@ -7158,11 +7261,12 @@
 </eponym>
 <eponym id="McCuneAlbrightsyndrome">
 	<name>McCune-Albright syndrome</name>
-	<desc>triad of irregular café au lait spots, fibrous dysplasia of long bones with cysts, and precocious puberty</desc>
+	<desc>triad of irregular café au lait spots, fibrous dysplasia of long bones with cysts, and precocious puberty; from activating mutation in GNAS1 gene</desc>
 	<cat>SYND</cat>
 	<cat>ORTHO</cat>
+	<cat>ENDO</cat>
 	<c>3/21/1998</c>
-	<e>8/25/2008</e>
+	<e>2/15/2009</e>
 </eponym>
 <eponym id="McDonaldssign">
 	<name>McDonald’s sign</name>
@@ -7245,6 +7349,18 @@
 	<desc>sloping forehead, posterior encephalocele, polydactyly, and polycystic kidneys</desc>
 	<cat>SYND</cat>
 	<c>4/19/2000</c>
+</eponym>
+<eponym id="Mediterraneanfeverfamilial">
+	<name>Mediterranean fever, familial</name>
+	<desc>autosomal recessive disorder characterized by sporadic, paroxysmal attacks of fever and serositis (e.g. abdominal pain); recurrent attacks can be prevented by colchicine; tends to affect group of people around the Mediterranean Sea.  Due to mutation in MEFV gene encoding pyrin.</desc>
+	<cat>GI</cat>
+	<c>1/24/2009</c>
+</eponym>
+<eponym id="Mediterraneanthromboctyopenia">
+	<name>Mediterranean thromboctyopenia</name>
+	<desc>in Southern Europe, inherited, mild thrombocytopenia with large platelets from mutation in GPIbalpha; genotype and phenotype similar to Bernard-Soulier syndrome</desc>
+	<cat>HEME</cat>
+	<c>10/23/2008</c>
 </eponym>
 <eponym id="Meesslines">
 	<name>Mees’s lines</name>
@@ -7620,11 +7736,18 @@
 	<cat>ANAT</cat>
 	<c>3/21/1998</c>
 </eponym>
+<eponym id="Montrealplateletsyndrome">
+	<name>Montreal platelet syndrome</name>
+	<desc>hereditary thrombocytopenia associated with mucocutaneous bleeding, giant platelets, and spontaneous platelet clumping in vitro; associated with type 2B VWD and the V1316M mutation.</desc>
+	<cat>HEME</cat>
+	<c>12/6/2008</c>
+</eponym>
 <eponym id="Moorencornealulcers">
 	<name>Mooren corneal ulcers</name>
-	<desc>chronic, painful ulcers, involves circumference of peripheral cornea and may progress to vision loss; associated with hep C</desc>
+	<desc>chronic, painful ulcers, involves circumference of peripheral cornea and may progress to vision loss; associated with hepatitis C</desc>
 	<cat>OPHTH</cat>
 	<c>2/28/2000</c>
+	<e>12/6/2008</e>
 </eponym>
 <eponym id="Morgagnihydatidsof">
 	<name>Morgagni, hydatids of</name>
@@ -7850,6 +7973,13 @@
 	<cat>RAYS</cat>
 	<c>11/25/2003</c>
 </eponym>
+<eponym id="Nagayamaspots">
+	<name>Nagayama spots</name>
+	<desc>In roseola, erythematous papules on the soft palate and uvula</desc>
+	<cat>ID</cat>
+	<cat>DERM</cat>
+	<c>9/13/2008</c>
+</eponym>
 <eponym id="Ngelesrule">
 	<name>Nägele’s rule</name>
 	<desc>means of estimating date of delivery by counting back 3 months from the first day of the last menstrual period and adding seven days; full term 38 weeks after fertilization, 40 weeks after LNMP</desc>
@@ -7909,6 +8039,13 @@
 	<desc>Autosomal recessive syndrome characterized by severe intrauterine growth retardation, microcephaly, abnormal brain development, edmea, and icthyosis.  First reported in 1971 by Neu et al. (Pediatrics 47;610-612)</desc>
 	<cat>SYND</cat>
 	<c>8/7/2008</c>
+</eponym>
+<eponym id="Nezelofsyndrome">
+	<name>Nezelof syndrome</name>
+	<desc>congenital immunodeficiency syndrome, autosomal recessive, due to thymic dysplasia</desc>
+	<cat>SYND</cat>
+	<cat>HEME</cat>
+	<c>10/21/2008</c>
 </eponym>
 <eponym id="Nicolaussyndrome">
 	<name>Nicolau’s syndrome</name>
@@ -8017,8 +8154,9 @@
 </eponym>
 <eponym id="Occamsrazor">
 	<name>Occam’s razor</name>
-	<desc>described in 14th century, “plurality must not be posited without necessity,” in other words, parsimony in diagnosis</desc>
+	<desc>described in 14th century, “plurality must not be posited without necessity,” in other words, parsimony in diagnosis; see also Hickam's dictum</desc>
 	<c>3/4/2000</c>
+	<e>12/6/2008</e>
 </eponym>
 <eponym id="Oddisphincterof">
 	<name>Oddi, sphincter of</name>
@@ -8055,9 +8193,10 @@
 </eponym>
 <eponym id="Olliersdisease">
 	<name>Ollier’s disease</name>
-	<desc>syndrome of multiple enchondromas</desc>
+	<desc>Syndrome of multiple enchondromas.  Increased risk of sarcoma.  No known genetic component</desc>
 	<cat>ORTHO</cat>
 	<c>3/21/1998</c>
+	<e>8/31/2008</e>
 </eponym>
 <eponym id="Omennssyndrome">
 	<name>Omenn’s syndrome</name>
@@ -8230,7 +8369,9 @@
 	<desc>effort thrombosis of the subclavian vein</desc>
 	<cat>CV</cat>
 	<cat>SYND</cat>
+	<cat>HEME</cat>
 	<c>2/28/2000</c>
+	<e>8/29/2008</e>
 </eponym>
 <eponym id="Pallassign">
 	<name>Palla’s sign</name>
@@ -8240,6 +8381,13 @@
 	<cat>SIGN</cat>
 	<cat>RAYS</cat>
 	<c>2/28/2000</c>
+</eponym>
+<eponym id="PallisterHallsyndrome">
+	<name>Pallister-Hall syndrome</name>
+	<desc>Disorder associated with polydactyly and cutaneous syndactyly.  Hypothalamic hamartoma characteristic, bifid epiglottis.  Autosomal dominant, due to mutation in GLI3, involved in hedgehog pathway.  See also Greig syndrome, which is also due to mutation in GLI3.</desc>
+	<cat>SYND</cat>
+	<cat>ORTHO</cat>
+	<c>8/29/2008</c>
 </eponym>
 <eponym id="Panayiotopoulossyndrome">
 	<name>Panayiotopoulos syndrome</name>
@@ -8400,14 +8548,18 @@
 	<desc>agglutination of sheep red blood cells by heterophile antibodies</desc>
 	<cat>ID</cat>
 	<cat>PATH</cat>
+	<cat>PROC</cat>
 	<c>12/25/2001</c>
+	<e>8/31/2008</e>
 </eponym>
 <eponym id="PaulBunnellDavidsohntest">
 	<name>Paul-Bunnell-Davidsohn test</name>
 	<desc>extension of classic Paul-Bunnell test for heterophile antibody; antibodies not absorbed by guinea pig kidney cells but cause sheep erythrocytes to agglutinate</desc>
 	<cat>ID</cat>
 	<cat>PATH</cat>
+	<cat>PROC</cat>
 	<c>3/21/1998</c>
+	<e>8/31/2008</e>
 </eponym>
 <eponym id="Pautriersmicroabcesses">
 	<name>Pautrier’s microabcesses</name>
@@ -8712,7 +8864,9 @@
 	<name>Porter-Silber test</name>
 	<desc>measurement of urinary 17-OH corticosteroid</desc>
 	<cat>ENDO</cat>
+	<cat>PROC</cat>
 	<c>10/16/2003</c>
+	<e>8/31/2008</e>
 </eponym>
 <eponym id="PosnerSchlossmansyndrome">
 	<name>Posner-Schlossman syndrome</name>
@@ -8809,6 +8963,13 @@
 	<desc>variant angina occurs at rest, manifests on EKG as episodic ST segment elevations, caused by coronary artery spasms with or without superimposed coronary artery disease; patients more likely to develop ventricular arrhythmias</desc>
 	<cat>CV</cat>
 	<c>3/21/1998</c>
+</eponym>
+<eponym id="Probstbundle">
+	<name>Probst bundle</name>
+	<desc>callosal longitudinal bundle, seen agenesis of the corpus callosum from fibers from the hemispheres failing to cross the midline and instead forming thick bundles</desc>
+	<cat>NEURO</cat>
+	<cat>ANAT</cat>
+	<c>12/6/2008</c>
 </eponym>
 <eponym id="Proteussyndrome">
 	<name>Proteus syndrome</name>
@@ -9108,7 +9269,9 @@
 	<name>Reitan trail test</name>
 	<desc>timed connect-the-number test for detecing alterations in mental status; time &gt;60 s pathologic in all age groups</desc>
 	<cat>NEURO</cat>
+	<cat>PROC</cat>
 	<c>7/3/2000</c>
+	<e>8/31/2008</e>
 </eponym>
 <eponym id="Reiterssyndrome">
 	<name>Reiter’s syndrome</name>
@@ -9161,6 +9324,13 @@
 	<cat>ID</cat>
 	<c>3/21/1998</c>
 	<e>8/25/2008</e>
+</eponym>
+<eponym id="Ribotslaw">
+	<name>Ribot's law</name>
+	<desc>in retrograde amnesia, recent memories are more likely to be lost; hypothesized by Ribot in 1881</desc>
+	<cat>PSYCH</cat>
+	<cat>NEURO</cat>
+	<c>2/15/2009</c>
 </eponym>
 <eponym id="Richfoci">
 	<name>Rich foci</name>
@@ -9236,6 +9406,7 @@
 	<cat>ENT</cat>
 	<cat>SIGN</cat>
 	<cat>PROC</cat>
+	<cat>NEURO</cat>
 	<c>3/21/1998</c>
 	<e>8/25/2008</e>
 </eponym>
@@ -9448,9 +9619,11 @@
 </eponym>
 <eponym id="RSHsyndrome">
 	<name>RSH syndrome</name>
-	<desc>see Smith-Lemli-Opitz syndrome</desc>
+	<desc>See Smith-Lemli-Opitz syndrome.  "RSH" refers to first initial of the first three patients with Smith-Lemli-Opitz syndrome.</desc>
 	<cat>BIOCHEM</cat>
+	<cat>SYND</cat>
 	<c>6/30/2002</c>
+	<e>8/29/2008</e>
 </eponym>
 <eponym id="RubinsteinTaybisyndrome">
 	<name>Rubinstein-Taybi syndrome</name>
@@ -9509,7 +9682,9 @@
 	<desc>serum titer rises in toxoplasma infection</desc>
 	<cat>ID</cat>
 	<cat>PATH</cat>
+	<cat>PROC</cat>
 	<c>3/9/2000</c>
+	<e>8/31/2008</e>
 </eponym>
 <eponym id="Sabouraudsagar">
 	<name>Sabouraud’s agar</name>
@@ -9745,6 +9920,12 @@
 	<cat>SYND</cat>
 	<c>8/27/2003</c>
 </eponym>
+<eponym id="SchinzelGiedionsyndrome">
+	<name>Schinzel-Giedion syndrome</name>
+	<desc>Congenital, autosomal recessive condition characterized by seizures, spasticity, and mental retardation with high protruding forehead, midface retraction, hypertelorism, and prominent ear lobes.  Described in 1978.</desc>
+	<cat>SYND</cat>
+	<c>9/14/2008</c>
+</eponym>
 <eponym id="Schirmerstest">
 	<name>Schirmer’s test</name>
 	<desc>measures quantity of tears secreted in 5 minutes in response to irritation from a filter strip placed under each lower eyelid; normal young person moistens 15 mm; 33% of elderly wet only 10 mm in 5 minutes; in Sjögren’s syndrome, &lt;5 mm in 5 min, 85% sensitivity, 85% specificity</desc>
@@ -9809,11 +9990,12 @@
 </eponym>
 <eponym id="SchultzCharltonphenomenon">
 	<name>Schultz-Charlton phenomenon</name>
-	<desc>was observed after intradermal inj of 0.1 mL of antitoxin into an area of scarlet fever rash that produced “blanching” at the site of injection within 12-24 h.  The test has to be performed during the very early phase of the eruption before exudation into the lesion made skin changes irreversible.</desc>
+	<desc>Blanching observed after intradermal inj of 0.1 mL of antitoxin into an area of scarlet fever rash within 12-24 h.  The test has to be performed during the very early phase of the eruption before exudation into the lesion made skin changes irreversible.  See also Dick test</desc>
 	<cat>ID</cat>
 	<cat>DERM</cat>
 	<cat>PROC</cat>
 	<c>2/28/2000</c>
+	<e>8/31/2008</e>
 </eponym>
 <eponym id="Schwartzsdictum">
 	<name>Schwartz’s dictum</name>
@@ -9861,6 +10043,13 @@
 	<cat>SYND</cat>
 	<c>3/6/2000</c>
 </eponym>
+<eponym id="Seidelssign">
+	<name>Seidel's sign</name>
+	<desc>in globe rupture, fluorescein streaming away from puncture site in a tear drop pattern</desc>
+	<cat>OPHTH</cat>
+	<cat>SIGN</cat>
+	<c>1/24/2009</c>
+</eponym>
 <eponym id="Seldingertechnique">
 	<name>Seldinger technique</name>
 	<desc>guide wire-assisted vascular cannulation,  i.e., small-bore needle first used to enter vessel, then wire passed through needle, needle removed, leaving wire in place for guiding cannulation of vessel, developed in 1953</desc>
@@ -9896,7 +10085,9 @@
 	<desc>nylon monofilament developed in 1950s for sensation testing; can be used in diabetic foot screening with a 5.07 monofilament which delivers 10 g of force</desc>
 	<cat>NEURO</cat>
 	<cat>ORTHO</cat>
+	<cat>PROC</cat>
 	<c>4/26/2001</c>
+	<e>8/31/2008</e>
 </eponym>
 <eponym id="Semontmaneuver">
 	<name>Semont maneuver</name>
@@ -10017,10 +10208,11 @@
 </eponym>
 <eponym id="Shohlssolution">
 	<name>Shohl’s solution</name>
-	<desc>alkalinizing citrate solution in hyporeninemic hypoaldosteronism associated with renal tubular acidosis associated with diabetic nephropathy</desc>
+	<desc>An alkalinizing citrate solution used to treat e.g. renal tubular acidosis</desc>
 	<cat>RENAL</cat>
+	<cat>PROC</cat>
 	<c>3/21/1998</c>
-	<e>4/13/2000</e>
+	<e>9/14/2008</e>
 </eponym>
 <eponym id="Shonescomplex">
 	<name>Shone’s complex</name>
@@ -10054,8 +10246,9 @@
 	<cat>ONC</cat>
 	<cat>ID</cat>
 	<cat>SYND</cat>
+	<cat>GI</cat>
 	<c>12/10/2000</c>
-	<e>8/23/2008</e>
+	<e>10/9/2008</e>
 </eponym>
 <eponym id="ShyDragersyndrome">
 	<name>Shy-Drager syndrome</name>
@@ -10159,6 +10352,13 @@
 	<c>3/21/1998</c>
 	<e>8/23/2008</e>
 </eponym>
+<eponym id="Sistrunkprocedure">
+	<name>Sistrunk procedure</name>
+	<desc>removal of benign thyroglossal duct cysts where the cyst, the central portion of the hyoid bone, and the entire thyroglossal tract are removed</desc>
+	<cat>PROC</cat>
+	<cat>ENT</cat>
+	<c>1/23/2009</c>
+</eponym>
 <eponym id="sixthdisease">
 	<name>sixth disease</name>
 	<desc>roseola infantilis, also known as exanthem subitum, caused by HHV 6, described in 1910</desc>
@@ -10222,7 +10422,9 @@
 	<name>Smith-Lemli-Opitz syndrome</name>
 	<desc>autosomal recessive disorder in cholesterol synthesis caused by mutation in the sterol delta-7-reductase gene; characterized by constellation of congenital anomalies:  microcephaly, mental retardation, hypotonia, incomplete development of the male genitalia, short nose with anteverted nostrils, failure of masculinization; also known as RSH syndrome after initials of surnames of three families with syndrome</desc>
 	<cat>BIOCHEM</cat>
+	<cat>SYND</cat>
 	<c>6/30/2002</c>
+	<e>8/29/2008</e>
 </eponym>
 <eponym id="SmithMagenissyndrome">
 	<name>Smith-Magenis syndrome</name>
@@ -10259,9 +10461,11 @@
 </eponym>
 <eponym id="Sotossyndrome">
 	<name>Sotos syndrome</name>
-	<desc>cerebral gigantism; associated with mutation in NSD1</desc>
+	<desc>cerebral gigantism with excessive growth in first 2-3 years of life, mild mental retardation, and delayed development; associated with mutation in NSD1; shares features with Weaver syndrome</desc>
 	<cat>NEURO</cat>
+	<cat>SYND</cat>
 	<c>3/4/2003</c>
+	<e>1/24/2009</e>
 </eponym>
 <eponym id="Spanishflu">
 	<name>Spanish flu</name>
@@ -10389,11 +10593,11 @@
 </eponym>
 <eponym id="StewartTrevessyndrome">
 	<name>Stewart-Treves syndrome</name>
-	<desc>lymphedema following mastectomy leading to lymphangiosarcoma</desc>
+	<desc>Angiosarcoma arising out of chronic lymphedema; e.g. following mastectomy.  Described in 1948.</desc>
 	<cat>ONC</cat>
 	<cat>SYND</cat>
 	<c>2/28/2000</c>
-	<e>8/21/2008</e>
+	<e>8/31/2008</e>
 </eponym>
 <eponym id="Sticklersyndrome">
 	<name>Stickler syndrome</name>
@@ -10715,6 +10919,12 @@
 	<cat>RHEUM</cat>
 	<cat>SYND</cat>
 	<c>3/21/1998</c>
+</eponym>
+<eponym id="Tillauxfracture">
+	<name>Tillaux fracture</name>
+	<desc>fracture seen in older adolescents in which the anteriolateral portion of the distal tibial epiphyseal plate is avulsed from the medial portion of the plate by the anterior tibiofibular ligament</desc>
+	<cat>ORTHO</cat>
+	<c>1/24/2009</c>
 </eponym>
 <eponym id="Tinelssign">
 	<name>Tinel’s sign</name>
@@ -11217,11 +11427,12 @@
 </eponym>
 <eponym id="Wadatest">
 	<name>Wada test</name>
-	<desc>test for hemispheric dominance for language by injecting amobarbital into carotid artery</desc>
+	<desc>A test for hemispheric dominance for language by injecting amobarbital into carotid artery, one hemisphere at a time; the barbiturate shuts down that hemisphere.  Initially described by Wada in 1949.</desc>
 	<cat>NEURO</cat>
 	<cat>SIGN</cat>
 	<cat>PROC</cat>
 	<c>3/5/2000</c>
+	<e>9/14/2008</e>
 </eponym>
 <eponym id="Waddellssigns">
 	<name>Waddell’s signs</name>
@@ -11336,11 +11547,18 @@
 </eponym>
 <eponym id="WatsonSchwartzreaction">
 	<name>Watson-Schwartz reaction</name>
-	<desc>screening test for porphobilinogen (elevated for example in acute intermittent porphyria); mixing 4-dimethylaminobenzaldehyde with urine and then extract with chloroform; porphobilinogen extracts into upper aqueous layer giving it a pink color and urobilinogen extracts into chloroform layer; 50% positive at urinary concentration 5x upper limit of normal and consistently positive 10-20x upper limit of normal</desc>
+	<desc>screening test for porphobilinogen (elevated for example in acute intermittent porphyria); mixing 4-dimethylaminobenzaldehyde with urine and then extract with chloroform; porphobilinogen extracts into upper aqueous layer giving it a pink color and urobilinogen extracts into chloroform layer; 50% positive at urinary concentration 5x upper limit of normal and consistently positive 10-20x upper limit of normal; see also Hoesch test</desc>
 	<cat>HEME</cat>
 	<cat>BIOCHEM</cat>
+	<cat>PROC</cat>
 	<c>8/8/2001</c>
-	<e>8/23/2008</e>
+	<e>10/12/2008</e>
+</eponym>
+<eponym id="Weaversyndrome">
+	<name>Weaver syndrome</name>
+	<desc>Congenital disorder associated with rapid growth beginning in the prenatal period, unusual craniofacial appearance, hoarse and low-pitched cry, and hypertonia with camptodactyly.  Occasionally has mutations in NSD1 (which is same mutation in Sotos syndrome)</desc>
+	<cat>SYND</cat>
+	<c>1/24/2009</c>
 </eponym>
 <eponym id="Weberfracture">
 	<name>Weber fracture</name>
@@ -11361,8 +11579,9 @@
 	<cat>ENT</cat>
 	<cat>SIGN</cat>
 	<cat>PROC</cat>
+	<cat>NEURO</cat>
 	<c>3/21/1998</c>
-	<e>5/3/2002</e>
+	<e>8/31/2008</e>
 </eponym>
 <eponym id="WeberChristiandisease">
 	<name>Weber-Christian disease</name>
@@ -11863,6 +12082,14 @@
 	<cat>ANAT</cat>
 	<cat>ENDO</cat>
 	<c>3/29/2001</c>
+</eponym>
+<eponym id="Zuckerkandltubercleof">
+	<name>Zuckerkandl, tubercle of</name>
+	<desc>part of thyroid that tracts posterior to the sides of the trachea and esophagus; found in nearly 2/3 of patients undergoing thyroid surgery, usually enlarges lateral to recurrent laryngeal nerve; described in 1902</desc>
+	<cat>ANAT</cat>
+	<cat>ENT</cat>
+	<cat>ONC</cat>
+	<c>1/23/2009</c>
 </eponym>
 
 </root>

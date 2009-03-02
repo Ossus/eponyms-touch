@@ -15,6 +15,9 @@
 
 @implementation TouchTableView
 
+@synthesize indexPathOfLastSelectedRow;
+
+
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	[super touchesBegan:touches withEvent:event];
@@ -34,10 +37,7 @@
 		NSIndexPath *touchedRow = [self indexPathForRowAtPoint:[touch locationInView:self]];
 		
 		// second tap - perform action and de-select the cell selected on first tap
-		if(2 == touch.tapCount) {
-			[self selectRowAtIndexPath:touchedRow animated:NO scrollPosition:UITableViewScrollPositionNone];
-			// otherwise, for too fast double taps, the cell will not visually update, not even after calling setNeedsDisplay
-			
+		if((2 == touch.tapCount) && (indexPathOfLastSelectedRow == touchedRow)) {
 			id tempDelegate = self.delegate;		// to circumvent a compiler warning (method not found in protocol)
 			if(tempDelegate && [tempDelegate conformsToProtocol:@protocol(TouchTableViewDelegate)]) {
 				[tempDelegate tableView:self didDoubleTapRowAtIndexPath:touchedRow];
@@ -50,6 +50,8 @@
 		else {
 			if(touch.window) {			// the method seems to be called 2 times, but once with window=nil, so just ignore that second call
 				[super touchesEnded:nil withEvent:event];
+				self.indexPathOfLastSelectedRow = touchedRow;
+				[self performSelectorInBackground:@selector(immediatelySelectRowAtIndexPath:) withObject:touchedRow];
 				[self performSelector:@selector(didSelectRowAtIndexPath:) withObject:touchedRow afterDelay:0.25];
 			}
 		}
@@ -61,15 +63,19 @@
 	}
 }
 
+- (void) immediatelySelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	[self selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+	[pool drain];
+}
+
 - (void) didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	[self selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-	
-	if(self.delegate) {
+	if(self.delegate && (indexPath == indexPathOfLastSelectedRow)) {
 		[self.delegate tableView:self didSelectRowAtIndexPath:indexPath];
 	}
 }
-
 
 
 @end
