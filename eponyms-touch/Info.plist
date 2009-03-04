@@ -23,7 +23,7 @@
 	<key>CFBundleVersion</key>
 	<string>1.1</string>
 	<key>SubversionRevision</key>
-	<string>r36</string>
+	<string>r43</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMainNibFile</key>
@@ -35,6 +35,6 @@
 	<key>eponymXMLURL</key>
 	<string>http://help.you.i.can.googlepages.com/eponyms.xml</string>
 	<key>numberOfIncludedEponyms</key>
-	<string>1634</string>
+	<string>1662</string>
 </dict>
 </plist>
