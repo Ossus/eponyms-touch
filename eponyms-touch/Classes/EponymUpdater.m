@@ -15,6 +15,8 @@
 #import "InfoViewController.h"
 #import "eponyms_touchAppDelegate.h"
 
+#define URL_LOAD_TIMEOUT 20.0
+
 
 
 @interface EponymUpdater (Private)
@@ -127,15 +129,13 @@ static sqlite3_stmt *star_eponym_query = nil;
 		NSURL *url;
 		if(2 == updateAction) {
 			url = self.eponymXMLURL;
-			//		url = [NSURL URLWithString:@"http://127.0.0.1/pp/Projects/Eponyms/XML/eponyms.xml"];			// DEBUG
 		}
 		else {
 			url = self.eponymUpdateCheckURL;
-			//		url = [NSURL URLWithString:@"http://127.0.0.1/pp/Projects/Eponyms/XML/eponyms_info.xml"];		// DEBUG
 		}
 		
 		// create the request and start downloading by making the connection
-		NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+		NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:URL_LOAD_TIMEOUT];
 		self.myConnection = [[[NSURLConnection alloc] initWithRequest:urlRequest delegate:self] autorelease];
 		
 		if(!myConnection) {

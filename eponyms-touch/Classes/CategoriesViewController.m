@@ -56,9 +56,7 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 	[delegate setEponymShown:0];
 	
 	if(atLaunchScrollTo > 0.0) {
-		CGRect rct = [myTableView bounds];
-		rct.origin.y = atLaunchScrollTo;
-		[myTableView setBounds:rct];
+		myTableView.contentOffset = CGPointMake(0.0, atLaunchScrollTo);
 		atLaunchScrollTo = 0.0;
 	}
 }
@@ -66,7 +64,11 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation
 {
-	return YES;
+	if(((eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate]).allowAutoRotate) {
+		return YES;
+	}
+	
+	return ((interfaceOrientation == UIInterfaceOrientationPortrait) || (interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown));
 }
 
 

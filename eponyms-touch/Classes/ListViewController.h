@@ -24,6 +24,7 @@
 	UISearchBar *mySearchBar;
 	UIBarButtonItem *initSearchButton;
 	UIBarButtonItem *abortSearchButton;
+	NSTimer *searchTimeoutTimer;
 	
 	CGFloat atLaunchScrollTo;
 	BOOL keyboardShown;
@@ -38,6 +39,7 @@
 @property (nonatomic, retain) UISearchBar *mySearchBar;
 @property (nonatomic, retain) UIBarButtonItem *initSearchButton;
 @property (nonatomic, retain) UIBarButtonItem *abortSearchButton;
+@property (nonatomic, retain) NSTimer *searchTimeoutTimer;
 
 @property (nonatomic, assign) CGFloat atLaunchScrollTo;
 

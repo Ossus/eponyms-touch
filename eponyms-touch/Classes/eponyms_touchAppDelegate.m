@@ -47,7 +47,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 
 @implementation eponyms_touchAppDelegate
 
-@synthesize window, database, myUpdater, usingEponymsOf, shouldAutoCheck, iAmUpdating, didCheckForNewEponyms, newEponymsAvailable;
+@synthesize window, database, myUpdater, usingEponymsOf, allowAutoRotate, shouldAutoCheck, iAmUpdating, didCheckForNewEponyms, newEponymsAvailable;
 @dynamic categoryShown;
 @synthesize navigationController, categoriesController, listController, eponymController, infoController;
 @synthesize categoryIDShown, eponymShown, categoryArray, eponymArray, eponymSectionArray, loadedEponyms, starImageListActive, starImageEponymActive, starImageEponymInactive;
@@ -76,6 +76,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		shownCategoryAtQuit = -100;
 		shownEponymAtQuit = 0;
 		scrollPositionAtQuit = 0.0;
+		self.allowAutoRotate = YES;
 	}
 	
 	// Prefs were there
@@ -87,6 +88,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		shownCategoryAtQuit = [[NSUserDefaults standardUserDefaults] integerForKey:@"shownCategoryAtQuit"];
 		shownEponymAtQuit = [[NSUserDefaults standardUserDefaults] integerForKey:@"shownEponymAtQuit"];
 		scrollPositionAtQuit = [[NSUserDefaults standardUserDefaults] floatForKey:@"scrollPositionAtQuit"];
+		self.allowAutoRotate = [[NSUserDefaults standardUserDefaults] boolForKey:@"allowAutoRotate"];
 	}
 	
 	
@@ -219,6 +221,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	[defaults setInteger:categoryIDShown forKey:@"shownCategoryAtQuit"];
 	[defaults setInteger:eponymShown forKey:@"shownEponymAtQuit"];
 	[defaults setFloat:bnds.origin.y forKey:@"scrollPositionAtQuit"];
+	[defaults setBool:allowAutoRotate forKey:@"allowAutoRotate"];
 	[defaults synchronize];
 }
 #pragma mark -
@@ -340,6 +343,9 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	if(database) {
 		return NO;
 	}
+	
+	// needed to load the unicode extensions
+	sqlite3_unicode_load();
 	
 	NSString *sqlPath = [self databaseFilePath];
 	NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -474,7 +480,6 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 
 - (void) loadEponymsOfCategory:(EponymCategory *)category containingString:(NSString *)searchString animated:(BOOL)animated
 {
-	NSLog(@"load eponyms of cat %@", category);
 	[eponymArray removeAllObjects];
 	[eponymSectionArray removeAllObjects];
 	[listController cacheEponyms:nil andHeaders:nil];
@@ -686,6 +691,8 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		sqlite3_close(database);
 		database = nil;
 	}
+	
+	sqlite3_unicode_free();
 }
 
 - (void) deleteDatabaseFile

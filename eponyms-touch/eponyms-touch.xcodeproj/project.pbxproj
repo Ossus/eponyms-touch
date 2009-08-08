@@ -21,7 +21,6 @@
 		EE2DE7530E1C297F00D97653 /* EponymViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2DE7520E1C297F00D97653 /* EponymViewController.m */; };
 		EE2DE7AC0E1C2F7A00D97653 /* CategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2DE7AB0E1C2F7A00D97653 /* CategoriesViewController.m */; };
 		EE2DE9DE0E2125C700D97653 /* Eponym.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2DE9DD0E2125C700D97653 /* Eponym.m */; };
-		EE2DEAF20E22302500D97653 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EE2DEAF10E22302500D97653 /* libsqlite3.dylib */; };
 		EE2DEDFA0E229B9B00D97653 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EE2DEDF90E229B9B00D97653 /* Icon.png */; };
 		EE2DEDFF0E229DB700D97653 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = EE2DEDFE0E229DB700D97653 /* Default.png */; };
 		EE380FA60E97B3180066BA6E /* eponyms_info.xml in Resources */ = {isa = PBXBuildFile; fileRef = EE380FA50E97B3180066BA6E /* eponyms_info.xml */; };
@@ -32,6 +31,8 @@
 		EE64C7C00E2680D40000BC8D /* eponyms.xml in Resources */ = {isa = PBXBuildFile; fileRef = EE64C7BF0E2680D40000BC8D /* eponyms.xml */; };
 		EE66414F0E62A2220047D7ED /* Star_eponym_active.png in Resources */ = {isa = PBXBuildFile; fileRef = EE66414D0E62A2220047D7ED /* Star_eponym_active.png */; };
 		EE6641500E62A2220047D7ED /* Star_eponym_inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = EE66414E0E62A2220047D7ED /* Star_eponym_inactive.png */; };
+		EE80AE12102605F3007352AD /* libSQLiteUnicode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE80ADF41025FF93007352AD /* libSQLiteUnicode.a */; };
+		EE80AE1A10260650007352AD /* libSQLiteUnicode.a in Resources */ = {isa = PBXBuildFile; fileRef = EE80ADF41025FF93007352AD /* libSQLiteUnicode.a */; };
 		EE89CA000E6059280016A781 /* EponymCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = EE89C9FF0E6059280016A781 /* EponymCategory.m */; };
 		EE89CD5F0E6170EE0016A781 /* TouchTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE89CD5E0E6170EE0016A781 /* TouchTableView.m */; };
 		EE89CE9D0E618B2C0016A781 /* Star_list_active.png in Resources */ = {isa = PBXBuildFile; fileRef = EE89CE9C0E618B2C0016A781 /* Star_list_active.png */; };
@@ -40,6 +41,23 @@
 		EED69F830E2BF41900BEF0C4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED69F820E2BF41900BEF0C4 /* CoreGraphics.framework */; };
 		EEF9F2940EA74928002F024E /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF9F2930EA74928002F024E /* Entitlements.plist */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EE80ADF31025FF93007352AD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EE80AD071024C7C4007352AD /* SQLiteUnicode.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = SQLiteUnicode;
+		};
+		EE80AE10102605E2007352AD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EE80AD071024C7C4007352AD /* SQLiteUnicode.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = SQLiteUnicode;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -68,7 +86,6 @@
 		EE2DE7AB0E1C2F7A00D97653 /* CategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesViewController.m; sourceTree = "<group>"; };
 		EE2DE9DC0E2125C700D97653 /* Eponym.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Eponym.h; sourceTree = "<group>"; };
 		EE2DE9DD0E2125C700D97653 /* Eponym.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Eponym.m; sourceTree = "<group>"; };
-		EE2DEAF10E22302500D97653 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = /usr/lib/libsqlite3.dylib; sourceTree = "<absolute>"; };
 		EE2DEDF90E229B9B00D97653 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		EE2DEDFE0E229DB700D97653 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		EE380FA50E97B3180066BA6E /* eponyms_info.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = eponyms_info.xml; sourceTree = "<group>"; };
@@ -79,6 +96,7 @@
 		EE64C7BF0E2680D40000BC8D /* eponyms.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = eponyms.xml; sourceTree = "<group>"; };
 		EE66414D0E62A2220047D7ED /* Star_eponym_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Star_eponym_active.png; sourceTree = "<group>"; };
 		EE66414E0E62A2220047D7ED /* Star_eponym_inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Star_eponym_inactive.png; sourceTree = "<group>"; };
+		EE80AD071024C7C4007352AD /* SQLiteUnicode.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SQLiteUnicode.xcodeproj; path = ../SQLiteUnicode/SQLiteUnicode.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EE89C9E70E6058A60016A781 /* EponymCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EponymCategory.h; sourceTree = "<group>"; };
 		EE89C9FF0E6059280016A781 /* EponymCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EponymCategory.m; sourceTree = "<group>"; };
 		EE89CD5D0E6170EE0016A781 /* TouchTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchTableView.h; sourceTree = "<group>"; };
@@ -96,9 +114,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE80AE12102605F3007352AD /* libSQLiteUnicode.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
-				EE2DEAF20E22302500D97653 /* libsqlite3.dylib in Frameworks */,
 				EED69F830E2BF41900BEF0C4 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -115,9 +133,9 @@
 				EE89C9FF0E6059280016A781 /* EponymCategory.m */,
 				EE2DE9DC0E2125C700D97653 /* Eponym.h */,
 				EE2DE9DD0E2125C700D97653 /* Eponym.m */,
+				EEBA8F120E66E727002D6DDC /* EponymUpdaterDelegate.h */,
 				EE1443E80E23A576003EA64C /* EponymUpdater.h */,
 				EE1443E90E23A576003EA64C /* EponymUpdater.m */,
-				EEBA8F120E66E727002D6DDC /* EponymUpdaterDelegate.h */,
 				EE2DE7AD0E1C2F8600D97653 /* View Controllers */,
 				EE89CD880E6174C00016A781 /* Subclasses */,
 			);
@@ -135,6 +153,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				EE80AD071024C7C4007352AD /* SQLiteUnicode.xcodeproj */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				EE2DE6B30E1AE30C00D97653 /* Images */,
@@ -174,7 +193,6 @@
 			isa = PBXGroup;
 			children = (
 				EED69F820E2BF41900BEF0C4 /* CoreGraphics.framework */,
-				EE2DEAF10E22302500D97653 /* libsqlite3.dylib */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 			);
@@ -212,6 +230,14 @@
 			name = "View Controllers";
 			sourceTree = "<group>";
 		};
+		EE80ADF01025FF93007352AD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EE80ADF41025FF93007352AD /* libSQLiteUnicode.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		EE89CD880E6174C00016A781 /* Subclasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,6 +264,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				EE80AE11102605E2007352AD /* PBXTargetDependency */,
 			);
 			name = "eponyms-touch";
 			productName = "eponyms-touch";
@@ -254,12 +281,28 @@
 			hasScannedForEncodings = 1;
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = EE80ADF01025FF93007352AD /* Products */;
+					ProjectRef = EE80AD071024C7C4007352AD /* SQLiteUnicode.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* eponyms-touch */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		EE80ADF41025FF93007352AD /* libSQLiteUnicode.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSQLiteUnicode.a;
+			remoteRef = EE80ADF31025FF93007352AD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1D60588D0D05DD3D006BFB54 /* Resources */ = {
@@ -283,6 +326,7 @@
 				EE8E56750E6CA69600928D90 /* ElevatedBar.png in Resources */,
 				EE380FA60E97B3180066BA6E /* eponyms_info.xml in Resources */,
 				EEF9F2940EA74928002F024E /* Entitlements.plist in Resources */,
+				EE80AE1A10260650007352AD /* libSQLiteUnicode.a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,21 +353,33 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		EE80AE11102605E2007352AD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SQLiteUnicode;
+			targetProxy = EE80AE10102605E2007352AD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Pascal Pfiffner";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				PRODUCT_NAME = "eponyms-touch";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "483EB8D4-3E0A-4517-8B97-3586F517F193";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
 			name = Debug;
 		};
@@ -335,6 +391,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				PRODUCT_NAME = "eponyms-touch";
 			};
 			name = Release;
@@ -343,13 +403,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Pascal Pfiffner";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					SQLITE_ENABLE_UNICODE,
+					SQLITE_CORE,
+				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "483EB8D4-3E0A-4517-8B97-3586F517F193";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos2.0;
 			};
 			name = Debug;
@@ -359,9 +426,16 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					SQLITE_ENABLE_UNICODE,
+					SQLITE_CORE,
+				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				SDKROOT = iphoneos2.0;
 			};
@@ -372,9 +446,16 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					SQLITE_ENABLE_UNICODE,
+					SQLITE_CORE,
+				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7A058CF4-A0B2-409A-9C88-65B87B5C786B";
 				SDKROOT = iphoneos2.0;
@@ -389,6 +470,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				PRODUCT_NAME = "eponyms-touch";
 			};
 			name = Distribution;
@@ -398,9 +483,16 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					SQLITE_ENABLE_UNICODE,
+					SQLITE_CORE,
+				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FB366378-2A0A-4275-A530-4973CB494D66";
 				SDKROOT = iphoneos2.0;
@@ -416,6 +508,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				PRODUCT_NAME = "eponyms-touch";
 			};
 			name = AdHoc;

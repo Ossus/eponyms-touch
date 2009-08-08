@@ -31,6 +31,7 @@
 	
 	UISegmentedControl *tabSegments;
 	IBOutlet UIView *infoView;
+	IBOutlet UIView *updatesView;
 	IBOutlet UIView *optionsView;
 	IBOutlet UIImageView *backgroundImage;
 	
@@ -43,7 +44,7 @@
 	IBOutlet UIButton *projectWebsiteButton;
 	IBOutlet UIButton *eponymsDotNetButton;
 	
-	// Options
+	// Updates
 	IBOutlet UILabel *lastCheckLabel;
 	IBOutlet UILabel *lastUpdateLabel;
 	
@@ -52,6 +53,9 @@
 	
 	IBOutlet UIButton *updateButton;
 	IBOutlet UISwitch *autocheckSwitch;
+	
+	// Options
+	IBOutlet UISwitch *allowRotateSwitch;
 }
 
 @property (nonatomic, assign) id delegate;
@@ -77,6 +81,7 @@
 // Options
 - (IBAction) performUpdateAction:(id)sender;
 - (IBAction) autoCheckSwitchToggled:(id)sender;
+- (IBAction) allowRotateSwitchToggled:(id)sender;
 
 // Links
 - (IBAction) openProjectWebsite:(id)sender;

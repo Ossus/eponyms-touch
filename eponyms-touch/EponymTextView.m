@@ -30,36 +30,51 @@
 	return self;
 }
 
-// This is why we're even here
+- (void) dealloc
+{
+	[borderColor release];
+	[fillColor release];
+	
+	[super dealloc];
+}
+#pragma mark -
+
+
+
+#pragma mark Drawing
 - (void) drawRect:(CGRect) rect
 {
 	CGRect localRect = CGRectInset(rect, self.borderWidth / 2, self.borderWidth / 2);
 	CGContextRef context = UIGraphicsGetCurrentContext();
+	
+	CGFloat bWidth = self.borderWidth;
+	CGFloat bRad = self.borderRadius;
+	
 	CGContextSaveGState(context);
 	
-	CGContextTranslateCTM(context, self.borderWidth / 2, self.borderWidth / 2);
+	CGContextTranslateCTM(context, bWidth / 2, bWidth / 2);
 	
 	// create the border - we start at the top left edge (without including the edge itself) and move around counter-clockwise
-	CGContextMoveToPoint(context, 0.0, self.borderRadius);
-	CGContextAddLineToPoint(context, 0.0, (localRect.size.height - self.borderRadius));
+	CGContextMoveToPoint(context, 0.0, bRad);
+	CGContextAddLineToPoint(context, 0.0, (localRect.size.height - bRad));
 	CGContextAddCurveToPoint(context, 0.0, localRect.size.height,
-							 self.borderRadius, localRect.size.height,
-							 self.borderRadius, localRect.size.height);
+							 bRad, localRect.size.height,
+							 bRad, localRect.size.height);
 	
-	CGContextAddLineToPoint(context, (localRect.size.width - self.borderRadius), localRect.size.height);
+	CGContextAddLineToPoint(context, (localRect.size.width - bRad), localRect.size.height);
 	CGContextAddCurveToPoint(context, localRect.size.width, localRect.size.height,
-							 localRect.size.width, (localRect.size.height - self.borderRadius),
-							 localRect.size.width, (localRect.size.height - self.borderRadius));
+							 localRect.size.width, (localRect.size.height - bRad),
+							 localRect.size.width, (localRect.size.height - bRad));
 	
-	CGContextAddLineToPoint(context, localRect.size.width, self.borderRadius);
+	CGContextAddLineToPoint(context, localRect.size.width, bRad);
 	CGContextAddCurveToPoint(context, localRect.size.width, 0.0,
-							 localRect.size.width - self.borderRadius, 0.0,
-							 localRect.size.width - self.borderRadius, 0.0);
+							 localRect.size.width - bRad, 0.0,
+							 localRect.size.width - bRad, 0.0);
 	
-	CGContextAddLineToPoint(context, self.borderRadius, 0.0);
+	CGContextAddLineToPoint(context, bRad, 0.0);
 	CGContextAddCurveToPoint(context, 0.0, 0.0,
-							 0.0, self.borderRadius,
-							 0.0, self.borderRadius);
+							 0.0, bRad,
+							 0.0, bRad);
 	
 	CGContextClosePath(context);
 	
@@ -68,23 +83,9 @@
 	// draw
 	[self.fillColor setFill];
 	[self.borderColor setStroke];
-	CGContextSetLineWidth(context, self.borderWidth);
+	CGContextSetLineWidth(context, bWidth);
 	
 	CGContextDrawPath(context, kCGPathFillStroke);
-}
-
-
-/*- (CGSize) sizeThatFits:(CGSize)size
-{
-}*/
-
-
-- (void) dealloc
-{
-	[borderColor release];			borderColor = nil;
-	[fillColor release];			fillColor = nil;
-	
-	[super dealloc];
 }
 
 

@@ -22,6 +22,8 @@ static NSString *MyCellIdentifier = @"EponymCell";
 
 @interface ListViewController (Private)
 
+- (void) searchForString:(NSString *)searchString;
+- (void) reallySearchForString;
 - (void) abortSearch;
 - (void) registerForKeyboardNotifications;
 - (void) forgetAboutKeyboardNotifications;
@@ -33,7 +35,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 
 @implementation ListViewController
 
-@synthesize delegate, myTableView, mySearchBar, initSearchButton, abortSearchButton, atLaunchScrollTo;
+@synthesize delegate, myTableView, mySearchBar, initSearchButton, abortSearchButton, searchTimeoutTimer, atLaunchScrollTo;
 @synthesize eponymArrayCache, eponymSectionArrayCache;
 
 
@@ -60,6 +62,10 @@ static NSString *MyCellIdentifier = @"EponymCell";
 	self.mySearchBar = nil;
 	self.initSearchButton = nil;
 	self.abortSearchButton = nil;
+	if(searchTimeoutTimer && [searchTimeoutTimer isValid]) {
+		[searchTimeoutTimer invalidate];
+	}
+	self.searchTimeoutTimer = nil;
 	
 	[super dealloc];
 }
@@ -125,6 +131,9 @@ static NSString *MyCellIdentifier = @"EponymCell";
 	
 	// switch off
 	else {
+		if(searchTimeoutTimer && [searchTimeoutTimer isValid]) {
+			[searchTimeoutTimer invalidate];
+		}
 		if(![mySearchBar isFirstResponder]) {
 			[delegate loadEponymsOfCurrentCategoryContainingString:nil animated:NO];
 		}
@@ -144,6 +153,28 @@ static NSString *MyCellIdentifier = @"EponymCell";
 - (void) initSearch
 {
 	[self switchToSearchMode:YES];
+}
+
+- (void) searchForString:(NSString *)searchText
+{
+	if(searchTimeoutTimer && [searchTimeoutTimer isValid]) {
+		[searchTimeoutTimer invalidate];
+	}
+	
+	self.searchTimeoutTimer = [NSTimer timerWithTimeInterval:0.3
+													  target:self
+													selector:@selector(reallySearchForString)
+													userInfo:searchText
+													 repeats:NO];
+	[[NSRunLoop currentRunLoop] addTimer:searchTimeoutTimer forMode:NSDefaultRunLoopMode];
+}
+
+- (void) reallySearchForString
+{
+	if(searchTimeoutTimer) {
+		NSString *searchText = [searchTimeoutTimer userInfo];
+		[delegate loadEponymsOfCurrentCategoryContainingString:searchText animated:NO];
+	}
 }
 
 - (void) abortSearch
@@ -167,9 +198,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 	
 	// remembers scroll position across restarts
 	if(atLaunchScrollTo > 0.0) {
-		CGRect rct = [myTableView bounds];
-		rct.origin.y = atLaunchScrollTo;
-		[myTableView setBounds:rct];
+		myTableView.contentOffset = CGPointMake(0.0, atLaunchScrollTo);
 		atLaunchScrollTo = 0.0;
 	}
 	
@@ -183,7 +212,11 @@ static NSString *MyCellIdentifier = @"EponymCell";
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	return YES;
+	if(((eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate]).allowAutoRotate) {
+		return YES;
+	}
+	
+	return ((interfaceOrientation == UIInterfaceOrientationPortrait) || (interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown));
 }
 
 - (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
@@ -357,9 +390,6 @@ static NSString *MyCellIdentifier = @"EponymCell";
 #pragma mark UISearchBar delegate methods
 - (void) searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
-	if(![searchBar.text isEqualToString:@""]) {
-		[delegate loadEponymsOfCurrentCategoryContainingString:searchBar.text animated:NO];
-	}
 }
 
 - (void) searchBarTextDidEndEditing:(UISearchBar *)searchBar
@@ -369,7 +399,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 // we want live search so we do our searching here, not in the searchBarTextDidEndEditing delegate method
 - (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-	[delegate loadEponymsOfCurrentCategoryContainingString:searchText animated:NO];
+	[self searchForString:searchText];
 }
 
 - (void) searchBarSearchButtonClicked:(UISearchBar *)searchBar

@@ -21,19 +21,23 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.1</string>
+	<string>1.2</string>
 	<key>SubversionRevision</key>
-	<string>r43</string>
+	<string>r52</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>projectWebsite</key>
 	<string>http://eponyms-touch.googlecode.com/</string>
-	<key>eponymUpdateCheckURL</key>
+	<key>eponymUpdateCheckURL ORIGINAL</key>
 	<string>http://help.you.i.can.googlepages.com/eponyms_info.xml</string>
-	<key>eponymXMLURL</key>
+	<key>eponymUpdateCheckURL</key>
+	<string>http://127.0.0.1/pp/Projects/Eponyms/XML/eponyms_info.xml</string>
+	<key>eponymXMLURL ORIGINAL</key>
 	<string>http://help.you.i.can.googlepages.com/eponyms.xml</string>
+	<key>eponymXMLURL</key>
+	<string>http://127.0.0.1/pp/Projects/Eponyms/XML/eponyms.xml</string>
 	<key>numberOfIncludedEponyms</key>
 	<string>1662</string>
 </dict>

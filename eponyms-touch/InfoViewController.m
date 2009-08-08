@@ -19,11 +19,13 @@
 
 
 @interface InfoViewController (Private)
+
 - (void) adjustContentToOrientation:(UIInterfaceOrientation)newOrientation animated:(BOOL)animated;
 - (void) switchToTab:(NSUInteger)tab;
 - (void) lockGUI:(BOOL)lock;
 - (void) newEponymsAreAvailable:(BOOL)available;
 - (void) resetStatusElementsWithButtonTitle:(NSString *)buttonTitle;
+
 @end
 
 
@@ -41,14 +43,15 @@
 		askingToAbortImport = NO;
 		
 		// compose the navigation bar
-		NSArray *possibleTabs = [NSArray arrayWithObjects:@"About", @"Update", nil];
+		NSArray *possibleTabs = [NSArray arrayWithObjects:@"About", @"Update", @"Options", nil];
 		self.tabSegments = [[UISegmentedControl alloc] initWithItems:possibleTabs];
 		tabSegments.selectedSegmentIndex = 0;
 		tabSegments.segmentedControlStyle = UISegmentedControlStyleBar;
-		tabSegments.frame = CGRectMake(0.0, 0.0, 180.0, 30.0);
+		tabSegments.frame = CGRectMake(0.0, 0.0, 220.0, 30.0);
+		tabSegments.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		[tabSegments addTarget:self action:@selector(tabChanged:) forControlEvents:UIControlEventValueChanged];
 		
-		self.navigationItem.titleView = tabSegments;
+		self.navigationItem.titleView	= tabSegments;
 		self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(dismissMe:)] autorelease];
 		
 		// NSBundle Info.plist
@@ -66,6 +69,7 @@
 	
 	// IBOutlets
 	[infoView release];
+	[updatesView release];
 	[optionsView release];
 	[backgroundImage release];
 	
@@ -85,6 +89,8 @@
 	
 	[updateButton release];
 	[autocheckSwitch release];
+	
+	[allowRotateSwitch release];
 	
 	[super dealloc];
 }
@@ -146,9 +152,12 @@
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	[self adjustContentToOrientation:interfaceOrientation animated:YES];
+	if(((eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate]).allowAutoRotate) {
+		[self adjustContentToOrientation:interfaceOrientation animated:YES];
+		return YES;
+	}
 	
-	return YES;
+	return ((interfaceOrientation == UIInterfaceOrientationPortrait) || (interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown));
 }
 
 - (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
@@ -248,10 +257,23 @@
 - (void) switchToTab:(NSUInteger)tab
 {
 	tabSegments.selectedSegmentIndex = tab;
+	if([backgroundImage superview]) {
+		[backgroundImage removeFromSuperview];
+	}
 	
 	// Show the About page
 	if(0 == tab) {
 		self.view = infoView;
+	}
+	
+	// Show the update tab
+	else if(1 == tab) {
+		self.view = updatesView;
+		
+		// adjust the elements
+		if([delegate didCheckForNewEponyms]) {
+			[self newEponymsAreAvailable:[delegate newEponymsAvailable]];
+		}
 	}
 	
 	// Show the options
@@ -259,9 +281,7 @@
 		self.view = optionsView;
 		
 		// adjust the elements
-		if([delegate didCheckForNewEponyms]) {
-			[self newEponymsAreAvailable:[delegate newEponymsAvailable]];
-		}
+		allowRotateSwitch.on = ((eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate]).allowAutoRotate;
 	}
 	
 	[self.view insertSubview:backgroundImage atIndex:0];
@@ -386,6 +406,12 @@
 {
 	UISwitch *mySwitch = sender;
 	[delegate setShouldAutoCheck:mySwitch.on];
+}
+
+- (IBAction) allowRotateSwitchToggled:(id)sender
+{
+	UISwitch *mySwitch = sender;
+	((eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate]).allowAutoRotate = mySwitch.on;
 }
 #pragma mark -
 

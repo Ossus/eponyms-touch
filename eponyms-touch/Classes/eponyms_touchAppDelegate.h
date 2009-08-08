@@ -29,6 +29,7 @@
 	
 	// Prefs
 	BOOL shouldAutoCheck;
+	BOOL allowAutoRotate;
 	
 	// Eponyms
 	EponymCategory *categoryShown;
@@ -64,6 +65,7 @@
 @property (nonatomic, assign) sqlite3 *database;
 
 @property (nonatomic, assign) BOOL shouldAutoCheck;
+@property (nonatomic, assign) BOOL allowAutoRotate;
 
 @property (nonatomic, retain) EponymCategory *categoryShown;
 @property (nonatomic, assign) NSInteger categoryIDShown;
