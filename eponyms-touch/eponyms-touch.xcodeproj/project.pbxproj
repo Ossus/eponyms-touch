@@ -12,7 +12,6 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
-		EE07C8B30E2C7FA3006F7F8A /* EponymTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE07C8B20E2C7FA3006F7F8A /* EponymTextView.m */; };
 		EE14428F0E236E10003EA64C /* InfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE14428E0E236E10003EA64C /* InfoView.xib */; };
 		EE1443EA0E23A576003EA64C /* EponymUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1443E90E23A576003EA64C /* EponymUpdater.m */; };
 		EE2DE6B50E1AE31800D97653 /* Eponyms.png in Resources */ = {isa = PBXBuildFile; fileRef = EE2DE6B40E1AE31800D97653 /* Eponyms.png */; };
@@ -28,11 +27,45 @@
 		EE3BC4430E6ADECB0051B69D /* InfoBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = EE3BC4420E6ADECB0051B69D /* InfoBackground.png */; };
 		EE4B74EA0E2EB35500F7B157 /* NOTICE.txt in Resources */ = {isa = PBXBuildFile; fileRef = EE4B74E90E2EB35500F7B157 /* NOTICE.txt */; };
 		EE4B74F00E2EB53800F7B157 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = EE4B74EF0E2EB53800F7B157 /* LICENSE.txt */; };
+		EE563848109DFAAE00D6C4E6 /* libGoogleAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE563847109DFAAE00D6C4E6 /* libGoogleAds.a */; };
+		EE56385B109DFB1D00D6C4E6 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+		EE56385C109DFB1D00D6C4E6 /* Eponyms.png in Resources */ = {isa = PBXBuildFile; fileRef = EE2DE6B40E1AE31800D97653 /* Eponyms.png */; };
+		EE56385D109DFB1D00D6C4E6 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EE2DEDF90E229B9B00D97653 /* Icon.png */; };
+		EE56385E109DFB1D00D6C4E6 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = EE2DEDFE0E229DB700D97653 /* Default.png */; };
+		EE56385F109DFB1D00D6C4E6 /* InfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE14428E0E236E10003EA64C /* InfoView.xib */; };
+		EE563860109DFB1D00D6C4E6 /* eponyms.xml in Resources */ = {isa = PBXBuildFile; fileRef = EE64C7BF0E2680D40000BC8D /* eponyms.xml */; };
+		EE563861109DFB1D00D6C4E6 /* Info.txt in Resources */ = {isa = PBXBuildFile; fileRef = EEAB00F90E2E2F3E00D84A8A /* Info.txt */; };
+		EE563862109DFB1D00D6C4E6 /* NOTICE.txt in Resources */ = {isa = PBXBuildFile; fileRef = EE4B74E90E2EB35500F7B157 /* NOTICE.txt */; };
+		EE563863109DFB1D00D6C4E6 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = EE4B74EF0E2EB53800F7B157 /* LICENSE.txt */; };
+		EE563864109DFB1D00D6C4E6 /* Star_list_active.png in Resources */ = {isa = PBXBuildFile; fileRef = EE89CE9C0E618B2C0016A781 /* Star_list_active.png */; };
+		EE563865109DFB1D00D6C4E6 /* Star_eponym_active.png in Resources */ = {isa = PBXBuildFile; fileRef = EE66414D0E62A2220047D7ED /* Star_eponym_active.png */; };
+		EE563866109DFB1D00D6C4E6 /* Star_eponym_inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = EE66414E0E62A2220047D7ED /* Star_eponym_inactive.png */; };
+		EE563867109DFB1D00D6C4E6 /* Badge_new_eponyms.png in Resources */ = {isa = PBXBuildFile; fileRef = EE3BC3C00E6ACEBF0051B69D /* Badge_new_eponyms.png */; };
+		EE563868109DFB1D00D6C4E6 /* InfoBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = EE3BC4420E6ADECB0051B69D /* InfoBackground.png */; };
+		EE563869109DFB1D00D6C4E6 /* ElevatedBar.png in Resources */ = {isa = PBXBuildFile; fileRef = EE8E56740E6CA69600928D90 /* ElevatedBar.png */; };
+		EE56386A109DFB1D00D6C4E6 /* eponyms_info.xml in Resources */ = {isa = PBXBuildFile; fileRef = EE380FA50E97B3180066BA6E /* eponyms_info.xml */; };
+		EE56386B109DFB1D00D6C4E6 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF9F2930EA74928002F024E /* Entitlements.plist */; };
+		EE56386E109DFB1D00D6C4E6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		EE56386F109DFB1D00D6C4E6 /* eponyms_touchAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* eponyms_touchAppDelegate.m */; };
+		EE563870109DFB1D00D6C4E6 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2DE6B90E1AE38200D97653 /* InfoViewController.m */; };
+		EE563871109DFB1D00D6C4E6 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2DE74D0E1C297200D97653 /* ListViewController.m */; };
+		EE563872109DFB1D00D6C4E6 /* EponymViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2DE7520E1C297F00D97653 /* EponymViewController.m */; };
+		EE563873109DFB1D00D6C4E6 /* CategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2DE7AB0E1C2F7A00D97653 /* CategoriesViewController.m */; };
+		EE563874109DFB1D00D6C4E6 /* Eponym.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2DE9DD0E2125C700D97653 /* Eponym.m */; };
+		EE563875109DFB1D00D6C4E6 /* EponymUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1443E90E23A576003EA64C /* EponymUpdater.m */; };
+		EE563877109DFB1D00D6C4E6 /* EponymCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = EE89C9FF0E6059280016A781 /* EponymCategory.m */; };
+		EE563878109DFB1D00D6C4E6 /* TouchTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE89CD5E0E6170EE0016A781 /* TouchTableView.m */; };
+		EE56387A109DFB1D00D6C4E6 /* libSQLiteUnicode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE80ADF41025FF93007352AD /* libSQLiteUnicode.a */; };
+		EE56387B109DFB1D00D6C4E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		EE56387C109DFB1D00D6C4E6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		EE56387D109DFB1D00D6C4E6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED69F820E2BF41900BEF0C4 /* CoreGraphics.framework */; };
+		EE56387E109DFB1D00D6C4E6 /* libGoogleAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE563847109DFAAE00D6C4E6 /* libGoogleAds.a */; };
+		EE563940109E186200D6C4E6 /* MCTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE56393F109E186200D6C4E6 /* MCTextView.m */; };
+		EE563BCC109E4BAE00D6C4E6 /* MCTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE56393F109E186200D6C4E6 /* MCTextView.m */; };
 		EE64C7C00E2680D40000BC8D /* eponyms.xml in Resources */ = {isa = PBXBuildFile; fileRef = EE64C7BF0E2680D40000BC8D /* eponyms.xml */; };
 		EE66414F0E62A2220047D7ED /* Star_eponym_active.png in Resources */ = {isa = PBXBuildFile; fileRef = EE66414D0E62A2220047D7ED /* Star_eponym_active.png */; };
 		EE6641500E62A2220047D7ED /* Star_eponym_inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = EE66414E0E62A2220047D7ED /* Star_eponym_inactive.png */; };
 		EE80AE12102605F3007352AD /* libSQLiteUnicode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE80ADF41025FF93007352AD /* libSQLiteUnicode.a */; };
-		EE80AE1A10260650007352AD /* libSQLiteUnicode.a in Resources */ = {isa = PBXBuildFile; fileRef = EE80ADF41025FF93007352AD /* libSQLiteUnicode.a */; };
 		EE89CA000E6059280016A781 /* EponymCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = EE89C9FF0E6059280016A781 /* EponymCategory.m */; };
 		EE89CD5F0E6170EE0016A781 /* TouchTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE89CD5E0E6170EE0016A781 /* TouchTableView.m */; };
 		EE89CE9D0E618B2C0016A781 /* Star_list_active.png in Resources */ = {isa = PBXBuildFile; fileRef = EE89CE9C0E618B2C0016A781 /* Star_list_active.png */; };
@@ -43,6 +76,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		EE563859109DFB1D00D6C4E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EE80AD071024C7C4007352AD /* SQLiteUnicode.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = SQLiteUnicode;
+		};
 		EE80ADF31025FF93007352AD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EE80AD071024C7C4007352AD /* SQLiteUnicode.xcodeproj */;
@@ -70,8 +110,6 @@
 		32CA4F630368D1EE00C91783 /* eponyms_touch_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eponyms_touch_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE01C9C90E61CEF00050376E /* TouchTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchTableViewDelegate.h; sourceTree = "<group>"; };
-		EE07C8B10E2C7FA3006F7F8A /* EponymTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EponymTextView.h; path = ../EponymTextView.h; sourceTree = "<group>"; };
-		EE07C8B20E2C7FA3006F7F8A /* EponymTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EponymTextView.m; path = ../EponymTextView.m; sourceTree = "<group>"; };
 		EE14428E0E236E10003EA64C /* InfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoView.xib; sourceTree = "<group>"; };
 		EE1443E80E23A576003EA64C /* EponymUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EponymUpdater.h; sourceTree = "<group>"; };
 		EE1443E90E23A576003EA64C /* EponymUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EponymUpdater.m; sourceTree = "<group>"; };
@@ -93,6 +131,13 @@
 		EE3BC4420E6ADECB0051B69D /* InfoBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InfoBackground.png; sourceTree = "<group>"; };
 		EE4B74E90E2EB35500F7B157 /* NOTICE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NOTICE.txt; sourceTree = "<group>"; };
 		EE4B74EF0E2EB53800F7B157 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		EE563845109DFAAE00D6C4E6 /* GADAdSenseParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSenseParameters.h; sourceTree = "<group>"; };
+		EE563846109DFAAE00D6C4E6 /* GADAdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdViewController.h; sourceTree = "<group>"; };
+		EE563847109DFAAE00D6C4E6 /* libGoogleAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAds.a; sourceTree = "<group>"; };
+		EE563884109DFB1D00D6C4E6 /* eponyms-student.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "eponyms-student.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE56388D109DFC0C00D6C4E6 /* Info-student.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-student.plist"; sourceTree = "<group>"; };
+		EE56393E109E186200D6C4E6 /* MCTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTextView.h; sourceTree = "<group>"; };
+		EE56393F109E186200D6C4E6 /* MCTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTextView.m; sourceTree = "<group>"; };
 		EE64C7BF0E2680D40000BC8D /* eponyms.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = eponyms.xml; sourceTree = "<group>"; };
 		EE66414D0E62A2220047D7ED /* Star_eponym_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Star_eponym_active.png; sourceTree = "<group>"; };
 		EE66414E0E62A2220047D7ED /* Star_eponym_inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Star_eponym_inactive.png; sourceTree = "<group>"; };
@@ -118,6 +163,19 @@
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				EED69F830E2BF41900BEF0C4 /* CoreGraphics.framework in Frameworks */,
+				EE563848109DFAAE00D6C4E6 /* libGoogleAds.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE563879109DFB1D00D6C4E6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE56387A109DFB1D00D6C4E6 /* libSQLiteUnicode.a in Frameworks */,
+				EE56387B109DFB1D00D6C4E6 /* Foundation.framework in Frameworks */,
+				EE56387C109DFB1D00D6C4E6 /* UIKit.framework in Frameworks */,
+				EE56387D109DFB1D00D6C4E6 /* CoreGraphics.framework in Frameworks */,
+				EE56387E109DFB1D00D6C4E6 /* libGoogleAds.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				1D6058910D05DD3D006BFB54 /* eponyms-touch.app */,
+				EE563884109DFB1D00D6C4E6 /* eponyms-student.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -156,6 +215,7 @@
 				EE80AD071024C7C4007352AD /* SQLiteUnicode.xcodeproj */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				EE56383A109DFA7A00D6C4E6 /* GoogleAds */,
 				EE2DE6B30E1AE30C00D97653 /* Images */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
@@ -179,6 +239,7 @@
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				EE14428E0E236E10003EA64C /* InfoView.xib */,
 				8D1107310486CEB800E47090 /* Info.plist */,
+				EE56388D109DFC0C00D6C4E6 /* Info-student.plist */,
 				EE4B74EF0E2EB53800F7B157 /* LICENSE.txt */,
 				EE4B74E90E2EB35500F7B157 /* NOTICE.txt */,
 				EEAB00F90E2E2F3E00D84A8A /* Info.txt */,
@@ -230,6 +291,16 @@
 			name = "View Controllers";
 			sourceTree = "<group>";
 		};
+		EE56383A109DFA7A00D6C4E6 /* GoogleAds */ = {
+			isa = PBXGroup;
+			children = (
+				EE563845109DFAAE00D6C4E6 /* GADAdSenseParameters.h */,
+				EE563846109DFAAE00D6C4E6 /* GADAdViewController.h */,
+				EE563847109DFAAE00D6C4E6 /* libGoogleAds.a */,
+			);
+			path = GoogleAds;
+			sourceTree = "<group>";
+		};
 		EE80ADF01025FF93007352AD /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,8 +315,8 @@
 				EE01C9C90E61CEF00050376E /* TouchTableViewDelegate.h */,
 				EE89CD5D0E6170EE0016A781 /* TouchTableView.h */,
 				EE89CD5E0E6170EE0016A781 /* TouchTableView.m */,
-				EE07C8B10E2C7FA3006F7F8A /* EponymTextView.h */,
-				EE07C8B20E2C7FA3006F7F8A /* EponymTextView.m */,
+				EE56393E109E186200D6C4E6 /* MCTextView.h */,
+				EE56393F109E186200D6C4E6 /* MCTextView.m */,
 			);
 			name = Subclasses;
 			sourceTree = "<group>";
@@ -271,6 +342,24 @@
 			productReference = 1D6058910D05DD3D006BFB54 /* eponyms-touch.app */;
 			productType = "com.apple.product-type.application";
 		};
+		EE563857109DFB1D00D6C4E6 /* eponyms-student */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EE56387F109DFB1D00D6C4E6 /* Build configuration list for PBXNativeTarget "eponyms-student" */;
+			buildPhases = (
+				EE56385A109DFB1D00D6C4E6 /* Resources */,
+				EE56386D109DFB1D00D6C4E6 /* Sources */,
+				EE563879109DFB1D00D6C4E6 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EE563858109DFB1D00D6C4E6 /* PBXTargetDependency */,
+			);
+			name = "eponyms-student";
+			productName = "eponyms-touch";
+			productReference = EE563884109DFB1D00D6C4E6 /* eponyms-student.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -290,6 +379,7 @@
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* eponyms-touch */,
+				EE563857109DFB1D00D6C4E6 /* eponyms-student */,
 			);
 		};
 /* End PBXProject section */
@@ -326,7 +416,30 @@
 				EE8E56750E6CA69600928D90 /* ElevatedBar.png in Resources */,
 				EE380FA60E97B3180066BA6E /* eponyms_info.xml in Resources */,
 				EEF9F2940EA74928002F024E /* Entitlements.plist in Resources */,
-				EE80AE1A10260650007352AD /* libSQLiteUnicode.a in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE56385A109DFB1D00D6C4E6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE56385B109DFB1D00D6C4E6 /* MainWindow.xib in Resources */,
+				EE56385C109DFB1D00D6C4E6 /* Eponyms.png in Resources */,
+				EE56385D109DFB1D00D6C4E6 /* Icon.png in Resources */,
+				EE56385E109DFB1D00D6C4E6 /* Default.png in Resources */,
+				EE56385F109DFB1D00D6C4E6 /* InfoView.xib in Resources */,
+				EE563860109DFB1D00D6C4E6 /* eponyms.xml in Resources */,
+				EE563861109DFB1D00D6C4E6 /* Info.txt in Resources */,
+				EE563862109DFB1D00D6C4E6 /* NOTICE.txt in Resources */,
+				EE563863109DFB1D00D6C4E6 /* LICENSE.txt in Resources */,
+				EE563864109DFB1D00D6C4E6 /* Star_list_active.png in Resources */,
+				EE563865109DFB1D00D6C4E6 /* Star_eponym_active.png in Resources */,
+				EE563866109DFB1D00D6C4E6 /* Star_eponym_inactive.png in Resources */,
+				EE563867109DFB1D00D6C4E6 /* Badge_new_eponyms.png in Resources */,
+				EE563868109DFB1D00D6C4E6 /* InfoBackground.png in Resources */,
+				EE563869109DFB1D00D6C4E6 /* ElevatedBar.png in Resources */,
+				EE56386A109DFB1D00D6C4E6 /* eponyms_info.xml in Resources */,
+				EE56386B109DFB1D00D6C4E6 /* Entitlements.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,15 +458,38 @@
 				EE2DE7AC0E1C2F7A00D97653 /* CategoriesViewController.m in Sources */,
 				EE2DE9DE0E2125C700D97653 /* Eponym.m in Sources */,
 				EE1443EA0E23A576003EA64C /* EponymUpdater.m in Sources */,
-				EE07C8B30E2C7FA3006F7F8A /* EponymTextView.m in Sources */,
 				EE89CA000E6059280016A781 /* EponymCategory.m in Sources */,
 				EE89CD5F0E6170EE0016A781 /* TouchTableView.m in Sources */,
+				EE563940109E186200D6C4E6 /* MCTextView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE56386D109DFB1D00D6C4E6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE56386E109DFB1D00D6C4E6 /* main.m in Sources */,
+				EE56386F109DFB1D00D6C4E6 /* eponyms_touchAppDelegate.m in Sources */,
+				EE563870109DFB1D00D6C4E6 /* InfoViewController.m in Sources */,
+				EE563871109DFB1D00D6C4E6 /* ListViewController.m in Sources */,
+				EE563872109DFB1D00D6C4E6 /* EponymViewController.m in Sources */,
+				EE563873109DFB1D00D6C4E6 /* CategoriesViewController.m in Sources */,
+				EE563874109DFB1D00D6C4E6 /* Eponym.m in Sources */,
+				EE563875109DFB1D00D6C4E6 /* EponymUpdater.m in Sources */,
+				EE563877109DFB1D00D6C4E6 /* EponymCategory.m in Sources */,
+				EE563878109DFB1D00D6C4E6 /* TouchTableView.m in Sources */,
+				EE563BCC109E4BAE00D6C4E6 /* MCTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		EE563858109DFB1D00D6C4E6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SQLiteUnicode;
+			targetProxy = EE563859109DFB1D00D6C4E6 /* PBXContainerItemProxy */;
+		};
 		EE80AE11102605E2007352AD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SQLiteUnicode;
@@ -377,6 +513,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/GoogleAds\"",
 				);
 				PRODUCT_NAME = "eponyms-touch";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -394,6 +531,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/GoogleAds\"",
 				);
 				PRODUCT_NAME = "eponyms-touch";
 			};
@@ -417,6 +555,7 @@
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos2.0;
 			};
 			name = Debug;
@@ -473,10 +612,152 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/GoogleAds\"",
 				);
 				PRODUCT_NAME = "eponyms-touch";
 			};
 			name = Distribution;
+		};
+		EE563880109DFB1D00D6C4E6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
+				INFOPLIST_FILE = "Info-student.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/GoogleAds\"",
+				);
+				PRODUCT_NAME = "eponyms-student";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+			};
+			name = Debug;
+		};
+		EE563881109DFB1D00D6C4E6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
+				INFOPLIST_FILE = "Info copy.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\\\"$(SRCROOT)\\\"",
+					"\\\"$(SRCROOT)/GoogleAds\\\"",
+				);
+				PRODUCT_NAME = "eponyms-touch";
+			};
+			name = Release;
+		};
+		EE563882109DFB1D00D6C4E6 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
+				INFOPLIST_FILE = "Info copy.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\\\"$(SRCROOT)\\\"",
+					"\\\"$(SRCROOT)/GoogleAds\\\"",
+				);
+				PRODUCT_NAME = "eponyms-touch";
+			};
+			name = Distribution;
+		};
+		EE563883109DFB1D00D6C4E6 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
+				INFOPLIST_FILE = "Info copy.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\\\"$(SRCROOT)\\\"",
+					"\\\"$(SRCROOT)/GoogleAds\\\"",
+				);
+				PRODUCT_NAME = "eponyms-touch";
+			};
+			name = AdHoc;
+		};
+		EE5639D2109E258400D6C4E6 /* Debug Plus */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					SQLITE_ENABLE_UNICODE,
+					SQLITE_CORE,
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = "";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
+				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = iphoneos2.0;
+			};
+			name = "Debug Plus";
+		};
+		EE5639D3109E258400D6C4E6 /* Debug Plus */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/GoogleAds\"",
+				);
+				PRODUCT_NAME = "eponyms-touch";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+			};
+			name = "Debug Plus";
+		};
+		EE5639D4109E258400D6C4E6 /* Debug Plus */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
+				INFOPLIST_FILE = "Info-student.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\\\"$(SRCROOT)\\\"",
+					"\\\"$(SRCROOT)/GoogleAds\\\"",
+				);
+				PRODUCT_NAME = "eponyms-touch";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+			};
+			name = "Debug Plus";
 		};
 		EEF9F28B0EA74874002F024E /* AdHoc */ = {
 			isa = XCBuildConfiguration;
@@ -511,6 +792,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/GoogleAds\"",
 				);
 				PRODUCT_NAME = "eponyms-touch";
 			};
@@ -523,6 +805,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
+				EE5639D3109E258400D6C4E6 /* Debug Plus */,
 				1D6058950D05DD3E006BFB54 /* Release */,
 				EE5036420F5F3ACA00EB56A2 /* Distribution */,
 				EEF9F28C0EA74874002F024E /* AdHoc */,
@@ -534,9 +817,22 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
+				EE5639D2109E258400D6C4E6 /* Debug Plus */,
 				C01FCF5008A954540054247B /* Release */,
 				EE5036410F5F3ACA00EB56A2 /* Distribution */,
 				EEF9F28B0EA74874002F024E /* AdHoc */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EE56387F109DFB1D00D6C4E6 /* Build configuration list for PBXNativeTarget "eponyms-student" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EE563880109DFB1D00D6C4E6 /* Debug */,
+				EE5639D4109E258400D6C4E6 /* Debug Plus */,
+				EE563881109DFB1D00D6C4E6 /* Release */,
+				EE563882109DFB1D00D6C4E6 /* Distribution */,
+				EE563883109DFB1D00D6C4E6 /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

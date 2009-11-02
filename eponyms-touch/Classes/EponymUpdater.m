@@ -227,8 +227,32 @@ static sqlite3_stmt *star_eponym_query = nil;
 	NSError *parseError = nil;
 	
 	
-	// Parse and create			****  (~ 11 sec on iPod touch 1st Gen)
+	// Parse and create			****
+	NSLog(@"begin...");
+	//* --
+	sqlite3_stmt *begin_transaction_stmt;
+	const char *beginTrans = "BEGIN EXCLUSIVE TRANSACTION";
+	if(sqlite3_prepare_v2(memory_database, beginTrans, -1, &begin_transaction_stmt, NULL) != SQLITE_OK) {
+		NSAssert1(0, @"Error: Failed to prepare exclusive transaction: '%s'.", sqlite3_errmsg(memory_database));
+	}
+	if(SQLITE_DONE != sqlite3_step(begin_transaction_stmt)) {
+		NSAssert1(0, @"Error: Failed to step on begin_transaction_stmt: '%s'.", sqlite3_errmsg(memory_database));
+	}
+	sqlite3_finalize(begin_transaction_stmt);
+	// --	*/
 	[self parseXMLData:XMLData parseError:&parseError];			// does the parsing and inserting into memory_database
+	//* --
+	sqlite3_stmt *end_transaction_stmt;
+	const char *endTrans = "COMMIT";
+	if(sqlite3_prepare_v2(memory_database, endTrans, -1, &end_transaction_stmt, NULL) != SQLITE_OK) {
+		NSAssert1(0, @"Error: failed to commit transaction: '%s'.", sqlite3_errmsg(memory_database));
+	}
+	if(SQLITE_DONE != sqlite3_step(end_transaction_stmt)) {
+		NSAssert1(0, @"Error: Failed to step on end_transaction_stmt: '%s'.", sqlite3_errmsg(memory_database));
+	}
+	sqlite3_finalize(end_transaction_stmt);
+	// --	*/
+	NSLog(@"...done");
 	// Parsing done				****
 	
 	
@@ -243,7 +267,7 @@ static sqlite3_stmt *star_eponym_query = nil;
 	// cat memory_data to disk (also re-sets starred eponyms)
 	else {
 		self.parseFailed = NO;
-		[self catMemoryDBToDisk];						// concatenates memory_database to the file database and closes memory_database
+		[self catMemoryDBToDisk];			// concatenates memory_database to the file database and closes memory_database
 	}
 	
 	// Clean up
@@ -530,7 +554,7 @@ static sqlite3_stmt *star_eponym_query = nil;
 {
 }
 
-// well NOT be called when we abort!
+// will NOT be called when we abort!
 - (void) parserDidEndDocument:(NSXMLParser *)parser
 {
 }

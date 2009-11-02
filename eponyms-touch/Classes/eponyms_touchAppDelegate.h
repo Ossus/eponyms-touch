@@ -42,7 +42,7 @@
 	NSMutableArray *loadedEponyms;			// 1D, used if a memory warning occurs
 	
 	// View Controllers
-	UINavigationController *navigationController;
+	UINavigationController *naviController;
 	CategoriesViewController *categoriesController;
 	ListViewController *listController;
 	EponymViewController *eponymController;
@@ -52,6 +52,7 @@
 	UIImage *starImageListActive;
 	UIImage *starImageEponymActive;
 	UIImage *starImageEponymInactive;
+	BOOL showGoogleAds;
 	
 	// Updating
 	EponymUpdater *myUpdater;
@@ -76,7 +77,7 @@
 @property (nonatomic, retain) NSMutableArray *eponymSectionArray;
 @property (nonatomic, retain) NSMutableArray *loadedEponyms;
 
-@property (nonatomic, retain) UINavigationController *navigationController;
+@property (nonatomic, retain) UINavigationController *naviController;
 @property (nonatomic, retain) CategoriesViewController *categoriesController;
 @property (nonatomic, retain) ListViewController *listController;
 @property (nonatomic, retain) EponymViewController *eponymController;
@@ -85,6 +86,7 @@
 @property (nonatomic, retain) UIImage *starImageListActive;
 @property (nonatomic, retain) UIImage *starImageEponymActive;
 @property (nonatomic, retain) UIImage *starImageEponymInactive;
+@property (nonatomic, assign) BOOL showGoogleAds;
 
 // Updating
 @property (nonatomic, retain) EponymUpdater *myUpdater;

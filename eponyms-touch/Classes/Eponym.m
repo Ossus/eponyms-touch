@@ -11,6 +11,7 @@
 
 
 #import "Eponym.h"
+#import "EponymCategory.h"
 #import "eponyms_touchAppDelegate.h"
 #import <sqlite3.h>
 
@@ -79,8 +80,13 @@ static sqlite3_stmt *toggle_starred_query = nil;
 		// load query
 		if(!load_query) {
 			NSString *textName = @"text_en";
-			NSString *categoryName = @"tag";
-			const char *qry = [[NSString stringWithFormat:@"SELECT created, lastedit, %@, %@, starred FROM eponyms LEFT JOIN category_eponym_linker USING (eponym_id) LEFT JOIN categories USING (category_id) WHERE eponym_id = ?", textName, categoryName] UTF8String];
+			NSString *categoryTag = @"tag";
+			NSString *categoryName = @"category_en";
+			const char *qry = [[NSString stringWithFormat:
+								@"SELECT created, lastedit, %@, eponym_id, %@, %@, starred FROM eponyms LEFT JOIN category_eponym_linker USING (eponym_id) LEFT JOIN categories USING (category_id) WHERE eponym_id = ?",
+								textName,
+								categoryTag,
+								categoryName] UTF8String];
 			if(SQLITE_OK != sqlite3_prepare_v2([delegate database], qry, -1, &load_query, NULL)) {
 				NSAssert1(0, @"Error: failed to prepare load_query: '%s'.", sqlite3_errmsg([delegate database]));
 			}
@@ -91,8 +97,8 @@ static sqlite3_stmt *toggle_starred_query = nil;
 		
 		// Complete and execute the query
 		sqlite3_bind_int(load_query, 1, eponym_id);
-		while(SQLITE_ROW == sqlite3_step(load_query)) {
-			if(0 == rows) {
+		while (SQLITE_ROW == sqlite3_step(load_query)) {
+			if (0 == rows) {
 				double createdEpoch = sqlite3_column_double(load_query, 0);
 				self.created = (createdEpoch > 10.0) ? [NSDate dateWithTimeIntervalSince1970:createdEpoch] : nil;
 				double updatedEpoch = sqlite3_column_double(load_query, 1);
@@ -101,9 +107,14 @@ static sqlite3_stmt *toggle_starred_query = nil;
 				self.text = textStr ? [NSString stringWithUTF8String:textStr] : @"";
 			}
 			
-			char *categoryStr = (char *)sqlite3_column_text(load_query, 3);
-			[newCategoriesArr addObject:(categoryStr ? [NSString stringWithUTF8String:categoryStr] : @"")];
-			
+			NSInteger categoryId = sqlite3_column_int(load_query, 3);
+			char *categoryTagStr = (char *)sqlite3_column_text(load_query, 4);
+			char *categoryNameStr = (char *)sqlite3_column_text(load_query, 5);
+			EponymCategory *myCat = [EponymCategory eponymCategoryWithID:categoryId
+																	 tag:[NSString stringWithUTF8String:categoryTagStr]
+																   title:[NSString stringWithUTF8String:categoryNameStr]
+														  whereStatement:nil];
+			[newCategoriesArr addObject:myCat];
 			rows++;
 		}
 		

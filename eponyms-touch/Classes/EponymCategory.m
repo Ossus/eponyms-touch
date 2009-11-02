@@ -20,7 +20,7 @@
 - (id) initWithID:(NSInteger)thisID tag:(NSString *)myTag title:(NSString *)myTitle whereStatement:(NSString *)myStatement;
 {
 	self = [super init];
-	if(self) {
+	if (self) {
 		self.myID = thisID;
 		self.tag = myTag;
 		self.title = myTitle;
@@ -61,7 +61,7 @@
 }
 - (void) setTitle:(NSString *)newTitle
 {
-	if(newTitle != title) {
+	if (newTitle != title) {
 		[title release];
 		title = [newTitle retain];
 	}
@@ -73,7 +73,7 @@
 }
 - (void) setHint:(NSString *)newHint
 {
-	if(newHint != hint) {
+	if (newHint != hint) {
 		[hint release];
 		hint = [newHint retain];
 	}
@@ -85,7 +85,7 @@
 }
 - (void) setSqlWhereStatement:(NSString *)stmt
 {
-	if(stmt != sqlWhereStatement) {
+	if (stmt != sqlWhereStatement) {
 		[sqlWhereStatement release];
 		sqlWhereStatement = [stmt retain];
 	}
@@ -97,7 +97,7 @@
 }
 - (void) setSqlOrderStatement:(NSString *)stmt
 {
-	if(stmt != sqlOrderStatement) {
+	if (stmt != sqlOrderStatement) {
 		[sqlOrderStatement release];
 		sqlOrderStatement = [stmt retain];
 	}

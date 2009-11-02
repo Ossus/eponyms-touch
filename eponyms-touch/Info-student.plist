@@ -7,11 +7,11 @@
 	<key>CFBundleDisplayName</key>
 	<string>Eponyms</string>
 	<key>CFBundleExecutable</key>
-	<string>eponyms-touch</string>
+	<string>eponyms-student</string>
 	<key>CFBundleIconFile</key>
 	<string>Icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.google.code.eponymstouch</string>
+	<string>com.google.code.eponymsstudent</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -41,6 +41,6 @@
 	<key>projectWebsite</key>
 	<string>http://eponyms-touch.googlecode.com/</string>
 	<key>showGoogleAds</key>
-	<false/>
+	<true/>
 </dict>
 </plist>

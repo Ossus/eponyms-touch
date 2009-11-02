@@ -42,7 +42,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-	if(self) {
+	if (self) {
 		self.title = @"Eponyms";
 	}
 	return self;
@@ -62,7 +62,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 	self.mySearchBar = nil;
 	self.initSearchButton = nil;
 	self.abortSearchButton = nil;
-	if(searchTimeoutTimer && [searchTimeoutTimer isValid]) {
+	if (searchTimeoutTimer && [searchTimeoutTimer isValid]) {
 		[searchTimeoutTimer invalidate];
 	}
 	self.searchTimeoutTimer = nil;
@@ -115,26 +115,27 @@ static NSString *MyCellIdentifier = @"EponymCell";
 - (void) switchToSearchMode:(BOOL)switchTo
 {
 	// switch searchmode on
-	if(switchTo) {
+	if (switchTo) {
 		self.navigationItem.rightBarButtonItem = abortSearchButton;
 		self.navigationItem.hidesBackButton = YES;
 		self.navigationItem.titleView = mySearchBar;
 		
-		BOOL isSideways = (UIInterfaceOrientationLandscapeLeft == [self interfaceOrientation] || UIInterfaceOrientationLandscapeRight == [self interfaceOrientation]);
+		BOOL isSideways = (UIInterfaceOrientationLandscapeLeft == [self interfaceOrientation]
+						   || UIInterfaceOrientationLandscapeRight == [self interfaceOrientation]);
 		CGFloat barHeight = isSideways ? 32 : 44;
 		CGRect searchBarRect = CGRectMake(0.0, 0.0, self.view.bounds.size.width, barHeight);
 		mySearchBar.bounds = searchBarRect;
-//		mySearchBar.tintColor = self.navigationController.navigationBar.tintColor = isSideways ? nil : [delegate naviBarTintColor];
+		mySearchBar.tintColor = self.navigationController.navigationBar.tintColor = isSideways ? nil : [delegate naviBarTintColor];
 		
 		[mySearchBar becomeFirstResponder];
 	}
 	
 	// switch off
 	else {
-		if(searchTimeoutTimer && [searchTimeoutTimer isValid]) {
+		if (searchTimeoutTimer && [searchTimeoutTimer isValid]) {
 			[searchTimeoutTimer invalidate];
 		}
-		if(![mySearchBar isFirstResponder]) {
+		if (![mySearchBar isFirstResponder]) {
 			[delegate loadEponymsOfCurrentCategoryContainingString:nil animated:NO];
 		}
 		else {
@@ -142,7 +143,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 			[mySearchBar resignFirstResponder];
 		}
 		
-//		mySearchBar.tintColor = self.navigationController.navigationBar.tintColor = [delegate naviBarTintColor];
+		mySearchBar.tintColor = self.navigationController.navigationBar.tintColor = [delegate naviBarTintColor];
 		
 		self.navigationItem.rightBarButtonItem = initSearchButton;
 		self.navigationItem.hidesBackButton = NO;
@@ -157,7 +158,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 
 - (void) searchForString:(NSString *)searchText
 {
-	if(searchTimeoutTimer && [searchTimeoutTimer isValid]) {
+	if (searchTimeoutTimer && [searchTimeoutTimer isValid]) {
 		[searchTimeoutTimer invalidate];
 	}
 	
@@ -171,7 +172,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 
 - (void) reallySearchForString
 {
-	if(searchTimeoutTimer) {
+	if (searchTimeoutTimer) {
 		NSString *searchText = [searchTimeoutTimer userInfo];
 		[delegate loadEponymsOfCurrentCategoryContainingString:searchText animated:NO];
 	}
@@ -191,13 +192,13 @@ static NSString *MyCellIdentifier = @"EponymCell";
 	[delegate setEponymShown:0];
 	
 	// set the Title and the back button title
-	if(delegate) {
+	if (delegate) {
 		self.title = [[delegate categoryShown] title];
 		self.navigationItem.backBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:[[delegate categoryShown] tag] style:UIBarButtonItemStylePlain target:nil action:nil] autorelease];
 	}
 	
 	// remembers scroll position across restarts
-	if(atLaunchScrollTo > 0.0) {
+	if (atLaunchScrollTo > 0.0) {
 		myTableView.contentOffset = CGPointMake(0.0, atLaunchScrollTo);
 		atLaunchScrollTo = 0.0;
 	}
@@ -212,7 +213,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	if(((eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate]).allowAutoRotate) {
+	if (((eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate]).allowAutoRotate) {
 		return YES;
 	}
 	
@@ -222,7 +223,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 - (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
 	// adjust searchbar if necessary
-	if(self.navigationItem.titleView == mySearchBar) {
+	if (self.navigationItem.titleView == mySearchBar) {
 		BOOL wasSideways = (UIInterfaceOrientationLandscapeLeft == fromInterfaceOrientation || UIInterfaceOrientationLandscapeRight == fromInterfaceOrientation);
 		
 		CGRect searchBarRect = mySearchBar.bounds;
@@ -243,7 +244,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 	self.eponymArrayCache = eponyms;
 	self.eponymSectionArrayCache = sections	;
 	
-	if(eponyms) {
+	if (eponyms) {
 		[myTableView reloadData];
 	}
 }
@@ -252,14 +253,9 @@ static NSString *MyCellIdentifier = @"EponymCell";
 
 
 #pragma mark UITableView delegate methods
-- (UITableViewCellAccessoryType) tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath
-{
-	return UITableViewCellAccessoryNone;
-}
-
 - (NSIndexPath *) tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	if([eponymArrayCache count] < 1) {
+	if ([eponymArrayCache count] < 1) {
 		return nil;
 	}
 	return indexPath;
@@ -267,7 +263,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	if([eponymArrayCache count] > 0) {
+	if ([eponymArrayCache count] > 0) {
 		Eponym *selectedEponym = [[eponymArrayCache objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 		[delegate loadEponym:selectedEponym animated:YES];
 	}
@@ -276,15 +272,20 @@ static NSString *MyCellIdentifier = @"EponymCell";
 // our own new delegate method in case of a double tap
 - (void) tableView:(TouchTableView *)tableView didDoubleTapRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	if([eponymArrayCache count] > 0) {
+	if ([eponymArrayCache count] > 0) {
 		Eponym *selectedEponym = [[eponymArrayCache objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-		if(selectedEponym) {
+		if (selectedEponym) {
 			[selectedEponym toggleStarred];
 			
 			// show/hide the star
 			UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
-			if(selectedCell) {
-				selectedCell.image = selectedEponym.starred ? [delegate starImageListActive] : nil;
+			if (selectedCell) {
+				if ([selectedCell respondsToSelector:@selector(imageView)]) {
+					[[selectedCell imageView] setImage:(selectedEponym.starred ? [delegate starImageListActive] : nil)];
+				}
+				else {
+					selectedCell.image = selectedEponym.starred ? [delegate starImageListActive] : nil;
+				}
 			}
 		}
 	}
@@ -311,7 +312,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 
 - (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger) section
 {
-	if([eponymArrayCache count] > section) {
+	if ([eponymArrayCache count] > section) {
 		return [eponymSectionArrayCache objectAtIndex:section];
 	}
 	return nil;
@@ -322,7 +323,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger) section
 {
 	// if we have no eponyms, display a hint instead
-	if([eponymArrayCache count] < 1) {
+	if ([eponymArrayCache count] < 1) {
 		return 1;
 	}
 	return [[eponymArrayCache objectAtIndex:section] count];
@@ -330,7 +331,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	if([eponymArrayCache count] < 1) {
+	if ([eponymArrayCache count] < 1) {
 		CGFloat tableHeight = tableView.frame.size.height;
 		return tableHeight;
 	}
@@ -342,11 +343,11 @@ static NSString *MyCellIdentifier = @"EponymCell";
 	UITableViewCell *cell;
 	
 	// if we have no eponyms, display a hint instead
-	if([eponymArrayCache count] < 1) {
+	if ([eponymArrayCache count] < 1) {
 		cell = [[[UITableViewCell alloc] initWithFrame:CGRectMake(0,0,0,0) reuseIdentifier:nil] autorelease];
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 		
-		if(0 == indexPath.row) {
+		if (0 == indexPath.row) {
 			CGRect cellBounds = [cell bounds];
 			cellBounds.size.width -= 40.0;
 			cellBounds.origin.x += 20.0;
@@ -354,6 +355,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 			UILabel *label = [[[UILabel alloc] initWithFrame:cellBounds] autorelease];
 			
 			label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+			label.numberOfLines = 10;
 			label.font = [UIFont systemFontOfSize:15.0];
 			label.textAlignment = UITextAlignmentCenter;
 			label.textColor = [UIColor grayColor];
@@ -362,7 +364,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 			
 			[cell.contentView addSubview:label];
 		}
-		else if([cell.contentView subviews]) {
+		else if ([cell.contentView subviews]) {
 			[[cell.contentView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
 		}
 	}
@@ -370,14 +372,20 @@ static NSString *MyCellIdentifier = @"EponymCell";
 	// ordinary eponym cell
 	else {
 		cell = [tableView dequeueReusableCellWithIdentifier:MyCellIdentifier];
-		if(cell == nil) {
+		if (cell == nil) {
 			cell = [[[UITableViewCell alloc] initWithFrame:CGRectMake(0,0,0,0) reuseIdentifier:MyCellIdentifier] autorelease];
 		}
 		
 		BOOL isStarredList = (-1 == [delegate categoryIDShown]);
 		Eponym *thisEponym = [[eponymArrayCache objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-		cell.text = [thisEponym title];
-		cell.image = (!isStarredList && thisEponym.starred) ? [delegate starImageListActive] : nil;
+		if ([cell respondsToSelector:@selector(textLabel)]) {
+			[[cell textLabel] setText:[thisEponym title]];
+			[[cell imageView] setImage:(!isStarredList && thisEponym.starred) ? [delegate starImageListActive] : nil];
+		}
+		else {
+			cell.text = [thisEponym title];
+			cell.image = (!isStarredList && thisEponym.starred) ? [delegate starImageListActive] : nil;
+		}
 		thisEponym.eponymCell = cell;
 	}
 	
@@ -435,7 +443,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 
 - (void) keyboardDidShow:(NSNotification*)aNotification
 {
-	if(keyboardShown)
+	if (keyboardShown)
 		return;
 	
 	NSDictionary* info = [aNotification userInfo];

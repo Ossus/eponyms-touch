@@ -139,10 +139,6 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 
 
 #pragma mark UITableView delegate methods
-- (UITableViewCellAccessoryType) tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath
-{
-	return UITableViewCellAccessoryDisclosureIndicator;
-}
 
 // table selection changed
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -185,10 +181,13 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 		cell = [[[UITableViewCell alloc] initWithFrame:CGRectMake(0,0,0,0) reuseIdentifier:MyCellIdentifier] autorelease];
 	}
 	
-	cell.text = [[[categoryArrayCache objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] title];
-	//if(0 == indexPath.section && 1 == indexPath.row) {
-	//	cell.image = [delegate starImageListActive];
-	//}
+	if ([cell respondsToSelector:@selector(textLabel)]) {
+		[[cell textLabel] setText:[[[categoryArrayCache objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] title]];
+	}
+	else {
+		cell.text = [[[categoryArrayCache objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] title];
+	}
+	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	
 	return cell;
 }

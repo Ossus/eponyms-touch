@@ -11,24 +11,25 @@
 
 
 #import <UIKit/UIKit.h>
-
+#import "GADAdViewController.h"
 @class Eponym;
-@class EponymTextView;
+@class MCTextView;
 
 
-@interface EponymViewController : UIViewController {
+@interface EponymViewController : UIViewController <GADAdViewControllerDelegate> {
 	id delegate;
 	Eponym *eponymToBeShown;
 	
 	UIBarButtonItem *rightBarButtonStarredItem;
 	UIBarButtonItem *rightBarButtonNotStarredItem;
 	
-	UIScrollView *eponymView;
 	UILabel *eponymTitleLabel;
-	EponymTextView *eponymTextView;
+	MCTextView *eponymTextView;
 	UILabel *eponymCategoriesLabel;
 	UILabel *dateCreatedLabel;
 	UILabel *dateUpdatedLabel;
+	
+	GADAdViewController *adController;
 }
 
 @property (nonatomic, assign) id delegate;
@@ -37,12 +38,13 @@
 @property (nonatomic, retain) UIBarButtonItem *rightBarButtonStarredItem;
 @property (nonatomic, retain) UIBarButtonItem *rightBarButtonNotStarredItem;
 
-@property (nonatomic, retain) UIScrollView *eponymView;
 @property (nonatomic, retain) UILabel *eponymTitleLabel;
-@property (nonatomic, retain) EponymTextView *eponymTextView;
+@property (nonatomic, retain) MCTextView *eponymTextView;
 @property (nonatomic, retain) UILabel *eponymCategoriesLabel;
 @property (nonatomic, retain) UILabel *dateCreatedLabel;
 @property (nonatomic, retain) UILabel *dateUpdatedLabel;
+
+@property (nonatomic, readonly, retain) GADAdViewController *adController;
 
 - (void) toggleEponymStarred;
 
