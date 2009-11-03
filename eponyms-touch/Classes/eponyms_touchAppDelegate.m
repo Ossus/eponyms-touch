@@ -17,6 +17,7 @@
 #import "CategoriesViewController.h"
 #import "ListViewController.h"
 #import "EponymViewController.h"
+//#import <sqlite3_unicode.h>			// uncomment when building against iPhone OS 3.0+
 
 #define EPONYM_TITLE_FIELD @"eponym_en"
 #define EPONYM_TEXT_FIELD @"text_en"

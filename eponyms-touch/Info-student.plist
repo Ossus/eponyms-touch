@@ -7,7 +7,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>Eponyms</string>
 	<key>CFBundleExecutable</key>
-	<string>eponyms-student</string>
+	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
 	<string>Icon.png</string>
 	<key>CFBundleIdentifier</key>
@@ -21,13 +21,13 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.5</string>
+	<string>1.2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>SubversionRevision</key>
-	<string>r54</string>
+	<string>r55</string>
 	<key>eponymUpdateCheckURL</key>
 	<string>http://code.hillrippers.ch/eponyms/XML/eponyms_info.xml</string>
 	<key>eponymUpdateCheckURL DEBUG</key>

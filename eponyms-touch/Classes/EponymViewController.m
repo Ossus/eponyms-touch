@@ -15,6 +15,8 @@
 #import "EponymCategory.h"
 #import "Eponym.h"
 #import "MCTextView.h"
+#import "PPHintableLabel.h"
+#import "PPHintView.h"
 #import "GADAdSenseParameters.h"
 
 
@@ -184,7 +186,7 @@
 	}
 }
 
-- (UILabel *) eponymCategoriesLabel
+- (PPHintableLabel *) eponymCategoriesLabel
 {
 	if (nil == eponymCategoriesLabel) {
 		CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
@@ -192,7 +194,7 @@
 		CGFloat labelWidth = fullWidth - 2 * pLabelSideMargin;
 		CGRect catRect = CGRectMake(pLabelSideMargin, pDistanceCatLabelFromText, labelWidth, 19.0);
 		
-		self.eponymCategoriesLabel = [[[UILabel alloc] initWithFrame:catRect] autorelease];
+		self.eponymCategoriesLabel = [[[PPHintableLabel alloc] initWithFrame:catRect] autorelease];
 		eponymCategoriesLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		eponymCategoriesLabel.font = [UIFont systemFontOfSize:17.0];
 		eponymCategoriesLabel.backgroundColor = [UIColor clearColor];
@@ -201,7 +203,7 @@
 	}
 	return eponymCategoriesLabel;
 }
-- (void) setEponymCategoriesLabel:(UILabel *)newLabel
+- (void) setEponymCategoriesLabel:(PPHintableLabel *)newLabel
 {
 	if (newLabel != eponymCategoriesLabel) {
 		[eponymCategoriesLabel release];
@@ -305,10 +307,13 @@
 	// categories
 	if ([eponymToBeShown.categories count] > 0) {
 		NSMutableArray *eponymCategories = [NSMutableArray arrayWithCapacity:[eponymToBeShown.categories count]];
+		NSMutableArray *eponymCategoriesDesc = [NSMutableArray arrayWithCapacity:[eponymToBeShown.categories count]];
 		for (EponymCategory *cat in eponymToBeShown.categories) {
 			[eponymCategories addObject:cat.tag];
+			[eponymCategoriesDesc addObject:[NSString stringWithFormat:@"%@ • %@", cat.tag, cat.title]];
 		}
 		eponymCategoriesLabel.text = [eponymCategories componentsJoinedByString:@", "];
+		eponymCategoriesLabel.hintText = [eponymCategoriesDesc componentsJoinedByString:@"\n"];
 	}
 	else {
 		eponymCategoriesLabel.text = nil;
@@ -357,7 +362,9 @@
 	
 	// Align the labels below
 	CGRect catRect = eponymCategoriesLabel.frame;
+	catRect.origin.x = currRect.origin.x + pLabelSideMargin;
 	catRect.origin.y = currRect.size.height + pDistanceCatLabelFromText;
+	catRect.size.width = [eponymCategoriesLabel.text sizeWithFont:eponymCategoriesLabel.font].width;
 	eponymCategoriesLabel.frame = catRect;
 	
 	CGFloat newHeight = catRect.origin.y + catRect.size.height;
@@ -399,9 +406,12 @@
 	}
 }
 
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation
+- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	if (((eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate]).allowAutoRotate) {
+		if (nil != eponymCategoriesLabel.hintViewDisplayed) {
+			[eponymCategoriesLabel.hintViewDisplayed hide];
+		}
 		return YES;
 	}
 	

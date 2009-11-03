@@ -14,6 +14,7 @@
 #import "GADAdViewController.h"
 @class Eponym;
 @class MCTextView;
+@class PPHintableLabel;
 
 
 @interface EponymViewController : UIViewController <GADAdViewControllerDelegate> {
@@ -25,7 +26,7 @@
 	
 	UILabel *eponymTitleLabel;
 	MCTextView *eponymTextView;
-	UILabel *eponymCategoriesLabel;
+	PPHintableLabel *eponymCategoriesLabel;
 	UILabel *dateCreatedLabel;
 	UILabel *dateUpdatedLabel;
 	
@@ -40,7 +41,7 @@
 
 @property (nonatomic, retain) UILabel *eponymTitleLabel;
 @property (nonatomic, retain) MCTextView *eponymTextView;
-@property (nonatomic, retain) UILabel *eponymCategoriesLabel;
+@property (nonatomic, retain) PPHintableLabel *eponymCategoriesLabel;
 @property (nonatomic, retain) UILabel *dateCreatedLabel;
 @property (nonatomic, retain) UILabel *dateUpdatedLabel;
 

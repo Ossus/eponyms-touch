@@ -71,18 +71,17 @@
 		EE89CE9D0E618B2C0016A781 /* Star_list_active.png in Resources */ = {isa = PBXBuildFile; fileRef = EE89CE9C0E618B2C0016A781 /* Star_list_active.png */; };
 		EE8E56750E6CA69600928D90 /* ElevatedBar.png in Resources */ = {isa = PBXBuildFile; fileRef = EE8E56740E6CA69600928D90 /* ElevatedBar.png */; };
 		EEAB00FA0E2E2F3E00D84A8A /* Info.txt in Resources */ = {isa = PBXBuildFile; fileRef = EEAB00F90E2E2F3E00D84A8A /* Info.txt */; };
+		EECD008410A0DAAE002B06C6 /* PPHintableLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EECD008310A0DAAE002B06C6 /* PPHintableLabel.m */; };
+		EECD008910A0DAC1002B06C6 /* PPHintView.m in Sources */ = {isa = PBXBuildFile; fileRef = EECD008610A0DAC1002B06C6 /* PPHintView.m */; };
+		EECD008A10A0DAC1002B06C6 /* PPHintViewContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = EECD008810A0DAC1002B06C6 /* PPHintViewContainer.m */; };
+		EECD015610A0EC95002B06C6 /* PPHintViewContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = EECD008810A0DAC1002B06C6 /* PPHintViewContainer.m */; };
+		EECD015710A0EC95002B06C6 /* PPHintableLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EECD008310A0DAAE002B06C6 /* PPHintableLabel.m */; };
+		EECD015810A0EC95002B06C6 /* PPHintView.m in Sources */ = {isa = PBXBuildFile; fileRef = EECD008610A0DAC1002B06C6 /* PPHintView.m */; };
 		EED69F830E2BF41900BEF0C4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED69F820E2BF41900BEF0C4 /* CoreGraphics.framework */; };
 		EEF9F2940EA74928002F024E /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF9F2930EA74928002F024E /* Entitlements.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		EE563859109DFB1D00D6C4E6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EE80AD071024C7C4007352AD /* SQLiteUnicode.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D2AAC07D0554694100DB518D;
-			remoteInfo = SQLiteUnicode;
-		};
 		EE80ADF31025FF93007352AD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EE80AD071024C7C4007352AD /* SQLiteUnicode.xcodeproj */;
@@ -95,6 +94,13 @@
 			containerPortal = EE80AD071024C7C4007352AD /* SQLiteUnicode.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = SQLiteUnicode;
+		};
+		EECD01F710A0F341002B06C6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EE80AD071024C7C4007352AD /* SQLiteUnicode.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D /* SQLiteUnicode */;
 			remoteInfo = SQLiteUnicode;
 		};
 /* End PBXContainerItemProxy section */
@@ -150,6 +156,12 @@
 		EE8E56740E6CA69600928D90 /* ElevatedBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ElevatedBar.png; sourceTree = "<group>"; };
 		EEAB00F90E2E2F3E00D84A8A /* Info.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Info.txt; sourceTree = "<group>"; };
 		EEBA8F120E66E727002D6DDC /* EponymUpdaterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EponymUpdaterDelegate.h; sourceTree = "<group>"; };
+		EECD008210A0DAAE002B06C6 /* PPHintableLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPHintableLabel.h; sourceTree = "<group>"; };
+		EECD008310A0DAAE002B06C6 /* PPHintableLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPHintableLabel.m; sourceTree = "<group>"; };
+		EECD008510A0DAC1002B06C6 /* PPHintView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPHintView.h; sourceTree = "<group>"; };
+		EECD008610A0DAC1002B06C6 /* PPHintView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPHintView.m; sourceTree = "<group>"; };
+		EECD008710A0DAC1002B06C6 /* PPHintViewContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPHintViewContainer.h; sourceTree = "<group>"; };
+		EECD008810A0DAC1002B06C6 /* PPHintViewContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPHintViewContainer.m; sourceTree = "<group>"; };
 		EED69F820E2BF41900BEF0C4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		EEF9F2930EA74928002F024E /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -317,6 +329,12 @@
 				EE89CD5E0E6170EE0016A781 /* TouchTableView.m */,
 				EE56393E109E186200D6C4E6 /* MCTextView.h */,
 				EE56393F109E186200D6C4E6 /* MCTextView.m */,
+				EECD008210A0DAAE002B06C6 /* PPHintableLabel.h */,
+				EECD008310A0DAAE002B06C6 /* PPHintableLabel.m */,
+				EECD008510A0DAC1002B06C6 /* PPHintView.h */,
+				EECD008610A0DAC1002B06C6 /* PPHintView.m */,
+				EECD008710A0DAC1002B06C6 /* PPHintViewContainer.h */,
+				EECD008810A0DAC1002B06C6 /* PPHintViewContainer.m */,
 			);
 			name = Subclasses;
 			sourceTree = "<group>";
@@ -353,7 +371,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				EE563858109DFB1D00D6C4E6 /* PBXTargetDependency */,
+				EECD01F810A0F341002B06C6 /* PBXTargetDependency */,
 			);
 			name = "eponyms-student";
 			productName = "eponyms-touch";
@@ -461,6 +479,9 @@
 				EE89CA000E6059280016A781 /* EponymCategory.m in Sources */,
 				EE89CD5F0E6170EE0016A781 /* TouchTableView.m in Sources */,
 				EE563940109E186200D6C4E6 /* MCTextView.m in Sources */,
+				EECD008410A0DAAE002B06C6 /* PPHintableLabel.m in Sources */,
+				EECD008910A0DAC1002B06C6 /* PPHintView.m in Sources */,
+				EECD008A10A0DAC1002B06C6 /* PPHintViewContainer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,21 +500,24 @@
 				EE563877109DFB1D00D6C4E6 /* EponymCategory.m in Sources */,
 				EE563878109DFB1D00D6C4E6 /* TouchTableView.m in Sources */,
 				EE563BCC109E4BAE00D6C4E6 /* MCTextView.m in Sources */,
+				EECD015610A0EC95002B06C6 /* PPHintViewContainer.m in Sources */,
+				EECD015710A0EC95002B06C6 /* PPHintableLabel.m in Sources */,
+				EECD015810A0EC95002B06C6 /* PPHintView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		EE563858109DFB1D00D6C4E6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SQLiteUnicode;
-			targetProxy = EE563859109DFB1D00D6C4E6 /* PBXContainerItemProxy */;
-		};
 		EE80AE11102605E2007352AD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SQLiteUnicode;
 			targetProxy = EE80AE10102605E2007352AD /* PBXContainerItemProxy */;
+		};
+		EECD01F810A0F341002B06C6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SQLiteUnicode;
+			targetProxy = EECD01F710A0F341002B06C6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -550,6 +574,7 @@
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
@@ -573,6 +598,7 @@
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
@@ -593,6 +619,7 @@
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
@@ -629,6 +656,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
+				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
 				INFOPLIST_FILE = "Info-student.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -644,16 +672,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
+				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
 				INFOPLIST_FILE = "Info copy.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)\\\"",
-					"\\\"$(SRCROOT)/GoogleAds\\\"",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/GoogleAds\"",
 				);
 				PRODUCT_NAME = "eponyms-touch";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "574DB9DC-0CDE-425B-9CB5-0FBD5DA32410";
 			};
 			name = Release;
 		};
@@ -661,16 +692,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
+				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
 				INFOPLIST_FILE = "Info copy.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)\\\"",
-					"\\\"$(SRCROOT)/GoogleAds\\\"",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/GoogleAds\"",
 				);
 				PRODUCT_NAME = "eponyms-touch";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "574DB9DC-0CDE-425B-9CB5-0FBD5DA32410";
 			};
 			name = Distribution;
 		};
@@ -679,16 +713,19 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
-				INFOPLIST_FILE = "Info copy.plist";
+				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
+				INFOPLIST_FILE = "Info-student.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)\\\"",
-					"\\\"$(SRCROOT)/GoogleAds\\\"",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/GoogleAds\"",
 				);
 				PRODUCT_NAME = "eponyms-touch";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "574DB9DC-0CDE-425B-9CB5-0FBD5DA32410";
 			};
 			name = AdHoc;
 		};
@@ -705,6 +742,7 @@
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
@@ -742,20 +780,21 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
+				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
 				INFOPLIST_FILE = "Info-student.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)\\\"",
-					"\\\"$(SRCROOT)/GoogleAds\\\"",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/GoogleAds\"",
 				);
 				PRODUCT_NAME = "eponyms-touch";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "574DB9DC-0CDE-425B-9CB5-0FBD5DA32410";
 			};
 			name = "Debug Plus";
 		};
@@ -772,10 +811,11 @@
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FB366378-2A0A-4275-A530-4973CB494D66";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "574DB9DC-0CDE-425B-9CB5-0FBD5DA32410";
 				SDKROOT = iphoneos2.0;
 			};
 			name = AdHoc;
