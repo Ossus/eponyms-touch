@@ -20,9 +20,25 @@ static sqlite3_stmt *mark_accessed_query = nil;
 static sqlite3_stmt *toggle_starred_query = nil;
 
 
+@interface Eponym ()
+
+@property (nonatomic, readwrite, copy) NSString *keywordTitle;
+
+@end
+
+
 @implementation Eponym
 
-@synthesize eponym_id, title, text, categories, created, lastedit, lastaccess, starred, eponymCell;
+@synthesize eponym_id;
+@synthesize title;
+@dynamic keywordTitle;
+@synthesize text;
+@synthesize categories;
+@synthesize created;
+@synthesize lastedit;
+@synthesize lastaccess;
+@synthesize starred;
+@synthesize eponymCell;
 
 
 // finalizes the compiled queries (needed before quitting)
@@ -60,6 +76,25 @@ static sqlite3_stmt *toggle_starred_query = nil;
 	self.title = nil;
 	
 	[super dealloc];
+}
+#pragma mark -
+
+
+
+#pragma mark KVC
+- (NSString *) keywordTitle
+{
+	if (nil == keywordTitle) {
+		self.keywordTitle = [self.title stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+	}
+	return keywordTitle;
+}
+- (void) setKeywordTitle:(NSString *)newTitle
+{
+	if (newTitle != keywordTitle) {
+		[keywordTitle release];
+		keywordTitle = [newTitle copyWithZone:[self zone]];
+	}
 }
 #pragma mark -
 

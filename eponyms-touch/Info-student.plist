@@ -27,7 +27,7 @@
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>SubversionRevision</key>
-	<string>r52</string>
+	<string>r54</string>
 	<key>eponymUpdateCheckURL</key>
 	<string>http://code.hillrippers.ch/eponyms/XML/eponyms_info.xml</string>
 	<key>eponymUpdateCheckURL DEBUG</key>

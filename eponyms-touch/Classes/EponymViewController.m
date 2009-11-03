@@ -27,6 +27,8 @@
 #define pTotalSizeBottomMargin 10.0
 #define kGoogleAdViewTopMargin 8.0
 
+#define kGoogleAdSenseClientID @"ca-mb-app-pub-1234567890123456"
+
 
 @interface EponymViewController ()
 
@@ -347,10 +349,10 @@
 {
 	// Size needed to fit all text
 	CGRect currRect = eponymTextView.frame;
-	CGSize szMax = CGSizeMake(currRect.size.width - 16.0, 10000.0);
-	CGSize optimalSize = [eponymToBeShown.text sizeWithFont:eponymTextView.font constrainedToSize:szMax];
+	CGSize szMax = CGSizeMake(currRect.size.width, 10000.0);
+	CGSize optimalSize = [eponymTextView sizeThatFits:szMax];
 	
-	currRect.size.height = optimalSize.height + 16.0;
+	currRect.size.height = optimalSize.height;
 	eponymTextView.frame = currRect;
 	
 	// Align the labels below
@@ -425,7 +427,12 @@
 	[eponymToBeShown toggleStarred];
 	self.navigationItem.rightBarButtonItem = eponymToBeShown.starred ? self.rightBarButtonStarredItem : self.rightBarButtonNotStarredItem;
 	if (eponymToBeShown.eponymCell) {
-		eponymToBeShown.eponymCell.image = eponymToBeShown.starred ? [delegate starImageListActive] : nil;
+		if ([eponymToBeShown.eponymCell respondsToSelector:@selector(imageView)]) {
+			[[eponymToBeShown.eponymCell imageView] setImage:eponymToBeShown.starred ? [delegate starImageListActive] : nil];
+		}
+		else {
+			eponymToBeShown.eponymCell.image = eponymToBeShown.starred ? [delegate starImageListActive] : nil;
+		}
 	}
 }
 #pragma mark -
@@ -450,12 +457,16 @@
 - (void) addGoogleAdsToView:(UIView *)toView inRect:(CGRect)inRect
 {
 	if ([self adViewExists]) {
-		if (nil != [adController.view superview]) {
+		UIView *oldSuperview = [adController.view superview];
+		if (nil != oldSuperview && oldSuperview != toView) {
 			[adController.view removeFromSuperview];
+			oldSuperview = nil;
 		}
 		
 		adController.view.frame = inRect;
-		[toView addSubview:adController.view];
+		if (nil == oldSuperview) {
+			[toView addSubview:adController.view];
+		}
 	}
 }
 
@@ -469,8 +480,8 @@
 		NSString *myKeywords = [NSString stringWithFormat:
 								@"medical,eponyms,%@,%@",
 								[categoryStrings componentsJoinedByString:@","],
-								eponym.title];
-		
+								eponym.keywordTitle];
+		//NSLog(@"Google Ad keywords: %@", myKeywords);
 		// **************************************************************************
 		// Please replace the kGADAdSenseClientID, kGADAdSenseKeywords, and
 		// kGADAdSenseChannelIDs values with your own AdSense client ID, keywords,
@@ -483,7 +494,7 @@
 		// **************************************************************************
 		NSNumber *channel = [NSNumber numberWithUnsignedLongLong:6892341229];
 		NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
-									@"ca-mb-app-pub-9691089513053829", kGADAdSenseClientID,
+									kGoogleAdSenseClientID, kGADAdSenseClientID,
 									@"Pascal Pfiffner", kGADAdSenseCompanyName,
 									@"Eponyms", kGADAdSenseAppName,
 									myKeywords, kGADAdSenseKeywords,
@@ -507,12 +518,12 @@
 - (void) adControllerDidFinishLoading:(GADAdViewController *)anAdController
 {
 	NSLog(@"ad controller finished: %@", anAdController);
-}	//	* /
+}	//	*/
 
 - (void) adController:(GADAdViewController *)anAdController failedWithError:(NSError *)error
 {
-	// just fail
-}	//	*/
+	[anAdController.view removeFromSuperview];
+}
 
 
 @end

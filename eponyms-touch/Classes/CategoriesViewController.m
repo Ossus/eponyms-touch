@@ -20,14 +20,16 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 
 @implementation CategoriesViewController
 
-@synthesize delegate, myTableView, atLaunchScrollTo;
+@synthesize delegate;
+@synthesize myTableView;
+@synthesize atLaunchScrollTo;
 @dynamic categoryArrayCache;
 
 
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-	if(self) {
+	if (self) {
 		self.title = @"Eponyms";
 	}
 	return self;
@@ -55,7 +57,7 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 	[delegate setCategoryShown:nil];
 	[delegate setEponymShown:0];
 	
-	if(atLaunchScrollTo > 0.0) {
+	if (atLaunchScrollTo > 0.0) {
 		myTableView.contentOffset = CGPointMake(0.0, atLaunchScrollTo);
 		atLaunchScrollTo = 0.0;
 	}
@@ -64,7 +66,7 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation
 {
-	if(((eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate]).allowAutoRotate) {
+	if (((eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate]).allowAutoRotate) {
 		return YES;
 	}
 	
@@ -96,12 +98,12 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 }
 - (void) setCategoryArrayCache:(NSArray *)categories
 {
-	if(categories != categoryArrayCache) {
+	if (categories != categoryArrayCache) {
 		[categoryArrayCache release];
 		categoryArrayCache = [categories retain];
 	}
 	
-	if(categories) {
+	if (categories) {
 		[myTableView reloadData];
 	}
 }
@@ -115,7 +117,7 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 	UIButton *infoButton;
 	CGRect buttonSize = CGRectMake(0.0, 0.0, 30.0, 30.0);
 	
-	if(hasNew) {
+	if (hasNew) {
 		infoButton = [UIButton buttonWithType:UIButtonTypeCustom];
 		[infoButton setImage:[UIImage imageNamed:@"Badge_new_eponyms.png"] forState:(UIControlStateNormal & UIControlStateHighlighted & UIControlStateDisabled & UIControlStateSelected & UIControlStateApplication & UIControlStateReserved)];
 		infoButton.showsTouchWhenHighlighted = YES;
@@ -177,7 +179,7 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyCellIdentifier];
-	if(cell == nil) {
+	if (cell == nil) {
 		cell = [[[UITableViewCell alloc] initWithFrame:CGRectMake(0,0,0,0) reuseIdentifier:MyCellIdentifier] autorelease];
 	}
 	

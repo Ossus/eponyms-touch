@@ -163,11 +163,11 @@ CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect);
 	}
 	
 	// calculate size needed by the text
-	CGFloat textPadding = 8.0;
+	CGFloat textPadding = 8.0 + 1.0;		// 1.0 is the border width. TODO: Remove when building for 3.0!
 	CGSize maxSize = CGSizeMake(size.width - (2 * textPadding), size.height - (2 * textPadding));
 	CGSize textSize = [self.text sizeWithFont:self.font constrainedToSize:maxSize];
 	
-	return CGSizeMake(textSize.width + (2 * textPadding), textSize.height + (2 * textPadding));
+	return CGSizeMake(textSize.width + (2 * textPadding), textSize.height + (2 * textPadding) - 2.0);		// TODO: Remove 2.0 when building for 3.0
 }
 #pragma mark -
 

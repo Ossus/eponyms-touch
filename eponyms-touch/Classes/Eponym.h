@@ -21,6 +21,7 @@
 	
 	// Eponym Attributes
 	NSString *title;
+	NSString *keywordTitle;			// the title ready to be used as a keyword
 	NSString *text;
 	NSArray *categories;
 	NSDate *created;
@@ -37,6 +38,7 @@
 // KVC
 @property (readonly, nonatomic) NSUInteger eponym_id;
 @property (copy, nonatomic) NSString *title;
+@property (copy, nonatomic, readonly) NSString *keywordTitle;
 @property (copy, nonatomic) NSString *text;
 @property (copy, nonatomic) NSArray *categories;
 @property (copy, nonatomic) NSDate *created;
