@@ -119,6 +119,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 		self.navigationItem.rightBarButtonItem = abortSearchButton;
 		self.navigationItem.hidesBackButton = YES;
 		self.navigationItem.titleView = mySearchBar;
+		isSearching = YES;
 		
 		BOOL isSideways = (UIInterfaceOrientationLandscapeLeft == [self interfaceOrientation]
 						   || UIInterfaceOrientationLandscapeRight == [self interfaceOrientation]);
@@ -148,6 +149,7 @@ static NSString *MyCellIdentifier = @"EponymCell";
 		self.navigationItem.rightBarButtonItem = initSearchButton;
 		self.navigationItem.hidesBackButton = NO;
 		self.navigationItem.titleView = nil;
+		isSearching = NO;
 	}
 }
 
@@ -360,7 +362,9 @@ static NSString *MyCellIdentifier = @"EponymCell";
 			label.textAlignment = UITextAlignmentCenter;
 			label.textColor = [UIColor grayColor];
 			label.lineBreakMode = UILineBreakModeWordWrap;
-			label.text = [(EponymCategory *)[delegate categoryShown] hint];
+			label.text = isSearching ?
+			@"No eponyms match your search criteria"
+			 : [(EponymCategory *)[delegate categoryShown] hint];
 			
 			[cell.contentView addSubview:label];
 		}

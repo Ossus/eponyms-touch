@@ -18,18 +18,20 @@
 #import "PPHintableLabel.h"
 #import "PPHintView.h"
 #import "GADAdSenseParameters.h"
+#import "GoogleAdSenseClient.h"
 
 
-#define pSideMargin 10.0
-#define pLabelSideMargin 5.0
-#define pHeightTitle 32.0
-#define pDistanceTextFromTitle 8.0
-#define pDistanceCatLabelFromText 8.0
-#define pDistanceDateLabelsFromCat 8.0
-#define pTotalSizeBottomMargin 10.0
-#define kGoogleAdViewTopMargin 8.0
+#define kSideMargin 15.0
+#define kLabelSideMargin 5.0
+#define kHeightTitle 32.0
+#define kDistanceTextFromTitle 8.0
+#define kDistanceCatLabelFromText 8.0
+#define kDistanceDateLabelsFromCat 8.0
+#define kTotalSizeBottomMargin 10.0
+#define kGoogleAdViewTopMargin 0.0			// additionally to kTotalSizeBottomMargin
+#define kBottomMargin 5.0					// does not apply to the Google Ads
 
-#define kGoogleAdSenseClientID @"ca-mb-app-pub-1234567890123456"
+
 
 
 @interface EponymViewController ()
@@ -138,8 +140,8 @@
 {
 	if (nil == eponymTitleLabel) {
 		CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
-		CGFloat fullWidth = screenRect.size.width - 2 * pSideMargin;
-		CGRect titleRect = CGRectMake(pSideMargin, pSideMargin, fullWidth, pHeightTitle);
+		CGFloat fullWidth = screenRect.size.width - 2 * kSideMargin;
+		CGRect titleRect = CGRectMake(kSideMargin, kSideMargin, fullWidth, kHeightTitle);
 		
 		self.eponymTitleLabel = [[[UILabel alloc] initWithFrame:titleRect] autorelease];
 		eponymTitleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -166,7 +168,7 @@
 {
 	if (nil == eponymTextView) {
 		CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
-		CGFloat fullWidth = screenRect.size.width - 2 * pSideMargin;
+		CGFloat fullWidth = screenRect.size.width - 2 * kSideMargin;
 		CGRect textRect = CGRectMake(0.0, 0.0, fullWidth, 40.0);
 		
 		self.eponymTextView = [[[MCTextView alloc] initWithFrame:textRect] autorelease];
@@ -190,9 +192,9 @@
 {
 	if (nil == eponymCategoriesLabel) {
 		CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
-		CGFloat fullWidth = screenRect.size.width - 2 * pSideMargin;
-		CGFloat labelWidth = fullWidth - 2 * pLabelSideMargin;
-		CGRect catRect = CGRectMake(pLabelSideMargin, pDistanceCatLabelFromText, labelWidth, 19.0);
+		CGFloat fullWidth = screenRect.size.width - 2 * kSideMargin;
+		CGFloat labelWidth = fullWidth - 2 * kLabelSideMargin;
+		CGRect catRect = CGRectMake(kLabelSideMargin, kDistanceCatLabelFromText, labelWidth, 19.0);
 		
 		self.eponymCategoriesLabel = [[[PPHintableLabel alloc] initWithFrame:catRect] autorelease];
 		eponymCategoriesLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -215,9 +217,9 @@
 {
 	if (nil == dateCreatedLabel) {
 		CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
-		CGFloat fullWidth = screenRect.size.width - 2 * pSideMargin;
-		CGFloat labelWidth = fullWidth - 2 * pLabelSideMargin;
-		CGRect createdRect = CGRectMake(pLabelSideMargin, pDistanceDateLabelsFromCat, labelWidth, 16.0);
+		CGFloat fullWidth = screenRect.size.width - 2 * kSideMargin;
+		CGFloat labelWidth = fullWidth - 2 * kLabelSideMargin;
+		CGRect createdRect = CGRectMake(kLabelSideMargin, kDistanceDateLabelsFromCat, labelWidth, 16.0);
 		
 		self.dateCreatedLabel = [[[UILabel alloc] initWithFrame:createdRect] autorelease];
 		dateCreatedLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -239,9 +241,9 @@
 {
 	if (nil == dateUpdatedLabel) {
 		CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
-		CGFloat fullWidth = screenRect.size.width - 2 * pSideMargin;
-		CGFloat labelWidth = fullWidth - 2 * pLabelSideMargin;
-		CGRect createdRect = CGRectMake(pLabelSideMargin, pDistanceDateLabelsFromCat, labelWidth, 16.0);
+		CGFloat fullWidth = screenRect.size.width - 2 * kSideMargin;
+		CGFloat labelWidth = fullWidth - 2 * kLabelSideMargin;
+		CGRect createdRect = CGRectMake(kLabelSideMargin, kDistanceDateLabelsFromCat, labelWidth, 16.0);
 		
 		self.dateUpdatedLabel = [[[UILabel alloc] initWithFrame:createdRect] autorelease];
 		dateUpdatedLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -276,8 +278,8 @@
 	[self.view addSubview:self.eponymTitleLabel];
 	
 	// Compose the container (contains eponym text, the category labels and the date labels)
-	CGFloat fullWidth = screenRect.size.width - 2 * pSideMargin;
-	CGRect containerRect = CGRectMake(pSideMargin, pSideMargin + pHeightTitle + pDistanceTextFromTitle, fullWidth, 20.0);
+	CGFloat fullWidth = screenRect.size.width - 2 * kSideMargin;
+	CGRect containerRect = CGRectMake(kSideMargin, kSideMargin + kHeightTitle + kDistanceTextFromTitle, fullWidth, 20.0);
 	
 	UIView *container = [[[UIView alloc] initWithFrame:containerRect] autorelease];
 	container.autoresizingMask = UIViewAutoresizingFlexibleWidth;// | UIViewAutoresizingFlexibleHeight;
@@ -352,6 +354,8 @@
 
 - (void) adjustDisplayToContent
 {
+	CGRect viewFrame = self.view.frame;
+	
 	// Size needed to fit all text
 	CGRect currRect = eponymTextView.frame;
 	CGSize szMax = CGSizeMake(currRect.size.width, 10000.0);
@@ -362,46 +366,52 @@
 	
 	// Align the labels below
 	CGRect catRect = eponymCategoriesLabel.frame;
-	catRect.origin.x = currRect.origin.x + pLabelSideMargin;
-	catRect.origin.y = currRect.size.height + pDistanceCatLabelFromText;
+	catRect.origin.x = currRect.origin.x + kLabelSideMargin;
+	catRect.origin.y = currRect.size.height + kDistanceCatLabelFromText;
 	catRect.size.width = [eponymCategoriesLabel.text sizeWithFont:eponymCategoriesLabel.font].width;
 	eponymCategoriesLabel.frame = catRect;
 	
-	CGFloat newHeight = catRect.origin.y + catRect.size.height;
+	CGFloat subviewHeight = catRect.origin.y + catRect.size.height;
 	
 	if (!dateCreatedLabel.hidden) {
 		CGRect creaRect = dateCreatedLabel.frame;
-		creaRect.origin.y = newHeight + pDistanceDateLabelsFromCat;
+		creaRect.origin.y = subviewHeight + kDistanceDateLabelsFromCat;
 		dateCreatedLabel.frame = creaRect;
-		newHeight = creaRect.origin.y + creaRect.size.height;
+		subviewHeight = creaRect.origin.y + creaRect.size.height;
 	}
 	
 	if (!dateUpdatedLabel.hidden) {
 		CGRect updRect = dateUpdatedLabel.frame;
-		updRect.origin.y = newHeight;
+		updRect.origin.y = subviewHeight;
 		dateUpdatedLabel.frame = updRect;
-		newHeight = updRect.origin.y + updRect.size.height;
+		subviewHeight = updRect.origin.y + updRect.size.height;
 	}
 	
 	// tell the container view his new height
-	newHeight += pTotalSizeBottomMargin;
+	subviewHeight += kTotalSizeBottomMargin;
 	CGRect superRect = eponymTextView.superview.frame;
-	superRect.size.height = newHeight;
+	superRect.size.height = subviewHeight;
 	eponymTextView.superview.frame = superRect;
 	
+	CGFloat totalHeight = superRect.origin.y + superRect.size.height + kBottomMargin;
+	
 	// adjust Google ads
-	CGFloat googleY = superRect.origin.y + superRect.size.height + kGoogleAdViewTopMargin;
-	CGRect adRect = CGRectMake(0.0, googleY, kGADAdSize320x50.width, kGADAdSize320x50.height);
-	[self addGoogleAdsToView:self.view inRect:adRect];
-	newHeight = googleY + adRect.size.height;
+	if ([self adViewExists]) {
+		CGFloat googleMin = viewFrame.size.height - kGADAdSize320x50.height;
+		CGFloat googleY = superRect.origin.y + superRect.size.height + kGoogleAdViewTopMargin;
+		CGFloat googleTop = fmaxf(googleY, googleMin);
+		CGRect adRect = CGRectMake(0.0, googleTop, kGADAdSize320x50.width, kGADAdSize320x50.height);
+		[self addGoogleAdsToView:self.view inRect:adRect];
+		totalHeight = googleTop + adRect.size.height;
+	}
 	
 	// tell our view the size so that scrolling is possible
-	CGFloat minHeight = [[UIScreen mainScreen] applicationFrame].size.height;
-	CGSize contSize = CGSizeMake(((UIScrollView *)self.view).contentSize.width, newHeight);
+	CGFloat minHeight = viewFrame.size.height;
+	CGSize contSize = CGSizeMake(((UIScrollView *)self.view).contentSize.width, totalHeight);
 	((UIScrollView *)self.view).contentSize = contSize;
 	
 	// scroll to top when needed
-	if (newHeight < minHeight) {
+	if (totalHeight < minHeight) {
 		[((UIScrollView *)self.view) scrollRectToVisible:CGRectMake(0.0, 0.0, 10.0, 10.0) animated:NO];
 	}
 }

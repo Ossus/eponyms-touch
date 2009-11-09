@@ -25,6 +25,7 @@
 	UIBarButtonItem *initSearchButton;
 	UIBarButtonItem *abortSearchButton;
 	NSTimer *searchTimeoutTimer;
+	BOOL isSearching;
 	
 	CGFloat atLaunchScrollTo;
 	BOOL keyboardShown;
@@ -44,5 +45,6 @@
 @property (nonatomic, assign) CGFloat atLaunchScrollTo;
 
 - (void) cacheEponyms:(NSArray *)eponyms andHeaders:(NSArray *)sections;
+
 
 @end

@@ -100,7 +100,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = EE80AD071024C7C4007352AD /* SQLiteUnicode.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC07D0554694100DB518D /* SQLiteUnicode */;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
 			remoteInfo = SQLiteUnicode;
 		};
 /* End PBXContainerItemProxy section */
@@ -164,6 +164,7 @@
 		EECD008810A0DAC1002B06C6 /* PPHintViewContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPHintViewContainer.m; sourceTree = "<group>"; };
 		EED69F820E2BF41900BEF0C4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		EEF9F2930EA74928002F024E /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+		EEFA119210A38F3D0041A4D7 /* GoogleAdSenseClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleAdSenseClient.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,6 +307,7 @@
 		EE56383A109DFA7A00D6C4E6 /* GoogleAds */ = {
 			isa = PBXGroup;
 			children = (
+				EEFA119210A38F3D0041A4D7 /* GoogleAdSenseClient.h */,
 				EE563845109DFAAE00D6C4E6 /* GADAdSenseParameters.h */,
 				EE563846109DFAAE00D6C4E6 /* GADAdViewController.h */,
 				EE563847109DFAAE00D6C4E6 /* libGoogleAds.a */,
