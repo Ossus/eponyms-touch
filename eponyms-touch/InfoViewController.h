@@ -22,18 +22,17 @@
 	
 	BOOL firstTimeLaunch;
 	BOOL askingToAbortImport;
-	UIInterfaceOrientation lastInterfaceOrientation;
 	
 	NSInteger lastEponymCheck;
 	NSInteger lastEponymUpdate;
 	NSDictionary *infoPlistDict;
 	NSURL *projectWebsiteURL;
 	
-	UISegmentedControl *tabSegments;
+	IBOutlet UISegmentedControl *tabSegments;
+	IBOutlet UIScrollView *parentView;
 	IBOutlet UIView *infoView;
 	IBOutlet UIView *updatesView;
 	IBOutlet UIView *optionsView;
-	IBOutlet UIImageView *backgroundImage;
 	
 	// Info
 	IBOutlet UILabel *versionLabel;
@@ -56,6 +55,7 @@
 	
 	// Options
 	IBOutlet UISwitch *allowRotateSwitch;
+	IBOutlet UISwitch *allowLearnModeSwitch;
 }
 
 @property (nonatomic, assign) id delegate;
@@ -66,12 +66,17 @@
 @property (nonatomic, retain) NSDictionary *infoPlistDict;
 @property (nonatomic, retain) NSURL *projectWebsiteURL;
 
-@property (nonatomic, retain) UISegmentedControl *tabSegments;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *tabSegments;
+@property (nonatomic, retain) IBOutlet UIScrollView *parentView;
+
+@property (nonatomic, retain) IBOutlet UISwitch *autocheckSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *allowRotateSwitch;
+@property (nonatomic, retain) IBOutlet UISwitch *allowLearnModeSwitch;
 
 
-- (void) tabChanged:(id)sender;
+- (IBAction) tabChanged:(id)sender;
 - (void) updateLabelsWithDateForLastCheck:(NSDate *)lastCheck lastUpdate:(NSDate *)lastUpdate usingEponyms:(NSDate *)usingEponyms;
-- (void) dismissMe:(id)sender;
+- (IBAction) dismissMe:(id)sender;
 
 - (void) setUpdateButtonTitle:(NSString *)title;
 - (void) setUpdateButtonTitleColor:(UIColor *)color;
@@ -80,8 +85,7 @@
 
 // Options
 - (IBAction) performUpdateAction:(id)sender;
-- (IBAction) autoCheckSwitchToggled:(id)sender;
-- (IBAction) allowRotateSwitchToggled:(id)sender;
+- (IBAction) switchToggled:(id)sender;
 
 // Links
 - (IBAction) openProjectWebsite:(id)sender;

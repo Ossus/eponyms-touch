@@ -37,7 +37,7 @@
 	<key>eponymXMLURL DEBUG</key>
 	<string>http://127.0.0.1/pp/Projects/Eponyms/XML/eponyms.xml</string>
 	<key>numberOfIncludedEponyms</key>
-	<string>1662</string>
+	<string>1717</string>
 	<key>projectWebsite</key>
 	<string>http://eponyms-touch.googlecode.com/</string>
 	<key>showGoogleAds</key>

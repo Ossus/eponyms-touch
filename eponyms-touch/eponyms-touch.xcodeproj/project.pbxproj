@@ -14,7 +14,6 @@
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		EE14428F0E236E10003EA64C /* InfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE14428E0E236E10003EA64C /* InfoView.xib */; };
 		EE1443EA0E23A576003EA64C /* EponymUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1443E90E23A576003EA64C /* EponymUpdater.m */; };
-		EE2DE6B50E1AE31800D97653 /* Eponyms.png in Resources */ = {isa = PBXBuildFile; fileRef = EE2DE6B40E1AE31800D97653 /* Eponyms.png */; };
 		EE2DE6BA0E1AE38200D97653 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2DE6B90E1AE38200D97653 /* InfoViewController.m */; };
 		EE2DE74E0E1C297200D97653 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2DE74D0E1C297200D97653 /* ListViewController.m */; };
 		EE2DE7530E1C297F00D97653 /* EponymViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2DE7520E1C297F00D97653 /* EponymViewController.m */; };
@@ -30,8 +29,6 @@
 		EE563848109DFAAE00D6C4E6 /* libGoogleAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE563847109DFAAE00D6C4E6 /* libGoogleAds.a */; };
 		EE56385B109DFB1D00D6C4E6 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		EE56385C109DFB1D00D6C4E6 /* Eponyms.png in Resources */ = {isa = PBXBuildFile; fileRef = EE2DE6B40E1AE31800D97653 /* Eponyms.png */; };
-		EE56385D109DFB1D00D6C4E6 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EE2DEDF90E229B9B00D97653 /* Icon.png */; };
-		EE56385E109DFB1D00D6C4E6 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = EE2DEDFE0E229DB700D97653 /* Default.png */; };
 		EE56385F109DFB1D00D6C4E6 /* InfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE14428E0E236E10003EA64C /* InfoView.xib */; };
 		EE563860109DFB1D00D6C4E6 /* eponyms.xml in Resources */ = {isa = PBXBuildFile; fileRef = EE64C7BF0E2680D40000BC8D /* eponyms.xml */; };
 		EE563861109DFB1D00D6C4E6 /* Info.txt in Resources */ = {isa = PBXBuildFile; fileRef = EEAB00F90E2E2F3E00D84A8A /* Info.txt */; };
@@ -62,6 +59,9 @@
 		EE56387E109DFB1D00D6C4E6 /* libGoogleAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE563847109DFAAE00D6C4E6 /* libGoogleAds.a */; };
 		EE563940109E186200D6C4E6 /* MCTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE56393F109E186200D6C4E6 /* MCTextView.m */; };
 		EE563BCC109E4BAE00D6C4E6 /* MCTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE56393F109E186200D6C4E6 /* MCTextView.m */; };
+		EE5A6C7F10B831840092053C /* Icon-student.png in Resources */ = {isa = PBXBuildFile; fileRef = EE5A6C7E10B831840092053C /* Icon-student.png */; };
+		EE5A6DF610B88ECE0092053C /* BlueRoundedButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EE5A6DF510B88ECE0092053C /* BlueRoundedButton.png */; };
+		EE5A6DF710B88ECE0092053C /* BlueRoundedButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EE5A6DF510B88ECE0092053C /* BlueRoundedButton.png */; };
 		EE64C7C00E2680D40000BC8D /* eponyms.xml in Resources */ = {isa = PBXBuildFile; fileRef = EE64C7BF0E2680D40000BC8D /* eponyms.xml */; };
 		EE66414F0E62A2220047D7ED /* Star_eponym_active.png in Resources */ = {isa = PBXBuildFile; fileRef = EE66414D0E62A2220047D7ED /* Star_eponym_active.png */; };
 		EE6641500E62A2220047D7ED /* Star_eponym_inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = EE66414E0E62A2220047D7ED /* Star_eponym_inactive.png */; };
@@ -78,6 +78,8 @@
 		EECD015710A0EC95002B06C6 /* PPHintableLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EECD008310A0DAAE002B06C6 /* PPHintableLabel.m */; };
 		EECD015810A0EC95002B06C6 /* PPHintView.m in Sources */ = {isa = PBXBuildFile; fileRef = EECD008610A0DAC1002B06C6 /* PPHintView.m */; };
 		EED69F830E2BF41900BEF0C4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED69F820E2BF41900BEF0C4 /* CoreGraphics.framework */; };
+		EEDB74DE10B89A76007782DA /* Eponyms.png in Resources */ = {isa = PBXBuildFile; fileRef = EEDB74DD10B89A76007782DA /* Eponyms.png */; };
+		EEDB74ED10B89AF7007782DA /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = EEDB74EC10B89AF7007782DA /* Default.png */; };
 		EEF9F2940EA74928002F024E /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF9F2930EA74928002F024E /* Entitlements.plist */; };
 /* End PBXBuildFile section */
 
@@ -144,6 +146,8 @@
 		EE56388D109DFC0C00D6C4E6 /* Info-student.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-student.plist"; sourceTree = "<group>"; };
 		EE56393E109E186200D6C4E6 /* MCTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTextView.h; sourceTree = "<group>"; };
 		EE56393F109E186200D6C4E6 /* MCTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTextView.m; sourceTree = "<group>"; };
+		EE5A6C7E10B831840092053C /* Icon-student.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-student.png"; sourceTree = "<group>"; };
+		EE5A6DF510B88ECE0092053C /* BlueRoundedButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueRoundedButton.png; sourceTree = "<group>"; };
 		EE64C7BF0E2680D40000BC8D /* eponyms.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = eponyms.xml; sourceTree = "<group>"; };
 		EE66414D0E62A2220047D7ED /* Star_eponym_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Star_eponym_active.png; sourceTree = "<group>"; };
 		EE66414E0E62A2220047D7ED /* Star_eponym_inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Star_eponym_inactive.png; sourceTree = "<group>"; };
@@ -163,6 +167,8 @@
 		EECD008710A0DAC1002B06C6 /* PPHintViewContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPHintViewContainer.h; sourceTree = "<group>"; };
 		EECD008810A0DAC1002B06C6 /* PPHintViewContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPHintViewContainer.m; sourceTree = "<group>"; };
 		EED69F820E2BF41900BEF0C4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		EEDB74DD10B89A76007782DA /* Eponyms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Eponyms.png; sourceTree = "<group>"; };
+		EEDB74EC10B89AF7007782DA /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		EEF9F2930EA74928002F024E /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		EEFA119210A38F3D0041A4D7 /* GoogleAdSenseClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleAdSenseClient.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -276,15 +282,15 @@
 		EE2DE6B30E1AE30C00D97653 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				EEDB74CB10B89953007782DA /* FullVersion */,
+				EEDB74CA10B8994A007782DA /* StudentVersion */,
 				EE3BC4420E6ADECB0051B69D /* InfoBackground.png */,
 				EE3BC3C00E6ACEBF0051B69D /* Badge_new_eponyms.png */,
 				EE66414D0E62A2220047D7ED /* Star_eponym_active.png */,
 				EE66414E0E62A2220047D7ED /* Star_eponym_inactive.png */,
 				EE89CE9C0E618B2C0016A781 /* Star_list_active.png */,
 				EE8E56740E6CA69600928D90 /* ElevatedBar.png */,
-				EE2DEDF90E229B9B00D97653 /* Icon.png */,
-				EE2DE6B40E1AE31800D97653 /* Eponyms.png */,
-				EE2DEDFE0E229DB700D97653 /* Default.png */,
+				EE5A6DF510B88ECE0092053C /* BlueRoundedButton.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -339,6 +345,26 @@
 				EECD008810A0DAC1002B06C6 /* PPHintViewContainer.m */,
 			);
 			name = Subclasses;
+			sourceTree = "<group>";
+		};
+		EEDB74CA10B8994A007782DA /* StudentVersion */ = {
+			isa = PBXGroup;
+			children = (
+				EEDB74EC10B89AF7007782DA /* Default.png */,
+				EE5A6C7E10B831840092053C /* Icon-student.png */,
+				EE2DE6B40E1AE31800D97653 /* Eponyms.png */,
+			);
+			path = StudentVersion;
+			sourceTree = "<group>";
+		};
+		EEDB74CB10B89953007782DA /* FullVersion */ = {
+			isa = PBXGroup;
+			children = (
+				EE2DEDFE0E229DB700D97653 /* Default.png */,
+				EE2DEDF90E229B9B00D97653 /* Icon.png */,
+				EEDB74DD10B89A76007782DA /* Eponyms.png */,
+			);
+			path = FullVersion;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -420,7 +446,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
-				EE2DE6B50E1AE31800D97653 /* Eponyms.png in Resources */,
 				EE2DEDFA0E229B9B00D97653 /* Icon.png in Resources */,
 				EE2DEDFF0E229DB700D97653 /* Default.png in Resources */,
 				EE14428F0E236E10003EA64C /* InfoView.xib in Resources */,
@@ -436,6 +461,8 @@
 				EE8E56750E6CA69600928D90 /* ElevatedBar.png in Resources */,
 				EE380FA60E97B3180066BA6E /* eponyms_info.xml in Resources */,
 				EEF9F2940EA74928002F024E /* Entitlements.plist in Resources */,
+				EE5A6DF710B88ECE0092053C /* BlueRoundedButton.png in Resources */,
+				EEDB74DE10B89A76007782DA /* Eponyms.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,8 +472,6 @@
 			files = (
 				EE56385B109DFB1D00D6C4E6 /* MainWindow.xib in Resources */,
 				EE56385C109DFB1D00D6C4E6 /* Eponyms.png in Resources */,
-				EE56385D109DFB1D00D6C4E6 /* Icon.png in Resources */,
-				EE56385E109DFB1D00D6C4E6 /* Default.png in Resources */,
 				EE56385F109DFB1D00D6C4E6 /* InfoView.xib in Resources */,
 				EE563860109DFB1D00D6C4E6 /* eponyms.xml in Resources */,
 				EE563861109DFB1D00D6C4E6 /* Info.txt in Resources */,
@@ -460,6 +485,9 @@
 				EE563869109DFB1D00D6C4E6 /* ElevatedBar.png in Resources */,
 				EE56386A109DFB1D00D6C4E6 /* eponyms_info.xml in Resources */,
 				EE56386B109DFB1D00D6C4E6 /* Entitlements.plist in Resources */,
+				EE5A6C7F10B831840092053C /* Icon-student.png in Resources */,
+				EE5A6DF610B88ECE0092053C /* BlueRoundedButton.png in Resources */,
+				EEDB74ED10B89AF7007782DA /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

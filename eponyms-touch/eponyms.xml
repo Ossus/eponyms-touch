@@ -8,7 +8,7 @@
 	<!ELEMENT c (#PCDATA)>
 	<!ELEMENT e (#PCDATA)>
 ]>
-<root created="1253453647">
+<root created="1258304812">
 
 <category tag="ANAT" title="Anatomy" />
 <category tag="GI" title="Gastroenterology" />
@@ -1613,6 +1613,14 @@
 	<c>7/26/2009</c>
 	<e>7/26/2009</e>
 </eponym>
+<eponym id="braakstage">
+	<name>Braak stage</name>
+	<desc>Pathologic staging system for the neurofibrillary degeneration seen in Alzheimer's disease, first described in 1991.</desc>
+	<cat>PATH</cat>
+	<cat>NEURO</cat>
+	<c>11/13/2009</c>
+	<e>11/13/2009</e>
+</eponym>
 <eponym id="BradburyEgglestonsyndrome">
 	<name>Bradbury-Eggleston syndrome</name>
 	<desc>Pure autonomic dysfunction characterized by low circulating catecholamines.</desc>
@@ -2182,7 +2190,7 @@
 </eponym>
 <eponym id="Carabellossign">
 	<name>Carabello's sign</name>
-	<desc>In severe aortic stenosis, during catheterization across aortic valve, an augmentation of the peripheral systolic pressure of more than 5 mm Hg during aortic pullback; from catheter further increasing the severity of the stenosis and removal resulting in a transient increase in stroke volume and systolic pressure (Am J Cardiol 1979;44:4247).</desc>
+	<desc>In severe aortic stenosis, during catheterization across aortic valve, an augmentation of the peripheral systolic pressure of more than 5 mm Hg during aortic pullback; from catheter further increasing the severity of the stenosis and removal resulting in a transient increase in stroke volume and systolic pressure (Am J Cardiol 1979;44:424–7).</desc>
 	<cat>CV</cat>
 	<cat>SIGN</cat>
 	<c>8/8/2002</c>
@@ -3194,6 +3202,16 @@
 	<cat>GI</cat>
 	<c>9/15/2009</c>
 	<e>9/15/2009</e>
+</eponym>
+<eponym id="demorsiersyndrome">
+	<name>De Morsier syndrome</name>
+	<desc>Septooptic dysplasia, characterized by combination of optic nerve hypoplasia, pituitary hypoplasia, and midline abnormalities of the brain, including absence of the corpus callosum and septum pellucidum. Associated with mutation in HESX1.</desc>
+	<cat>NEURO</cat>
+	<cat>PEDS</cat>
+	<cat>SYND</cat>
+	<cat>OPHTH</cat>
+	<c>11/13/2009</c>
+	<e>11/13/2009</e>
 </eponym>
 <eponym id="deMussetssign">
 	<name>de Musset's sign</name>
@@ -6225,6 +6243,13 @@
 	<c>7/1/2009</c>
 	<e>7/1/2009</e>
 </eponym>
+<eponym id="jacquemierssign">
+	<name>Jacquemier's sign</name>
+	<desc>Early sign of pregnancy characterized by purplish coloration of vagina.</desc>
+	<cat>OB</cat>
+	<c>11/13/2009</c>
+	<e>11/13/2009</e>
+</eponym>
 <eponym id="Jadassohnnevussebaceous">
 	<name>Jadassohn, nevus sebaceus of</name>
 	<desc>Circumscribed hamartoma involving skin with a preponderance of sebaceous glands. Usually seen at birth or in early childhood. Described by Jadassohn in 1895.</desc>
@@ -6458,7 +6483,7 @@
 </eponym>
 <eponym id="KandinskyClerambaultssyndrome">
 	<name>Kandinsky-Clerambault's syndrome</name>
-	<desc>Alienation from or loss of one's own mental processes which are attributed to somebody else, combined with delusions of external influences, such as stealing or insertion of thoughts, described independently by Russian psychiatrist Victor Khrisanfovich Kandinsky (18491889) and French psychiatrist Gaëtan Gatian de Clerambault (18721934) .</desc>
+	<desc>Alienation from or loss of one's own mental processes which are attributed to somebody else, combined with delusions of external influences, such as stealing or insertion of thoughts, described independently by Russian psychiatrist Victor Khrisanfovich Kandinsky (1849–1889) and French psychiatrist Gaëtan Gatian de Clerambault (1872–1934) .</desc>
 	<cat>PSYCH</cat>
 	<c>11/18/2002</c>
 	<e>11/18/2002</e>
@@ -8002,6 +8027,14 @@
 	<c>1/23/2005</c>
 	<e>1/23/2005</e>
 </eponym>
+<eponym id="macaulaysdisease">
+	<name>Macaulay's disease</name>
+	<desc>Lymphomatoid papulosis, a low-grade cutaneous T-cell lymphoma.</desc>
+	<cat>DERM</cat>
+	<cat>ONC</cat>
+	<c>11/13/2009</c>
+	<e>11/13/2009</e>
+</eponym>
 <eponym id="MacCallumsplaques">
 	<name>MacCallum's plaques</name>
 	<desc>Irregular thickenings, usually in the left atrium, from subendocardial lesions, usually exacerbated by regurgitant jets.</desc>
@@ -8672,12 +8705,12 @@
 	<e>7/4/2009</e>
 </eponym>
 <eponym id="Meltzerstraid">
-	<name>Meltzer's traid</name>
+	<name>Meltzer's triad</name>
 	<desc>In cryoglobulinemia, triad of palpable purpura, arthralgia and myalgia.</desc>
 	<cat>SIGN</cat>
 	<cat>RHEUM</cat>
 	<c>1/17/2005</c>
-	<e>1/17/2005</e>
+	<e>10/15/2009</e>
 </eponym>
 <eponym id="Mendelsonssyndrome">
 	<name>Mendelson's syndrome</name>
@@ -9150,10 +9183,10 @@
 </eponym>
 <eponym id="MuchaHabermanndisease">
 	<name>Mucha-Habermann disease</name>
-	<desc>Pityriasis lichenoides et varioliformis acuta, scattered necrotic papules and vesicles that can resemble insect bites but usually are more generalized and symmetric.</desc>
+	<desc>Pityriasis lichenoides et varioliformis acuta, scattered necrotic papules and vesicles that can resemble insect bites but usually are more generalized and symmetric. Felt to be a form of a self-limited lymphoproliferative disease.</desc>
 	<cat>DERM</cat>
 	<c>3/21/1998</c>
-	<e>3/21/1998</e>
+	<e>11/13/2009</e>
 </eponym>
 <eponym id="MuckleWellssyndrome">
 	<name>Muckle-Wells syndrome</name>
@@ -12776,6 +12809,13 @@
 	<cat>PEDS</cat>
 	<c>2/3/2001</c>
 	<e>6/22/2009</e>
+</eponym>
+<eponym id="thomastest">
+	<name>Thomas test</name>
+	<desc>To test for hip flexion deformity due to e.g. osteoarthritis, while lying supine, patient flexes unaffected leg at the hip. If patient is unable to keep contralateral leg flat, then test is positive. Other variants of test exist.</desc>
+	<cat>ORTHO</cat>
+	<c>11/7/2009</c>
+	<e>11/7/2009</e>
 </eponym>
 <eponym id="Thompsonstest">
 	<name>Thompson's test</name>

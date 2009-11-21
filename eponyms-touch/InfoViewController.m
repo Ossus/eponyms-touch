@@ -20,7 +20,6 @@
 
 @interface InfoViewController (Private)
 
-- (void) adjustContentToOrientation:(UIInterfaceOrientation)newOrientation animated:(BOOL)animated;
 - (void) switchToTab:(NSUInteger)tab;
 - (void) lockGUI:(BOOL)lock;
 - (void) newEponymsAreAvailable:(BOOL)available;
@@ -34,25 +33,17 @@
 @implementation InfoViewController
 
 @synthesize delegate, firstTimeLaunch, lastEponymCheck, lastEponymUpdate, tabSegments, infoPlistDict, projectWebsiteURL;
+@synthesize parentView;
+@synthesize autocheckSwitch;
+@synthesize allowRotateSwitch;
+@synthesize allowLearnModeSwitch;
 
 
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-	if(self) {
+	if (self) {
 		askingToAbortImport = NO;
-		
-		// compose the navigation bar
-		NSArray *possibleTabs = [NSArray arrayWithObjects:@"About", @"Update", @"Options", nil];
-		self.tabSegments = [[UISegmentedControl alloc] initWithItems:possibleTabs];
-		tabSegments.selectedSegmentIndex = 0;
-		tabSegments.segmentedControlStyle = UISegmentedControlStyleBar;
-		tabSegments.frame = CGRectMake(0.0, 0.0, 220.0, 30.0);
-		tabSegments.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-		[tabSegments addTarget:self action:@selector(tabChanged:) forControlEvents:UIControlEventValueChanged];
-		
-		self.navigationItem.titleView	= tabSegments;
-		self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(dismissMe:)] autorelease];
 		
 		// NSBundle Info.plist
 		self.infoPlistDict = [[NSBundle mainBundle] infoDictionary];		// !! could use the supplied NSBundle or the mainBundle on nil
@@ -68,10 +59,11 @@
 	self.tabSegments = nil;
 	
 	// IBOutlets
+	self.parentView = nil;
+	
 	[infoView release];
 	[updatesView release];
 	[optionsView release];
-	[backgroundImage release];
 	
 	[versionLabel release];
 	[usingEponymsLabel release];
@@ -88,9 +80,10 @@
 	[progressView release];
 	
 	[updateButton release];
-	[autocheckSwitch release];
 	
-	[allowRotateSwitch release];
+	self.autocheckSwitch = nil;
+	self.allowRotateSwitch = nil;
+	self.allowLearnModeSwitch = nil;
 	
 	[super dealloc];
 }
@@ -101,11 +94,7 @@
 #pragma mark View Controller Delegate
 - (void) viewDidLoad
 {
-	self.view = infoView;
-	
-	tabSegments.tintColor = [delegate naviBarTintColor];
 	[self switchToTab:0];
-	lastInterfaceOrientation = UIInterfaceOrientationPortrait;
 	
 	// hide progress stuff
 	[self setStatusMessage:nil];
@@ -130,14 +119,14 @@
 {
 	BOOL mustSeeProgress = firstTimeLaunch || [delegate newEponymsAvailable];
 	
-	if(mustSeeProgress) {
+	if (mustSeeProgress) {
 		[self switchToTab:1];
 	}
 }
 
 - (void) viewDidAppear:(BOOL)animated
 {
-	if(firstTimeLaunch) {
+	if (firstTimeLaunch) {
 		NSString *title = @"First Launch";
 		NSString *message = @"Welcome to Eponyms!\nBefore using Eponyms, the database must be created.";
 		
@@ -145,94 +134,21 @@
 	}
 	
 	// Adjust options
+	eponyms_touchAppDelegate *appDelegate = (eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate];
 	autocheckSwitch.on = [delegate shouldAutoCheck];
-	
-	[self adjustContentToOrientation:[self interfaceOrientation] animated:NO];
+	allowRotateSwitch.on = appDelegate.allowAutoRotate;
+	allowLearnModeSwitch.on = appDelegate.allowLearnMode;
 }
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	if(((eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate]).allowAutoRotate) {
-		[self adjustContentToOrientation:interfaceOrientation animated:YES];
-		return YES;
-	}
-	
-	return ((interfaceOrientation == UIInterfaceOrientationPortrait) || (interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown));
-}
-
-- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-}
-
-- (void) adjustContentToOrientation:(UIInterfaceOrientation)newOrientation animated:(BOOL)animated
-{
-	if(newOrientation != lastInterfaceOrientation) {
-		CGPoint websiteCenter;
-		CGPoint eponymsNetCenter;
-		CGRect propsFrame;
-		
-		// get dimensions
-		CGSize screenSize;// = infoView.frame.size;		// can't use this here since upon calling infoView still has the old dimensions
-		CGRect foo = authorTextView.frame;
-		CGPoint authorsOrigin = foo.origin;
-		CGFloat authorsHeight = foo.size.height;
-		
-		// to Portrait
-		if((UIInterfaceOrientationPortrait == newOrientation) || (UIInterfaceOrientationPortraitUpsideDown == newOrientation)) {
-			screenSize = CGSizeMake(320, 416);
-			websiteCenter = CGPointMake(roundf((screenSize.width - 48.0) / 4) + 20.0,			// - 48 = - 2*20 (margin) + -8 (space between buttons)
-										authorsOrigin.y + authorsHeight + (projectWebsiteButton.bounds.size.height / 2) + 10);
-			eponymsNetCenter = CGPointMake(roundf((screenSize.width - 48.0) / 4 * 3) + 28.0,	// + 28 = + 20 (margin) + 8 (space between buttons)
-										   authorsOrigin.y + authorsHeight + (projectWebsiteButton.bounds.size.height / 2) + 10);
-			CGFloat propsFrameY = authorsOrigin.y + authorsHeight + projectWebsiteButton.bounds.size.height + 20;
-			propsFrame = CGRectMake(20,
-									propsFrameY,
-									screenSize.width - 40,
-									screenSize.height - propsFrameY - 20);
-		}
-		
-		// Landscape
-		else {
-			screenSize = CGSizeMake(480, 268);
-			websiteCenter = CGPointMake(screenSize.width - roundf((projectWebsiteButton.bounds.size.width / 2) + 20), 38.5);
-			eponymsNetCenter = CGPointMake(screenSize.width - roundf((eponymsDotNetButton.bounds.size.width / 2) + 20), 86.5);
-			CGFloat propsFrameY = authorsOrigin.y + authorsHeight;
-			propsFrame = CGRectMake(20,
-									propsFrameY,
-									screenSize.width - 40,
-									screenSize.height - propsFrameY - 20);
-		}
-		
-		// Start animation
-		if(animated) {
-			[UIView beginAnimations:nil context:nil];
-			
-			projectWebsiteButton.center = websiteCenter;
-			eponymsDotNetButton.center = eponymsNetCenter;
-			propsTextView.frame = propsFrame;
-			
-			[UIView commitAnimations];
-		}
-		else {
-			projectWebsiteButton.center = websiteCenter;
-			eponymsDotNetButton.center = eponymsNetCenter;
-			propsTextView.frame = propsFrame;
-		}
-	}
-	
-	lastInterfaceOrientation = newOrientation;
-}
-
-- (void) didReceiveMemoryWarning
-{
-	[self dismissMe:nil];
-	[super didReceiveMemoryWarning];		// Releases the view if it doesn't have a superview !!
+	return (interfaceOrientation == UIInterfaceOrientationPortrait);	// very difficult to get good results in the info view, so don't allow rotation
 }
 
 - (void) dismissMe:(id)sender
 {
 	// warning when closing during import
-	if([delegate iAmUpdating]) {
+	if ([delegate iAmUpdating]) {
 		askingToAbortImport = YES;
 		NSString *warning = @"Are you sure you want to abort the eponym import? This will discard any imported eponyms.";
 		[self alertViewWithTitle:CANCEL_IMPORT_TITLE message:warning cancelTitle:@"Continue" otherTitle:@"Abort Import"];
@@ -257,40 +173,53 @@
 - (void) switchToTab:(NSUInteger)tab
 {
 	tabSegments.selectedSegmentIndex = tab;
-	if([backgroundImage superview]) {
-		[backgroundImage removeFromSuperview];
-	}
+	BOOL alsoAdjustHeight = NO;
+	
+	// remove current view
+	[[parentView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+	UIView *viewToAdd = nil;
 	
 	// Show the About page
-	if(0 == tab) {
-		self.view = infoView;
+	if (0 == tab) {
+		viewToAdd = infoView;
 	}
 	
 	// Show the update tab
-	else if(1 == tab) {
-		self.view = updatesView;
+	else if (1 == tab) {
+		viewToAdd = updatesView;
+		alsoAdjustHeight = YES;
 		
 		// adjust the elements
-		if([delegate didCheckForNewEponyms]) {
+		if ([delegate didCheckForNewEponyms]) {
 			[self newEponymsAreAvailable:[delegate newEponymsAvailable]];
 		}
 	}
 	
 	// Show the options
 	else {
-		self.view = optionsView;
-		
-		// adjust the elements
-		allowRotateSwitch.on = ((eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate]).allowAutoRotate;
+		viewToAdd = optionsView;
+		alsoAdjustHeight = YES;
 	}
 	
-	[self.view insertSubview:backgroundImage atIndex:0];
+	// add the view?
+	if (nil != viewToAdd) {
+		CGRect viewFrame = viewToAdd.frame;
+		viewFrame.size.width = parentView.frame.size.width;
+		if (alsoAdjustHeight) {
+			viewFrame.size.height = parentView.frame.size.height;
+		}
+		viewToAdd.frame = viewFrame;
+		
+		[parentView addSubview:viewToAdd];
+		parentView.contentSize = viewToAdd.frame.size;
+		parentView.contentOffset = CGPointZero;
+	}
 }
 
 - (void) newEponymsAreAvailable:(BOOL)available
 {
 	NSString *statusMessage = nil;
-	if(available) {
+	if (available) {
 		statusMessage = @"New eponyms are available!";
 		[self setUpdateButtonTitle:@"Download New Eponyms"];
 		[self setUpdateButtonTitleColor:[UIColor redColor]];
@@ -313,7 +242,7 @@
 
 - (void) lockGUI:(BOOL)lock
 {
-	if(lock) {
+	if (lock) {
 		updateButton.enabled = NO;
 		projectWebsiteButton.enabled = NO;
 		eponymsDotNetButton.enabled = NO;
@@ -336,17 +265,17 @@
 	[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
 	
 	// last check
-	if(lastCheck) {
+	if (lastCheck) {
 		[lastCheckLabel setText:([lastCheck timeIntervalSince1970] > 10.0) ? [dateFormatter stringFromDate:lastCheck] : @"Never"];
 	}
 	
 	// last update
-	if(lastUpdate) {
+	if (lastUpdate) {
 		[lastUpdateLabel setText:([lastUpdate timeIntervalSince1970] > 10.0) ? [dateFormatter stringFromDate:lastUpdate] : @"Never"];
 	}
 	
 	// using eponyms
-	if(usingEponyms) {
+	if (usingEponyms) {
 		[dateFormatter setTimeStyle:NSDateFormatterNoStyle];
 		NSString *usingEponymsString = ([usingEponyms timeIntervalSince1970] > 10.0) ? [dateFormatter stringFromDate:usingEponyms] : @"Unknown";
 		[usingEponymsLabel setText:[NSString stringWithFormat:@"Eponyms Date: %@", usingEponymsString]];
@@ -363,7 +292,7 @@
 
 - (void) setUpdateButtonTitleColor:(UIColor *)color
 {
-	if(nil == color) {
+	if (nil == color) {
 		color = [UIColor colorWithRed:0.2 green:0.3 blue:0.5 alpha:1.0];		// default button text color
 	}
 	[updateButton setTitleColor:color forState:(UIControlStateNormal & UIControlStateHighlighted & UIControlStateSelected & UIControlStateDisabled)];
@@ -371,11 +300,11 @@
 
 - (void) setStatusMessage:(NSString *)message
 {
-	if(message) {
+	if (message) {
 		// check message length
 		CGFloat maxPossibleWidth = progressText.bounds.size.width * 1.1;		// text will be squeezed, so we allow a little overhead
 		CGFloat isWidth = [message sizeWithFont:progressText.font].width;
-		if(isWidth > maxPossibleWidth) {
+		if (isWidth > maxPossibleWidth) {
 			CGFloat fraction = maxPossibleWidth / isWidth;
 			NSUInteger useNumChars = roundf([message length] * fraction);
 			
@@ -393,7 +322,7 @@
 
 - (void) setProgress:(CGFloat)progress
 {
-	if(progress >= 0.0) {
+	if (progress >= 0.0) {
 		progressView.hidden = NO;
 		progressView.progress = progress;
 	}
@@ -402,16 +331,20 @@
 	}
 }
 
-- (IBAction) autoCheckSwitchToggled:(id)sender
+- (IBAction) switchToggled:(id)sender
 {
 	UISwitch *mySwitch = sender;
-	[delegate setShouldAutoCheck:mySwitch.on];
-}
-
-- (IBAction) allowRotateSwitchToggled:(id)sender
-{
-	UISwitch *mySwitch = sender;
-	((eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate]).allowAutoRotate = mySwitch.on;
+	eponyms_touchAppDelegate *appDelegate = (eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate];
+	
+	if (autocheckSwitch == mySwitch) {
+		[delegate setShouldAutoCheck:mySwitch.on];
+	}
+	else if (allowRotateSwitch == mySwitch) {
+		appDelegate.allowAutoRotate = mySwitch.on;
+	}
+	else if (allowLearnModeSwitch == mySwitch) {
+		appDelegate.allowLearnMode = mySwitch.on;
+	}
 }
 #pragma mark -
 
@@ -431,9 +364,9 @@
 	[updater retain];
 	[self lockGUI:NO];
 	
-	if(success) {
+	if (success) {
 		// did check for updates
-		if(1 == updater.updateAction) {
+		if (1 == updater.updateAction) {
 			[self newEponymsAreAvailable:updater.newEponymsAvailable];
 			[self updateLabelsWithDateForLastCheck:[NSDate date] lastUpdate:nil usingEponyms:nil];
 		}
@@ -442,7 +375,7 @@
 		else {
 			NSString *statusMessage;
 			
-			if(updater.numEponymsParsed > 0) {
+			if (updater.numEponymsParsed > 0) {
 				statusMessage = [NSString stringWithFormat:@"Created %u eponyms", updater.numEponymsParsed];
 				[self updateLabelsWithDateForLastCheck:nil lastUpdate:[NSDate date] usingEponyms:updater.eponymCreationDate];
 			}
@@ -459,7 +392,7 @@
 	else {
 		[self resetStatusElementsWithButtonTitle:@"Try Again"];		
 		
-		if(updater.downloadFailed && updater.statusMessage) {
+		if (updater.downloadFailed && updater.statusMessage) {
 			[self alertViewWithTitle:@"Download Failed" message:updater.statusMessage cancelTitle:@"OK"];
 		}
 		
@@ -497,8 +430,8 @@
 - (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger) buttonIndex
 {
 	// abort import alert
-	if(askingToAbortImport) {
-		if(buttonIndex == alertView.firstOtherButtonIndex) {
+	if (askingToAbortImport) {
+		if (buttonIndex == alertView.firstOtherButtonIndex) {
 			[delegate abortUpdateAction];
 			[self dismissMe:nil];
 		}
@@ -506,7 +439,7 @@
 	}
 	
 	// first import alert (can only be accepted at the moment)
-	else if(firstTimeLaunch) {
+	else if (firstTimeLaunch) {
 		[(eponyms_touchAppDelegate *)delegate loadEponymXMLFromDisk];
 	}
 }
@@ -522,7 +455,7 @@
 
 - (void) openWebsite:(NSURL *)url fromButton:(id) button
 {
-	if(![[UIApplication sharedApplication] openURL:url]) {
+	if (![[UIApplication sharedApplication] openURL:url]) {
 		[button setText:@"Failed"];
 	}
 }

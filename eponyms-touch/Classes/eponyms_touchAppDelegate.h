@@ -23,13 +23,14 @@
 @class Eponym;
 
 
-@interface eponyms_touchAppDelegate : NSObject <UIApplicationDelegate, EponymUpdaterDelegate> {
+@interface eponyms_touchAppDelegate : NSObject <UIApplicationDelegate, EponymUpdaterDelegate, UIAccelerometerDelegate> {
 	IBOutlet UIWindow *window;
 	sqlite3 *database;
 	
 	// Prefs
 	BOOL shouldAutoCheck;
 	BOOL allowAutoRotate;
+	BOOL allowLearnMode;
 	
 	// Eponyms
 	EponymCategory *categoryShown;
@@ -60,6 +61,14 @@
 	BOOL didCheckForNewEponyms;
 	BOOL newEponymsAvailable;
 	NSInteger usingEponymsOf;
+	
+	// Accelerometer
+	UIAccelerationValue accelerationX;
+	UIAccelerationValue lastAccelerationX;
+	UIAccelerationValue accelerationY;
+	UIAccelerationValue lastAccelerationY;
+	NSUInteger lastMainShakeAxis;					// 1 = X-axis, 2 = Y-axis
+	NSTimeInterval randomIsRefractoryUntil;			// timestamp until the next shake event is allowed
 }
 
 @property (nonatomic, retain) UIWindow *window;
@@ -67,6 +76,7 @@
 
 @property (nonatomic, assign) BOOL shouldAutoCheck;
 @property (nonatomic, assign) BOOL allowAutoRotate;
+@property (nonatomic, assign) BOOL allowLearnMode;
 
 @property (nonatomic, retain) EponymCategory *categoryShown;
 @property (nonatomic, assign) NSInteger categoryIDShown;
@@ -102,6 +112,7 @@
 - (void) loadEponymsOfCategoryID:(NSInteger)category_id containingString:(NSString *)searchString animated:(BOOL)animated;
 - (void) loadEponymsOfCategory:(EponymCategory *)category containingString:(NSString *)searchString animated:(BOOL)animated;
 - (void) loadEponym:(Eponym *)eponym animated:(BOOL)animated;
+- (IBAction) loadRandomEponym:(id)sender;
 - (void) closeMainDatabase;
 - (void) deleteDatabaseFile;
 

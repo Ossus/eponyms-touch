@@ -17,7 +17,7 @@
 @class PPHintableLabel;
 
 
-@interface EponymViewController : UIViewController <GADAdViewControllerDelegate> {
+@interface EponymViewController : UIViewController <UIScrollViewDelegate, GADAdViewControllerDelegate> {
 	id delegate;
 	Eponym *eponymToBeShown;
 	
@@ -30,6 +30,10 @@
 	UILabel *dateCreatedLabel;
 	UILabel *dateUpdatedLabel;
 	
+	UIButton *revealButton;	
+	NSInteger displayNextEponymInLearningMode;		// -1 = title hidden, 0 = normal, 1 = eponym hidden
+	
+	BOOL adIsLoading;
 	GADAdViewController *adController;
 }
 
@@ -45,9 +49,13 @@
 @property (nonatomic, retain) UILabel *dateCreatedLabel;
 @property (nonatomic, retain) UILabel *dateUpdatedLabel;
 
+@property (nonatomic, retain) UIButton *revealButton;
+@property (nonatomic, assign) NSInteger displayNextEponymInLearningMode;
+
 @property (nonatomic, readonly, retain) GADAdViewController *adController;
 
-- (void) toggleEponymStarred;
+- (void) toggleEponymStarred:(id)sender;
+- (void) reveal:(id)sender;
 
 
 @end

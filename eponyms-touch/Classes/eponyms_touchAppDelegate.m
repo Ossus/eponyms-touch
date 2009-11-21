@@ -17,15 +17,11 @@
 #import "CategoriesViewController.h"
 #import "ListViewController.h"
 #import "EponymViewController.h"
-//#import <sqlite3_unicode.h>			// uncomment when building against iPhone OS 3.0+
 
 #define EPONYM_TITLE_FIELD @"eponym_en"
 #define EPONYM_TEXT_FIELD @"text_en"
 #define THIS_DB_VERSION 1
 
-
-//@interface eponyms_touchAppDelegate (Private)
-//@end
 
 static sqlite3_stmt *load_all_categories_query = nil;
 static sqlite3_stmt *load_eponyms_query = nil;
@@ -48,7 +44,13 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 
 @implementation eponyms_touchAppDelegate
 
-@synthesize window, database, myUpdater, usingEponymsOf, allowAutoRotate, shouldAutoCheck, iAmUpdating, didCheckForNewEponyms, newEponymsAvailable;
+@synthesize window, database, myUpdater, usingEponymsOf;
+@synthesize allowAutoRotate;
+@synthesize allowLearnMode;
+@synthesize shouldAutoCheck;
+@synthesize iAmUpdating;
+@synthesize didCheckForNewEponyms;
+@synthesize newEponymsAvailable;
 @dynamic categoryShown;
 @synthesize naviController, categoriesController, listController, eponymController, infoController;
 @synthesize categoryIDShown, eponymShown, categoryArray, eponymArray, eponymSectionArray, loadedEponyms;
@@ -67,10 +69,11 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	NSUInteger shownEponymAtQuit;
 	CGFloat scrollPositionAtQuit;
 	
-	NSNumber *testValue = [[NSUserDefaults standardUserDefaults] objectForKey:@"usingEponymsOf"];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSNumber *testValue = [defaults objectForKey:@"usingEponymsOf"];
 	if (nil == testValue) {
 		NSDictionary *appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:0], @"lastEponymUpdate", nil];
-		[[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+		[defaults registerDefaults:appDefaults];
 		
 		self.usingEponymsOf = 0;
 		self.shouldAutoCheck = YES;
@@ -79,19 +82,21 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		shownCategoryAtQuit = -100;
 		shownEponymAtQuit = 0;
 		scrollPositionAtQuit = 0.0;
-		self.allowAutoRotate = YES;
+		self.allowAutoRotate = NO;
+		self.allowLearnMode = YES;
 	}
 	
 	// Prefs were there
 	else {
 		self.usingEponymsOf = [testValue intValue];
-		self.shouldAutoCheck = [[NSUserDefaults standardUserDefaults] boolForKey:@"shouldAutoCheck"];
-		lastEponymCheck = [[NSUserDefaults standardUserDefaults] integerForKey:@"lastEponymCheck"];
-		lastUsedDBVersion = [[NSUserDefaults standardUserDefaults] integerForKey:@"lastUsedDBVersion"];
-		shownCategoryAtQuit = [[NSUserDefaults standardUserDefaults] integerForKey:@"shownCategoryAtQuit"];
-		shownEponymAtQuit = [[NSUserDefaults standardUserDefaults] integerForKey:@"shownEponymAtQuit"];
-		scrollPositionAtQuit = [[NSUserDefaults standardUserDefaults] floatForKey:@"scrollPositionAtQuit"];
-		self.allowAutoRotate = [[NSUserDefaults standardUserDefaults] boolForKey:@"allowAutoRotate"];
+		self.shouldAutoCheck = [defaults boolForKey:@"shouldAutoCheck"];
+		lastEponymCheck = [defaults integerForKey:@"lastEponymCheck"];
+		lastUsedDBVersion = [defaults integerForKey:@"lastUsedDBVersion"];
+		shownCategoryAtQuit = [defaults integerForKey:@"shownCategoryAtQuit"];
+		shownEponymAtQuit = [defaults integerForKey:@"shownEponymAtQuit"];
+		scrollPositionAtQuit = [defaults floatForKey:@"scrollPositionAtQuit"];
+		self.allowAutoRotate = [defaults boolForKey:@"allowAutoRotate"];
+		self.allowLearnMode = [defaults boolForKey:@"allowLearnMode"];
 	}
 	
 	
@@ -128,18 +133,25 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	
 	
 	// **** Restore State
-	if (shownEponymAtQuit > 0) {														// Eponym
+	if (shownEponymAtQuit > 0) {											// Eponym
+		shownCategoryAtQuit = (shownCategoryAtQuit > -100) ? shownCategoryAtQuit : 0;
 		[self loadEponymsOfCategoryID:shownCategoryAtQuit containingString:nil animated:NO];
 		[self loadEponymWithId:shownEponymAtQuit animated:NO];
 	}
-	else if (shownCategoryAtQuit > -100) {												// Eponym list
+	else if (shownCategoryAtQuit > -100) {									// Eponym list
 		listController.atLaunchScrollTo = scrollPositionAtQuit;
 		[self loadEponymsOfCategoryID:shownCategoryAtQuit containingString:nil animated:NO];
 	}
-	else {																			// Category list (may be infoView, but we don't want to go there)
+	else {																	// Category list (may be infoView, but we don't want to go there)
 		categoriesController.atLaunchScrollTo = scrollPositionAtQuit;
 	}
 	//NSLog(@"shownEponymAtQuit: %u, shownCategoryAtQuit: %u", shownEponymAtQuit, shownCategoryAtQuit);
+	
+	
+	// **** Register for shake events
+	UIAccelerometer *accelerometer = [UIAccelerometer sharedAccelerometer];
+	accelerometer.updateInterval = 1 / 10;
+	accelerometer.delegate = self;
 	
 	
 	// **** First launch or older database structure - create from scratch
@@ -207,6 +219,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 - (void) applicationWillTerminate:(UIApplication *)application
 {
 	[self closeMainDatabase];
+	[UIAccelerometer sharedAccelerometer].delegate = nil;
 	
 	// Are we updating? Abort that
 	if (iAmUpdating) {
@@ -222,6 +235,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	[defaults setInteger:eponymShown forKey:@"shownEponymAtQuit"];
 	[defaults setFloat:bnds.origin.y forKey:@"scrollPositionAtQuit"];
 	[defaults setBool:allowAutoRotate forKey:@"allowAutoRotate"];
+	[defaults setBool:allowLearnMode forKey:@"allowLearnMode"];
 	[defaults synchronize];
 }
 #pragma mark -
@@ -351,14 +365,15 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		
 		// did actually update eponyms
 		else {
+			NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 			if (updater.numEponymsParsed > 0) {
 				self.usingEponymsOf = (NSInteger)[updater.eponymCreationDate timeIntervalSince1970];
-				[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(NSInteger)nowInEpoch]
+				[defaults setObject:[NSNumber numberWithInt:(NSInteger)nowInEpoch]
 														  forKey:@"lastEponymUpdate"];
-				[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:usingEponymsOf]
+				[defaults setObject:[NSNumber numberWithInt:usingEponymsOf]
 														  forKey:@"usingEponymsOf"];
 			}
-			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(NSInteger)nowInEpoch] forKey:@"lastEponymCheck"];
+			[defaults setObject:[NSNumber numberWithInt:(NSInteger)nowInEpoch] forKey:@"lastEponymCheck"];
 			
 			mayReleaseUpdater = !updater.parseFailed;
 			[self showNewEponymsAreAvailable:NO];
@@ -529,7 +544,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	[eponymSectionArray removeAllObjects];
 	[listController cacheEponyms:nil andHeaders:nil];
 	
-	if (nil == database) {
+	if (NULL == database) {
 		[self connectToDBAndCreateIfNeeded];
 	}
 	
@@ -581,8 +596,8 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	// compile the queries for the special "categories" (all, starred and last accessed eponyms)
 	else {
 		if (category != categoryShown) {
-			sqlite3_finalize(load_eponyms_query);			load_eponyms_query = nil;
-			sqlite3_finalize(load_eponyms_search_query);	load_eponyms_search_query = nil;
+			sqlite3_finalize(load_eponyms_query);			load_eponyms_query = NULL;
+			sqlite3_finalize(load_eponyms_search_query);	load_eponyms_search_query = NULL;
 		}
 		
 		// search query
@@ -633,12 +648,12 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	NSMutableArray *sectionArray = [[NSMutableArray alloc] init];
 	
 	while (sqlite3_step(query) == SQLITE_ROW) {
-		int eid = sqlite3_column_int(query, 0);
+		int epo_id = sqlite3_column_int(query, 0);
 		char *eponymTitle = (char *)sqlite3_column_text(query, 1);
 		int starred = sqlite3_column_int(query, 2);
 		
 		[title setString:[NSString stringWithUTF8String:eponymTitle]];
-		Eponym *eponym = [[Eponym alloc] initWithID:eid title:title delegate:self];
+		Eponym *eponym = [[Eponym alloc] initWithID:epo_id title:title delegate:self];
 		eponym.starred = starred ? YES : NO;
 		
 		// determine the first letter and create the eponym (for all eponyms, starred eponyms or eponyms from the real categories)
@@ -648,9 +663,8 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 			// new first letter!
 			if (NSOrderedSame != [firstLetter caseInsensitiveCompare:oldFirstLetter]) {
 				if ([sectionArray count] > 0) {
-					[eponymArray addObject:sectionArray];
-					[sectionArray release];
-					sectionArray = [[NSMutableArray alloc] init];
+					[eponymArray addObject:[[sectionArray copy] autorelease]];
+					[sectionArray removeAllObjects];
 					
 					[eponymSectionArray addObject:[oldFirstLetter uppercaseString]];
 				}
@@ -665,7 +679,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	
 	// add last section
 	if ([sectionArray count] > 0) {
-		[eponymArray addObject:sectionArray];
+		[eponymArray addObject:[[sectionArray copy] autorelease]];
 		[eponymSectionArray addObject:[oldFirstLetter uppercaseString]];
 	}
 	[sectionArray release];
@@ -706,6 +720,48 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	[self loadEponym:eponym animated:animated];
 }
 
+// loads a random eponym of the current group
+- (IBAction) loadRandomEponym:(id)sender
+{
+	NSTimeInterval startDate = [[NSDate date] timeIntervalSince1970];
+	if (randomIsRefractoryUntil > startDate) {
+		return;
+	}
+	randomIsRefractoryUntil = startDate + 3.0;		// at max all three seconds
+	
+	// no loaded group -> load all eponyms
+	if (nil == eponymArray || [eponymArray count] < 1) {
+		EponymCategory *fullCategory = [self categoryWithID:0];
+		[self loadEponymsOfCategory:fullCategory containingString:nil animated:NO];
+	}
+	
+	// get random group
+	NSInteger randGroup = arc4random() % [eponymArray count];
+	NSArray *groupItems = [eponymArray objectAtIndex:randGroup];
+	
+	// random eponym from group
+	if (nil != groupItems && [groupItems count] > 0) {
+		NSInteger randEpo = arc4random() % [groupItems count];
+		Eponym *randEponym = [groupItems objectAtIndex:randEpo];
+		
+		// got one - load
+		if (nil != randEponym) {
+			eponymController.displayNextEponymInLearningMode = (2 == lastMainShakeAxis) ? -1 : 1;
+			[self loadEponym:randEponym animated:YES];
+		}
+		
+		// got none!
+		else {
+			NSLog(@"Did not get a random eponym!");
+		}
+	}
+	
+	// else invalid group!
+	else {
+		NSLog(@"Did not get a good random group! int: %i, max: %i", randGroup, [eponymArray count]);
+	}
+}
+
 
 // cleans up the queries and closes the database
 - (void) closeMainDatabase
@@ -737,7 +793,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	// close
 	if (database) {
 		sqlite3_close(database);
-		database = nil;
+		database = NULL;
 	}
 	
 	sqlite3_unicode_free();
@@ -765,14 +821,46 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		infoController.delegate = self;
 	}
 	
-	infoController.lastEponymCheck = [[NSUserDefaults standardUserDefaults] integerForKey:@"lastEponymCheck"];
-	infoController.lastEponymUpdate = [[NSUserDefaults standardUserDefaults] integerForKey:@"lastEponymUpdate"];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	infoController.lastEponymCheck = [defaults integerForKey:@"lastEponymCheck"];
+	infoController.lastEponymUpdate = [defaults integerForKey:@"lastEponymUpdate"];
 	infoController.firstTimeLaunch = firstTimeLaunch;
 	
-	UINavigationController *tempNaviController = [[UINavigationController alloc] initWithRootViewController:infoController];
-	[naviController presentModalViewController:tempNaviController animated:YES];
-	tempNaviController.navigationBar.tintColor = [self naviBarTintColor];
-	[tempNaviController release];
+	[naviController presentModalViewController:infoController animated:YES];
+}
+#pragma mark -
+
+
+
+#pragma mark Accelerometer Delegate
+- (void) accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
+{
+	if (allowLearnMode) {
+		
+		// Simple high pass filter by subtracting low pass values (we only need the x axis = iPhone sideways axis)
+		accelerationX = acceleration.x - ((acceleration.x * 0.1) + (accelerationX * 0.9));
+		accelerationY = acceleration.y - ((acceleration.y * 0.05) + (accelerationY * 0.95));
+		
+		// X-shake
+		if (lastAccelerationX && (abs(lastAccelerationX) > 1.0) && (abs(accelerationX) > 1.0)) {
+			lastMainShakeAxis = 1;
+			[self loadRandomEponym:nil];
+		}
+		
+		// Y-shake
+		if (lastAccelerationY && (abs(lastAccelerationY) > 1.0) && (abs(accelerationY) > 1.0)) {
+			lastMainShakeAxis = 2;
+			[self loadRandomEponym:nil];
+		}
+		
+		// no shake at all
+		else {
+			lastMainShakeAxis = 0;
+		}
+		
+		lastAccelerationX = accelerationX;
+		lastAccelerationY = accelerationY;
+	}
 }
 #pragma mark -
 

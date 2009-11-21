@@ -37,8 +37,11 @@
 @interface EponymViewController ()
 
 @property (nonatomic, readwrite, retain) GADAdViewController *adController;
-- (void) adjustDisplayToContent;
 
+- (void) adjustInterfaceToEponym;
+- (void) alignUIElements;
+
+- (BOOL) adViewIsVisible;
 - (BOOL) adViewExists;
 - (void) addGoogleAdsToView:(UIView *)toView inRect:(CGRect)inRect;
 - (void) loadGoogleAdsWithEponym:(Eponym *)eponym;
@@ -49,13 +52,16 @@
 
 @implementation EponymViewController
 
-@synthesize delegate, eponymToBeShown;
+@synthesize delegate;
+@dynamic eponymToBeShown;
 @dynamic rightBarButtonStarredItem, rightBarButtonNotStarredItem;
 @dynamic eponymTitleLabel;
 @dynamic eponymTextView;
 @dynamic eponymCategoriesLabel;
 @dynamic dateCreatedLabel;
 @dynamic dateUpdatedLabel;
+@dynamic revealButton;
+@synthesize displayNextEponymInLearningMode;
 @synthesize adController;
 
 
@@ -88,6 +94,22 @@
 
 
 #pragma mark KVC
+- (Eponym *) eponymToBeShown
+{
+	return eponymToBeShown;
+}
+- (void) setEponymToBeShown:(Eponym *)newEponym
+{
+	if (newEponym != eponymToBeShown) {
+		[eponymToBeShown release];
+		eponymToBeShown = [newEponym retain];
+		
+		if (nil != eponymToBeShown) {
+			[self adjustInterfaceToEponym];
+		}
+	}
+}
+
 - (UIBarButtonItem *) rightBarButtonStarredItem
 {
 	if (nil == rightBarButtonStarredItem) {
@@ -96,7 +118,7 @@
 		UIButton *myButton = [UIButton buttonWithType:UIButtonTypeCustom];
 		[myButton setImage:[delegate starImageEponymActive]
 				  forState:(UIControlStateNormal & UIControlStateHighlighted & UIControlStateDisabled & UIControlStateSelected & UIControlStateApplication & UIControlStateReserved)];
-		[myButton addTarget:self action:@selector(toggleEponymStarred) forControlEvents:UIControlEventTouchUpInside];
+		[myButton addTarget:self action:@selector(toggleEponymStarred:) forControlEvents:UIControlEventTouchUpInside];
 		myButton.showsTouchWhenHighlighted = YES;
 		myButton.frame = buttonSize;
 		
@@ -104,6 +126,7 @@
 	}
 	return rightBarButtonStarredItem;
 }
+
 - (void) setRightBarButtonStarredItem:(UIBarButtonItem *)newBarButtonItem
 {
 	if (newBarButtonItem != rightBarButtonStarredItem) {
@@ -120,7 +143,7 @@
 		UIButton *myButton = [UIButton buttonWithType:UIButtonTypeCustom];
 		[myButton setImage:[delegate starImageEponymInactive]
 				  forState:(UIControlStateNormal & UIControlStateHighlighted & UIControlStateDisabled & UIControlStateSelected & UIControlStateApplication & UIControlStateReserved)];
-		[myButton addTarget:self action:@selector(toggleEponymStarred) forControlEvents:UIControlEventTouchUpInside];
+		[myButton addTarget:self action:@selector(toggleEponymStarred:) forControlEvents:UIControlEventTouchUpInside];
 		myButton.showsTouchWhenHighlighted = YES;
 		myButton.frame = buttonSize;
 		
@@ -173,7 +196,8 @@
 		
 		self.eponymTextView = [[[MCTextView alloc] initWithFrame:textRect] autorelease];
 		eponymTextView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-		eponymTextView.userInteractionEnabled = NO;
+		eponymTextView.userInteractionEnabled = YES;
+		eponymTextView.scrollEnabled = NO;
 		eponymTextView.editable = NO;
 		eponymTextView.font = [UIFont systemFontOfSize:17.0];
 		eponymTextView.borderColor = [UIColor colorWithWhite:0.6 alpha:1.0];
@@ -198,6 +222,8 @@
 		
 		self.eponymCategoriesLabel = [[[PPHintableLabel alloc] initWithFrame:catRect] autorelease];
 		eponymCategoriesLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+		eponymCategoriesLabel.adjustsFontSizeToFitWidth = YES;
+		eponymCategoriesLabel.minimumFontSize = 12.0;
 		eponymCategoriesLabel.font = [UIFont systemFontOfSize:17.0];
 		eponymCategoriesLabel.backgroundColor = [UIColor clearColor];
 		eponymCategoriesLabel.shadowColor = [UIColor colorWithWhite:1.0 alpha:0.7];
@@ -219,13 +245,15 @@
 		CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
 		CGFloat fullWidth = screenRect.size.width - 2 * kSideMargin;
 		CGFloat labelWidth = fullWidth - 2 * kLabelSideMargin;
-		CGRect createdRect = CGRectMake(kLabelSideMargin, kDistanceDateLabelsFromCat, labelWidth, 16.0);
+		CGRect createdRect = CGRectMake(kLabelSideMargin, kDistanceDateLabelsFromCat, labelWidth, 18.0);
 		
 		self.dateCreatedLabel = [[[UILabel alloc] initWithFrame:createdRect] autorelease];
 		dateCreatedLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		dateCreatedLabel.textColor = [UIColor darkGrayColor]; 
-		dateCreatedLabel.font = [UIFont systemFontOfSize:[UIFont smallSystemFontSize]];
+		dateCreatedLabel.font = [UIFont systemFontOfSize:14.0];
 		dateCreatedLabel.backgroundColor = [UIColor clearColor];
+		dateCreatedLabel.shadowColor = [UIColor colorWithWhite:1.0 alpha:0.5];
+		dateCreatedLabel.shadowOffset = CGSizeMake(0.0, 1.0);
 	}
 	return dateCreatedLabel;
 }
@@ -243,13 +271,15 @@
 		CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
 		CGFloat fullWidth = screenRect.size.width - 2 * kSideMargin;
 		CGFloat labelWidth = fullWidth - 2 * kLabelSideMargin;
-		CGRect createdRect = CGRectMake(kLabelSideMargin, kDistanceDateLabelsFromCat, labelWidth, 16.0);
+		CGRect createdRect = CGRectMake(kLabelSideMargin, kDistanceDateLabelsFromCat, labelWidth, 18.0);
 		
 		self.dateUpdatedLabel = [[[UILabel alloc] initWithFrame:createdRect] autorelease];
 		dateUpdatedLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		dateUpdatedLabel.textColor = [UIColor darkGrayColor]; 
-		dateUpdatedLabel.font = [UIFont systemFontOfSize:[UIFont smallSystemFontSize]];
+		dateUpdatedLabel.font = [UIFont systemFontOfSize:14.0];
 		dateUpdatedLabel.backgroundColor = [UIColor clearColor];
+		dateUpdatedLabel.shadowColor = [UIColor colorWithWhite:1.0 alpha:0.5];
+		dateUpdatedLabel.shadowOffset = CGSizeMake(0.0, 1.0);
 	}
 	return dateUpdatedLabel;
 }
@@ -258,6 +288,41 @@
 	if (newLabel != dateUpdatedLabel) {
 		[dateUpdatedLabel release];
 		dateUpdatedLabel = [newLabel retain];
+	}
+}
+
+- (UIButton *) revealButton
+{
+	if (nil == revealButton) {
+		CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
+		CGFloat fullWidth = screenRect.size.width - 2 * kSideMargin;
+		CGFloat buttonWidth = 70.0;
+		CGRect buttonRect = CGRectMake(fullWidth - buttonWidth, kDistanceDateLabelsFromCat, buttonWidth, 37.0);
+		
+		self.revealButton = [UIButton buttonWithType:UIButtonTypeCustom];
+		[revealButton setTitle:@"Solve"
+					  forState:(UIControlStateNormal & UIControlStateHighlighted & UIControlStateDisabled & UIControlStateSelected & UIControlStateApplication & UIControlStateReserved)];
+		[revealButton setTitleColor:[UIColor colorWithRed:0.0 green:0.25 blue:0.5 alpha:1.0] forState:UIControlStateNormal];
+		
+		// background image
+		UIImage *buttonImage = [[UIImage imageNamed:@"BlueRoundedButton.png"] stretchableImageWithLeftCapWidth:8.0 topCapHeight:8.0];
+		[revealButton setBackgroundImage:buttonImage
+								forState:(UIControlStateNormal & UIControlStateHighlighted & UIControlStateDisabled & UIControlStateSelected & UIControlStateApplication & UIControlStateReserved)];
+		
+		// action
+		[revealButton addTarget:self action:@selector(reveal:) forControlEvents:UIControlEventTouchUpInside];
+		
+		// properties
+		revealButton.frame = buttonRect;
+		revealButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+	}
+	return revealButton;
+}
+- (void) setRevealButton:(UIButton *)newButton
+{
+	if (newButton != revealButton) {
+		[revealButton release];
+		revealButton = [newButton retain];
 	}
 }
 #pragma mark -
@@ -274,6 +339,7 @@
 	self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
 	self.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 	self.view.autoresizesSubviews = YES;
+	((UIScrollView *)self.view).delegate = self;
 	
 	[self.view addSubview:self.eponymTitleLabel];
 	
@@ -290,6 +356,7 @@
 	[container addSubview:self.eponymCategoriesLabel];
 	[container addSubview:self.dateCreatedLabel];
 	[container addSubview:self.dateUpdatedLabel];
+	[container addSubview:self.revealButton];
 	
 	[self.view addSubview:container];
 	
@@ -299,60 +366,18 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
-	// starred or not starred, that's the question
-	self.navigationItem.rightBarButtonItem = eponymToBeShown.starred ? self.rightBarButtonStarredItem : self.rightBarButtonNotStarredItem;
-	
-	// title and text
-	eponymTitleLabel.text = eponymToBeShown.title;
-	eponymTextView.text = eponymToBeShown.text;
-	
-	// categories
-	if ([eponymToBeShown.categories count] > 0) {
-		NSMutableArray *eponymCategories = [NSMutableArray arrayWithCapacity:[eponymToBeShown.categories count]];
-		NSMutableArray *eponymCategoriesDesc = [NSMutableArray arrayWithCapacity:[eponymToBeShown.categories count]];
-		for (EponymCategory *cat in eponymToBeShown.categories) {
-			[eponymCategories addObject:cat.tag];
-			[eponymCategoriesDesc addObject:[NSString stringWithFormat:@"%@ • %@", cat.tag, cat.title]];
-		}
-		eponymCategoriesLabel.text = [eponymCategories componentsJoinedByString:@", "];
-		eponymCategoriesLabel.hintText = [eponymCategoriesDesc componentsJoinedByString:@"\n"];
-	}
-	else {
-		eponymCategoriesLabel.text = nil;
-	}
-	
-	// dates
-	NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-	[dateFormatter setDateStyle:NSDateFormatterShortStyle];
-	[dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-	
-	if (eponymToBeShown.created) {
-		dateCreatedLabel.hidden = NO;
-		dateCreatedLabel.text = [NSString stringWithFormat:@"Created: %@", [dateFormatter stringFromDate:eponymToBeShown.created]];
-	}
-	else {
-		dateCreatedLabel.hidden = YES;
-	}
-	
-	if (eponymToBeShown.lastedit) {
-		dateUpdatedLabel.hidden = NO;
-		dateUpdatedLabel.text = [NSString stringWithFormat:@"Updated: %@", [dateFormatter stringFromDate:eponymToBeShown.lastedit]];
-	}
-	else {
-		dateUpdatedLabel.hidden = YES;
-	}
-	
-	// adjust content
-	[self adjustDisplayToContent];
+	[self alignUIElements];
 }
 
 - (void) viewDidAppear:(BOOL)animated
 {
-	[self loadGoogleAdsWithEponym:eponymToBeShown];
+	if (!adIsLoading && [self adViewIsVisible]) {
+		[self loadGoogleAdsWithEponym:eponymToBeShown];
+	}
 }
 
 
-- (void) adjustDisplayToContent
+- (void) alignUIElements
 {
 	CGRect viewFrame = self.view.frame;
 	
@@ -361,7 +386,9 @@
 	CGSize szMax = CGSizeMake(currRect.size.width, 10000.0);
 	CGSize optimalSize = [eponymTextView sizeThatFits:szMax];
 	
-	currRect.size.height = optimalSize.height;
+	if (optimalSize.height < 10000.0) {
+		currRect.size.height = optimalSize.height;
+	}
 	eponymTextView.frame = currRect;
 	
 	// Align the labels below
@@ -382,9 +409,15 @@
 	
 	if (!dateUpdatedLabel.hidden) {
 		CGRect updRect = dateUpdatedLabel.frame;
-		updRect.origin.y = subviewHeight;
+		updRect.origin.y = subviewHeight + 1.0;
 		dateUpdatedLabel.frame = updRect;
 		subviewHeight = updRect.origin.y + updRect.size.height;
+	}
+	
+	if (!revealButton.hidden) {
+		CGRect buttRect = revealButton.frame;
+		buttRect.origin.y = catRect.origin.y + catRect.size.height + kDistanceDateLabelsFromCat;
+		revealButton.frame = buttRect;
 	}
 	
 	// tell the container view his new height
@@ -430,7 +463,10 @@
 
 - (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation) fromInterfaceOrientation
 {
-	[self adjustDisplayToContent];
+	[self alignUIElements];
+	if (!adIsLoading && [self adViewIsVisible]) {
+		[self loadGoogleAdsWithEponym:eponymToBeShown];
+	}
 }
 
 - (void) didReceiveMemoryWarning
@@ -441,8 +477,83 @@
 
 
 
+#pragma mark Eponym Display
+- (void) adjustInterfaceToEponym
+{
+	((UIScrollView *)self.view).contentOffset = CGPointZero;
+	
+	// starred or not starred, that's the question
+	self.navigationItem.rightBarButtonItem = eponymToBeShown.starred ? self.rightBarButtonStarredItem : self.rightBarButtonNotStarredItem;
+	
+	// title and text
+	eponymTitleLabel.text = (-1 == displayNextEponymInLearningMode) ? @"…" : eponymToBeShown.title;
+	eponymTextView.text = (1 == displayNextEponymInLearningMode) ? @"…" : eponymToBeShown.text;
+	eponymTextView.contentOffset = CGPointZero;
+	[eponymTextView resignFirstResponder];
+	
+	// categories
+	if ([eponymToBeShown.categories count] > 0) {
+		NSMutableArray *eponymCategories = [NSMutableArray arrayWithCapacity:[eponymToBeShown.categories count]];
+		NSMutableArray *eponymCategoriesDesc = [NSMutableArray arrayWithCapacity:[eponymToBeShown.categories count]];
+		for (EponymCategory *cat in eponymToBeShown.categories) {
+			[eponymCategories addObject:cat.tag];
+			[eponymCategoriesDesc addObject:[NSString stringWithFormat:@"%@ • %@", cat.tag, cat.title]];
+		}
+		eponymCategoriesLabel.text = [eponymCategories componentsJoinedByString:@", "];
+		eponymCategoriesLabel.hintText = [eponymCategoriesDesc componentsJoinedByString:@"\n"];
+	}
+	else {
+		eponymCategoriesLabel.text = @"";
+	}
+	
+	// dates
+	NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+	[dateFormatter setDateStyle:NSDateFormatterShortStyle];
+	[dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+	
+	if (eponymToBeShown.created) {
+		dateCreatedLabel.hidden = NO;
+		dateCreatedLabel.text = [NSString stringWithFormat:@"Created: %@", [dateFormatter stringFromDate:eponymToBeShown.created]];
+	}
+	else {
+		dateCreatedLabel.hidden = YES;
+	}
+	
+	if (eponymToBeShown.lastedit) {
+		dateUpdatedLabel.hidden = NO;
+		dateUpdatedLabel.text = [NSString stringWithFormat:@"Updated: %@", [dateFormatter stringFromDate:eponymToBeShown.lastedit]];
+	}
+	else {
+		dateUpdatedLabel.hidden = YES;
+	}
+	
+	// reveal button
+	revealButton.hidden = (0 == displayNextEponymInLearningMode);
+	displayNextEponymInLearningMode = 0;
+	
+	// ad handling
+	adIsLoading = NO;
+	
+	// adjust content
+	[self alignUIElements];
+}
+
+- (IBAction) reveal:(id)sender
+{
+	eponymTitleLabel.text = eponymToBeShown.title;
+	eponymTextView.text = eponymToBeShown.text;
+	
+	[UIView beginAnimations:nil context:nil];
+	revealButton.hidden = YES;
+	[self alignUIElements];
+	[UIView commitAnimations];
+}
+#pragma mark -
+
+
+
 #pragma mark Toggle Starred
-- (void) toggleEponymStarred
+- (void) toggleEponymStarred:(id)sender
 {
 	[eponymToBeShown toggleStarred];
 	self.navigationItem.rightBarButtonItem = eponymToBeShown.starred ? self.rightBarButtonStarredItem : self.rightBarButtonNotStarredItem;
@@ -459,9 +570,36 @@
 
 
 
+#pragma mark Scroll View Delegate
+- (void) scrollViewDidScroll:(UIScrollView *)scrollView
+{
+	if (!adIsLoading && [self adViewIsVisible]) {
+		[self loadGoogleAdsWithEponym:eponymToBeShown];
+	}
+}
+#pragma mark -
+
+
+
 #pragma mark Google Ads
+- (BOOL) adViewIsVisible
+{
+	BOOL adIsVisible = NO;
+	if ([self adViewExists]) {
+		UIScrollView *scrollView = (UIScrollView *)self.view;
+		CGFloat adMiddle = adController.view.frame.origin.y + (adController.view.frame.size.height / 2);
+		CGFloat lowestVisible = scrollView.frame.size.height + scrollView.contentOffset.y;
+		adIsVisible = (adMiddle <= lowestVisible);
+	}
+	return adIsVisible;
+}
+
 - (BOOL) adViewExists
 {
+	if (nil != adController) {
+		return YES;
+	}
+	
 	if (!((eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate]).showGoogleAds) {
 		return NO;
 	}
@@ -492,7 +630,7 @@
 
 - (void) loadGoogleAdsWithEponym:(Eponym *)eponym
 {
-	if ([self adViewExists]) {
+	if (!adIsLoading && [self adViewExists]) {
 		NSMutableArray *categoryStrings = [NSMutableArray arrayWithCapacity:[eponym.categories count]];
 		for (EponymCategory *cat in eponym.categories) {
 			[categoryStrings addObject:[cat.title stringByReplacingOccurrencesOfString:@" " withString:@"+"]];
@@ -527,6 +665,7 @@
 									[NSNumber numberWithInt:1], kGADAdSenseIsTestAdRequest,
 									nil];
 		[adController loadGoogleAd:attributes];
+		adIsLoading = YES;		// to prevent reloading again
 	}
 }
 
@@ -534,11 +673,11 @@
 {
 	return GAD_ACTION_DISPLAY_INTERNAL_WEBSITE_VIEW;
 }
-/*
+
 - (void) adControllerDidFinishLoading:(GADAdViewController *)anAdController
 {
-	NSLog(@"ad controller finished: %@", anAdController);
-}	//	*/
+	adIsLoading = NO;
+}
 
 - (void) adController:(GADAdViewController *)anAdController failedWithError:(NSError *)error
 {

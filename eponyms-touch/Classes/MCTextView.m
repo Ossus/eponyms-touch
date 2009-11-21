@@ -36,7 +36,6 @@ CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect);
 		self.gradientBackgroundColor = [UIColor whiteColor];
 		self.backgroundColor = nil;
 	}
-	
 	return self;
 }
 
@@ -163,7 +162,7 @@ CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect);
 	}
 	
 	// calculate size needed by the text
-	CGFloat textPadding = 8.0 + 3.0;		// TODO: Remove the 3.0 when building for 3.0! (workaround to incorrect size calculation)
+	CGFloat textPadding = 8.0 + 2.5;		// TODO: Remove the 2.5 when building for 3.0! (workaround to incorrect size calculation)
 	CGSize maxSize = CGSizeMake(size.width - (2 * textPadding), size.height - (2 * textPadding));
 	CGSize textSize = [self.text sizeWithFont:self.font constrainedToSize:maxSize];
 	

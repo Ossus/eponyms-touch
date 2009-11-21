@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string>Icon.png</string>
+	<string>Icon-student.png</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.google.code.eponymsstudent</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -37,7 +37,7 @@
 	<key>eponymXMLURL DEBUG</key>
 	<string>http://127.0.0.1/pp/Projects/Eponyms/XML/eponyms.xml</string>
 	<key>numberOfIncludedEponyms</key>
-	<string>1662</string>
+	<string>1717</string>
 	<key>projectWebsite</key>
 	<string>http://eponyms-touch.googlecode.com/</string>
 	<key>showGoogleAds</key>
