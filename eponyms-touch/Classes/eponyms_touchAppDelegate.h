@@ -53,7 +53,6 @@
 	UIImage *starImageListActive;
 	UIImage *starImageEponymActive;
 	UIImage *starImageEponymInactive;
-	BOOL showGoogleAds;
 	
 	// Updating
 	EponymUpdater *myUpdater;
@@ -96,7 +95,6 @@
 @property (nonatomic, retain) UIImage *starImageListActive;
 @property (nonatomic, retain) UIImage *starImageEponymActive;
 @property (nonatomic, retain) UIImage *starImageEponymInactive;
-@property (nonatomic, assign) BOOL showGoogleAds;
 
 // Updating
 @property (nonatomic, retain) EponymUpdater *myUpdater;

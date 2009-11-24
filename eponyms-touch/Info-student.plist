@@ -27,7 +27,7 @@
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>SubversionRevision</key>
-	<string>r55</string>
+	<string>r62</string>
 	<key>eponymUpdateCheckURL</key>
 	<string>http://code.hillrippers.ch/eponyms/XML/eponyms_info.xml</string>
 	<key>eponymUpdateCheckURL DEBUG</key>
@@ -40,7 +40,5 @@
 	<string>1717</string>
 	<key>projectWebsite</key>
 	<string>http://eponyms-touch.googlecode.com/</string>
-	<key>showGoogleAds</key>
-	<true/>
 </dict>
 </plist>

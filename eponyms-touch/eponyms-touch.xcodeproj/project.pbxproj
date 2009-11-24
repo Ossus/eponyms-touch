@@ -563,6 +563,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
+				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
 				INFOPLIST_FILE = Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -581,6 +582,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
+				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
 				INFOPLIST_FILE = Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -665,6 +667,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
+				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
 				INFOPLIST_FILE = Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -693,6 +696,7 @@
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/GoogleAds\"",
 				);
+				OTHER_CFLAGS = "-DSHOW_GOOGLE_ADS";
 				PRODUCT_NAME = "eponyms-student";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
@@ -707,13 +711,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
-				INFOPLIST_FILE = "Info copy.plist";
+				INFOPLIST_FILE = "Info-student.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/GoogleAds\"",
 				);
-				PRODUCT_NAME = "eponyms-touch";
+				OTHER_CFLAGS = "-DSHOW_GOOGLE_ADS";
+				PRODUCT_NAME = "eponyms-student";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "574DB9DC-0CDE-425B-9CB5-0FBD5DA32410";
 			};
 			name = Release;
@@ -727,13 +732,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
-				INFOPLIST_FILE = "Info copy.plist";
+				INFOPLIST_FILE = "Info-student.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/GoogleAds\"",
 				);
-				PRODUCT_NAME = "eponyms-touch";
+				OTHER_CFLAGS = "-DSHOW_GOOGLE_ADS";
+				PRODUCT_NAME = "eponyms-student";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "574DB9DC-0CDE-425B-9CB5-0FBD5DA32410";
 			};
 			name = Distribution;
@@ -754,7 +760,8 @@
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/GoogleAds\"",
 				);
-				PRODUCT_NAME = "eponyms-touch";
+				OTHER_CFLAGS = "-DSHOW_GOOGLE_ADS";
+				PRODUCT_NAME = "eponyms-student";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "574DB9DC-0CDE-425B-9CB5-0FBD5DA32410";
 			};
 			name = AdHoc;
@@ -794,6 +801,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
+				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
 				INFOPLIST_FILE = Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -823,7 +831,8 @@
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/GoogleAds\"",
 				);
-				PRODUCT_NAME = "eponyms-touch";
+				OTHER_CFLAGS = "-DSHOW_GOOGLE_ADS";
+				PRODUCT_NAME = "eponyms-student";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "574DB9DC-0CDE-425B-9CB5-0FBD5DA32410";
 			};
 			name = "Debug Plus";
@@ -858,6 +867,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
+				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
 				INFOPLIST_FILE = Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

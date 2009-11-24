@@ -17,6 +17,7 @@
 #import "CategoriesViewController.h"
 #import "ListViewController.h"
 #import "EponymViewController.h"
+//#import <sqlite3_unicode.h>			// uncomment when building against iPhone OS 3.0+
 
 #define EPONYM_TITLE_FIELD @"eponym_en"
 #define EPONYM_TEXT_FIELD @"text_en"
@@ -57,7 +58,6 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 @dynamic starImageListActive;
 @dynamic starImageEponymActive;
 @dynamic starImageEponymInactive;
-@synthesize showGoogleAds;
 
 
 - (void) applicationDidFinishLaunching:(UIApplication *)application
@@ -107,8 +107,6 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	self.naviController = [[[UINavigationController alloc] initWithRootViewController:categoriesController] autorelease];
 	naviController.navigationBar.tintColor = [self naviBarTintColor];
 	
-	self.showGoogleAds = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"showGoogleAds"] boolValue];
-	
 	// create the view controllers for the Eponym list and the Eponym details
 	self.listController = [[[ListViewController alloc] initWithNibName:nil bundle:nil] autorelease];
 	[listController setDelegate:self];
@@ -150,7 +148,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	
 	// **** Register for shake events
 	UIAccelerometer *accelerometer = [UIAccelerometer sharedAccelerometer];
-	accelerometer.updateInterval = 1 / 10;
+	accelerometer.updateInterval = 1 / 5;
 	accelerometer.delegate = self;
 	
 	
@@ -837,20 +835,22 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 {
 	if (allowLearnMode) {
 		
-		// Simple high pass filter by subtracting low pass values (we only need the x axis = iPhone sideways axis)
+		// Simple high pass filter by subtracting low pass values
 		accelerationX = acceleration.x - ((acceleration.x * 0.1) + (accelerationX * 0.9));
-		accelerationY = acceleration.y - ((acceleration.y * 0.05) + (accelerationY * 0.95));
+		accelerationY = acceleration.y - ((acceleration.y * 0.005) + (accelerationY * 0.995));
 		
 		// X-shake
-		if (lastAccelerationX && (abs(lastAccelerationX) > 1.0) && (abs(accelerationX) > 1.0)) {
+		if ((lastAccelerationX * accelerationX < 0.0) && (abs(accelerationX - lastAccelerationX) > 1.5)) {
 			lastMainShakeAxis = 1;
 			[self loadRandomEponym:nil];
+			accelerationX = 0.0;
 		}
 		
 		// Y-shake
-		if (lastAccelerationY && (abs(lastAccelerationY) > 1.0) && (abs(accelerationY) > 1.0)) {
+		else if ((lastAccelerationY * accelerationY < 0.0) && (abs(accelerationY - lastAccelerationY) > 1.2)) {
 			lastMainShakeAxis = 2;
 			[self loadRandomEponym:nil];
+			accelerationY = 0.0;
 		}
 		
 		// no shake at all

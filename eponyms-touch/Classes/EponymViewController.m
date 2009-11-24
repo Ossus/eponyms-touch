@@ -17,8 +17,10 @@
 #import "MCTextView.h"
 #import "PPHintableLabel.h"
 #import "PPHintView.h"
+#ifdef SHOW_GOOGLE_ADS
 #import "GADAdSenseParameters.h"
 #import "GoogleAdSenseClient.h"
+#endif
 
 
 #define kSideMargin 15.0
@@ -36,15 +38,17 @@
 
 @interface EponymViewController ()
 
-@property (nonatomic, readwrite, retain) GADAdViewController *adController;
-
 - (void) adjustInterfaceToEponym;
 - (void) alignUIElements;
+
+#ifdef SHOW_GOOGLE_ADS
+@property (nonatomic, readwrite, retain) GADAdViewController *adController;
 
 - (BOOL) adViewIsVisible;
 - (BOOL) adViewExists;
 - (void) addGoogleAdsToView:(UIView *)toView inRect:(CGRect)inRect;
 - (void) loadGoogleAdsWithEponym:(Eponym *)eponym;
+#endif
 
 @end
 
@@ -62,7 +66,9 @@
 @dynamic dateUpdatedLabel;
 @dynamic revealButton;
 @synthesize displayNextEponymInLearningMode;
+#ifdef SHOW_GOOGLE_ADS
 @synthesize adController;
+#endif
 
 
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -85,7 +91,10 @@
 	self.dateUpdatedLabel = nil;
 	
 	self.view = nil;
+	
+#ifdef SHOW_GOOGLE_ADS
 	self.adController = nil;
+#endif
 	
 	[super dealloc];
 }
@@ -103,7 +112,10 @@
 	if (newEponym != eponymToBeShown) {
 		[eponymToBeShown release];
 		eponymToBeShown = [newEponym retain];
-		
+#ifdef SHOW_GOOGLE_ADS
+		adIsLoading = NO;
+		adDidLoad = NO;
+#endif
 		if (nil != eponymToBeShown) {
 			[self adjustInterfaceToEponym];
 		}
@@ -361,7 +373,9 @@
 	[self.view addSubview:container];
 	
 	// Google Ads
+#ifdef SHOW_GOOGLE_ADS
 	[self adViewExists];
+#endif
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -371,9 +385,11 @@
 
 - (void) viewDidAppear:(BOOL)animated
 {
-	if (!adIsLoading && [self adViewIsVisible]) {
+#ifdef SHOW_GOOGLE_ADS
+	if ([self adViewIsVisible]) {
 		[self loadGoogleAdsWithEponym:eponymToBeShown];
 	}
+#endif
 }
 
 
@@ -429,6 +445,7 @@
 	CGFloat totalHeight = superRect.origin.y + superRect.size.height + kBottomMargin;
 	
 	// adjust Google ads
+#ifdef SHOW_GOOGLE_ADS
 	if ([self adViewExists]) {
 		CGFloat googleMin = viewFrame.size.height - kGADAdSize320x50.height;
 		CGFloat googleY = superRect.origin.y + superRect.size.height + kGoogleAdViewTopMargin;
@@ -437,6 +454,7 @@
 		[self addGoogleAdsToView:self.view inRect:adRect];
 		totalHeight = googleTop + adRect.size.height;
 	}
+#endif
 	
 	// tell our view the size so that scrolling is possible
 	CGFloat minHeight = viewFrame.size.height;
@@ -464,9 +482,11 @@
 - (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation) fromInterfaceOrientation
 {
 	[self alignUIElements];
-	if (!adIsLoading && [self adViewIsVisible]) {
+#ifdef SHOW_GOOGLE_ADS
+	if (!adIsLoading && !adDidLoad && [self adViewIsVisible]) {
 		[self loadGoogleAdsWithEponym:eponymToBeShown];
 	}
+#endif
 }
 
 - (void) didReceiveMemoryWarning
@@ -531,9 +551,6 @@
 	revealButton.hidden = (0 == displayNextEponymInLearningMode);
 	displayNextEponymInLearningMode = 0;
 	
-	// ad handling
-	adIsLoading = NO;
-	
 	// adjust content
 	[self alignUIElements];
 }
@@ -573,14 +590,17 @@
 #pragma mark Scroll View Delegate
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView
 {
-	if (!adIsLoading && [self adViewIsVisible]) {
+#ifdef SHOW_GOOGLE_ADS
+	if (!adIsLoading && !adDidLoad && [self adViewIsVisible]) {
 		[self loadGoogleAdsWithEponym:eponymToBeShown];
 	}
+#endif
 }
 #pragma mark -
 
 
 
+#ifdef SHOW_GOOGLE_ADS
 #pragma mark Google Ads
 - (BOOL) adViewIsVisible
 {
@@ -598,10 +618,6 @@
 {
 	if (nil != adController) {
 		return YES;
-	}
-	
-	if (!((eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate]).showGoogleAds) {
-		return NO;
 	}
 	
 	if (nil == adController) {
@@ -630,7 +646,8 @@
 
 - (void) loadGoogleAdsWithEponym:(Eponym *)eponym
 {
-	if (!adIsLoading && [self adViewExists]) {
+	if (!adIsLoading && !adDidLoad && [self adViewExists]) {
+		adIsLoading = YES;
 		NSMutableArray *categoryStrings = [NSMutableArray arrayWithCapacity:[eponym.categories count]];
 		for (EponymCategory *cat in eponym.categories) {
 			[categoryStrings addObject:[cat.title stringByReplacingOccurrencesOfString:@" " withString:@"+"]];
@@ -665,7 +682,6 @@
 									[NSNumber numberWithInt:1], kGADAdSenseIsTestAdRequest,
 									nil];
 		[adController loadGoogleAd:attributes];
-		adIsLoading = YES;		// to prevent reloading again
 	}
 }
 
@@ -676,13 +692,14 @@
 
 - (void) adControllerDidFinishLoading:(GADAdViewController *)anAdController
 {
-	adIsLoading = NO;
+	adDidLoad = YES;
 }
 
 - (void) adController:(GADAdViewController *)anAdController failedWithError:(NSError *)error
 {
 	[anAdController.view removeFromSuperview];
 }
+#endif
 
 
 @end

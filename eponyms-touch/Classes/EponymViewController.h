@@ -11,13 +11,19 @@
 
 
 #import <UIKit/UIKit.h>
+#ifdef SHOW_GOOGLE_ADS
 #import "GADAdViewController.h"
+#endif
 @class Eponym;
 @class MCTextView;
 @class PPHintableLabel;
 
 
-@interface EponymViewController : UIViewController <UIScrollViewDelegate, GADAdViewControllerDelegate> {
+@interface EponymViewController : UIViewController <UIScrollViewDelegate
+#ifdef SHOW_GOOGLE_ADS
+													, GADAdViewControllerDelegate
+#endif
+	> {
 	id delegate;
 	Eponym *eponymToBeShown;
 	
@@ -32,9 +38,11 @@
 	
 	UIButton *revealButton;	
 	NSInteger displayNextEponymInLearningMode;		// -1 = title hidden, 0 = normal, 1 = eponym hidden
-	
+#ifdef SHOW_GOOGLE_ADS	
 	BOOL adIsLoading;
+	BOOL adDidLoad;
 	GADAdViewController *adController;
+#endif
 }
 
 @property (nonatomic, assign) id delegate;
@@ -51,8 +59,9 @@
 
 @property (nonatomic, retain) UIButton *revealButton;
 @property (nonatomic, assign) NSInteger displayNextEponymInLearningMode;
-
+#ifdef SHOW_GOOGLE_ADS
 @property (nonatomic, readonly, retain) GADAdViewController *adController;
+#endif
 
 - (void) toggleEponymStarred:(id)sender;
 - (void) reveal:(id)sender;
