@@ -28,8 +28,9 @@
 	NSDictionary *infoPlistDict;
 	NSURL *projectWebsiteURL;
 	
-	IBOutlet UISegmentedControl *tabSegments;
 	IBOutlet UIScrollView *parentView;
+	UISegmentedControl *tabSegments;
+	
 	IBOutlet UIView *infoView;
 	IBOutlet UIView *updatesView;
 	IBOutlet UIView *optionsView;
@@ -37,19 +38,14 @@
 	// Info
 	IBOutlet UILabel *versionLabel;
 	IBOutlet UILabel *usingEponymsLabel;
-	IBOutlet UITextView *authorTextView;
-	IBOutlet UITextView *propsTextView;
-	
 	IBOutlet UIButton *projectWebsiteButton;
 	IBOutlet UIButton *eponymsDotNetButton;
 	
 	// Updates
 	IBOutlet UILabel *lastCheckLabel;
 	IBOutlet UILabel *lastUpdateLabel;
-	
 	IBOutlet UILabel *progressText;
 	IBOutlet UIProgressView *progressView;
-	
 	IBOutlet UIButton *updateButton;
 	IBOutlet UISwitch *autocheckSwitch;
 	
@@ -66,10 +62,25 @@
 @property (nonatomic, retain) NSDictionary *infoPlistDict;
 @property (nonatomic, retain) NSURL *projectWebsiteURL;
 
-@property (nonatomic, retain) IBOutlet UISegmentedControl *tabSegments;
 @property (nonatomic, retain) IBOutlet UIScrollView *parentView;
+@property (nonatomic, retain) UISegmentedControl *tabSegments;
 
+@property (nonatomic, retain) IBOutlet UIView *infoView;
+@property (nonatomic, retain) IBOutlet UIView *updatesView;
+@property (nonatomic, retain) IBOutlet UIView *optionsView;
+
+@property (nonatomic, retain) IBOutlet UILabel *versionLabel;
+@property (nonatomic, retain) IBOutlet UILabel *usingEponymsLabel;
+@property (nonatomic, retain) IBOutlet UIButton *projectWebsiteButton;
+@property (nonatomic, retain) IBOutlet UIButton *eponymsDotNetButton;
+
+@property (nonatomic, retain) IBOutlet UILabel *lastCheckLabel;
+@property (nonatomic, retain) IBOutlet UILabel *lastUpdateLabel;
+@property (nonatomic, retain) IBOutlet UILabel *progressText;
+@property (nonatomic, retain) IBOutlet UIProgressView *progressView;
+@property (nonatomic, retain) IBOutlet UIButton *updateButton;
 @property (nonatomic, retain) IBOutlet UISwitch *autocheckSwitch;
+
 @property (nonatomic, retain) IBOutlet UISwitch *allowRotateSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *allowLearnModeSwitch;
 

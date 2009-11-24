@@ -26,6 +26,7 @@
 	> {
 	id delegate;
 	Eponym *eponymToBeShown;
+	BOOL viewIsVisible;
 	
 	UIBarButtonItem *rightBarButtonStarredItem;
 	UIBarButtonItem *rightBarButtonNotStarredItem;
@@ -42,6 +43,7 @@
 	BOOL adIsLoading;
 	BOOL adDidLoad;
 	GADAdViewController *adController;
+	NSTimeInterval adsAreRefractoryUntil;			// timestamp until we allow loading a new ad
 #endif
 }
 

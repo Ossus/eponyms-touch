@@ -32,8 +32,26 @@
 
 @implementation InfoViewController
 
-@synthesize delegate, firstTimeLaunch, lastEponymCheck, lastEponymUpdate, tabSegments, infoPlistDict, projectWebsiteURL;
+@synthesize delegate;
+@synthesize firstTimeLaunch;
+@synthesize lastEponymCheck;
+@synthesize lastEponymUpdate;
+@synthesize infoPlistDict;
+@synthesize projectWebsiteURL;
 @synthesize parentView;
+@synthesize infoView;
+@synthesize updatesView;
+@synthesize optionsView;
+@synthesize tabSegments;
+@synthesize versionLabel;
+@synthesize usingEponymsLabel;
+@synthesize projectWebsiteButton;
+@synthesize eponymsDotNetButton;
+@synthesize lastCheckLabel;
+@synthesize lastUpdateLabel;
+@synthesize progressText;
+@synthesize progressView;
+@synthesize updateButton;
 @synthesize autocheckSwitch;
 @synthesize allowRotateSwitch;
 @synthesize allowLearnModeSwitch;
@@ -44,6 +62,18 @@
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 	if (self) {
 		askingToAbortImport = NO;
+		
+		// compose the navigation bar
+		NSArray *possibleTabs = [NSArray arrayWithObjects:@"About", @"Update", @"Options", nil];
+		self.tabSegments = [[UISegmentedControl alloc] initWithItems:possibleTabs];
+		tabSegments.selectedSegmentIndex = 0;
+		tabSegments.segmentedControlStyle = UISegmentedControlStyleBar;
+		tabSegments.frame = CGRectMake(0.0, 0.0, 220.0, 30.0);
+		tabSegments.autoresizingMask = UIViewAutoresizingNone;
+		[tabSegments addTarget:self action:@selector(tabChanged:) forControlEvents:UIControlEventValueChanged];
+		
+		self.navigationItem.titleView = tabSegments;
+		self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(dismissMe:)] autorelease];
 		
 		// NSBundle Info.plist
 		self.infoPlistDict = [[NSBundle mainBundle] infoDictionary];		// !! could use the supplied NSBundle or the mainBundle on nil
@@ -60,28 +90,24 @@
 	
 	// IBOutlets
 	self.parentView = nil;
+	self.tabSegments = nil;
 	
-	[infoView release];
-	[updatesView release];
-	[optionsView release];
+	self.infoView = nil;
+	self.updatesView = nil;
+	self.optionsView = nil;
 	
-	[versionLabel release];
-	[usingEponymsLabel release];
-	[authorTextView release];
-	[propsTextView release];
+	self.versionLabel = nil;
+	self.usingEponymsLabel = nil;
+	self.projectWebsiteButton = nil;
+	self.eponymsDotNetButton = nil;
 	
-	[projectWebsiteButton release];
-	[eponymsDotNetButton release];
-	
-	[lastCheckLabel release];
-	[lastUpdateLabel release];
-	
-	[progressText release];
-	[progressView release];
-	
-	[updateButton release];
-	
+	self.lastCheckLabel = nil;
+	self.lastUpdateLabel = nil;
+	self.progressText = nil;
+	self.progressView = nil;
+	self.updateButton = nil;
 	self.autocheckSwitch = nil;
+	
 	self.allowRotateSwitch = nil;
 	self.allowLearnModeSwitch = nil;
 	
@@ -94,15 +120,11 @@
 #pragma mark View Controller Delegate
 - (void) viewDidLoad
 {
-	[self switchToTab:0];
+	tabSegments.tintColor = [delegate naviBarTintColor];
 	
 	// hide progress stuff
 	[self setStatusMessage:nil];
 	[self resetStatusElementsWithButtonTitle:nil];
-	
-	projectWebsiteButton.autoresizingMask = UIViewAutoresizingNone;
-	eponymsDotNetButton.autoresizingMask = UIViewAutoresizingNone;
-	propsTextView.autoresizingMask = UIViewAutoresizingNone;
 	
 	// last update date/time
 	NSDate *lastCheckDate = [NSDate dateWithTimeIntervalSince1970:lastEponymCheck];
@@ -121,6 +143,9 @@
 	
 	if (mustSeeProgress) {
 		[self switchToTab:1];
+	}
+	else {
+		[self switchToTab:tabSegments.selectedSegmentIndex];
 	}
 }
 
@@ -142,7 +167,14 @@
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	return (interfaceOrientation == UIInterfaceOrientationPortrait);	// very difficult to get good results in the info view, so don't allow rotation
+	/*
+	if (((eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate]).allowAutoRotate) {
+		return YES;
+	}
+	
+	return ((interfaceOrientation == UIInterfaceOrientationPortrait) || (interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown));	//	*/
+	// very difficult to get good results in the info view, so don't allow rotation
+	return NO;
 }
 
 - (void) dismissMe:(id)sender
@@ -173,21 +205,21 @@
 - (void) switchToTab:(NSUInteger)tab
 {
 	tabSegments.selectedSegmentIndex = tab;
-	BOOL alsoAdjustHeight = NO;
 	
 	// remove current view
 	[[parentView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
 	UIView *viewToAdd = nil;
+	BOOL adjustFrame = YES;
 	
 	// Show the About page
 	if (0 == tab) {
 		viewToAdd = infoView;
+		adjustFrame = NO;
 	}
 	
 	// Show the update tab
 	else if (1 == tab) {
 		viewToAdd = updatesView;
-		alsoAdjustHeight = YES;
 		
 		// adjust the elements
 		if ([delegate didCheckForNewEponyms]) {
@@ -198,17 +230,13 @@
 	// Show the options
 	else {
 		viewToAdd = optionsView;
-		alsoAdjustHeight = YES;
 	}
 	
 	// add the view?
 	if (nil != viewToAdd) {
-		CGRect viewFrame = viewToAdd.frame;
-		viewFrame.size.width = parentView.frame.size.width;
-		if (alsoAdjustHeight) {
-			viewFrame.size.height = parentView.frame.size.height;
+		if (adjustFrame) {
+			viewToAdd.frame = parentView.bounds;
 		}
-		viewToAdd.frame = viewFrame;
 		
 		[parentView addSubview:viewToAdd];
 		parentView.contentSize = viewToAdd.frame.size;

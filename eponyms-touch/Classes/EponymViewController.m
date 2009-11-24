@@ -112,11 +112,15 @@
 	if (newEponym != eponymToBeShown) {
 		[eponymToBeShown release];
 		eponymToBeShown = [newEponym retain];
-#ifdef SHOW_GOOGLE_ADS
-		adIsLoading = NO;
-		adDidLoad = NO;
-#endif
+		
 		if (nil != eponymToBeShown) {
+#ifdef SHOW_GOOGLE_ADS
+			adIsLoading = NO;
+			adDidLoad = NO;
+			if ([self adViewIsVisible]) {
+				[self performSelector:@selector(loadGoogleAdsWithEponym:) withObject:eponymToBeShown afterDelay:0.4];
+			}
+#endif
 			[self adjustInterfaceToEponym];
 		}
 	}
@@ -385,11 +389,17 @@
 
 - (void) viewDidAppear:(BOOL)animated
 {
+	viewIsVisible = YES;
 #ifdef SHOW_GOOGLE_ADS
 	if ([self adViewIsVisible]) {
 		[self loadGoogleAdsWithEponym:eponymToBeShown];
 	}
 #endif
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+	viewIsVisible = NO;
 }
 
 
@@ -605,7 +615,7 @@
 - (BOOL) adViewIsVisible
 {
 	BOOL adIsVisible = NO;
-	if ([self adViewExists]) {
+	if (viewIsVisible && [self adViewExists]) {
 		UIScrollView *scrollView = (UIScrollView *)self.view;
 		CGFloat adMiddle = adController.view.frame.origin.y + (adController.view.frame.size.height / 2);
 		CGFloat lowestVisible = scrollView.frame.size.height + scrollView.contentOffset.y;
@@ -647,6 +657,12 @@
 - (void) loadGoogleAdsWithEponym:(Eponym *)eponym
 {
 	if (!adIsLoading && !adDidLoad && [self adViewExists]) {
+		NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
+		if (now < adsAreRefractoryUntil) {
+			return;
+		}
+		adsAreRefractoryUntil = now + 10.0;					// at max load a new ad every 10 seconds
+		
 		adIsLoading = YES;
 		NSMutableArray *categoryStrings = [NSMutableArray arrayWithCapacity:[eponym.categories count]];
 		for (EponymCategory *cat in eponym.categories) {
@@ -667,11 +683,11 @@
 		// PLEASE DO NOT CLICK ON THE AD UNLESS YOU ARE IN TEST MODE. OTHERWISE, YOUR
 		// ACCOUNT MAY BE DISABLED.
 		// **************************************************************************
-		NSNumber *channel = [NSNumber numberWithUnsignedLongLong:6892341229];
+		NSNumber *channel = [NSNumber numberWithUnsignedLongLong:kGoogleAdSenseChannelID];
 		NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
 									kGoogleAdSenseClientID, kGADAdSenseClientID,
-									@"Pascal Pfiffner", kGADAdSenseCompanyName,
-									@"Eponyms", kGADAdSenseAppName,
+									kGoogleAdSenseCompanyName, kGADAdSenseCompanyName,
+									kGoogleAdSenseAppName, kGADAdSenseAppName,
 									myKeywords, kGADAdSenseKeywords,
 									[NSArray arrayWithObject:channel], kGADAdSenseChannelIDs,
 									[UIColor colorWithWhite:0.9 alpha:1.0], kGADAdSenseAdBackgroundColor,
@@ -679,7 +695,7 @@
 									[UIColor blackColor], kGADAdSenseAdLinkColor,
 									[UIColor darkGrayColor], kGADAdSenseAdTextColor,
 									[UIColor colorWithRed:0.0 green:0.25 blue:0.5 alpha:1.0], kGADAdSenseAdURLColor,
-									[NSNumber numberWithInt:1], kGADAdSenseIsTestAdRequest,
+									[NSNumber numberWithInt:0], kGADAdSenseIsTestAdRequest,
 									nil];
 		[adController loadGoogleAd:attributes];
 	}

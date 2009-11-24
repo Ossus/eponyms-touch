@@ -824,7 +824,10 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	infoController.lastEponymUpdate = [defaults integerForKey:@"lastEponymUpdate"];
 	infoController.firstTimeLaunch = firstTimeLaunch;
 	
-	[naviController presentModalViewController:infoController animated:YES];
+	UINavigationController *tempNaviController = [[UINavigationController alloc] initWithRootViewController:infoController];
+	tempNaviController.navigationBar.tintColor = [self naviBarTintColor];
+	[naviController presentModalViewController:tempNaviController animated:YES];
+	[tempNaviController release];
 }
 #pragma mark -
 
@@ -834,10 +837,13 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 - (void) accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
 {
 	if (allowLearnMode) {
+		BOOL deviceIsPortrait = UIDeviceOrientationIsPortrait(self.naviController.interfaceOrientation);
+		UIAccelerationValue deviceX = deviceIsPortrait ? acceleration.x : acceleration.y;
+		UIAccelerationValue deviceY = deviceIsPortrait ? acceleration.y : acceleration.x;
 		
 		// Simple high pass filter by subtracting low pass values
-		accelerationX = acceleration.x - ((acceleration.x * 0.1) + (accelerationX * 0.9));
-		accelerationY = acceleration.y - ((acceleration.y * 0.005) + (accelerationY * 0.995));
+		accelerationX = deviceX - ((deviceX * 0.1) + (accelerationX * 0.9));
+		accelerationY = deviceY - ((deviceY * 0.1) + (accelerationY * 0.9));
 		
 		// X-shake
 		if ((lastAccelerationX * accelerationX < 0.0) && (abs(accelerationX - lastAccelerationX) > 1.5)) {
