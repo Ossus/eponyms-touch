@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
+<!--
+
+eponyms-touch
+Eponyms Data © by Andrew J. Yee
+This data is formally excluded from the Apache License
+
+-->
 <!DOCTYPE eponyms [
 	<!ELEMENT category (tag, title)>
 	<!ELEMENT eponym (id, name, desc, cat*, c?, e?)>
