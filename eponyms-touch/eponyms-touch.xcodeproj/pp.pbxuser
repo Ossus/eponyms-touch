@@ -150,8 +150,8 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 280890204;
-			PBXWorkspaceStateSaveDate = 280890204;
+			PBXPerProjectTemplateStateSaveDate = 284648460;
+			PBXWorkspaceStateSaveDate = 284648460;
 		};
 		perUserProjectItems = {
 			1D3623250D0F684500981E51 = 1D3623250D0F684500981E51 /* eponyms_touchAppDelegate.m */;
@@ -162,13 +162,14 @@
 			EE2420FD102E0EBE000CBDCF = EE2420FD102E0EBE000CBDCF /* PBXBookmark */;
 			EE2DE74D0E1C297200D97653 = EE2DE74D0E1C297200D97653 /* ListViewController.m */;
 			EE2DE7520E1C297F00D97653 = EE2DE7520E1C297F00D97653 /* EponymViewController.m */;
-			EE2DE7E610BE0B6800851FD5 /* PlistBookmark */ = EE2DE7E610BE0B6800851FD5 /* PlistBookmark */;
+			EE2DE7E610BE0B6800851FD5 = EE2DE7E610BE0B6800851FD5 /* PlistBookmark */;
 			EE2DE9DD0E2125C700D97653 = EE2DE9DD0E2125C700D97653 /* Eponym.m */;
 			EE3BC3C80E6ACEF20051B69D = EE3BC3C80E6ACEF20051B69D /* PBXBookmark */;
 			EE3BC3C90E6ACEF20051B69D = EE3BC3C90E6ACEF20051B69D /* PBXBookmark */;
 			EE49223D1022111700A9D757 = EE49223D1022111700A9D757 /* PBXTextBookmark */;
 			EE4924E210225CF200A9D757 = EE4924E210225CF200A9D757 /* PBXTextBookmark */;
 			EE5336F710A8D37300BFA5B3 = EE5336F710A8D37300BFA5B3 /* PBXTextBookmark */;
+			EE5483EE10F7640E00FE53D5 /* PlistBookmark */ = EE5483EE10F7640E00FE53D5 /* PlistBookmark */;
 			EE5638E8109E0D9800D6C4E6 = EE5638E8109E0D9800D6C4E6 /* PBXTextBookmark */;
 			EE5638E9109E0D9800D6C4E6 = EE5638E9109E0D9800D6C4E6 /* PBXTextBookmark */;
 			EE563B5C109E449100D6C4E6 = EE563B5C109E449100D6C4E6 /* PBXTextBookmark */;
@@ -457,7 +458,7 @@
 		);
 		name = "/Users/pp/Programming/Cocoa/eponyms-touch/Info.plist";
 		rLen = 0;
-		rLoc = 9223372036854775807;
+		rLoc = 9223372036854775808;
 	};
 	EE2DE9DC0E2125C700D97653 /* Eponym.h */ = {
 		uiCtxt = {
@@ -545,6 +546,17 @@
 		rType = 0;
 		vrLen = 2135;
 		vrLoc = 5100;
+	};
+	EE5483EE10F7640E00FE53D5 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/pp/Cocoa/eponyms-touch/Info.plist";
+		rLen = 0;
+		rLoc = 9223372036854775807;
 	};
 	EE563845109DFAAE00D6C4E6 /* GADAdSenseParameters.h */ = {
 		uiCtxt = {

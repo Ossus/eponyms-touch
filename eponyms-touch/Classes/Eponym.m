@@ -139,15 +139,15 @@ static sqlite3_stmt *toggle_starred_query = nil;
 				double updatedEpoch = sqlite3_column_double(load_query, 1);
 				self.lastedit = (updatedEpoch > 10.0) ? [NSDate dateWithTimeIntervalSince1970:updatedEpoch] : nil;
 				char *textStr = (char *)sqlite3_column_text(load_query, 2);
-				self.text = textStr ? [NSString stringWithUTF8String:textStr] : @"";
+				self.text = (NULL == textStr) ? [NSString stringWithUTF8String:textStr] : @"";
 			}
 			
 			NSInteger categoryId = sqlite3_column_int(load_query, 3);
 			char *categoryTagStr = (char *)sqlite3_column_text(load_query, 4);
 			char *categoryNameStr = (char *)sqlite3_column_text(load_query, 5);
 			EponymCategory *myCat = [EponymCategory eponymCategoryWithID:categoryId
-																	 tag:[NSString stringWithUTF8String:categoryTagStr]
-																   title:[NSString stringWithUTF8String:categoryNameStr]
+																	 tag:(NULL == categoryTagStr) ? @"" : [NSString stringWithUTF8String:categoryTagStr]
+																   title:(NULL == categoryNameStr) ? @"" : [NSString stringWithUTF8String:categoryNameStr]
 														  whereStatement:nil];
 			[newCategoriesArr addObject:myCat];
 			rows++;
