@@ -733,31 +733,36 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		[self loadEponymsOfCategory:fullCategory containingString:nil animated:NO];
 	}
 	
-	// get random group
-	NSInteger randGroup = arc4random() % [eponymArray count];
-	NSArray *groupItems = [eponymArray objectAtIndex:randGroup];
+	// TODO: Verify that eponymArray is not zero
 	
-	// random eponym from group
-	if (nil != groupItems && [groupItems count] > 0) {
-		NSInteger randEpo = arc4random() % [groupItems count];
-		Eponym *randEponym = [groupItems objectAtIndex:randEpo];
+	NSUInteger numGroupEponyms = 0;
+	NSUInteger numTries = 5;
+	
+	while (numGroupEponyms < 1 && numTries > 0) {
 		
-		// got one - load
-		if (nil != randEponym) {
-			eponymController.displayNextEponymInLearningMode = (2 == lastMainShakeAxis) ? -1 : 1;
-			[self loadEponym:randEponym animated:YES];
+		// get random group
+		NSUInteger randGroup = arc4random() % [eponymArray count];
+		NSArray *groupEponyms = [eponymArray objectAtIndex:randGroup];
+		numGroupEponyms = [groupEponyms count];
+		
+		// random eponym from group
+		if (numGroupEponyms > 0) {
+			NSUInteger randEpo = arc4random() % numGroupEponyms;
+			Eponym *randEponym = [groupEponyms objectAtIndex:randEpo];
+			
+			// got one - load
+			if (nil != randEponym) {
+				eponymController.displayNextEponymInLearningMode = (2 == lastMainShakeAxis) ? -1 : 1;
+				[self loadEponym:randEponym animated:YES];
+				return;
+			}
 		}
 		
-		// got none!
-		else {
-			NSLog(@"Did not get a random eponym!");
-		}
+		numTries--;
 	}
 	
-	// else invalid group!
-	else {
-		NSLog(@"Did not get a good random group! int: %i, max: %i", randGroup, [eponymArray count]);
-	}
+	// still no good group!
+	NSLog(@"Did not get a good random group!");
 }
 
 
