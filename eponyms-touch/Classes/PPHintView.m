@@ -3,8 +3,7 @@
 //  RenalApp
 //
 //  Created by Pascal Pfiffner on 18.10.09.
-//  This sourcecode is released under the Apache License, Version 2.0
-//  http://www.apache.org/licenses/LICENSE-2.0.html
+//  Copyright 2009 Pascal Pfiffner. All rights reserved.
 //  
 //  A custom view that displays text pointing at some element
 //	Deduced from MedCalc's MCPopupView
@@ -58,7 +57,7 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight);
 	self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
-		//self.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:1.0 alpha:0.3];
+		//self.backgroundColor = [UIColor colorWithRed:0.f green:0.f blue:1.f alpha:0.3f];
 		self.opaque = NO;
 		self.userInteractionEnabled = YES;
 		
@@ -128,10 +127,10 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight);
 		titleLabel.opaque = NO;
 		titleLabel.backgroundColor = [UIColor clearColor];
 		titleLabel.textColor = [UIColor whiteColor];
-		titleLabel.font = [UIFont boldSystemFontOfSize:17.0];
+		titleLabel.font = [UIFont boldSystemFontOfSize:17.f];
 		titleLabel.adjustsFontSizeToFitWidth = YES;
-		titleLabel.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.9];
-		titleLabel.shadowOffset = CGSizeMake(0.0, -1.0);
+		titleLabel.shadowColor = [UIColor colorWithWhite:0.f alpha:0.9f];
+		titleLabel.shadowOffset = CGSizeMake(0.f, -1.f);
 		titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
 		
 		[self addSubview:[titleLabel autorelease]];
@@ -154,7 +153,7 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight);
 {
 	if (nil == textLabel) {
 		CGRect frame = CGRectInset(self.bounds, kPopupMarginForShadow + kPopupTextXPadding, kPopupMarginForShadow + kPopupTextYPadding);
-		CGFloat topPadding = titleLabel ? (kPopupTitleLabelHeight + kPopupTextYPadding / 2) : 0.0;
+		CGFloat topPadding = titleLabel ? (kPopupTitleLabelHeight + kPopupTextYPadding / 2) : 0.f;
 		frame.origin.y += topPadding;
 		frame.size.height -= topPadding;
 		
@@ -162,9 +161,9 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight);
 		textLabel.opaque = NO;
 		textLabel.backgroundColor = [UIColor clearColor];
 		textLabel.textColor = [UIColor whiteColor];
-		textLabel.font = [UIFont systemFontOfSize:15.0];
-		textLabel.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.9];
-		textLabel.shadowOffset = CGSizeMake(0.0, -1.0);
+		textLabel.font = [UIFont systemFontOfSize:15.f];
+		textLabel.shadowColor = [UIColor colorWithWhite:0.f alpha:0.9f];
+		textLabel.shadowOffset = CGSizeMake(0.f, -1.f);
 		textLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		textLabel.numberOfLines = 100;
 		
@@ -195,40 +194,73 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight);
 		return;
 	}
 	
+	// we don't want to display something under the status bar
+	CGSize sbs = [UIApplication sharedApplication].statusBarFrame.size;
+	CGFloat statusBarHeight = UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation) ? sbs.width : sbs.height;
+	
+	// find the view we want to attach to
 	CGPoint origin = CGPointZero;				// this will be the center of the popup
-	UIView *referenceSuperview = [[forElement.window subviews] objectAtIndex:0];
-	CGFloat statusBarHeight = 22.0;		// Gives 480 in landscape -> [UIApplication sharedApplication].statusBarFrame.size.height;		// we don't want to display something below this
-	elementFrame = [referenceSuperview convertRect:forElement.frame fromView:[forElement superview]];
-	CGPoint refElementCenter = [referenceSuperview convertPoint:forElement.center fromView:[forElement superview]];
+	UIView *child = forElement;
+	UIView *parent = nil;
+	UIView *attachToView = nil;
+	while (parent = [child superview]) {
+		NSString *parentClass = NSStringFromClass([parent class]);
+		if ([parentClass isEqualToString:@"UILayoutContainerView"]) {
+			attachToView = parent;
+			break;
+		}
+		else if ([UIWindow class] == [parent class]) {
+			attachToView = child;
+			break;
+		}
+		child = parent;
+	}
+	if (!attachToView) {
+		attachToView = child;
+	}
+	//DLog(@"-- USING --\n%@", attachToView);
+	CGSize attachSize = [attachToView bounds].size;
+	
+	elementFrame = [attachToView convertRect:forElement.frame fromView:[forElement superview]];
+	CGPoint refElementCenter = [attachToView convertPoint:forElement.center fromView:[forElement superview]];
 	
 	// calculate needed dimensions based on the titleLabel (width) and textView (height)
-	CGFloat boxWidth = 0.0;
-	CGFloat boxHeight = 0.0;
+	CGFloat boxWidth = 0.f;
+	CGFloat boxHeight = 0.f;
 	if (nil != titleLabel) {
 		CGSize labelSize = [titleLabel.text sizeWithFont:titleLabel.font];
-		boxWidth = fminf(labelSize.width + 2 * kPopupTextXPadding, [self bounds].size.width - 2 * kPopupBoxPadding);
-		boxHeight = kPopupTextYPadding + 20.0 + kPopupTextYPadding;
+		boxWidth = fminf(labelSize.width + 2 * kPopupTextXPadding, attachSize.width - 2 * kPopupBoxPadding);
+		boxHeight = kPopupTextYPadding + 20.f + kPopupTextYPadding;
 	}
 	if (nil != textLabel) {
 		BOOL useWidth = NO;
-		if (0.0 == boxWidth) {
+		if (0.f == boxWidth) {
 			useWidth = YES;
-			boxWidth = [self bounds].size.width - 2 * kPopupBoxPadding;
+			boxWidth = attachSize.width - 2 * kPopupBoxPadding;
 		}
-		CGSize maxSize = CGSizeMake(boxWidth - 2 * kPopupTextXPadding, 400.0);
+		CGSize maxSize = CGSizeMake(boxWidth - 2 * kPopupTextXPadding, 600.f);
 		CGSize textSize = [textLabel.text sizeWithFont:textLabel.font constrainedToSize:maxSize];
+		CGFloat widthHeightRatio = textSize.width / textSize.height;
+		
+		//especially on the iPad, we don't want to have a view the whole screen wide but only one or two lines of text
+		if (widthHeightRatio > 4.f && textSize.width > 320.f) {
+			maxSize.width = fmaxf(320.f - 2 * kPopupBoxPadding, textSize.width / (widthHeightRatio / 3));		// 3 is approx. the target ratio
+			textSize = [textLabel.text sizeWithFont:textLabel.font constrainedToSize:maxSize];
+		}
+		
+		// set box height according to needed size
 		boxHeight = ([textLabel frame].origin.y - kPopupMarginForShadow) + textSize.height + kPopupTextYPadding;
 		if (useWidth) {
-			boxWidth = kPopupTextXPadding + textSize.width + kPopupTextXPadding;
+			boxWidth = textSize.width + 2 * kPopupTextXPadding;
 		}
 	}
-	boxWidth = ((0.0 == boxWidth) ? [self bounds].size.width : boxWidth);
+	boxWidth = ((0.f == boxWidth) ? attachSize.width : boxWidth);
 	boxWidth += ((NSInteger)boxWidth % 2);			// to avoid interpolation
-	boxHeight = ((0.0 == boxHeight) ? [self bounds].size.height : boxHeight);
+	boxHeight = ((0.f == boxHeight) ? attachSize.height : boxHeight);
 	boxHeight += ((NSInteger)boxHeight % 2);
 	
 	boxRect = CGRectMake(kPopupMarginForShadow, kPopupMarginForShadow, boxWidth, boxHeight);
-	self.frame = CGRectInset(boxRect, -1 * kPopupMarginForShadow, -1 * kPopupMarginForShadow);
+	self.frame = CGRectInset(boxRect, -kPopupMarginForShadow, -kPopupMarginForShadow);
 	
 	boxWidth += (2 * kPopupBoxPadding);
 	boxHeight += (2 * kPopupBoxPadding);
@@ -240,62 +272,62 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight);
 		origin.x = refElementCenter.x;
 	}
 	
-	// no; enough space to the left?
+	// yes; enough space to the left?
 	else if (elementFrame.origin.x > boxWidth) {
 		position = 1;
 		origin.y = refElementCenter.y;
 		origin.x = elementFrame.origin.x - (boxWidth / 2);
 	}
 	
-	// no; enough space at the bottom?
-	else if ((referenceSuperview.bounds.size.height - (elementFrame.origin.y + elementFrame.size.height)) > boxHeight) {
+	// yes; enough space at the bottom?
+	else if ((attachSize.height - (elementFrame.origin.y + elementFrame.size.height)) > boxHeight) {
 		position = 2;
 		origin.y = elementFrame.origin.y + elementFrame.size.height + (boxHeight / 2);
 		origin.x = refElementCenter.x;
 	}
 	
-	// no; enough space to the right?
-	else if ((referenceSuperview.bounds.size.width - (elementFrame.origin.x + elementFrame.size.width)) > boxWidth) {
+	// yes; enough space to the right?
+	else if ((attachSize.width - (elementFrame.origin.x + elementFrame.size.width)) > boxWidth) {
 		position = 3;
 		origin.y = refElementCenter.y;
 		origin.x = elementFrame.origin.x + elementFrame.size.width + (boxWidth / 2);
 	}
 	
-	// oh, not enough space at all! try smaller fontsizes
+	// no, not enough space at all! try smaller fontsizes
 	else {
 		NSLog(@"NOT ENOUGH SPACE FOR %fx%f -> IMPLEMENT smaller font sizes", boxWidth, boxHeight);
 	}
 	
 	// check whether we're in bounds
-	if ((origin.x - (boxWidth / 2)) < 0.0) {
+	if ((origin.x - (boxWidth / 2)) < 0.f) {
 		origin.x = (boxWidth / 2);
 	}
-	else if ((origin.x + (boxWidth / 2)) > referenceSuperview.frame.size.width) {
-		origin.x = referenceSuperview.frame.size.width - (boxWidth / 2);
+	else if ((origin.x + (boxWidth / 2)) > attachToView.frame.size.width) {
+		origin.x = attachToView.frame.size.width - (boxWidth / 2);
 	}
 	
 	if ((origin.y - (boxHeight / 2)) < statusBarHeight) {
 		origin.y = statusBarHeight + (boxHeight / 2);
 	}
-	else if ((origin.y + (boxHeight / 2)) > referenceSuperview.frame.size.height) {
-		origin.y = referenceSuperview.frame.size.height - (boxHeight / 2);
+	else if ((origin.y + (boxHeight / 2)) > attachToView.frame.size.height) {
+		origin.y = attachToView.frame.size.height - (boxHeight / 2);
 	}
 	
 	origin.x = roundf(origin.x);
 	origin.y = roundf(origin.y);
 	
 	self.center = origin;
-	self.layer.opacity = 0.0;
+	self.layer.opacity = 0.f;
 	
 	// add to window and animate in
 	[self.containerView addSubview:self];
-	[referenceSuperview addSubview:containerView];
+	[attachToView addSubview:containerView];
 	elementCenter = [self convertPoint:forElement.center fromView:[forElement superview]];
 	
 	[UIView beginAnimations:nil context:nil];
-	//[UIView setAnimationDuration:0.1];
+	//[UIView setAnimationDuration:0.1f];
 	
-	self.layer.opacity = 1.0;
+	self.layer.opacity = 1.f;
 	
 	[UIView commitAnimations];
 	
@@ -308,11 +340,11 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight);
 - (void) hide
 {
 	[UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:0.4];
+	[UIView setAnimationDuration:0.4f];
     [UIView setAnimationDelegate:self];
 	[UIView setAnimationDidStopSelector:@selector(hideAnimationDidStop:finished:context:)];
 	
-	self.layer.opacity = 0.0;
+	self.layer.opacity = 0.f;
 	
 	[UIView commitAnimations];
 	
@@ -365,20 +397,20 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight);
 
 #pragma mark Drawing
 /*
-- (void) drawLayer:(CALayer *)layer inContext:(CGContextRef)context
-{
-	if (layer == containerView.layer) {
-		
-	}
-}	//	*/
+ - (void) drawLayer:(CALayer *)layer inContext:(CGContextRef)context
+ {
+ if (layer == containerView.layer) {
+ 
+ }
+ }	//	*/
 
 - (void) drawRect:(CGRect)rect
 {
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	
 	// set general variables
-	CGFloat borderRadius = 8.0;
-	CGFloat borderWidth = 2.0;
+	CGFloat borderRadius = 8.f;
+	CGFloat borderWidth = 2.f;
 	
 	CGContextSaveGState(context);
 	
@@ -391,10 +423,11 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight);
 	CGContextEOClip(context);
 	
 	CGContextAddPath(context, outlinePath);
-	CGContextSetShadowWithColor(context, CGSizeMake(0.0, -1 * kPopupShadowOffset), kPopupShadowBlurRadius, cgBoxShadowColor);
+	const NSInteger shadowDirectionY = 1;		// -1 for iOS < 3.2
+	CGContextSetShadowWithColor(context, CGSizeMake(0.f, shadowDirectionY * kPopupShadowOffset), kPopupShadowBlurRadius, cgBoxShadowColor);
 	CGContextSetFillColorWithColor(context, cgBlackColor);		// you won't see this, but this generates the shadow
 	CGContextFillPath(context);
-
+	
 	CGContextRestoreGState(context);
 	
 	// draw the main background
@@ -406,14 +439,14 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight);
 	CGContextFillRect(context, self.bounds);	
 	
 	// gloss
-	CGFloat glossHeight = 34.0;
+	CGFloat glossHeight = 34.f;
 	
 	CGPathRef glossPath = createGlossPath(boxRect, glossHeight);
 	CGContextAddPath(context, glossPath);
 	CGContextClip(context);
 	
-	CGPoint startPoint = CGPointMake(0.0, boxRect.origin.y - kPopupBoxPadding);
-	CGPoint endPoint = CGPointMake(0.0, boxRect.origin.y + glossHeight);
+	CGPoint startPoint = CGPointMake(0.f, boxRect.origin.y - kPopupBoxPadding);
+	CGPoint endPoint = CGPointMake(0.f, boxRect.origin.y + glossHeight);
 	CGContextDrawLinearGradient(context, cgGlossGradient, startPoint, endPoint, kCGGradientDrawsBeforeStartLocation);
 	CGPathRelease(glossPath);
 	
@@ -434,21 +467,21 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight);
 {
 	CGColorSpaceRef rgbColorSpace = CGColorSpaceCreateDeviceRGB();
 	
-	CGFloat backgroundColorComponents[4] = { 0.0, 0.1, 0.3, 0.85 };
+	CGFloat backgroundColorComponents[4] = { 0.f, 0.1f, 0.3f, 0.85f };
 	cgBackgroundColor = CGColorCreate(rgbColorSpace, backgroundColorComponents);
 	
-	CGFloat borderColorComponents[4] = { 1.0, 1.0, 1.0, 1.0 };
+	CGFloat borderColorComponents[4] = { 1.f, 1.f, 1.f, 1.f };
 	cgBorderColor = CGColorCreate(rgbColorSpace, borderColorComponents);
 	
-	CGFloat boxShadowColorComponents[4] = { 0.0, 0.0, 0.0, 0.75 };
+	CGFloat boxShadowColorComponents[4] = { 0.f, 0.f, 0.f, 0.75f };
 	cgBoxShadowColor = CGColorCreate(rgbColorSpace, boxShadowColorComponents);
 	
-	CGFloat blackColorComponents[4] = { 0.0, 0.0, 0.0, 1.0 };
+	CGFloat blackColorComponents[4] = { 0.f, 0.f, 0.f, 1.f };
 	cgBlackColor = CGColorCreate(rgbColorSpace, blackColorComponents);
 	
-	CGFloat locations[2] = { 0.0, 1.0 };
-	CGFloat glossComponents[8] = {	1.0, 1.0, 1.0, 0.5,			// Top color
-									1.0, 1.0, 1.0, 0.1 };		// Bottom color
+	CGFloat locations[2] = { 0.f, 1.f };
+	CGFloat glossComponents[8] = {	1.f, 1.f, 1.f, 0.5f,			// Top color
+		1.f, 1.f, 1.f, 0.1f };		// Bottom color
 	cgGlossGradient = CGGradientCreateWithColorComponents(rgbColorSpace, glossComponents, locations, 2);
 	
 	CGColorSpaceRelease(rgbColorSpace);
@@ -491,7 +524,7 @@ CGMutablePathRef createOutlinePath(NSInteger pPosition, CGRect pRect, CGPoint el
 		if (arrowHead.x < pRect.origin.x + borderRadius + arrowOffset) {			// too far left
 			if (arrowHead.x < pRect.origin.x + arrowOffset) {
 				arrowHead.x = pRect.origin.x + arrowOffset;
-				lRadius = 0.0;
+				lRadius = 0.f;
 			}
 			else {
 				lRadius = arrowHead.x - arrowOffset - pRect.origin.x;
@@ -500,7 +533,7 @@ CGMutablePathRef createOutlinePath(NSInteger pPosition, CGRect pRect, CGPoint el
 		else if (arrowHead.x > pRect.origin.x + pRect.size.width - borderRadius - arrowOffset) {		// too far right
 			if (arrowHead.x > pRect.origin.x + pRect.size.width - arrowOffset) {
 				arrowHead.x = pRect.origin.x + pRect.size.width + arrowOffset;
-				rRadius = 0.0;
+				rRadius = 0.f;
 			}
 			else {
 				rRadius = (pRect.origin.x + pRect.size.width) - (arrowHead.x + arrowOffset);
@@ -508,25 +541,25 @@ CGMutablePathRef createOutlinePath(NSInteger pPosition, CGRect pRect, CGPoint el
 		}
 		
 		// draw arrow side
-		if (lRadius < 1.0) {
+		if (lRadius < 1.f) {
 			CGPathMoveToPoint(path, NULL, pRect.origin.x, pRect.origin.y + borderWidth);
 		}
 		else {
 			CGPathMoveToPoint(path, NULL, pRect.origin.x, pRect.origin.y + lRadius);
-			CGPathAddArc(path, NULL, pRect.origin.x + lRadius, pRect.origin.y + lRadius, lRadius, PI, 1.5 * PI, 0);
+			CGPathAddArc(path, NULL, pRect.origin.x + lRadius, pRect.origin.y + lRadius, lRadius, PI, 1.5f * PI, 0);
 			CGPathAddLineToPoint(path, NULL, arrowHead.x - arrowOffset, arrowHead.y + arrowOffset);
 		}
 		
 		CGPathAddLineToPoint(path, NULL, arrowHead.x, arrowHead.y);
 		CGPathAddLineToPoint(path, NULL, arrowHead.x + arrowOffset, arrowHead.y + arrowOffset);
 		
-		if (rRadius >= 1.0) {
-			CGPathAddArc(path, NULL, pRect.origin.x + pRect.size.width - rRadius, pRect.origin.y + rRadius, rRadius, 1.5 * PI, 0.0, 0);
+		if (rRadius >= 1.f) {
+			CGPathAddArc(path, NULL, pRect.origin.x + pRect.size.width - rRadius, pRect.origin.y + rRadius, rRadius, 1.5f * PI, 0.f, 0);
 		}
 		
 		// remaining body
-		CGPathAddArc(path, NULL, pRect.origin.x + pRect.size.width - borderRadius, pRect.origin.y + pRect.size.height - borderRadius, borderRadius, 0.0, 0.5 * PI, 0);
-		CGPathAddArc(path, NULL, pRect.origin.x + borderRadius, pRect.origin.y + pRect.size.height - borderRadius, borderRadius, 0.5 * PI, PI, 0);
+		CGPathAddArc(path, NULL, pRect.origin.x + pRect.size.width - borderRadius, pRect.origin.y + pRect.size.height - borderRadius, borderRadius, 0.f, 0.5f * PI, 0);
+		CGPathAddArc(path, NULL, pRect.origin.x + borderRadius, pRect.origin.y + pRect.size.height - borderRadius, borderRadius, 0.5f * PI, PI, 0);
 		CGPathCloseSubpath(path);
 	}
 	
@@ -547,7 +580,7 @@ CGMutablePathRef createOutlinePath(NSInteger pPosition, CGRect pRect, CGPoint el
 		if (arrowHead.x < pRect.origin.x + borderRadius + arrowOffset) {			// too far left
 			if (arrowHead.x < pRect.origin.x + arrowOffset) {
 				arrowHead.x = pRect.origin.x + arrowOffset;
-				lRadius = 0.0;
+				lRadius = 0.f;
 			}
 			else {
 				lRadius = arrowHead.x - arrowOffset - pRect.origin.x;
@@ -556,7 +589,7 @@ CGMutablePathRef createOutlinePath(NSInteger pPosition, CGRect pRect, CGPoint el
 		else if (arrowHead.x > pRect.origin.x + pRect.size.width - borderRadius - arrowOffset) {		// too far right
 			if (arrowHead.x > pRect.origin.x + pRect.size.width - arrowOffset) {
 				arrowHead.x = pRect.origin.x + pRect.size.width + arrowOffset;
-				rRadius = 0.0;
+				rRadius = 0.f;
 			}
 			else {
 				rRadius = (pRect.origin.x + pRect.size.width) - (arrowHead.x + arrowOffset);
@@ -564,26 +597,26 @@ CGMutablePathRef createOutlinePath(NSInteger pPosition, CGRect pRect, CGPoint el
 		}
 		
 		// draw arrow side
-		if (lRadius < 1.0) {
+		if (lRadius < 1.f) {
 			CGPathMoveToPoint(path, NULL, pRect.origin.x, pRect.origin.y + pRect.size.height - borderWidth);
 		}
 		else {
 			CGPathMoveToPoint(path, NULL, pRect.origin.x, pRect.origin.y + pRect.size.height - lRadius);
-			CGPathAddArc(path, NULL, pRect.origin.x + lRadius, pRect.origin.y + pRect.size.height - lRadius, lRadius, PI, 0.5 * PI, 1);
+			CGPathAddArc(path, NULL, pRect.origin.x + lRadius, pRect.origin.y + pRect.size.height - lRadius, lRadius, PI, 0.5f * PI, 1);
 			CGPathAddLineToPoint(path, NULL, arrowHead.x - arrowOffset, arrowHead.y - arrowOffset);
 		}
 		
 		CGPathAddLineToPoint(path, NULL, arrowHead.x, arrowHead.y);
 		CGPathAddLineToPoint(path, NULL, arrowHead.x + arrowOffset, arrowHead.y - arrowOffset);
 		
-		if (rRadius >= 1.0) {
-			CGPathAddArc(path, NULL, pRect.origin.x + pRect.size.width - rRadius, pRect.origin.y + pRect.size.height - rRadius, rRadius, 0.5 * PI, 0.0, 1);
+		if (rRadius >= 1.f) {
+			CGPathAddArc(path, NULL, pRect.origin.x + pRect.size.width - rRadius, pRect.origin.y + pRect.size.height - rRadius, rRadius, 0.5f * PI, 0.f, 1);
 		}
 		
 		
 		// remaining body
-		CGPathAddArc(path, NULL, pRect.origin.x + pRect.size.width - borderRadius, pRect.origin.y + borderRadius, borderRadius, 0.0, 1.5 * PI, 1);
-		CGPathAddArc(path, NULL, pRect.origin.x + borderRadius, pRect.origin.y + borderRadius, borderRadius, 1.5 * PI, PI, 1);
+		CGPathAddArc(path, NULL, pRect.origin.x + pRect.size.width - borderRadius, pRect.origin.y + borderRadius, borderRadius, 0.f, 1.5f * PI, 1);
+		CGPathAddArc(path, NULL, pRect.origin.x + borderRadius, pRect.origin.y + borderRadius, borderRadius, 1.5f * PI, PI, 1);
 		CGPathCloseSubpath(path);
 	}
 	
@@ -605,9 +638,9 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight)
 	bo.y -= kPopupBoxPadding;
 	bs.width += 2 * kPopupBoxPadding;
 	bs.height += 2 * kPopupBoxPadding;
-
+	
 	glossHeight += kPopupBoxPadding;
-	CGFloat glossBow = 12.0;
+	CGFloat glossBow = 12.f;
 	
 	// calculate the radius of the bow
 	CGFloat tangensAlpha = (bs.width / 2) / (2 * glossBow);
@@ -620,7 +653,7 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight)
 	CGPathAddLineToPoint(path, NULL, bo.x + bs.width, bo.y);
 	CGPathAddLineToPoint(path, NULL, bo.x + bs.width, bo.y + glossHeight - glossBow);
 	CGPathAddArcToPoint(path, NULL, bo.x + bs.width / 2, bo.y + glossHeight + glossBow,
-						   bo.x, bo.y + glossHeight - glossBow, bowRadius);
+						bo.x, bo.y + glossHeight - glossBow, bowRadius);
 	CGPathAddLineToPoint(path, NULL, bo.x, bo.y + glossHeight - glossBow);
 	CGPathCloseSubpath(path);
 	

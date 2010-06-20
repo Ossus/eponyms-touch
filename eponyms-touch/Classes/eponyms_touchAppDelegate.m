@@ -60,7 +60,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 @dynamic starImageEponymInactive;
 
 
-- (void) applicationDidFinishLaunching:(UIApplication *)application
+- (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 	// **** Prefs
 	NSUInteger lastUsedDBVersion;
@@ -116,6 +116,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	[window addSubview:[naviController view]];
 	[window makeKeyAndVisible];
 	
+	
 	// **** Data
 	// If we updated from version 1.0.x, we must create a new one. We can delete the old one since no personal data was stored back then.
 	if (lastUsedDBVersion < 1) {
@@ -137,11 +138,9 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		[self loadEponymWithId:shownEponymAtQuit animated:NO];
 	}
 	else if (shownCategoryAtQuit > -100) {									// Eponym list
-		listController.atLaunchScrollTo = scrollPositionAtQuit;
 		[self loadEponymsOfCategoryID:shownCategoryAtQuit containingString:nil animated:NO];
 	}
 	else {																	// Category list (may be infoView, but we don't want to go there)
-		categoriesController.atLaunchScrollTo = scrollPositionAtQuit;
 	}
 	//NSLog(@"shownEponymAtQuit: %u, shownCategoryAtQuit: %u", shownEponymAtQuit, shownCategoryAtQuit);
 	
@@ -170,7 +169,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 
 - (void) dealloc
 {
-	self.categoryShown = nil;
+	[categoryShown release];
 	self.categoryArray = nil;
 	self.eponymArray = nil;
 	self.eponymSectionArray = nil;
@@ -179,13 +178,9 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	self.naviController = nil;
 	self.listController = nil;
 	self.eponymController = nil;
-	if (infoController) {
-		self.infoController = nil;
-	}
+	self.infoController = nil;
 	
-	if (myUpdater) {
-		self.myUpdater = nil;
-	}
+	self.myUpdater = nil;
 	
 	[window release];
 	[super dealloc];
@@ -250,6 +245,8 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	if (catShown != categoryShown) {
 		[categoryShown release];
 		categoryShown = [catShown retain];
+		
+		listController.noDataHint = [categoryShown hint];
 	}
 	
 	categoryIDShown = catShown ? [catShown myID] : -100;
@@ -684,14 +681,11 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	
 	sqlite3_reset(query);
 	
-	// GUI actions
-	if (listController.atLaunchScrollTo == 0.0) {
-		listController.atLaunchScrollTo = 0.1;										// will scroll the table to the top
-	}
-	[listController cacheEponyms:eponymArray andHeaders:eponymSectionArray];		// will also reload the table
-	
+	// tell the list controller what to show
 	self.categoryShown = category;
 	self.eponymShown = 0;
+	
+	[listController cacheEponyms:eponymArray andHeaders:eponymSectionArray];		// will also reload the table
 	if (listController != naviController.topViewController) {
 		[naviController pushViewController:listController animated:animated];
 	}

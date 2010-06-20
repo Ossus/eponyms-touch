@@ -7,3 +7,15 @@
 #import <UIKit/UIKit.h>
 #import <CoreGraphics/CoreGraphics.h>
 #endif
+
+
+// DLog only displays if -DDEBUG is set, ALog always displays output regardless of the DEBUG setting
+#ifdef DEBUG
+#   define DLog(fmt, ...) NSLog((@"%s (line %d) " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#   define DLog(...)
+#endif
+#define ALog(fmt, ...) NSLog((@"%s (line %d) " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+
+#define IS_PORTRAIT(o) ((UIInterfaceOrientationPortrait == o) || (UIInterfaceOrientationPortraitUpsideDown == o))
+#define IS_LANDSCAPE(o) ((UIInterfaceOrientationLandscapeLeft == o) || (UIInterfaceOrientationLandscapeRight == o))

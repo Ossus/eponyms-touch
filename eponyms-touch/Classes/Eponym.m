@@ -104,25 +104,25 @@ static sqlite3_stmt *toggle_starred_query = nil;
 - (void) load
 {
 	[self markAccessed];
-	if(loaded) {
+	if (loaded) {
 		return;
 	}
 	
 	[[delegate loadedEponyms] addObject:self];
 	
-	if([delegate database]) {
+	if ([delegate database]) {
 		
 		// load query
-		if(!load_query) {
-			NSString *textName = @"text_en";
-			NSString *categoryTag = @"tag";
-			NSString *categoryName = @"category_en";
+		if (!load_query) {
+			static NSString *textName = @"text_en";
+			static NSString *categoryTag = @"tag";
+			static NSString *categoryName = @"category_en";
 			const char *qry = [[NSString stringWithFormat:
 								@"SELECT created, lastedit, %@, eponym_id, %@, %@, starred FROM eponyms LEFT JOIN category_eponym_linker USING (eponym_id) LEFT JOIN categories USING (category_id) WHERE eponym_id = ?",
 								textName,
 								categoryTag,
 								categoryName] UTF8String];
-			if(SQLITE_OK != sqlite3_prepare_v2([delegate database], qry, -1, &load_query, NULL)) {
+			if (SQLITE_OK != sqlite3_prepare_v2([delegate database], qry, -1, &load_query, NULL)) {
 				NSAssert1(0, @"Error: failed to prepare load_query: '%s'.", sqlite3_errmsg([delegate database]));
 			}
 		}
@@ -139,7 +139,7 @@ static sqlite3_stmt *toggle_starred_query = nil;
 				double updatedEpoch = sqlite3_column_double(load_query, 1);
 				self.lastedit = (updatedEpoch > 10.0) ? [NSDate dateWithTimeIntervalSince1970:updatedEpoch] : nil;
 				char *textStr = (char *)sqlite3_column_text(load_query, 2);
-				self.text = (NULL == textStr) ? [NSString stringWithUTF8String:textStr] : @"";
+				self.text = (NULL != textStr) ? [NSString stringWithUTF8String:textStr] : @"<empty eponym>";
 			}
 			
 			NSInteger categoryId = sqlite3_column_int(load_query, 3);
@@ -154,7 +154,7 @@ static sqlite3_stmt *toggle_starred_query = nil;
 		}
 		
 		// eponym not found
-		if(rows < 1) {
+		if (rows < 1) {
 			self.created = nil;
 			self.lastedit = nil;
 			self.text = @"-";
@@ -226,6 +226,15 @@ static sqlite3_stmt *toggle_starred_query = nil;
 		}
 		sqlite3_reset(mark_accessed_query);
 	}
+}
+#pragma mark -
+
+
+
+#pragma mark Utilities
+- (NSString *) description
+{
+	return [NSString stringWithFormat:@"Eponym <0x%x> \"%@\" hydrated: %i", self, title, loaded];
 }
 
 

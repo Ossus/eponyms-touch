@@ -21,29 +21,21 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 @implementation CategoriesViewController
 
 @synthesize delegate;
-@synthesize myTableView;
-@synthesize atLaunchScrollTo;
 @dynamic categoryArrayCache;
 
 
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-	if (self) {
+	if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
 		self.title = @"Eponyms";
 	}
 	return self;
 }
 
 // set up the table
-- (void)loadView
+- (void) viewDidLoad
 {
-	self.myTableView = [[UITableView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame] style:UITableViewStylePlain];	
-	myTableView.delegate = self;
-	myTableView.dataSource = self;
-	myTableView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-	myTableView.autoresizesSubviews = YES;
-	self.view = myTableView;
+	[super viewDidLoad];
 	
 	// add the info panel button
 	[self showNewEponymsAvailable:NO];
@@ -51,26 +43,23 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 
 - (void) viewWillAppear:(BOOL)animated
 {
-	NSIndexPath *tableSelection = [myTableView indexPathForSelectedRow];
-	[myTableView deselectRowAtIndexPath:tableSelection animated:NO];
+	[super viewWillAppear:animated];
+	
+	NSIndexPath *tableSelection = [self.tableView indexPathForSelectedRow];
+	[self.tableView deselectRowAtIndexPath:tableSelection animated:NO];
 	
 	[delegate setCategoryShown:nil];
 	[delegate setEponymShown:0];
-	
-	if (atLaunchScrollTo > 0.0) {
-		myTableView.contentOffset = CGPointMake(0.0, atLaunchScrollTo);
-		atLaunchScrollTo = 0.0;
-	}
 }
 
 
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation
+- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
 	if (((eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate]).allowAutoRotate) {
 		return YES;
 	}
 	
-	return ((interfaceOrientation == UIInterfaceOrientationPortrait) || (interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown));
+	return IS_PORTRAIT(toInterfaceOrientation);
 }
 
 
@@ -83,7 +72,6 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 - (void) dealloc
 {
 	self.categoryArrayCache = nil;
-	self.myTableView = nil;
 	
 	[super dealloc];
 }
@@ -104,7 +92,7 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 	}
 	
 	if (categories) {
-		[myTableView reloadData];
+		[self.tableView reloadData];
 	}
 }
 #pragma mark -
@@ -143,7 +131,7 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 #pragma mark UITableView delegate methods
 
 // table selection changed
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void) tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	EponymCategory *selectedCategory = [[categoryArrayCache objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	[delegate loadEponymsOfCategory:selectedCategory containingString:nil animated:YES];
@@ -153,42 +141,37 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 
 
 #pragma mark UITableView datasource methods
-- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)aTableView
 {
 	NSUInteger count = [categoryArrayCache count];
 	return (count < 1) ? 1 : count;
 }
-- (NSArray *) sectionIndexTitlesForTableView:(UITableView *)tableView
+- (NSArray *) sectionIndexTitlesForTableView:(UITableView *)aTableView
 {
 	return [NSArray array];
 }
 
-/*- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger) section
+/*- (UIView *)tableView:(UITableView *)aTableView viewForHeaderInSection:(NSInteger) section
  {
  }*/
-- (NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger) section
+- (NSString *) tableView:(UITableView *)aTableView titleForHeaderInSection:(NSInteger) section
 {
 	return (1 == section) ? @"Categories" : nil;
 }
 
-- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger) section
+- (NSInteger) tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger) section
 {
 	return [[categoryArrayCache objectAtIndex:section] count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyCellIdentifier];
+	UITableViewCell *cell = [aTableView dequeueReusableCellWithIdentifier:MyCellIdentifier];
 	if (cell == nil) {
 		cell = [[[UITableViewCell alloc] initWithFrame:CGRectMake(0,0,0,0) reuseIdentifier:MyCellIdentifier] autorelease];
 	}
 	
-	if ([cell respondsToSelector:@selector(textLabel)]) {
-		[[cell textLabel] setText:[[[categoryArrayCache objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] title]];
-	}
-	else {
-		cell.text = [[[categoryArrayCache objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] title];
-	}
+	cell.textLabel.text = [[[categoryArrayCache objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] title];
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	
 	return cell;

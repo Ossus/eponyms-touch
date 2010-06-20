@@ -58,7 +58,8 @@
 
 @synthesize delegate;
 @dynamic eponymToBeShown;
-@dynamic rightBarButtonStarredItem, rightBarButtonNotStarredItem;
+@dynamic rightBarButtonStarredItem;
+@dynamic rightBarButtonNotStarredItem;
 @dynamic eponymTitleLabel;
 @dynamic eponymTextView;
 @dynamic eponymCategoriesLabel;
@@ -73,8 +74,7 @@
 
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-	if (self) {
+	if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
 		self.title = @"Eponym";
 	}
 	return self;
@@ -84,19 +84,40 @@
 {
 	self.eponymToBeShown = nil;
 	
+	self.rightBarButtonStarredItem = nil;
+	self.rightBarButtonNotStarredItem = nil;
+	
 	self.eponymTitleLabel = nil;
 	self.eponymTextView = nil;
 	self.eponymCategoriesLabel = nil;
 	self.dateCreatedLabel = nil;
 	self.dateUpdatedLabel = nil;
-	
-	self.view = nil;
+	self.revealButton = nil;
 	
 #ifdef SHOW_GOOGLE_ADS
 	self.adController = nil;
 #endif
 	
 	[super dealloc];
+}
+
+- (void) viewDidUnload
+{
+	self.rightBarButtonStarredItem = nil;
+	self.rightBarButtonNotStarredItem = nil;
+	
+	self.eponymTitleLabel = nil;
+	self.eponymTextView = nil;
+	self.eponymCategoriesLabel = nil;
+	self.dateCreatedLabel = nil;
+	self.dateUpdatedLabel = nil;
+	self.revealButton = nil;
+	
+#ifdef SHOW_GOOGLE_ADS
+	self.adController = nil;
+#endif
+	
+	[super viewDidUnload];
 }
 #pragma mark -
 
@@ -384,11 +405,14 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
+	[super viewWillAppear:animated];
 	[self alignUIElements];
 }
 
 - (void) viewDidAppear:(BOOL)animated
 {
+	[super viewDidAppear:animated];
+	
 	viewIsVisible = YES;
 #ifdef SHOW_GOOGLE_ADS
 	if ([self adViewIsVisible]) {
@@ -400,6 +424,7 @@
 - (void) viewWillDisappear:(BOOL)animated
 {
 	viewIsVisible = NO;
+	[super viewWillDisappear:animated];
 }
 
 
@@ -477,7 +502,7 @@
 	}
 }
 
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
 	if (((eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate]).allowAutoRotate) {
 		if (nil != eponymCategoriesLabel.hintViewDisplayed) {
@@ -486,7 +511,7 @@
 		return YES;
 	}
 	
-	return ((interfaceOrientation == UIInterfaceOrientationPortrait) || (interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown));
+	return IS_PORTRAIT(toInterfaceOrientation);
 }
 
 - (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation) fromInterfaceOrientation
@@ -497,11 +522,6 @@
 		[self loadGoogleAdsWithEponym:eponymToBeShown];
 	}
 #endif
-}
-
-- (void) didReceiveMemoryWarning
-{
-	[super didReceiveMemoryWarning];	// Releases the view if it doesn't have a superview
 }
 #pragma mark -
 
@@ -585,12 +605,7 @@
 	[eponymToBeShown toggleStarred];
 	self.navigationItem.rightBarButtonItem = eponymToBeShown.starred ? self.rightBarButtonStarredItem : self.rightBarButtonNotStarredItem;
 	if (eponymToBeShown.eponymCell) {
-		if ([eponymToBeShown.eponymCell respondsToSelector:@selector(imageView)]) {
-			[[eponymToBeShown.eponymCell imageView] setImage:eponymToBeShown.starred ? [delegate starImageListActive] : nil];
-		}
-		else {
-			eponymToBeShown.eponymCell.image = eponymToBeShown.starred ? [delegate starImageListActive] : nil;
-		}
+		eponymToBeShown.eponymCell.imageView.image = eponymToBeShown.starred ? [delegate starImageListActive] : nil;
 	}
 }
 #pragma mark -

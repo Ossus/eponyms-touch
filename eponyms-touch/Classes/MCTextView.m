@@ -11,10 +11,6 @@
 
 #import "MCTextView.h"
 
-#ifndef PI
-#define PI 3.141593
-#endif
-
 
 CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect);
 
@@ -33,9 +29,11 @@ CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect);
 		myColorSpace = CGColorSpaceCreateDeviceRGB();
 		self.opaque = NO;
 		self.backgroundGradientType = 1;
-		self.gradientBackgroundColor = [UIColor whiteColor];
 		self.backgroundColor = nil;
+		self.gradientBackgroundColor = [UIColor whiteColor];
+		//self.contentInset = UIEdgeInsetsMake(-4.f, 0.f, 0.f, -4.f);		// seems to adjust self bounds -> weird drawing -> TODO: Find solution
 	}
+	
 	return self;
 }
 
@@ -107,8 +105,8 @@ CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect);
 			
 			// grayscale
 			if (2 == num_comp) {
-				CGFloat topWhite = (comp[0] + ((1.0 - comp[0]) * 0.1));
-				CGFloat bottomWhite = (comp[0] - (comp[0] * 0.1));
+				CGFloat topWhite = (comp[0] + ((1.f - comp[0]) * 0.1f));
+				CGFloat bottomWhite = (comp[0] - (comp[0] * 0.1f));
 				topComponents[0] = topComponents[1] = topComponents[2] = topWhite;
 				bottomComponents[0] = bottomComponents[1] = bottomComponents[2] = bottomWhite;
 				topComponents[3] = comp[1];			// alpha
@@ -120,8 +118,8 @@ CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect);
 			else if (4 == num_comp) {
 				NSUInteger i;
 				for (i = 0; i < 3; i++) {
-					topComponents[i] = (comp[i] + ((1.0 - comp[i]) * 0.1));
-					bottomComponents[i] = (comp[i] - (comp[i] * 0.1));
+					topComponents[i] = (comp[i] + ((1.f - comp[i]) * 0.1f));
+					bottomComponents[i] = (comp[i] - (comp[i] * 0.1f));
 				}
 				topComponents[3] = comp[3];			// alpha
 				bottomComponents[3] = comp[3];
@@ -144,7 +142,7 @@ CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect);
 					}
 				}
 				
-				CGFloat locations[2] = { 0.0, 1.0 };
+				CGFloat locations[2] = { 0.f, 1.f };
 				backgroundGradient = CGGradientCreateWithColorComponents(myColorSpace, components, locations, 2);
 			}
 		}
@@ -162,11 +160,11 @@ CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect);
 	}
 	
 	// calculate size needed by the text
-	CGFloat textPadding = 8.0 + 2.5;		// TODO: Remove the 2.5 when building for 3.0! (workaround to incorrect size calculation)
+	CGFloat textPadding = 8.f;
 	CGSize maxSize = CGSizeMake(size.width - (2 * textPadding), size.height - (2 * textPadding));
 	CGSize textSize = [self.text sizeWithFont:self.font constrainedToSize:maxSize];
 	
-	return CGSizeMake(textSize.width + (2 * textPadding), textSize.height + (2 * textPadding) - 2.0);		// TODO: Remove 2.0 when building for 3.0
+	return CGSizeMake(textSize.width + (2 * textPadding), textSize.height + (2 * textPadding));
 }
 #pragma mark -
 
@@ -176,10 +174,9 @@ CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect);
 - (void) drawRect:(CGRect)rect
 {
 	CGContextRef context = UIGraphicsGetCurrentContext();
-	CGColorSpaceRef rgbColorSpace = CGColorSpaceCreateDeviceRGB();
 	
-	CGFloat borderRadius = 6.0;
-	CGFloat borderWidth = 1.0;
+	CGFloat borderRadius = 6.f;
+	CGFloat borderWidth = 1.f;
 	CGRect localRect = self.bounds;
 	
 	// draw the box border (fill the whole outline)
@@ -195,13 +192,13 @@ CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect);
 		CGContextFillRect(context, localRect);
 	}
 	else {
-		CGFloat locations[2] = { 0.0, 1.0 };
-		CGFloat components[8] = {	0.2, 0.25, 0.4, 0.5,		// Top color
-									0.4, 0.45, 0.55, 0.2 };		// Bottom color
-		CGGradientRef borderGradient = CGGradientCreateWithColorComponents(rgbColorSpace, components, locations, 2);
+		CGFloat locations[2] = { 0.f, 1.f };
+		CGFloat components[8] = {	0.2f, 0.25f, 0.4f, 0.5f,		// Top color
+									0.4f, 0.45f, 0.55f, 0.2f };		// Bottom color
+		CGGradientRef borderGradient = CGGradientCreateWithColorComponents(myColorSpace, components, locations, 2);
 		
-		CGPoint startPoint = CGPointMake(0.0, 0.0);
-		CGPoint endPoint = CGPointMake(0.0, localRect.size.height);
+		CGPoint startPoint = CGPointMake(0.f, 0.f);
+		CGPoint endPoint = CGPointMake(0.f, localRect.size.height);
 		CGContextDrawLinearGradient(context, borderGradient, startPoint, endPoint, 0);
 		CGGradientRelease(borderGradient);
 	}
@@ -217,8 +214,8 @@ CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect);
 		CGContextClip(context);
 		
 		if (backgroundGradient) {
-			CGPoint startPoint = CGPointMake(0.0, 0.0);
-			CGPoint endPoint = CGPointMake(0.0, localRect.size.height);
+			CGPoint startPoint = CGPointMake(0.f, 0.f);
+			CGPoint endPoint = CGPointMake(0.f, localRect.size.height);
 			CGContextDrawLinearGradient(context, backgroundGradient, startPoint, endPoint, 0);
 		}
 		else {
@@ -233,12 +230,12 @@ CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect);
 		CGMutablePathRef innerPath = createRoundedPathInRect(borderRadius - borderWidth, localRect);
 		CGContextAddPath(context, innerPath);
 		
-		CGFloat shadowColorComponents[4] = { 0.0, 0.0, 0.0, 0.6 };
-		CGFloat blackColorComponents[4] = { 0.0, 0.0, 0.0, 1.0 };
-		CGColorRef shadowColor = CGColorCreate(rgbColorSpace, shadowColorComponents);
+		CGFloat shadowColorComponents[4] = { 0.f, 0.f, 0.f, 0.6f };
+		CGFloat blackColorComponents[4] = { 0.f, 0.f, 0.f, 1.f };
+		CGColorRef shadowColor = CGColorCreate(myColorSpace, shadowColorComponents);
 		
 		CGContextSetLineWidth(context, 2 * borderWidth);
-		CGContextSetShadowWithColor(context, CGSizeMake(0.0, -1.0), 2.0, shadowColor);
+		CGContextSetShadowWithColor(context, CGSizeMake(0.f, 1.f), 2.f, shadowColor);
 		CGContextSetStrokeColor(context, blackColorComponents);
 		CGContextStrokePath(context);
 		CGColorRelease(shadowColor);
@@ -247,7 +244,6 @@ CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect);
 	
 	// Clean up
 	CGPathRelease(outlinePath);
-	CGColorSpaceRelease(rgbColorSpace);
 	
 	// call super to draw the text
 	[super drawRect:rect];
@@ -260,13 +256,14 @@ CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect)
 	CGSize rs = rect.size;
 	
 	CGMutablePathRef path = CGPathCreateMutable();
-	CGPathAddArc(path, NULL, ro.x + borderRadius,				ro.y + borderRadius,				borderRadius, 1.0 * PI, 1.5 * PI, 0);
-	CGPathAddArc(path, NULL, ro.x + rs.width - borderRadius,	ro.y + borderRadius,				borderRadius, 1.5 * PI, 0.0, 0);
-	CGPathAddArc(path, NULL, ro.x + rs.width - borderRadius,	ro.y + rs.height - borderRadius,	borderRadius, 0.0, 0.5 * PI, 0);
-	CGPathAddArc(path, NULL, ro.x + borderRadius,				ro.y + rs.height - borderRadius,	borderRadius, 0.5 * PI, 1.0 * PI, 0);
+	CGPathAddArc(path, NULL, ro.x + borderRadius,				ro.y + borderRadius,				borderRadius, 1.f * M_PI, 1.5f * M_PI, 0);
+	CGPathAddArc(path, NULL, ro.x + rs.width - borderRadius,	ro.y + borderRadius,				borderRadius, 1.5f * M_PI, 0.f, 0);
+	CGPathAddArc(path, NULL, ro.x + rs.width - borderRadius,	ro.y + rs.height - borderRadius,	borderRadius, 0.f, 0.5f * M_PI, 0);
+	CGPathAddArc(path, NULL, ro.x + borderRadius,				ro.y + rs.height - borderRadius,	borderRadius, 0.5f * M_PI, 1.f * M_PI, 0);
 	CGPathCloseSubpath(path);
 	
 	return path;			// don't forget to CGPathRelease() !
 }
+
 
 @end

@@ -11,24 +11,18 @@
 
 
 #import <UIKit/UIKit.h>
+#import "MCTableViewController.h"
 
 
-@interface CategoriesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+@interface CategoriesViewController : MCTableViewController {
 	id delegate;
-	
 	NSArray *categoryArrayCache;
-	UITableView *myTableView;
-	
-	CGFloat atLaunchScrollTo;
 }
 
 @property (nonatomic, assign) id delegate;
 @property (nonatomic, retain) NSArray *categoryArrayCache;
-@property (nonatomic, retain) UITableView *myTableView;
-
-@property (nonatomic, assign) CGFloat atLaunchScrollTo;
-
 
 - (void) showNewEponymsAvailable:(BOOL)hasNew;
+
 
 @end

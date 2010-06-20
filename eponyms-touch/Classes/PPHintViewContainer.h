@@ -3,8 +3,7 @@
 //  RenalApp
 //
 //  Created by Pascal Pfiffner on 20.10.09.
-//  This sourcecode is released under the Apache License, Version 2.0
-//  http://www.apache.org/licenses/LICENSE-2.0.html
+//  Copyright 2009 Pascal Pfiffner. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

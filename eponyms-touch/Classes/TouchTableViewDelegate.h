@@ -1,8 +1,9 @@
 //
 //  TouchTableViewDelegate.h
-//  eponyms-touch
+//  eponyms-touch + medcalc
 //
 //  Created by Pascal Pfiffner on 24.08.08.
+//	Copyright 2008 MedCalc. All rights reserved.
 //  This sourcecode is released under the Apache License, Version 2.0
 //  http://www.apache.org/licenses/LICENSE-2.0.html
 //  
@@ -12,8 +13,9 @@
 #import <UIKit/UIKit.h>
 @class TouchTableView;
 
-@protocol TouchTableViewDelegate <NSObject>
+@protocol TouchTableViewDelegate <NSObject, UITableViewDelegate>
 
-- (void) tableView:(TouchTableView *)tableView didDoubleTapRowAtIndexPath:(NSIndexPath *)indexPath;
+@optional
+- (void) tableView:(TouchTableView *)aTableView didDoubleTapRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

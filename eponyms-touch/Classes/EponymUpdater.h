@@ -18,7 +18,7 @@
 @class InfoViewController;
 
 
-@interface EponymUpdater : NSObject {
+@interface EponymUpdater : NSObject <NSXMLParserDelegate> {
 	id<EponymUpdaterDelegate> delegate;
 	InfoViewController<EponymUpdaterDelegate> *viewController;
 	

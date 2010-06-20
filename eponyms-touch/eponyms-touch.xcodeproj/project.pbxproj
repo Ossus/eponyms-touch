@@ -70,6 +70,31 @@
 		EE89CE9D0E618B2C0016A781 /* Star_list_active.png in Resources */ = {isa = PBXBuildFile; fileRef = EE89CE9C0E618B2C0016A781 /* Star_list_active.png */; };
 		EE8E56750E6CA69600928D90 /* ElevatedBar.png in Resources */ = {isa = PBXBuildFile; fileRef = EE8E56740E6CA69600928D90 /* ElevatedBar.png */; };
 		EEAB00FA0E2E2F3E00D84A8A /* Info.txt in Resources */ = {isa = PBXBuildFile; fileRef = EEAB00F90E2E2F3E00D84A8A /* Info.txt */; };
+		EEC2A6A511CE6A3C009C9486 /* Icon-student~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6A311CE6A3C009C9486 /* Icon-student~iPad.png */; };
+		EEC2A6A611CE6A3C009C9486 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6A411CE6A3C009C9486 /* Icon@2x.png */; };
+		EEC2A6A811CE6A51009C9486 /* Eponyms@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6A711CE6A51009C9486 /* Eponyms@2x.png */; };
+		EEC2A6AB11CE6A5F009C9486 /* Icon-student@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6A911CE6A5F009C9486 /* Icon-student@2x.png */; };
+		EEC2A6AC11CE6A5F009C9486 /* Icon-student~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6AA11CE6A5F009C9486 /* Icon-student~iPad.png */; };
+		EEC2A6AE11CE6A6A009C9486 /* Eponyms@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6AD11CE6A6A009C9486 /* Eponyms@2x.png */; };
+		EEC2A6B311CE6B21009C9486 /* Badge_new_eponyms@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6AF11CE6B21009C9486 /* Badge_new_eponyms@2x.png */; };
+		EEC2A6B411CE6B21009C9486 /* Star_eponym_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6B011CE6B21009C9486 /* Star_eponym_active@2x.png */; };
+		EEC2A6B511CE6B21009C9486 /* Star_eponym_inactive@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6B111CE6B21009C9486 /* Star_eponym_inactive@2x.png */; };
+		EEC2A6B611CE6B21009C9486 /* Star_list_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6B211CE6B21009C9486 /* Star_list_active@2x.png */; };
+		EEC2A6B711CE6B21009C9486 /* Badge_new_eponyms@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6AF11CE6B21009C9486 /* Badge_new_eponyms@2x.png */; };
+		EEC2A6B811CE6B21009C9486 /* Star_eponym_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6B011CE6B21009C9486 /* Star_eponym_active@2x.png */; };
+		EEC2A6B911CE6B21009C9486 /* Star_eponym_inactive@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6B111CE6B21009C9486 /* Star_eponym_inactive@2x.png */; };
+		EEC2A6BA11CE6B21009C9486 /* Star_list_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6B211CE6B21009C9486 /* Star_list_active@2x.png */; };
+		EEC2A6C111CE6C3A009C9486 /* PPSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC2A6C011CE6C3A009C9486 /* PPSplitViewController.m */; };
+		EEC2A6C211CE6C3A009C9486 /* PPSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC2A6C011CE6C3A009C9486 /* PPSplitViewController.m */; };
+		EEC2A6C511CE6C47009C9486 /* MCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC2A6C411CE6C47009C9486 /* MCViewController.m */; };
+		EEC2A6C611CE6C47009C9486 /* MCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC2A6C411CE6C47009C9486 /* MCViewController.m */; };
+		EEC2A6C911CE6C4F009C9486 /* MCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC2A6C811CE6C4F009C9486 /* MCTableViewController.m */; };
+		EEC2A6CA11CE6C4F009C9486 /* MCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC2A6C811CE6C4F009C9486 /* MCTableViewController.m */; };
+		EEC2A6FA11CE6E12009C9486 /* MCViewAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC2A6F911CE6E12009C9486 /* MCViewAnimations.m */; };
+		EEC2A6FB11CE6E12009C9486 /* MCViewAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC2A6F911CE6E12009C9486 /* MCViewAnimations.m */; };
+		EEC2A70811CE6E37009C9486 /* UIViewController+PPSubclassing.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC2A70711CE6E37009C9486 /* UIViewController+PPSubclassing.m */; };
+		EEC2A70911CE6E37009C9486 /* UIViewController+PPSubclassing.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC2A70711CE6E37009C9486 /* UIViewController+PPSubclassing.m */; };
+		EEC2A70D11CE6E8A009C9486 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC2A70C11CE6E8A009C9486 /* QuartzCore.framework */; };
 		EECD008410A0DAAE002B06C6 /* PPHintableLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EECD008310A0DAAE002B06C6 /* PPHintableLabel.m */; };
 		EECD008910A0DAC1002B06C6 /* PPHintView.m in Sources */ = {isa = PBXBuildFile; fileRef = EECD008610A0DAC1002B06C6 /* PPHintView.m */; };
 		EECD008A10A0DAC1002B06C6 /* PPHintViewContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = EECD008810A0DAC1002B06C6 /* PPHintViewContainer.m */; };
@@ -108,8 +133,8 @@
 
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		1D3623240D0F684500981E51 /* eponyms_touchAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eponyms_touchAppDelegate.h; sourceTree = "<group>"; };
-		1D3623250D0F684500981E51 /* eponyms_touchAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = eponyms_touchAppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		1D3623240D0F684500981E51 /* eponyms_touchAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = eponyms_touchAppDelegate.h; path = Classes/eponyms_touchAppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* eponyms_touchAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = eponyms_touchAppDelegate.m; path = Classes/eponyms_touchAppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		1D6058910D05DD3D006BFB54 /* eponyms-touch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "eponyms-touch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
@@ -159,6 +184,27 @@
 		EE8E56740E6CA69600928D90 /* ElevatedBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ElevatedBar.png; sourceTree = "<group>"; };
 		EEAB00F90E2E2F3E00D84A8A /* Info.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Info.txt; sourceTree = "<group>"; };
 		EEBA8F120E66E727002D6DDC /* EponymUpdaterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EponymUpdaterDelegate.h; sourceTree = "<group>"; };
+		EEC2A6A311CE6A3C009C9486 /* Icon-student~iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-student~iPad.png"; sourceTree = "<group>"; };
+		EEC2A6A411CE6A3C009C9486 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		EEC2A6A711CE6A51009C9486 /* Eponyms@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Eponyms@2x.png"; sourceTree = "<group>"; };
+		EEC2A6A911CE6A5F009C9486 /* Icon-student@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-student@2x.png"; sourceTree = "<group>"; };
+		EEC2A6AA11CE6A5F009C9486 /* Icon-student~iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-student~iPad.png"; sourceTree = "<group>"; };
+		EEC2A6AD11CE6A6A009C9486 /* Eponyms@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Eponyms@2x.png"; sourceTree = "<group>"; };
+		EEC2A6AF11CE6B21009C9486 /* Badge_new_eponyms@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Badge_new_eponyms@2x.png"; sourceTree = "<group>"; };
+		EEC2A6B011CE6B21009C9486 /* Star_eponym_active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Star_eponym_active@2x.png"; sourceTree = "<group>"; };
+		EEC2A6B111CE6B21009C9486 /* Star_eponym_inactive@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Star_eponym_inactive@2x.png"; sourceTree = "<group>"; };
+		EEC2A6B211CE6B21009C9486 /* Star_list_active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Star_list_active@2x.png"; sourceTree = "<group>"; };
+		EEC2A6BF11CE6C3A009C9486 /* PPSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPSplitViewController.h; sourceTree = "<group>"; };
+		EEC2A6C011CE6C3A009C9486 /* PPSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPSplitViewController.m; sourceTree = "<group>"; };
+		EEC2A6C311CE6C47009C9486 /* MCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCViewController.h; sourceTree = "<group>"; };
+		EEC2A6C411CE6C47009C9486 /* MCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCViewController.m; sourceTree = "<group>"; };
+		EEC2A6C711CE6C4F009C9486 /* MCTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTableViewController.h; sourceTree = "<group>"; };
+		EEC2A6C811CE6C4F009C9486 /* MCTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTableViewController.m; sourceTree = "<group>"; };
+		EEC2A6F811CE6E12009C9486 /* MCViewAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCViewAnimations.h; sourceTree = "<group>"; };
+		EEC2A6F911CE6E12009C9486 /* MCViewAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCViewAnimations.m; sourceTree = "<group>"; };
+		EEC2A70611CE6E37009C9486 /* UIViewController+PPSubclassing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PPSubclassing.h"; sourceTree = "<group>"; };
+		EEC2A70711CE6E37009C9486 /* UIViewController+PPSubclassing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PPSubclassing.m"; sourceTree = "<group>"; };
+		EEC2A70C11CE6E8A009C9486 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		EECD008210A0DAAE002B06C6 /* PPHintableLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPHintableLabel.h; sourceTree = "<group>"; };
 		EECD008310A0DAAE002B06C6 /* PPHintableLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPHintableLabel.m; sourceTree = "<group>"; };
 		EECD008510A0DAC1002B06C6 /* PPHintView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPHintView.h; sourceTree = "<group>"; };
@@ -181,6 +227,7 @@
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				EED69F830E2BF41900BEF0C4 /* CoreGraphics.framework in Frameworks */,
+				EEC2A70D11CE6E8A009C9486 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,8 +249,6 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				1D3623240D0F684500981E51 /* eponyms_touchAppDelegate.h */,
-				1D3623250D0F684500981E51 /* eponyms_touchAppDelegate.m */,
 				EE89C9E70E6058A60016A781 /* EponymCategory.h */,
 				EE89C9FF0E6059280016A781 /* EponymCategory.m */,
 				EE2DE9DC0E2125C700D97653 /* Eponym.h */,
@@ -213,6 +258,7 @@
 				EE1443E90E23A576003EA64C /* EponymUpdater.m */,
 				EE2DE7AD0E1C2F8600D97653 /* View Controllers */,
 				EE89CD880E6174C00016A781 /* Subclasses */,
+				EEC2A6FC11CE6E19009C9486 /* Helpers */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -230,11 +276,14 @@
 			isa = PBXGroup;
 			children = (
 				EE80AD071024C7C4007352AD /* SQLiteUnicode.xcodeproj */,
+				1D3623240D0F684500981E51 /* eponyms_touchAppDelegate.h */,
+				1D3623250D0F684500981E51 /* eponyms_touchAppDelegate.m */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				EE56383A109DFA7A00D6C4E6 /* GoogleAds */,
 				EE2DE6B30E1AE30C00D97653 /* Images */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
+				EEC2A66F11CE65CA009C9486 /* Resources-iPad */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -273,6 +322,7 @@
 				EED69F820E2BF41900BEF0C4 /* CoreGraphics.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				EEC2A70C11CE6E8A009C9486 /* QuartzCore.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -284,9 +334,13 @@
 				EEDB74CA10B8994A007782DA /* StudentVersion */,
 				EE3BC4420E6ADECB0051B69D /* InfoBackground.png */,
 				EE3BC3C00E6ACEBF0051B69D /* Badge_new_eponyms.png */,
+				EEC2A6AF11CE6B21009C9486 /* Badge_new_eponyms@2x.png */,
 				EE66414D0E62A2220047D7ED /* Star_eponym_active.png */,
+				EEC2A6B011CE6B21009C9486 /* Star_eponym_active@2x.png */,
 				EE66414E0E62A2220047D7ED /* Star_eponym_inactive.png */,
+				EEC2A6B111CE6B21009C9486 /* Star_eponym_inactive@2x.png */,
 				EE89CE9C0E618B2C0016A781 /* Star_list_active.png */,
+				EEC2A6B211CE6B21009C9486 /* Star_list_active@2x.png */,
 				EE8E56740E6CA69600928D90 /* ElevatedBar.png */,
 				EE5A6DF510B88ECE0092053C /* BlueRoundedButton.png */,
 			);
@@ -296,6 +350,12 @@
 		EE2DE7AD0E1C2F8600D97653 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				EEC2A6C311CE6C47009C9486 /* MCViewController.h */,
+				EEC2A6C411CE6C47009C9486 /* MCViewController.m */,
+				EEC2A6C711CE6C4F009C9486 /* MCTableViewController.h */,
+				EEC2A6C811CE6C4F009C9486 /* MCTableViewController.m */,
+				EEC2A6BF11CE6C3A009C9486 /* PPSplitViewController.h */,
+				EEC2A6C011CE6C3A009C9486 /* PPSplitViewController.m */,
 				EE2DE7AA0E1C2F7A00D97653 /* CategoriesViewController.h */,
 				EE2DE7AB0E1C2F7A00D97653 /* CategoriesViewController.m */,
 				EE2DE74C0E1C297200D97653 /* ListViewController.h */,
@@ -345,12 +405,33 @@
 			name = Subclasses;
 			sourceTree = "<group>";
 		};
+		EEC2A66F11CE65CA009C9486 /* Resources-iPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Resources-iPad";
+			sourceTree = "<group>";
+		};
+		EEC2A6FC11CE6E19009C9486 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				EEC2A6F811CE6E12009C9486 /* MCViewAnimations.h */,
+				EEC2A6F911CE6E12009C9486 /* MCViewAnimations.m */,
+				EEC2A70611CE6E37009C9486 /* UIViewController+PPSubclassing.h */,
+				EEC2A70711CE6E37009C9486 /* UIViewController+PPSubclassing.m */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		EEDB74CA10B8994A007782DA /* StudentVersion */ = {
 			isa = PBXGroup;
 			children = (
 				EEDB74EC10B89AF7007782DA /* Default.png */,
 				EE5A6C7E10B831840092053C /* Icon-student.png */,
+				EEC2A6A911CE6A5F009C9486 /* Icon-student@2x.png */,
+				EEC2A6AA11CE6A5F009C9486 /* Icon-student~iPad.png */,
 				EE2DE6B40E1AE31800D97653 /* Eponyms.png */,
+				EEC2A6AD11CE6A6A009C9486 /* Eponyms@2x.png */,
 			);
 			path = StudentVersion;
 			sourceTree = "<group>";
@@ -360,7 +441,10 @@
 			children = (
 				EE2DEDFE0E229DB700D97653 /* Default.png */,
 				EE2DEDF90E229B9B00D97653 /* Icon.png */,
+				EEC2A6A411CE6A3C009C9486 /* Icon@2x.png */,
+				EEC2A6A311CE6A3C009C9486 /* Icon-student~iPad.png */,
 				EEDB74DD10B89A76007782DA /* Eponyms.png */,
+				EEC2A6A711CE6A51009C9486 /* Eponyms@2x.png */,
 			);
 			path = FullVersion;
 			sourceTree = "<group>";
@@ -461,6 +545,13 @@
 				EEF9F2940EA74928002F024E /* Entitlements.plist in Resources */,
 				EE5A6DF710B88ECE0092053C /* BlueRoundedButton.png in Resources */,
 				EEDB74DE10B89A76007782DA /* Eponyms.png in Resources */,
+				EEC2A6A511CE6A3C009C9486 /* Icon-student~iPad.png in Resources */,
+				EEC2A6A611CE6A3C009C9486 /* Icon@2x.png in Resources */,
+				EEC2A6A811CE6A51009C9486 /* Eponyms@2x.png in Resources */,
+				EEC2A6B711CE6B21009C9486 /* Badge_new_eponyms@2x.png in Resources */,
+				EEC2A6B811CE6B21009C9486 /* Star_eponym_active@2x.png in Resources */,
+				EEC2A6B911CE6B21009C9486 /* Star_eponym_inactive@2x.png in Resources */,
+				EEC2A6BA11CE6B21009C9486 /* Star_list_active@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,6 +577,13 @@
 				EE5A6C7F10B831840092053C /* Icon-student.png in Resources */,
 				EE5A6DF610B88ECE0092053C /* BlueRoundedButton.png in Resources */,
 				EEDB74ED10B89AF7007782DA /* Default.png in Resources */,
+				EEC2A6AB11CE6A5F009C9486 /* Icon-student@2x.png in Resources */,
+				EEC2A6AC11CE6A5F009C9486 /* Icon-student~iPad.png in Resources */,
+				EEC2A6AE11CE6A6A009C9486 /* Eponyms@2x.png in Resources */,
+				EEC2A6B311CE6B21009C9486 /* Badge_new_eponyms@2x.png in Resources */,
+				EEC2A6B411CE6B21009C9486 /* Star_eponym_active@2x.png in Resources */,
+				EEC2A6B511CE6B21009C9486 /* Star_eponym_inactive@2x.png in Resources */,
+				EEC2A6B611CE6B21009C9486 /* Star_list_active@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,6 +608,11 @@
 				EECD008410A0DAAE002B06C6 /* PPHintableLabel.m in Sources */,
 				EECD008910A0DAC1002B06C6 /* PPHintView.m in Sources */,
 				EECD008A10A0DAC1002B06C6 /* PPHintViewContainer.m in Sources */,
+				EEC2A6C211CE6C3A009C9486 /* PPSplitViewController.m in Sources */,
+				EEC2A6C611CE6C47009C9486 /* MCViewController.m in Sources */,
+				EEC2A6CA11CE6C4F009C9486 /* MCTableViewController.m in Sources */,
+				EEC2A6FB11CE6E12009C9486 /* MCViewAnimations.m in Sources */,
+				EEC2A70911CE6E37009C9486 /* UIViewController+PPSubclassing.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,6 +634,11 @@
 				EECD015610A0EC95002B06C6 /* PPHintViewContainer.m in Sources */,
 				EECD015710A0EC95002B06C6 /* PPHintableLabel.m in Sources */,
 				EECD015810A0EC95002B06C6 /* PPHintView.m in Sources */,
+				EEC2A6C111CE6C3A009C9486 /* PPSplitViewController.m in Sources */,
+				EEC2A6C511CE6C47009C9486 /* MCViewController.m in Sources */,
+				EEC2A6C911CE6C4F009C9486 /* MCTableViewController.m in Sources */,
+				EEC2A6FA11CE6E12009C9486 /* MCViewAnimations.m in Sources */,
+				EEC2A70811CE6E37009C9486 /* UIViewController+PPSubclassing.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,13 +713,16 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "-DDEBUG";
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				RUN_CLANG_STATIC_ANALYZER = NO;
-				SDKROOT = iphoneos2.0;
+				SDKROOT = iphoneos4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -629,11 +740,13 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos2.0;
+				SDKROOT = iphoneos4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -651,11 +764,13 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0C954729-44E5-469B-9F90-DB1AF15A0033";
-				SDKROOT = iphoneos2.0;
+				SDKROOT = iphoneos4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Distribution;
 		};
@@ -681,6 +796,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -698,6 +814,8 @@
 				OTHER_CFLAGS = "-DSHOW_GOOGLE_ADS";
 				PRODUCT_NAME = "eponyms-student";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -705,6 +823,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -719,6 +838,8 @@
 				OTHER_CFLAGS = "-DSHOW_GOOGLE_ADS";
 				PRODUCT_NAME = "eponyms-student";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "574DB9DC-0CDE-425B-9CB5-0FBD5DA32410";
+				SDKROOT = iphoneos4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -726,6 +847,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -740,6 +862,8 @@
 				OTHER_CFLAGS = "-DSHOW_GOOGLE_ADS";
 				PRODUCT_NAME = "eponyms-student";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "574DB9DC-0CDE-425B-9CB5-0FBD5DA32410";
+				SDKROOT = iphoneos4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Distribution;
 		};
@@ -747,6 +871,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
 				COPY_PHASE_STRIP = YES;
@@ -762,6 +887,8 @@
 				OTHER_CFLAGS = "-DSHOW_GOOGLE_ADS";
 				PRODUCT_NAME = "eponyms-student";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "574DB9DC-0CDE-425B-9CB5-0FBD5DA32410";
+				SDKROOT = iphoneos4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = AdHoc;
 		};
@@ -779,13 +906,16 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "-DDEBUG";
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				SDKROOT = iphoneos2.0;
+				SDKROOT = iphoneos4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "Debug Plus";
 		};
@@ -816,6 +946,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
 				COPY_PHASE_STRIP = NO;
@@ -833,6 +964,8 @@
 				OTHER_CFLAGS = "-DSHOW_GOOGLE_ADS";
 				PRODUCT_NAME = "eponyms-student";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "574DB9DC-0CDE-425B-9CB5-0FBD5DA32410";
+				SDKROOT = iphoneos4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "Debug Plus";
 		};
@@ -850,11 +983,13 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "574DB9DC-0CDE-425B-9CB5-0FBD5DA32410";
-				SDKROOT = iphoneos2.0;
+				SDKROOT = iphoneos4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = AdHoc;
 		};
