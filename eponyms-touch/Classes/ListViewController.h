@@ -39,5 +39,9 @@
 
 - (void) cacheEponyms:(NSArray *)eponyms andHeaders:(NSArray *)sections;
 
+- (void) assureEponymSelectedInList;
+- (void) assureSelectedEponymStarredInList;
+- (void) assureEponymAtIndexPathStarredInList:(NSIndexPath *)indexPath;
+
 
 @end

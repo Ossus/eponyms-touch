@@ -27,18 +27,9 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
 	if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-		self.title = @"Eponyms";
+		self.title = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? @"Categories" : @"Eponyms";
 	}
 	return self;
-}
-
-// set up the table
-- (void) viewDidLoad
-{
-	[super viewDidLoad];
-	
-	// add the info panel button
-	[self showNewEponymsAvailable:NO];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -49,7 +40,6 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 	[self.tableView deselectRowAtIndexPath:tableSelection animated:NO];
 	
 	[delegate setCategoryShown:nil];
-	[delegate setEponymShown:0];
 }
 
 
@@ -94,35 +84,6 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 	if (categories) {
 		[self.tableView reloadData];
 	}
-}
-#pragma mark -
-
-
-
-#pragma mark GUI
-- (void) showNewEponymsAvailable:(BOOL)hasNew
-{
-	UIButton *infoButton;
-	CGRect buttonSize = CGRectMake(0.0, 0.0, 30.0, 30.0);
-	
-	if (hasNew) {
-		infoButton = [UIButton buttonWithType:UIButtonTypeCustom];
-		[infoButton setImage:[UIImage imageNamed:@"Badge_new_eponyms.png"] forState:(UIControlStateNormal & UIControlStateHighlighted & UIControlStateDisabled & UIControlStateSelected & UIControlStateApplication & UIControlStateReserved)];
-		infoButton.showsTouchWhenHighlighted = YES;
-		infoButton.frame = buttonSize;
-	}
-	
-	else {
-		infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
-		infoButton.frame = buttonSize;
-	}
-	
-	// compose and add to navigation bar
-	[infoButton addTarget:delegate action:@selector(showInfoPanel:) forControlEvents:UIControlEventTouchUpInside];
-	
-	UIBarButtonItem *infoBarButton = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
-	self.navigationItem.rightBarButtonItem = infoBarButton;
-	[infoBarButton release];
 }
 #pragma mark -
 

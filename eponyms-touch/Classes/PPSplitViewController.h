@@ -17,6 +17,8 @@
 	
 	BOOL usesFullLandscapeWidth;					// YES by default. if NO adds a margin to the left and right
 	
+	BOOL useCustomLeftTitleBar;						// YES by default
+	BOOL useCustomRightTitleBar;					// YES by default
 	UINavigationBar *leftTitleBar;
 	UINavigationBar *rightTitleBar;
 	
@@ -39,6 +41,8 @@
 
 @property (nonatomic, assign) BOOL usesFullLandscapeWidth;
 
+@property (nonatomic, assign) BOOL useCustomLeftTitleBar;
+@property (nonatomic, assign) BOOL useCustomRightTitleBar;
 @property (nonatomic, readonly, retain) UINavigationBar *leftTitleBar;
 @property (nonatomic, readonly, retain) UINavigationBar *rightTitleBar;
 

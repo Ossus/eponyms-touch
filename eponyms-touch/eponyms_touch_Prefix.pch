@@ -8,6 +8,7 @@
 #import <CoreGraphics/CoreGraphics.h>
 #endif
 
+#define APP_DELEGATE (eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate]
 
 // DLog only displays if -DDEBUG is set, ALog always displays output regardless of the DEBUG setting
 #ifdef DEBUG
@@ -19,3 +20,10 @@
 
 #define IS_PORTRAIT(o) ((UIInterfaceOrientationPortrait == o) || (UIInterfaceOrientationPortraitUpsideDown == o))
 #define IS_LANDSCAPE(o) ((UIInterfaceOrientationLandscapeLeft == o) || (UIInterfaceOrientationLandscapeRight == o))
+
+// Needed for 3.0 targeting with iPad support
+#ifndef UI_USER_INTERFACE_IDIOM
+#define UIUserInterfaceIdiomPhone 1
+#define UIUserInterfaceIdiomPad 0
+#define UI_USER_INTERFACE_IDIOM() ([[UIDevice currentDevice] respondsToSelector:@selector(userInterfaceIdiom)] ? [[UIDevice currentDevice] userInterfaceIdiom] : UIUserInterfaceIdiomPhone)
+#endif

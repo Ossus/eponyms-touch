@@ -66,6 +66,8 @@
 #endif
 
 - (void) toggleEponymStarred:(id)sender;
+- (void) indicateEponymStarredStatus;
+
 - (void) reveal:(id)sender;
 
 

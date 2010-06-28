@@ -10,6 +10,7 @@
 //  
 
 #import "MCTextView.h"
+#import "UIView+shadowBug.h"
 
 
 CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect);
@@ -235,7 +236,7 @@ CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect);
 		CGColorRef shadowColor = CGColorCreate(myColorSpace, shadowColorComponents);
 		
 		CGContextSetLineWidth(context, 2 * borderWidth);
-		CGContextSetShadowWithColor(context, CGSizeMake(0.f, 1.f), 2.f, shadowColor);
+		CGContextSetShadowWithColor(context, CGSizeMake(0.f, [UIView shadowVerticalMultiplier] * 1.f), 2.f, shadowColor);
 		CGContextSetStrokeColor(context, blackColorComponents);
 		CGContextStrokePath(context);
 		CGColorRelease(shadowColor);

@@ -45,6 +45,8 @@
 @dynamic rightView;
 @synthesize tabView;
 
+@synthesize useCustomLeftTitleBar;
+@synthesize useCustomRightTitleBar;
 @synthesize leftTitleBar;
 @synthesize rightTitleBar;
 
@@ -95,6 +97,8 @@
 {
 	if (self = [super initWithNibName:nil bundle:nil]) {
 		usesFullLandscapeWidth = YES;
+		useCustomLeftTitleBar = YES;
+		useCustomRightTitleBar = YES;
 	}
 	return self;
 }
@@ -133,38 +137,53 @@
 	[self.view addSubview:containerView];
 	
 	CGFloat dividerWidth = 1.f;
-	CGFloat naviHeight = 44.f;
+	CGFloat naviHeight = 0.f;
+	CGFloat halfWidth = roundf(0.5 * appFrame.size.width);
 	
-	// add title (navigation) bars
-	CGRect naviFrame = CGRectMake(0.f, 0.f, roundf(0.5 * appFrame.size.width) - dividerWidth, naviHeight);
-	self.leftTitleBar = [[[UINavigationBar alloc] initWithFrame:naviFrame] autorelease];
-	leftTitleBar.autoresizingMask = UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
+	// *** add left view and title (navigation) bar
+	if (useCustomLeftTitleBar) {
+		naviHeight = 44.f;
+		CGRect naviFrame = CGRectMake(0.f, 0.f, halfWidth - dividerWidth, naviHeight);
+		self.leftTitleBar = [[[UINavigationBar alloc] initWithFrame:naviFrame] autorelease];
+		leftTitleBar.autoresizingMask = UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
+		
+		[containerView addSubview:leftTitleBar];
+	}
 	
-	naviFrame.origin.x = naviFrame.size.width + dividerWidth;
-	naviFrame.size.width += dividerWidth;
-	self.rightTitleBar = [[[UINavigationBar alloc] initWithFrame:naviFrame] autorelease];
-	rightTitleBar.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
-	
-	[containerView addSubview:leftTitleBar];
-	[containerView addSubview:rightTitleBar];
-	
-	// add subviews
 	CGRect viewFrame = appFrame;
 	viewFrame.origin.y = naviHeight;
-	viewFrame.size.width = roundf(0.5 * appFrame.size.width) - dividerWidth;
+	viewFrame.size.width = halfWidth - dividerWidth;
 	viewFrame.size.height -= naviHeight;
 	
 	self.leftView = [[[UIView alloc] initWithFrame:viewFrame] autorelease];
 	leftView.backgroundColor = [UIColor whiteColor];
 	leftView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin;
 	
-	viewFrame.origin.x = viewFrame.size.width + dividerWidth;
-	viewFrame.size.width += dividerWidth;
+	[containerView addSubview:leftView];
+	
+	
+	// *** add right view and title (navigation) bar
+	naviHeight = 0.f;
+	if (useCustomRightTitleBar) {
+		naviHeight = 44.f;
+		CGRect naviFrame = CGRectMake(halfWidth, 0.f, halfWidth, naviHeight);
+		naviFrame.size.width += dividerWidth;
+		self.rightTitleBar = [[[UINavigationBar alloc] initWithFrame:naviFrame] autorelease];
+		rightTitleBar.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
+		
+		[containerView addSubview:rightTitleBar];
+	}
+	
+	viewFrame = appFrame;
+	viewFrame.origin.x = halfWidth;
+	viewFrame.origin.y = naviHeight;
+	viewFrame.size.width = halfWidth;
+	viewFrame.size.height -= naviHeight;
+	
 	self.rightView = [[[UIView alloc] initWithFrame:viewFrame] autorelease];
 	rightView.backgroundColor = [UIColor whiteColor];
 	rightView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin;
 	
-	[containerView addSubview:leftView];
 	[containerView addSubview:rightView];
 	
 	// add real subviews

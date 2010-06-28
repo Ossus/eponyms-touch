@@ -15,6 +15,7 @@
 
 
 @class EponymUpdater;
+@class PPSplitViewController;
 @class CategoriesViewController;
 @class ListViewController;
 @class EponymViewController;
@@ -43,6 +44,7 @@
 	NSMutableArray *loadedEponyms;			// 1D, used if a memory warning occurs
 	
 	// View Controllers
+	PPSplitViewController *splitController;
 	UINavigationController *naviController;
 	CategoriesViewController *categoriesController;
 	ListViewController *listController;
@@ -86,11 +88,12 @@
 @property (nonatomic, retain) NSMutableArray *eponymSectionArray;
 @property (nonatomic, retain) NSMutableArray *loadedEponyms;
 
-@property (nonatomic, retain) UINavigationController *naviController;
-@property (nonatomic, retain) CategoriesViewController *categoriesController;
-@property (nonatomic, retain) ListViewController *listController;
-@property (nonatomic, retain) EponymViewController *eponymController;
-@property (nonatomic, retain) InfoViewController *infoController;
+@property (nonatomic, readonly, retain) PPSplitViewController *splitController;
+@property (nonatomic, readonly, retain) UINavigationController *naviController;
+@property (nonatomic, readonly, retain) CategoriesViewController *categoriesController;
+@property (nonatomic, readonly, retain) ListViewController *listController;
+@property (nonatomic, readonly, retain) EponymViewController *eponymController;
+@property (nonatomic, readonly, retain) InfoViewController *infoController;
 
 @property (nonatomic, retain) UIImage *starImageListActive;
 @property (nonatomic, retain) UIImage *starImageEponymActive;

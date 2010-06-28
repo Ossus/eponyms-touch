@@ -22,7 +22,5 @@
 @property (nonatomic, assign) id delegate;
 @property (nonatomic, retain) NSArray *categoryArrayCache;
 
-- (void) showNewEponymsAvailable:(BOOL)hasNew;
-
 
 @end

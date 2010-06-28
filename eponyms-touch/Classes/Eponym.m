@@ -38,7 +38,6 @@ static sqlite3_stmt *toggle_starred_query = nil;
 @synthesize lastedit;
 @synthesize lastaccess;
 @synthesize starred;
-@synthesize eponymCell;
 
 
 // finalizes the compiled queries (needed before quitting)

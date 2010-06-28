@@ -12,6 +12,7 @@
 
 #import "ListViewController.h"
 #import "eponyms_touchAppDelegate.h"
+#import "EponymViewController.h"
 #import "EponymCategory.h"
 #import "Eponym.h"
 #import "TouchTableView.h"
@@ -81,11 +82,26 @@
 	
 	//mySearchBar.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 }
+
+- (void) viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	
+	// deselect the previously shown eponym
+	NSIndexPath *selectedCellIndexPath = [self.tableView indexPathForSelectedRow];
+	[self.tableView deselectRowAtIndexPath:selectedCellIndexPath animated:NO];
+	
+	// set the Title and the back button title
+	if (delegate) {
+		self.title = [[delegate categoryShown] title];
+		self.navigationItem.backBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:[[delegate categoryShown] tag] style:UIBarButtonItemStylePlain target:nil action:nil] autorelease];
+	}
+}
 #pragma mark -
 
 
 
-#pragma mark GUI
+#pragma mark Search
 - (void) switchToSearchMode:(BOOL)switchTo
 {
 	// switch searchmode on
@@ -162,24 +178,11 @@
 {
 	[self switchToSearchMode:NO];
 }
+#pragma mark -
 
-- (void) viewWillAppear:(BOOL)animated
-{
-	[super viewWillAppear:animated];
-	
-	// deselect the previously shown eponym
-	NSIndexPath *selectedCellIndexPath = [self.tableView indexPathForSelectedRow];
-	[self.tableView deselectRowAtIndexPath:selectedCellIndexPath animated:NO];
-	
-	[delegate setEponymShown:0];
-	
-	// set the Title and the back button title
-	if (delegate) {
-		self.title = [[delegate categoryShown] title];
-		self.navigationItem.backBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:[[delegate categoryShown] tag] style:UIBarButtonItemStylePlain target:nil action:nil] autorelease];
-	}
-}
 
+
+#pragma mark Rotation
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
 	if (((eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate]).allowAutoRotate) {
@@ -203,6 +206,57 @@
 		
 		// workaround to the tintColoring bug (bad color alignment) -> un-tint the bar!
 //		mySearchBar.tintColor = self.navigationController.navigationBar.tintColor = wasSideways ? [delegate naviBarTintColor] : nil;
+	}
+}
+#pragma mark -
+
+
+
+#pragma mark Selecting and Starring
+- (void) assureEponymSelectedInList
+{
+	NSUInteger activeEponym = [delegate eponymShown];
+	if (activeEponym > 0) {
+		NSUInteger section = 0;
+		for (NSArray *catArray in eponymArrayCache) {
+			NSUInteger row = 0;
+			for (Eponym *epo in catArray) {
+				if (epo.eponym_id == activeEponym) {
+					NSIndexPath *myIndex = [NSIndexPath indexPathForRow:row inSection:section];
+					[self.tableView selectRowAtIndexPath:myIndex animated:NO scrollPosition:UITableViewScrollPositionNone];
+					return;
+				}
+				row++;
+			}
+			section++;
+		}
+	}
+	
+	// no selected eponym - select the first one
+	if ([eponymArrayCache count] > 0) {
+		if ([[eponymArrayCache objectAtIndex:0] count] > 0) {
+			Eponym *firstEponym = [[eponymArrayCache objectAtIndex:0] objectAtIndex:0];
+			[delegate loadEponym:firstEponym animated:NO];
+			
+			 NSIndexPath *firstIndex = [NSIndexPath indexPathForRow:0 inSection:0];
+			[self.tableView selectRowAtIndexPath:firstIndex animated:NO scrollPosition:UITableViewScrollPositionNone];
+		}
+	}
+}
+
+- (void) assureSelectedEponymStarredInList
+{
+	[self assureEponymAtIndexPathStarredInList:[self.tableView indexPathForSelectedRow]];
+}
+
+- (void) assureEponymAtIndexPathStarredInList:(NSIndexPath *)indexPath
+{
+	if (indexPath) {
+		[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
+	}
+	
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+		[self assureEponymSelectedInList];
 	}
 }
 #pragma mark -
@@ -260,10 +314,8 @@
 			[selectedEponym toggleStarred];
 			
 			// show/hide the star
-			UITableViewCell *selectedCell = [aTableView cellForRowAtIndexPath:indexPath];
-			if (selectedCell) {
-				selectedCell.imageView.image = selectedEponym.starred ? [delegate starImageListActive] : nil;
-			}
+			[self assureEponymAtIndexPathStarredInList:indexPath];
+			[[delegate eponymController] indicateEponymStarredStatus];
 		}
 	}
 }
@@ -314,8 +366,6 @@
 	Eponym *thisEponym = [[eponymArrayCache objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	cell.textLabel.text = [thisEponym title];
 	cell.imageView.image = (!isStarredList && thisEponym.starred) ? [delegate starImageListActive] : nil;
-	
-	thisEponym.eponymCell = cell;
 	
 	return cell;
 }

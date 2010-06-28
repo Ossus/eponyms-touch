@@ -13,11 +13,15 @@
 #import "EponymCategory.h"
 #import "Eponym.h"
 #import "EponymUpdater.h"
+#import "PPSplitViewController.h"
 #import "InfoViewController.h"
 #import "CategoriesViewController.h"
 #import "ListViewController.h"
 #import "EponymViewController.h"
-//#import <sqlite3_unicode.h>			// uncomment when building against iPhone OS 3.0+
+#import "SQLiteAccessors.h"
+#ifdef SQLITE_ENABLE_UNICODE
+#import "sqlite3_unicode.h"
+#endif
 
 #define EPONYM_TITLE_FIELD @"eponym_en"
 #define EPONYM_TEXT_FIELD @"text_en"
@@ -33,10 +37,19 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 
 @interface eponyms_touchAppDelegate ()
 
+@property (nonatomic, readwrite, retain) PPSplitViewController *splitController;
+@property (nonatomic, readwrite, retain) UINavigationController *naviController;
+@property (nonatomic, readwrite, retain) CategoriesViewController *categoriesController;
+@property (nonatomic, readwrite, retain) ListViewController *listController;
+@property (nonatomic, readwrite, retain) EponymViewController *eponymController;
+@property (nonatomic, readwrite, retain) InfoViewController *infoController;
+
+
 - (void) showNewEponymsAreAvailable:(BOOL)available;
 - (void) loadEponymWithId:(NSUInteger)eponym_id animated:(BOOL)animated;
 - (Eponym *) eponymWithId:(NSUInteger)eponym_id;
 - (void) showInfoPanelAsFirstTimeLaunch:(BOOL)firstTimeLaunch;
+- (NSString *) templateDatabaseFilePath;
 
 @end
 
@@ -53,21 +66,53 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 @synthesize didCheckForNewEponyms;
 @synthesize newEponymsAvailable;
 @dynamic categoryShown;
-@synthesize naviController, categoriesController, listController, eponymController, infoController;
-@synthesize categoryIDShown, eponymShown, categoryArray, eponymArray, eponymSectionArray, loadedEponyms;
+@dynamic splitController;
+@synthesize naviController;
+@synthesize categoriesController;
+@synthesize listController;
+@synthesize eponymController;
+@synthesize infoController;
+@synthesize categoryIDShown;
+@synthesize eponymShown;
+@synthesize categoryArray;
+@synthesize eponymArray;
+@synthesize eponymSectionArray;
+@synthesize loadedEponyms;
 @dynamic starImageListActive;
 @dynamic starImageEponymActive;
 @dynamic starImageEponymInactive;
 
 
+- (void) dealloc
+{
+	[categoryShown release];
+	self.categoryArray = nil;
+	self.eponymArray = nil;
+	self.eponymSectionArray = nil;
+	self.loadedEponyms = nil;
+	
+	self.splitController = nil;
+	self.naviController = nil;
+	self.listController = nil;
+	self.eponymController = nil;
+	self.infoController = nil;
+	
+	self.myUpdater = nil;
+	
+	[window release];
+	[super dealloc];
+}
+
+
 - (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+	BOOL onIPad = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad);
+	
 	// **** Prefs
 	NSUInteger lastUsedDBVersion;
 	NSInteger lastEponymCheck;
 	NSInteger shownCategoryAtQuit;
 	NSUInteger shownEponymAtQuit;
-	CGFloat scrollPositionAtQuit;
 	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSNumber *testValue = [defaults objectForKey:@"usingEponymsOf"];
@@ -79,10 +124,9 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		self.shouldAutoCheck = YES;
 		lastUsedDBVersion = THIS_DB_VERSION;
 		lastEponymCheck = 0;
-		shownCategoryAtQuit = -100;
+		shownCategoryAtQuit = onIPad ? 0 : -100;
 		shownEponymAtQuit = 0;
-		scrollPositionAtQuit = 0.0;
-		self.allowAutoRotate = NO;
+		self.allowAutoRotate = onIPad;
 		self.allowLearnMode = YES;
 	}
 	
@@ -94,7 +138,6 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		lastUsedDBVersion = [defaults integerForKey:@"lastUsedDBVersion"];
 		shownCategoryAtQuit = [defaults integerForKey:@"shownCategoryAtQuit"];
 		shownEponymAtQuit = [defaults integerForKey:@"shownEponymAtQuit"];
-		scrollPositionAtQuit = [defaults floatForKey:@"scrollPositionAtQuit"];
 		self.allowAutoRotate = [defaults boolForKey:@"allowAutoRotate"];
 		self.allowLearnMode = [defaults boolForKey:@"allowLearnMode"];
 	}
@@ -104,16 +147,32 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	// create the NavigationController and the first ViewController (categoryController)
 	self.categoriesController = [[[CategoriesViewController alloc] initWithNibName:nil bundle:nil] autorelease];
 	[categoriesController setDelegate:self];
+	categoriesController.autosaveName = @"CategoryList";
 	self.naviController = [[[UINavigationController alloc] initWithRootViewController:categoriesController] autorelease];
 	naviController.navigationBar.tintColor = [self naviBarTintColor];
 	
 	// create the view controllers for the Eponym list and the Eponym details
 	self.listController = [[[ListViewController alloc] initWithNibName:nil bundle:nil] autorelease];
 	[listController setDelegate:self];
+	listController.autosaveName = @"EponymList";
 	self.eponymController = [[[EponymViewController alloc] initWithNibName:nil bundle:nil] autorelease];
 	[eponymController setDelegate:self];
 	
-	[window addSubview:[naviController view]];
+	[self showNewEponymsAreAvailable:NO];
+	
+	
+	// *** iPad specific UI
+	if (onIPad) {
+		window.backgroundColor = [UIColor viewFlipsideBackgroundColor];
+		[window addSubview:self.splitController.view];
+	}
+	
+	
+	// *** iPhone specific UI
+	else {
+		[window addSubview:naviController.view];
+	}
+	
 	[window makeKeyAndVisible];
 	
 	
@@ -124,11 +183,11 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	}
 	
 	// connect to the database and load the categories
-	BOOL databaseCreated = [self connectToDBAndCreateIfNeeded];		// returns a BOOL whether the database had to be created
+	BOOL databaseCreated = [self connectToDBAndCreateIfNeeded];
 	[self loadDatabaseAnimated:NO reload:NO];
 	
-	self.iAmUpdating = NO;
-	self.newEponymsAvailable = NO;
+	iAmUpdating = NO;
+	newEponymsAvailable = NO;
 	
 	
 	// **** Restore State
@@ -140,9 +199,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	else if (shownCategoryAtQuit > -100) {									// Eponym list
 		[self loadEponymsOfCategoryID:shownCategoryAtQuit containingString:nil animated:NO];
 	}
-	else {																	// Category list (may be infoView, but we don't want to go there)
-	}
-	//NSLog(@"shownEponymAtQuit: %u, shownCategoryAtQuit: %u", shownEponymAtQuit, shownCategoryAtQuit);
+	//DLog(@"shownEponymAtQuit: %u, shownCategoryAtQuit: %u", shownEponymAtQuit, shownCategoryAtQuit);
 	
 	
 	// **** Register for shake events
@@ -164,26 +221,13 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 			[self performSelector:@selector(checkForUpdates:) withObject:nil afterDelay:2.0];
 		}
 	}
-}
-
-
-- (void) dealloc
-{
-	[categoryShown release];
-	self.categoryArray = nil;
-	self.eponymArray = nil;
-	self.eponymSectionArray = nil;
-	self.loadedEponyms = nil;
 	
-	self.naviController = nil;
-	self.listController = nil;
-	self.eponymController = nil;
-	self.infoController = nil;
+	// on iPad, select first eponym
+	if (onIPad) {
+		[listController performSelector:@selector(assureEponymSelectedInList) withObject:nil afterDelay:0.1];
+	}
 	
-	self.myUpdater = nil;
-	
-	[window release];
-	[super dealloc];
+	return YES;
 }
 
 
@@ -221,12 +265,11 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	
 	// Save state
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	CGRect bnds = [[[naviController topViewController] view] bounds];
+
 	[defaults setInteger:THIS_DB_VERSION forKey:@"lastUsedDBVersion"];
 	[defaults setBool:shouldAutoCheck forKey:@"shouldAutoCheck"];
 	[defaults setInteger:categoryIDShown forKey:@"shownCategoryAtQuit"];
 	[defaults setInteger:eponymShown forKey:@"shownEponymAtQuit"];
-	[defaults setFloat:bnds.origin.y forKey:@"scrollPositionAtQuit"];
 	[defaults setBool:allowAutoRotate forKey:@"allowAutoRotate"];
 	[defaults setBool:allowLearnMode forKey:@"allowLearnMode"];
 	[defaults synchronize];
@@ -236,9 +279,34 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 
 
 #pragma mark KVC
+- (PPSplitViewController *) splitController
+{
+	if (nil == splitController) {
+		self.splitController = [[[PPSplitViewController alloc] init] autorelease];
+		splitController.usesFullLandscapeWidth = NO;
+		splitController.useCustomLeftTitleBar = NO;
+		splitController.leftViewController = self.naviController;
+		splitController.rightViewController = self.eponymController;
+		
+		[splitController view];
+		splitController.leftTitleBar.tintColor = [self naviBarTintColor];
+		splitController.rightTitleBar.tintColor = [self naviBarTintColor];
+		
+		splitController.logo = [UIImage imageNamed:@"Eponyms_bglogo.png"];
+	}
+	return splitController;
+}
+- (void) setSplitController:(PPSplitViewController *)newController
+{
+	if (newController != splitController) {
+		[splitController release];
+		splitController = [newController retain];
+	}
+}
+
 - (EponymCategory *) categoryShown
 {
-	return categoryShown;
+	return [[categoryShown retain] autorelease];
 }
 - (void) setCategoryShown:(EponymCategory *)catShown
 {
@@ -363,10 +431,8 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 			NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 			if (updater.numEponymsParsed > 0) {
 				self.usingEponymsOf = (NSInteger)[updater.eponymCreationDate timeIntervalSince1970];
-				[defaults setObject:[NSNumber numberWithInt:(NSInteger)nowInEpoch]
-														  forKey:@"lastEponymUpdate"];
-				[defaults setObject:[NSNumber numberWithInt:usingEponymsOf]
-														  forKey:@"usingEponymsOf"];
+				[defaults setObject:[NSNumber numberWithInt:(NSInteger)nowInEpoch] forKey:@"lastEponymUpdate"];
+				[defaults setObject:[NSNumber numberWithInt:usingEponymsOf] forKey:@"usingEponymsOf"];
 			}
 			[defaults setObject:[NSNumber numberWithInt:(NSInteger)nowInEpoch] forKey:@"lastEponymCheck"];
 			
@@ -385,7 +451,36 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 
 - (void) showNewEponymsAreAvailable:(BOOL)available
 {
-	[categoriesController showNewEponymsAvailable:available];
+	UIButton *infoButton;
+	CGRect buttonSize = CGRectMake(0.f, 0.f, 30.f, 30.f);
+	
+	if (available) {
+		infoButton = [UIButton buttonWithType:UIButtonTypeCustom];
+		[infoButton setImage:[UIImage imageNamed:@"Badge_new_eponyms.png"] forState:(UIControlStateNormal & UIControlStateHighlighted & UIControlStateDisabled & UIControlStateSelected & UIControlStateApplication & UIControlStateReserved)];
+		infoButton.showsTouchWhenHighlighted = YES;
+		infoButton.frame = buttonSize;
+	}
+	
+	else {
+		infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+		infoButton.frame = buttonSize;
+	}
+	
+	// compose and add to navigation bar
+	[infoButton addTarget:self action:@selector(showInfoPanel:) forControlEvents:UIControlEventTouchUpInside];
+	
+	UIBarButtonItem *infoBarButton = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
+	
+	// iPad - add to eponym view
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+		eponymController.navigationItem.rightBarButtonItem = infoBarButton;
+	}
+	
+	// iPhone - show in top controller
+	else {
+		categoriesController.navigationItem.rightBarButtonItem = infoBarButton;
+	}
+	[infoBarButton release];
 }
 #pragma mark -
 
@@ -399,63 +494,45 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		return NO;
 	}
 	
+	BOOL created = NO;
+	
 	// needed to load the unicode extensions
+#ifdef SQLITE_ENABLE_UNICODE
 	sqlite3_unicode_load();
+#endif
 	
 	NSString *sqlPath = [self databaseFilePath];
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 	
-	if ([fileManager fileExistsAtPath:sqlPath]) {
-		if (SQLITE_OK != sqlite3_open([sqlPath UTF8String], &database)) {
-			sqlite3_close(database);
-			NSAssert1(0, @"Failed to open existing database: '%s'.", sqlite3_errmsg(database));
-		}
-		return NO;
-	}
-	
-	// database does not exist - create it
-	if ([fileManager createFileAtPath:sqlPath contents:nil attributes:nil]) {
-		char *err;
-		NSDictionary *creationQueries = [self databaseCreationQueries];
-		NSString *createCatTable = [creationQueries objectForKey:@"createCatTable"];
-		NSString *createLinkTable = [creationQueries objectForKey:@"createLinkTable"];
-		NSString *createEpoTable = [creationQueries objectForKey:@"createEpoTable"];
+	// copy empty template database over
+	if (![fileManager fileExistsAtPath:sqlPath]) {
+		NSError *copyError = nil;
+		[fileManager copyItemAtPath:[self templateDatabaseFilePath] toPath:sqlPath error:&copyError];
 		
-		// Create the real database (still empty)
-		if (SQLITE_OK == sqlite3_open([sqlPath UTF8String], &database)) {	// sqlite3_open_v2([sqlPath UTF8String], &database, SQLITE_OPEN_CREATE, NULL)
-			sqlite3_exec(database, [createCatTable UTF8String], NULL, NULL, &err);
-			if (err) {
-				NSAssert1(0, @"Error: Failed to execute createCatTable: '%s'.", sqlite3_errmsg(database));
-			}
-			
-			sqlite3_exec(database, [createLinkTable UTF8String], NULL, NULL, &err);
-			if (err) {
-				NSAssert1(0, @"Error: Failed to execute createLinkTable: '%s'.", sqlite3_errmsg(database));
-			}
-			
-			sqlite3_exec(database, [createEpoTable UTF8String], NULL, NULL, &err);
-			if (err) {
-				NSAssert1(0, @"Error: Failed to execute createEpoTable: '%s'.", sqlite3_errmsg(database));
-			}
-			
+		if (nil != copyError) {
+			NSString *errorString = [NSString stringWithFormat:@"Error copying '%@' to '%@' - %@",
+									 [self templateDatabaseFilePath], sqlPath,
+									 [copyError localizedDescription]];
+			NSAssert(0, errorString);
 		}
-		else {
-			sqlite3_close(database);
-			NSAssert1(0, @"Failed to open new database: '%s'.", sqlite3_errmsg(database));
-		}
-	}
-	else {
-		NSAssert1(0, @"Error: Failed to touch the database file at '%@'.", sqlPath);
 	}
 	
-	return YES;
+	// connect
+	if (SQLITE_OK != sqlite3_open([sqlPath UTF8String], &database)) {
+		sqlite3_close(database);
+		NSAssert1(0, @"Failed to open existing database: '%s'.", sqlite3_errmsg(database));
+	}
+	
+	return created;
 }
 
 
 - (void) loadDatabaseAnimated:(BOOL)animated reload:(BOOL)as_reload
 {
 	// Drop back to the root view
-	[naviController popToRootViewControllerAnimated:animated];
+	if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
+		[naviController popToRootViewControllerAnimated:animated];
+	}
 	
 	// empty eponyms and categories
 	self.categoryArray = [NSMutableArray arrayWithCapacity:10];
@@ -463,16 +540,11 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	self.eponymSectionArray = [NSMutableArray arrayWithCapacity:10];
 	self.loadedEponyms = [NSMutableArray array];
 	
-	if (as_reload) {
-		self.categoryShown = nil;
-		self.eponymShown = 0;
-	}
-	
 	// Create EponymCategoryes for "All Eponyms", "Starred Eponyms" and "Recent Eponyms"
-	EponymCategory *allEponyms =		[EponymCategory eponymCategoryWithID:0 tag:@"All" title:@"All Eponyms" whereStatement:@"1"];
+	EponymCategory *allEponyms = [EponymCategory eponymCategoryWithID:0 tag:@"All" title:@"All Eponyms" whereStatement:@"1"];
 	allEponyms.sqlOrderStatement = [NSString stringWithFormat:@"%@ COLLATE NOCASE ASC", EPONYM_TITLE_FIELD];
 	
-	EponymCategory *starredEponyms =	[EponymCategory eponymCategoryWithID:-1 tag:@"Starred" title:@"Starred Eponyms" whereStatement:@"starred = 1"];
+	EponymCategory *starredEponyms = [EponymCategory eponymCategoryWithID:-1 tag:@"Starred" title:@"Starred Eponyms" whereStatement:@"starred = 1"];
 	starredEponyms.hint = @"Double tap an eponym title in the list or the star top right in eponym view in order to star it";
 	starredEponyms.sqlOrderStatement = [NSString stringWithFormat:@"%@ COLLATE NOCASE ASC", EPONYM_TITLE_FIELD];
 	
@@ -492,7 +564,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		if (load_all_categories_query == nil) {
 			NSString *categoryTitle = @"category_en";
 			const char *qry = [[NSString stringWithFormat:@"SELECT category_id, tag, %@ FROM categories ORDER BY %@, tag COLLATE NOCASE ASC", categoryTitle, categoryTitle] UTF8String];
-			if (sqlite3_prepare_v2(database, qry, -1, &load_all_categories_query, NULL) != SQLITE_OK) {
+			if (!prepareSqliteStatement(database, &load_all_categories_query, qry)) {
 				NSAssert1(0, @"Error: failed to prepare load_all_categories_query: '%s'.", sqlite3_errmsg(database));
 			}
 		}
@@ -516,7 +588,19 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	[categoryArray addObject:normalCats];
 	
 	// GUI actions
+	EponymCategory *oldCategory = self.categoryShown;
+	if (as_reload) {
+		self.categoryShown = nil;
+		self.eponymShown = 0;
+	}
+	
 	categoriesController.categoryArrayCache = categoryArray;
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+		EponymCategory *fetchCat = oldCategory ? oldCategory : allEponyms;
+		[self loadEponymsOfCategory:fetchCat containingString:nil animated:animated];
+		
+		[listController assureEponymSelectedInList];
+	}
 }
 
 
@@ -560,7 +644,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 								  EPONYM_TEXT_FIELD,
 								  EPONYM_TITLE_FIELD ];
 				
-				if (sqlite3_prepare_v2(database, [sql UTF8String], -1, &load_eponyms_of_category_search_query, NULL) != SQLITE_OK) {
+				if (!prepareSqliteStatement(database, &load_eponyms_of_category_search_query, [sql UTF8String])) {
 					NSAssert1(0, @"Error: Failed to prepare load_eponyms_of_category_search_query: '%s'.", sqlite3_errmsg(database));
 				}
 			}
@@ -578,7 +662,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 								 EPONYM_TITLE_FIELD,
 								 EPONYM_TITLE_FIELD ];
 				
-				if (sqlite3_prepare_v2(database, [sql UTF8String], -1, &load_eponyms_of_category_query, NULL) != SQLITE_OK) {
+				if (!prepareSqliteStatement(database, &load_eponyms_of_category_query, [sql UTF8String])) {
 					NSAssert1(0, @"Error: Failed to prepare load_eponyms_of_category_query: '%s'.", sqlite3_errmsg(database));
 				}
 			}
@@ -605,7 +689,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 								  EPONYM_TEXT_FIELD,
 								  [category sqlOrderStatement]];
 				
-				if (sqlite3_prepare_v2(database, [sql UTF8String], -1, &load_eponyms_search_query, NULL) != SQLITE_OK) {
+				if (!prepareSqliteStatement(database, &load_eponyms_search_query, [sql UTF8String])) {
 					NSAssert1(0, @"Error: Failed to prepare load_eponyms_search_query: '%s'.", sqlite3_errmsg(database));
 				}
 			}
@@ -624,7 +708,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 								 [category sqlWhereStatement],
 								 [category sqlOrderStatement]];
 				
-				if (sqlite3_prepare_v2(database, [sql UTF8String], -1, &load_eponyms_query, NULL) != SQLITE_OK) {
+				if (!prepareSqliteStatement(database, &load_eponyms_query, [sql UTF8String])) {
 					NSAssert1(0, @"Error: Failed to prepare load_eponyms_query: '%s'.", sqlite3_errmsg(database));
 				}
 			}
@@ -698,9 +782,16 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 {
 	[eponym load];
 	
+	self.eponymShown = eponym.eponym_id;
 	eponymController.eponymToBeShown = eponym;
-	eponymShown = eponym.eponym_id;
-	if (eponymController != naviController.topViewController) {
+	
+	// iPad - show in right side
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+		
+	}
+	
+	// iPhone - push navigation controller
+	else if (eponymController != naviController.topViewController) {
 		[naviController pushViewController:eponymController animated:animated];
 	}
 }
@@ -766,23 +857,23 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	// finalize queries
 	if (load_all_categories_query) {
 		sqlite3_finalize(load_all_categories_query);
-		load_all_categories_query = nil;
+		load_all_categories_query = NULL;
 	}
 	if (load_eponyms_query) {
 		sqlite3_finalize(load_eponyms_query);
-		load_eponyms_query = nil;
+		load_eponyms_query = NULL;
 	}
 	if (load_eponyms_search_query) {
 		sqlite3_finalize(load_eponyms_search_query);
-		load_eponyms_search_query = nil;
+		load_eponyms_search_query = NULL;
 	}
 	if (load_eponyms_of_category_query) {
 		sqlite3_finalize(load_eponyms_of_category_query);
-		load_eponyms_of_category_query = nil;
+		load_eponyms_of_category_query = NULL;
 	}
 	if (load_eponyms_of_category_search_query) {
 		sqlite3_finalize(load_eponyms_of_category_search_query);
-		load_eponyms_of_category_search_query = nil;
+		load_eponyms_of_category_search_query = NULL;
 	}
 	
 	[Eponym finalizeQueries];
@@ -793,7 +884,9 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		database = NULL;
 	}
 	
+#ifdef SQLITE_ENABLE_UNICODE
 	sqlite3_unicode_free();
+#endif
 }
 
 - (void) deleteDatabaseFile
@@ -806,7 +899,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 
 
 #pragma mark GUI Actions
-- (void) showInfoPanel:(id) sender
+- (void) showInfoPanel:(id)sender
 {	
 	[self showInfoPanelAsFirstTimeLaunch:NO];
 }
@@ -814,18 +907,30 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 - (void) showInfoPanelAsFirstTimeLaunch:(BOOL)firstTimeLaunch
 {
 	if (!infoController) {
-		self.infoController = [[[InfoViewController alloc] initWithNibName:@"InfoView" bundle:nil] autorelease];
+		self.infoController = [[[InfoViewController alloc] init] autorelease];
 		infoController.delegate = self;
 	}
 	
+	// get data from prefs
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	infoController.lastEponymCheck = [defaults integerForKey:@"lastEponymCheck"];
 	infoController.lastEponymUpdate = [defaults integerForKey:@"lastEponymUpdate"];
 	infoController.firstTimeLaunch = firstTimeLaunch;
 	
+	// present
 	UINavigationController *tempNaviController = [[UINavigationController alloc] initWithRootViewController:infoController];
 	tempNaviController.navigationBar.tintColor = [self naviBarTintColor];
-	[naviController presentModalViewController:tempNaviController animated:YES];
+	
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+		tempNaviController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+		if ([tempNaviController respondsToSelector:@selector(setModalPresentationStyle:)]) {
+			[tempNaviController setModalPresentationStyle:2]; // UIModalPresentationFormSheet;
+		}
+		[splitController presentModalViewController:tempNaviController animated:YES];
+	}
+	else {
+		[naviController presentModalViewController:tempNaviController animated:YES];
+	}
 	[tempNaviController release];
 }
 #pragma mark -
@@ -912,14 +1017,18 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 
 - (NSString *) databaseFilePath
 {
-	NSString *sqlFilename = @"eponyms.sqlite";
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
-	NSString *sqlPath = [documentsDirectory stringByAppendingPathComponent:sqlFilename];
+	NSString *sqlPath = [documentsDirectory stringByAppendingPathComponent:@"eponyms.sqlite"];
 	
 	return sqlPath;
 }
 
+- (NSString *) templateDatabaseFilePath
+{
+	NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
+	return [thisBundle pathForResource:@"eponyms" ofType:@"sqlite"];
+}
 
 - (NSDictionary *) databaseCreationQueries
 {
@@ -930,6 +1039,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	
 	return queries;
 }
+
 
 - (UIColor *) naviBarTintColor
 {

@@ -30,9 +30,6 @@
 	NSUInteger starred;
 	
 	BOOL loaded;
-	
-	// GUI
-	UITableViewCell *eponymCell;
 }
 	
 // KVC
@@ -45,8 +42,6 @@
 @property (copy, nonatomic) NSDate *lastedit;
 @property (copy, nonatomic) NSDate *lastaccess;
 @property (nonatomic, assign) NSUInteger starred;
-
-@property (nonatomic, assign) UITableViewCell *eponymCell;
 
 // Finalize (delete) all of the SQLite compiled queries.
 + (void) finalizeQueries;

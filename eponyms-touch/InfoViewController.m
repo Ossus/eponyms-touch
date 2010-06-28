@@ -57,6 +57,12 @@
 @synthesize allowLearnModeSwitch;
 
 
+- (id) init
+{
+	NSString *thisNibName = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? @"InfoView-iPad" : @"InfoView";
+	return [self initWithNibName:thisNibName bundle:nil];
+}
+
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -64,7 +70,14 @@
 		askingToAbortImport = NO;
 		
 		// compose the navigation bar
-		NSArray *possibleTabs = [NSArray arrayWithObjects:@"About", @"Update", @"Options", nil];
+		NSArray *possibleTabs = nil;
+		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+			possibleTabs = [NSArray arrayWithObjects:@"About", @"Update", nil];
+		}
+		else {
+			possibleTabs = [NSArray arrayWithObjects:@"About", @"Update", @"Options", nil];
+		}
+		
 		self.tabSegments = [[UISegmentedControl alloc] initWithItems:possibleTabs];
 		tabSegments.selectedSegmentIndex = 0;
 		tabSegments.segmentedControlStyle = UISegmentedControlStyleBar;
@@ -165,16 +178,14 @@
 	allowLearnModeSwitch.on = appDelegate.allowLearnMode;
 }
 
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-	/*
-	if (((eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate]).allowAutoRotate) {
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 		return YES;
 	}
 	
-	return ((interfaceOrientation == UIInterfaceOrientationPortrait) || (interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown));	//	*/
 	// very difficult to get good results in the info view, so don't allow rotation
-	return NO;
+	return IS_PORTRAIT(toInterfaceOrientation);
 }
 
 - (void) dismissMe:(id)sender

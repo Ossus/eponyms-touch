@@ -36,6 +36,9 @@
 - (void) finalizeQueries;
 
 // Utilities
+- (void) notifyParseEndedTo:(id)receiver;
+- (void) notifyDownloadEndedTo:(id)receiver;
+
 - (void) downloadFailedWithMessage:(NSString *)message;
 - (NSInteger) epochForStringDate:(NSString *)stringDate;
 
@@ -277,9 +280,9 @@ static sqlite3_stmt *star_eponym_query = nil;
 	
 	// inform the delegates
 	if (viewController) {
-		[viewController updater:self didEndActionSuccessful:!self.parseFailed];
+		[self performSelectorOnMainThread:@selector(notifyParseEndedTo:) withObject:viewController waitUntilDone:YES];
 	}
-	[delegate updater:self didEndActionSuccessful:!self.parseFailed];
+	[self performSelectorOnMainThread:@selector(notifyParseEndedTo:) withObject:delegate waitUntilDone:YES];
 	self.updateAction = parseFailed ? updateAction : 1;
 	
 	[myAutoreleasePool release];
@@ -347,7 +350,7 @@ static sqlite3_stmt *star_eponym_query = nil;
 	NSUInteger bytesReceived = [receivedData length];
 	
 	// display progress
-	if (viewController && [viewController respondsToSelector:@selector(updater:progress:)] && (expectedContentLength != NSURLResponseUnknownLength)) {
+	if ([viewController respondsToSelector:@selector(updater:progress:)] && (expectedContentLength != NSURLResponseUnknownLength)) {
 		CGFloat fraction = bytesReceived / (CGFloat) expectedContentLength;
 		[viewController updater:self progress:fraction];
 	}
@@ -368,7 +371,7 @@ static sqlite3_stmt *star_eponym_query = nil;
 				if ([delegate respondsToSelector:@selector(updater:progress:)]) {
 					[delegate updater:self progress:-1.0];
 				}
-				if (viewController && [viewController respondsToSelector:@selector(updater:progress:)]) {
+				if ([viewController respondsToSelector:@selector(updater:progress:)]) {
 					[viewController updater:self progress:-1.0];
 				}
 				[self parseNewEponymCheck:receivedData];
@@ -826,6 +829,16 @@ static sqlite3_stmt *star_eponym_query = nil;
 
 
 #pragma mark Utilities
+- (void) notifyParseEndedTo:(id)receiver
+{
+	[receiver updater:self didEndActionSuccessful:!self.parseFailed];
+}
+
+- (void) notifyDownloadEndedTo:(id)receiver
+{
+	[receiver updater:self didEndActionSuccessful:!self.downloadFailed];
+}
+
 - (void) downloadFailedWithMessage:(NSString *)message
 {
 	self.isDownloading = NO;
@@ -834,9 +847,9 @@ static sqlite3_stmt *star_eponym_query = nil;
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	
 	if (viewController) {
-		[viewController updater:self didEndActionSuccessful:NO];
+		[self performSelectorOnMainThread:@selector(notifyDownloadEndedTo:) withObject:viewController waitUntilDone:YES];
 	}
-	[delegate updater:self didEndActionSuccessful:NO];
+	[self performSelectorOnMainThread:@selector(notifyDownloadEndedTo:) withObject:delegate waitUntilDone:YES];
 }
 
 - (void) updateProgress:(NSNumber *)progress
@@ -844,7 +857,7 @@ static sqlite3_stmt *star_eponym_query = nil;
 	if ([delegate respondsToSelector:@selector(updater:progress:)]) {
 		[delegate updater:self progress:[progress floatValue]];
 	}
-	if (viewController && [viewController respondsToSelector:@selector(updater:progress:)]) {
+	if ([viewController respondsToSelector:@selector(updater:progress:)]) {
 		[viewController updater:self progress:[progress floatValue]];
 	}
 }

@@ -82,7 +82,7 @@
 
 - (void) dealloc
 {
-	self.eponymToBeShown = nil;
+	[eponymToBeShown release];
 	
 	self.rightBarButtonStarredItem = nil;
 	self.rightBarButtonNotStarredItem = nil;
@@ -373,7 +373,12 @@
 	
 	// The main view
 	self.view = [[[UIScrollView alloc] initWithFrame:screenRect] autorelease];
-	self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+		self.view.backgroundColor = [UIColor colorWithRed:0.936f green:0.953f blue:0.968f alpha:1.f];
+	}
+	else {
+		self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+	}
 	self.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 	self.view.autoresizesSubviews = YES;
 	((UIScrollView *)self.view).delegate = self;
@@ -514,7 +519,7 @@
 	return IS_PORTRAIT(toInterfaceOrientation);
 }
 
-- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation) fromInterfaceOrientation
+- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
 	[self alignUIElements];
 #ifdef SHOW_GOOGLE_ADS
@@ -533,7 +538,7 @@
 	((UIScrollView *)self.view).contentOffset = CGPointZero;
 	
 	// starred or not starred, that's the question
-	self.navigationItem.rightBarButtonItem = eponymToBeShown.starred ? self.rightBarButtonStarredItem : self.rightBarButtonNotStarredItem;
+	[self indicateEponymStarredStatus];
 	
 	// title and text
 	eponymTitleLabel.text = (-1 == displayNextEponymInLearningMode) ? @"…" : eponymToBeShown.title;
@@ -603,9 +608,17 @@
 - (void) toggleEponymStarred:(id)sender
 {
 	[eponymToBeShown toggleStarred];
-	self.navigationItem.rightBarButtonItem = eponymToBeShown.starred ? self.rightBarButtonStarredItem : self.rightBarButtonNotStarredItem;
-	if (eponymToBeShown.eponymCell) {
-		eponymToBeShown.eponymCell.imageView.image = eponymToBeShown.starred ? [delegate starImageListActive] : nil;
+	[self indicateEponymStarredStatus];
+	[[APP_DELEGATE listController] assureSelectedEponymStarredInList];
+}
+
+- (void) indicateEponymStarredStatus
+{
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+		self.navigationItem.leftBarButtonItem = eponymToBeShown.starred ? self.rightBarButtonStarredItem : self.rightBarButtonNotStarredItem;
+	}
+	else {
+		self.navigationItem.rightBarButtonItem = eponymToBeShown.starred ? self.rightBarButtonStarredItem : self.rightBarButtonNotStarredItem;
 	}
 }
 #pragma mark -
@@ -613,14 +626,14 @@
 
 
 #pragma mark Scroll View Delegate
+#ifdef SHOW_GOOGLE_ADS
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView
 {
-#ifdef SHOW_GOOGLE_ADS
 	if (!adIsLoading && !adDidLoad && [self adViewIsVisible]) {
 		[self loadGoogleAdsWithEponym:eponymToBeShown];
 	}
-#endif
 }
+#endif
 #pragma mark -
 
 
@@ -645,11 +658,10 @@
 		return YES;
 	}
 	
-	if (nil == adController) {
-		self.adController = [[[GADAdViewController alloc] initWithDelegate:self] autorelease];
-		adController.adSize = kGADAdSize320x50;
-		adController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-	}
+	self.adController = [[[GADAdViewController alloc] initWithDelegate:self] autorelease];
+	adController.adSize = kGADAdSize320x50;
+	adController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	
 	return (nil != adController);
 }
 
@@ -671,7 +683,9 @@
 
 - (void) loadGoogleAdsWithEponym:(Eponym *)eponym
 {
+	DLog(@"load?");
 	if (!adIsLoading && !adDidLoad && [self adViewExists]) {
+		DLog(@"load!");
 		NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
 		if (now < adsAreRefractoryUntil) {
 			return;
@@ -698,36 +712,51 @@
 		// PLEASE DO NOT CLICK ON THE AD UNLESS YOU ARE IN TEST MODE. OTHERWISE, YOUR
 		// ACCOUNT MAY BE DISABLED.
 		// **************************************************************************
-		NSNumber *channel = [NSNumber numberWithUnsignedLongLong:kGoogleAdSenseChannelID];
 		NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
 									kGoogleAdSenseClientID, kGADAdSenseClientID,
 									kGoogleAdSenseCompanyName, kGADAdSenseCompanyName,
 									kGoogleAdSenseAppName, kGADAdSenseAppName,
+									kGoogleAdSenseAppleID, kGADAdSenseApplicationAppleID,
 									myKeywords, kGADAdSenseKeywords,
-									[NSArray arrayWithObject:channel], kGADAdSenseChannelIDs,
-									[UIColor colorWithWhite:0.9 alpha:1.0], kGADAdSenseAdBackgroundColor,
-									[UIColor colorWithWhite:0.6 alpha:1.0], kGADAdSenseAdBorderColor,
-									[UIColor blackColor], kGADAdSenseAdLinkColor,
-									[UIColor darkGrayColor], kGADAdSenseAdTextColor,
-									[UIColor colorWithRed:0.0 green:0.25 blue:0.5 alpha:1.0], kGADAdSenseAdURLColor,
+									[NSArray arrayWithObject:kGoogleAdSenseChannelID], kGADAdSenseChannelIDs,
+									@"e5e5e5", kGADAdSenseAdBackgroundColor,
+									@"999999", kGADAdSenseAdBorderColor,
+									@"000000", kGADAdSenseAdLinkColor,
+									@"545454", kGADAdSenseAdTextColor,
+									@"004080", kGADAdSenseAdURLColor,
+#ifdef DEBUG
+									[NSNumber numberWithInt:1], kGADAdSenseIsTestAdRequest,
+#else
 									[NSNumber numberWithInt:0], kGADAdSenseIsTestAdRequest,
+#endif
 									nil];
 		[adController loadGoogleAd:attributes];
 	}
 }
+#pragma mark -
 
-- (GADAdClickAction) adControllerActionModelForAdClick:(GADAdViewController *)anAdController
+
+
+#pragma mark Ad Delegate
+- (UIViewController *) viewControllerForModalPresentation:(GADAdViewController *)adController
+{
+	return self;
+}
+
+- (GADAdClickAction) adControllerActionModelForAdClick:(GADAdViewController *)adController
 {
 	return GAD_ACTION_DISPLAY_INTERNAL_WEBSITE_VIEW;
 }
 
-- (void) adControllerDidFinishLoading:(GADAdViewController *)anAdController
+- (void) loadSucceeded:(GADAdViewController *)adController withResults:(NSDictionary *)results
 {
+	DLog(@"Load Succeeded: %@", results);
 	adDidLoad = YES;
 }
 
-- (void) adController:(GADAdViewController *)anAdController failedWithError:(NSError *)error
+- (void) loadFailed:(GADAdViewController *)anAdController withError:(NSError *)error
 {
+	DLog(@"Load Failed: %@", [error userInfo]);
 	[anAdController.view removeFromSuperview];
 }
 #endif

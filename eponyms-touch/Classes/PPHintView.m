@@ -13,6 +13,7 @@
 #import "PPHintViewContainer.h"
 #import "PPHintableLabel.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UIView+shadowBug.h"
 
 #define kPopupBoxPadding 10.0			// min distance to screen edges
 #define kPopupElementDistance 10.0		// distance to the referring element
@@ -423,8 +424,7 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight);
 	CGContextEOClip(context);
 	
 	CGContextAddPath(context, outlinePath);
-	const NSInteger shadowDirectionY = 1;		// -1 for iOS < 3.2
-	CGContextSetShadowWithColor(context, CGSizeMake(0.f, shadowDirectionY * kPopupShadowOffset), kPopupShadowBlurRadius, cgBoxShadowColor);
+	CGContextSetShadowWithColor(context, CGSizeMake(0.f, [UIView shadowVerticalMultiplier] * kPopupShadowOffset), kPopupShadowBlurRadius, cgBoxShadowColor);
 	CGContextSetFillColorWithColor(context, cgBlackColor);		// you won't see this, but this generates the shadow
 	CGContextFillPath(context);
 	
