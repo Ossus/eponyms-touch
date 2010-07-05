@@ -13,7 +13,6 @@
 #import <sqlite3.h>
 #import "EponymUpdaterDelegate.h"
 
-
 @class EponymUpdater;
 @class PPSplitViewController;
 @class CategoriesViewController;
@@ -22,6 +21,12 @@
 @class InfoViewController;
 @class EponymCategory;
 @class Eponym;
+
+typedef enum {
+	EPLearningModeNone = 0,
+	EPLearningModeNoTitle,
+	EPLearningModeNoText
+} EPLearningMode;
 
 
 @interface eponyms_touchAppDelegate : NSObject <UIApplicationDelegate, EponymUpdaterDelegate, UIAccelerometerDelegate> {
@@ -113,7 +118,9 @@
 - (void) loadEponymsOfCategoryID:(NSInteger)category_id containingString:(NSString *)searchString animated:(BOOL)animated;
 - (void) loadEponymsOfCategory:(EponymCategory *)category containingString:(NSString *)searchString animated:(BOOL)animated;
 - (void) loadEponym:(Eponym *)eponym animated:(BOOL)animated;
-- (IBAction) loadRandomEponym:(id)sender;
+- (void) loadRandomEponymWithMode:(EPLearningMode)mode;
+- (void) resetEponymRefractoryTimeout;
+
 - (void) closeMainDatabase;
 - (void) deleteDatabaseFile;
 

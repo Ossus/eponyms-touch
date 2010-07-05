@@ -44,6 +44,7 @@
 	[super dealloc];
 }
 
+
 - (id) init
 {
 	return [self initWithNibName:nil bundle:nil];
@@ -58,6 +59,12 @@
 												 selector:@selector(willQuit)
 													 name:UIApplicationWillTerminateNotification
 												   object:nil];
+		if (&UIApplicationDidEnterBackgroundNotification != NULL) {
+			[[NSNotificationCenter defaultCenter] addObserver:self
+													 selector:@selector(willQuit)
+														 name:UIApplicationDidEnterBackgroundNotification
+													   object:nil];
+		}
 	}
 	return self;
 }
@@ -90,13 +97,12 @@
 {
 	[super viewDidLoad];
 	
-	// calling this here is too early for some states!
-	/*
 	if (nil != restoreOnLoad) {
-		[self restoreStateFrom:restoreOnLoad];
+		[self performSelector:@selector(restoreStateFrom:) withObject:restoreOnLoad afterDelay:0.0];
 		self.restoreOnLoad = nil;
-	}	//	*/
+	}
 }
+
 
 - (BOOL) isDisplayedModal
 {
@@ -135,7 +141,7 @@
 - (void) willQuit
 {
 	[self saveState];
-	[[NSUserDefaults standardUserDefaults] synchronize];
+	[[NSUserDefaults standardUserDefaults] synchronize];		// this should be done by the app delegate, but often it's too late
 }
 
 - (NSString *) stateSaveName
@@ -147,7 +153,6 @@
 {
 	if (nil != autosaveName) {
 		NSDictionary *state = [self currentState];
-		
 		if (nil != state) {
 			[[NSUserDefaults standardUserDefaults] setObject:state forKey:[self stateSaveName]];
 		}
@@ -170,11 +175,14 @@
 			if ([latestDate isKindOfClass:[NSDate class]]) {
 				allow = (latestDate == [latestDate laterDate:[NSDate date]]);
 			}
+			
 			if (allow) {
 				[self restoreStateFrom:lastState];
 			}
 		}
-		[defaults removeObjectForKey:saveName];
+		else if (lastState) {
+			[defaults removeObjectForKey:saveName];
+		}
 	}
 }
 
@@ -206,6 +214,10 @@
 {
 	if ([self isViewLoaded]) {
 		[self setStateTo:state];
+		
+		// clean up
+		self.restoreOnLoad = nil;
+		[[NSUserDefaults standardUserDefaults] removeObjectForKey:[self stateSaveName]];
 	}
 	else {
 		self.restoreOnLoad = state;

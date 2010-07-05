@@ -8,7 +8,7 @@
 #import <CoreGraphics/CoreGraphics.h>
 #endif
 
-#define APP_DELEGATE (eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate]
+#define APP_DELEGATE ((eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate])
 
 // DLog only displays if -DDEBUG is set, ALog always displays output regardless of the DEBUG setting
 #ifdef DEBUG

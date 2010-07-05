@@ -21,7 +21,7 @@
 - (NSString *) stateSaveName;
 - (void) registerForKeyboardNotifications;
 - (void) forgetAboutKeyboardNotifications;
-- (void) keyboardWillShow:(NSNotification*)aNotification;
+- (void) keyboardDidShow:(NSNotification*)aNotification;
 - (void) keyboardWillHide:(NSNotification*)aNotification;
 
 @end
@@ -133,6 +133,7 @@
 	
 	NSIndexPath *selectedRow = [tableView indexPathForSelectedRow];
 	if (selectedRow) {
+		[tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:selectedRow] withRowAnimation:UITableViewRowAnimationNone];
 		[tableView deselectRowAtIndexPath:selectedRow animated:animated];
 	}
 }
@@ -187,7 +188,7 @@
 
 
 
-#pragma mark Data Source
+#pragma mark Data Source and Delegate
 - (NSInteger) tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger)section
 {
 	return 0;
@@ -196,6 +197,15 @@
 - (UITableViewCell *) tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	return nil;
+}
+
+- (BOOL) tableView:(TouchTableView *)aTableView rowIsVisible:(NSIndexPath *)indexPath
+{
+	CGRect visibleRect = aTableView.bounds;
+	visibleRect.origin.y = aTableView.contentOffset.y;
+	CGRect rowRect = [aTableView rectForRowAtIndexPath:indexPath];
+	
+	return CGRectIntersectsRect(rowRect, visibleRect);
 }
 #pragma mark -
 
@@ -236,8 +246,8 @@
 - (void) registerForKeyboardNotifications
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(keyboardWillShow:)
-												 name:UIKeyboardWillShowNotification object:nil];
+											 selector:@selector(keyboardDidShow:)
+												 name:UIKeyboardDidShowNotification object:nil];
 	
     [[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(keyboardWillHide:)
@@ -246,44 +256,39 @@
 
 - (void) forgetAboutKeyboardNotifications
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 
-- (void) keyboardWillShow:(NSNotification*)aNotification
+- (void) keyboardDidShow:(NSNotification*)aNotification
 {
 	NSDictionary *info = [aNotification userInfo];
+	
 	NSValue *boundsValue = [info objectForKey:UIKeyboardBoundsUserInfoKey];			// deprecated as of iOS 3.2. Use UIKeyboardFrameEndUserInfoKey some time
-	CGSize keyboardSize = [boundsValue CGRectValue].size;
+	CGFloat keyboardHeight = [boundsValue CGRectValue].size.height;
+	
+	NSValue *endPoint = [info objectForKey:UIKeyboardCenterEndUserInfoKey];
+	CGPoint inSelfPoint = [tableView convertPoint:[endPoint CGPointValue] fromView:tableView.window];		// this wont work rotated!
+	CGFloat endHeight = roundf(inSelfPoint.y - tableView.contentOffset.y - (keyboardHeight / 2));
 	
 	// Resize the table view view
-	[UIView beginAnimations:nil context:nil];
-	[UIView setAnimationBeginsFromCurrentState:YES];
-	
 	CGRect viewFrame = [self.tableView frame];
-	viewFrame.size.height -= keyboardSize.height;
+	viewFrame.size.height = endHeight;
 	self.tableView.frame = viewFrame;
-	
-	[UIView commitAnimations];
 }
 
 
 - (void) keyboardWillHide:(NSNotification*)aNotification
 {
-	NSDictionary* info = [aNotification userInfo];
-	NSValue* boundsValue = [info objectForKey:UIKeyboardBoundsUserInfoKey];			// deprecated as of iOS 3.2. Use UIKeyboardFrameEndUserInfoKey some time
-	CGSize keyboardSize = [boundsValue CGRectValue].size;
-	
 	// adjust table view height to full height again
-	[UIView beginAnimations:nil context:nil];
-	[UIView setAnimationBeginsFromCurrentState:YES];
+//	[UIView beginAnimations:nil context:nil];
+//	[UIView setAnimationBeginsFromCurrentState:YES];
+//	[UIView setAnimationDuration:[[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
 	
-	CGRect viewFrame = [self.tableView frame];
-	viewFrame.size.height += keyboardSize.height;
-	self.tableView.frame = viewFrame;
+	tableView.frame = [[tableView superview] bounds];
 	
-	[UIView commitAnimations];
+//	[UIView commitAnimations];
 }
 
 

@@ -24,7 +24,6 @@
 													, GADAdViewControllerDelegate
 #endif
 	> {
-	id delegate;
 	Eponym *eponymToBeShown;
 	BOOL viewIsVisible;
 	
@@ -37,8 +36,11 @@
 	UILabel *dateCreatedLabel;
 	UILabel *dateUpdatedLabel;
 	
-	UIButton *revealButton;	
-	NSInteger displayNextEponymInLearningMode;		// -1 = title hidden, 0 = normal, 1 = eponym hidden
+	EPLearningMode displayNextEponymInLearningMode;
+	UIButton *randomNoTitleEponymButton;
+	UIButton *randomNoTextEponymButton;
+	UIButton *revealButton;
+	
 #ifdef SHOW_GOOGLE_ADS	
 	BOOL adIsLoading;
 	BOOL adDidLoad;
@@ -47,7 +49,6 @@
 #endif
 }
 
-@property (nonatomic, assign) id delegate;
 @property (nonatomic, retain) Eponym *eponymToBeShown;
 
 @property (nonatomic, retain) UIBarButtonItem *rightBarButtonStarredItem;
@@ -59,8 +60,11 @@
 @property (nonatomic, retain) UILabel *dateCreatedLabel;
 @property (nonatomic, retain) UILabel *dateUpdatedLabel;
 
+@property (nonatomic, assign) EPLearningMode displayNextEponymInLearningMode;
+@property (nonatomic, retain) UIButton *randomNoTitleEponymButton;
+@property (nonatomic, retain) UIButton *randomNoTextEponymButton;
 @property (nonatomic, retain) UIButton *revealButton;
-@property (nonatomic, assign) NSInteger displayNextEponymInLearningMode;
+
 #ifdef SHOW_GOOGLE_ADS
 @property (nonatomic, readonly, retain) GADAdViewController *adController;
 #endif

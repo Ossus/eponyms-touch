@@ -156,7 +156,6 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	[listController setDelegate:self];
 	listController.autosaveName = @"EponymList";
 	self.eponymController = [[[EponymViewController alloc] initWithNibName:nil bundle:nil] autorelease];
-	[eponymController setDelegate:self];
 	
 	[self showNewEponymsAreAvailable:NO];
 	
@@ -202,12 +201,6 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	//DLog(@"shownEponymAtQuit: %u, shownCategoryAtQuit: %u", shownEponymAtQuit, shownCategoryAtQuit);
 	
 	
-	// **** Register for shake events
-	UIAccelerometer *accelerometer = [UIAccelerometer sharedAccelerometer];
-	accelerometer.updateInterval = 1 / 5;
-	accelerometer.delegate = self;
-	
-	
 	// **** First launch or older database structure - create from scratch
 	if (databaseCreated || (usingEponymsOf < 1)) {
 		[self showInfoPanelAsFirstTimeLaunch:YES];
@@ -224,7 +217,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	
 	// on iPad, select first eponym
 	if (onIPad) {
-		[listController performSelector:@selector(assureEponymSelectedInList) withObject:nil afterDelay:0.1];
+		[listController performSelector:@selector(assureEponymSelectedInListAnimated:) withObject:nil afterDelay:0.1];
 	}
 	
 	return YES;
@@ -252,6 +245,55 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 }
 
 
+- (void) applicationDidBecomeActive:(UIApplication *)application
+{
+	// Register for shake events
+	UIAccelerometer *accelerometer = [UIAccelerometer sharedAccelerometer];
+	accelerometer.updateInterval = 1 / 10;
+	accelerometer.delegate = self;
+	
+	// connect to db
+	[self connectToDBAndCreateIfNeeded];
+}
+
+
+- (void) applicationWillResignActive:(UIApplication *)application
+{
+	[UIAccelerometer sharedAccelerometer].delegate = nil;
+}
+
+
+// also save state here in case we quit while in background
+- (void) applicationDidEnterBackground:(UIApplication *)application
+{
+	// are we updating? Abort that (move to background some day)
+	if (iAmUpdating) {
+		[self abortUpdateAction];
+	}
+	
+	// unload no longer displayed eponyms
+	NSArray *loadedEponymsCopy = [loadedEponyms copy];
+	for (Eponym *eponym in loadedEponymsCopy) {
+		if (eponym.eponym_id != eponymShown) {
+			[eponym unload];
+		}
+	}
+	[loadedEponymsCopy release];
+	
+	[self closeMainDatabase];			// TODO: Check this
+	
+	// save state
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	
+	[defaults setInteger:THIS_DB_VERSION forKey:@"lastUsedDBVersion"];
+	[defaults setBool:shouldAutoCheck forKey:@"shouldAutoCheck"];
+	[defaults setInteger:categoryIDShown forKey:@"shownCategoryAtQuit"];
+	[defaults setInteger:eponymShown forKey:@"shownEponymAtQuit"];
+	[defaults setBool:allowAutoRotate forKey:@"allowAutoRotate"];
+	[defaults setBool:allowLearnMode forKey:@"allowLearnMode"];
+	[defaults synchronize];
+}
+
 // save our currently displayed view and close the database
 - (void) applicationWillTerminate:(UIApplication *)application
 {
@@ -263,9 +305,9 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		[self abortUpdateAction];
 	}
 	
-	// Save state
+	// save state
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
+	
 	[defaults setInteger:THIS_DB_VERSION forKey:@"lastUsedDBVersion"];
 	[defaults setBool:shouldAutoCheck forKey:@"shouldAutoCheck"];
 	[defaults setInteger:categoryIDShown forKey:@"shownCategoryAtQuit"];
@@ -530,7 +572,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 - (void) loadDatabaseAnimated:(BOOL)animated reload:(BOOL)as_reload
 {
 	// Drop back to the root view
-	if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
+	if (as_reload && UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
 		[naviController popToRootViewControllerAnimated:animated];
 	}
 	
@@ -599,7 +641,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		EponymCategory *fetchCat = oldCategory ? oldCategory : allEponyms;
 		[self loadEponymsOfCategory:fetchCat containingString:nil animated:animated];
 		
-		[listController assureEponymSelectedInList];
+		[listController assureEponymSelectedInListAnimated:NO];
 	}
 }
 
@@ -767,11 +809,14 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	
 	// tell the list controller what to show
 	self.categoryShown = category;
-	self.eponymShown = 0;
 	
 	[listController cacheEponyms:eponymArray andHeaders:eponymSectionArray];		// will also reload the table
 	if (listController != naviController.topViewController) {
 		[naviController pushViewController:listController animated:animated];
+	}
+	
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+		eponymShown = 0;
 	}
 }
 
@@ -785,14 +830,11 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	self.eponymShown = eponym.eponym_id;
 	eponymController.eponymToBeShown = eponym;
 	
-	// iPad - show in right side
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-		
-	}
-	
 	// iPhone - push navigation controller
-	else if (eponymController != naviController.topViewController) {
-		[naviController pushViewController:eponymController animated:animated];
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+		if (eponymController != naviController.topViewController) {
+			[naviController pushViewController:eponymController animated:animated];
+		}
 	}
 }
 
@@ -804,7 +846,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 }
 
 // loads a random eponym of the current group
-- (IBAction) loadRandomEponym:(id)sender
+- (void) loadRandomEponymWithMode:(EPLearningMode)mode
 {
 	NSTimeInterval startDate = [[NSDate date] timeIntervalSince1970];
 	if (randomIsRefractoryUntil > startDate) {
@@ -813,12 +855,15 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	randomIsRefractoryUntil = startDate + 3.0;		// at max all three seconds
 	
 	// no loaded group -> load all eponyms
-	if (nil == eponymArray || [eponymArray count] < 1) {
+	if ([eponymArray count] < 1) {
 		EponymCategory *fullCategory = [self categoryWithID:0];
 		[self loadEponymsOfCategory:fullCategory containingString:nil animated:NO];
 	}
 	
-	// TODO: Verify that eponymArray is not zero
+	if ([eponymArray count] < 1) {
+		DLog(@"eponymArray is still empty. Nothing we can do about this any more, should not happen...");
+		return;			// nothing more we can do here
+	}
 	
 	NSUInteger numGroupEponyms = 0;
 	NSUInteger numTries = 5;
@@ -837,7 +882,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 			
 			// got one - load
 			if (nil != randEponym) {
-				eponymController.displayNextEponymInLearningMode = (2 == lastMainShakeAxis) ? -1 : 1;
+				eponymController.displayNextEponymInLearningMode = mode;
 				[self loadEponym:randEponym animated:YES];
 				return;
 			}
@@ -848,6 +893,11 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	
 	// still no good group!
 	NSLog(@"Did not get a good random group!");
+}
+
+- (void) resetEponymRefractoryTimeout
+{
+	randomIsRefractoryUntil = 0;
 }
 
 
@@ -951,21 +1001,14 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		
 		// X-shake
 		if ((lastAccelerationX * accelerationX < 0.0) && (abs(accelerationX - lastAccelerationX) > 1.5)) {
-			lastMainShakeAxis = 1;
-			[self loadRandomEponym:nil];
+			[self loadRandomEponymWithMode:EPLearningModeNoText];
 			accelerationX = 0.0;
 		}
 		
 		// Y-shake
 		else if ((lastAccelerationY * accelerationY < 0.0) && (abs(accelerationY - lastAccelerationY) > 1.2)) {
-			lastMainShakeAxis = 2;
-			[self loadRandomEponym:nil];
+			[self loadRandomEponymWithMode:EPLearningModeNoTitle];
 			accelerationY = 0.0;
-		}
-		
-		// no shake at all
-		else {
-			lastMainShakeAxis = 0;
 		}
 		
 		lastAccelerationX = accelerationX;

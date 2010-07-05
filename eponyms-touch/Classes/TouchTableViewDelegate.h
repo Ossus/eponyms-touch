@@ -17,5 +17,6 @@
 
 @optional
 - (void) tableView:(TouchTableView *)aTableView didDoubleTapRowAtIndexPath:(NSIndexPath *)indexPath;
+- (BOOL) tableView:(TouchTableView *)aTableView rowIsVisible:(NSIndexPath *)indexPath;
 
 @end

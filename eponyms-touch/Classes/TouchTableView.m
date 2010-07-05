@@ -134,6 +134,7 @@
 		
 		if (nil != noDataLabel) {
 			noDataLabel.text = noDataHint;
+			noDataLabel.frame = [self optimalLabelFrame];
 		}
 	}
 }
@@ -178,7 +179,8 @@
 			self.separatorStyle = UITableViewCellSeparatorStyleNone;
 		}
 		
-		self.noDataLabel.frame = [self optimalLabelFrame];
+		noDataLabel.text = noDataHint;
+		noDataLabel.frame = [self optimalLabelFrame];
 		if (animated) {
 			[self addSubviewAnimated:noDataLabel];
 		}

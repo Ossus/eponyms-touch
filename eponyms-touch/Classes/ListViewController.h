@@ -39,7 +39,7 @@
 
 - (void) cacheEponyms:(NSArray *)eponyms andHeaders:(NSArray *)sections;
 
-- (void) assureEponymSelectedInList;
+- (void) assureEponymSelectedInListAnimated:(BOOL)animated;
 - (void) assureSelectedEponymStarredInList;
 - (void) assureEponymAtIndexPathStarredInList:(NSIndexPath *)indexPath;
 

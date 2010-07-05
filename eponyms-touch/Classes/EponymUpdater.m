@@ -405,9 +405,9 @@ static sqlite3_stmt *star_eponym_query = nil;
 - (void) connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
 	self.myConnection = nil;
-	[self downloadFailedWithMessage:[NSString stringWithFormat:@"Error - %@ %@",
-									 [error localizedDescription],
-									 [[error userInfo] objectForKey:NSErrorFailingURLStringKey]]];
+	[self downloadFailedWithMessage:[NSString stringWithFormat:@"Error - %@",
+									 [error localizedDescription]]];
+	DLog(@"Error - %@ %@", [error localizedDescription], [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
 }
 #pragma mark -
 

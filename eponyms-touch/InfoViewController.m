@@ -86,7 +86,7 @@
 		[tabSegments addTarget:self action:@selector(tabChanged:) forControlEvents:UIControlEventValueChanged];
 		
 		self.navigationItem.titleView = tabSegments;
-		self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(dismissMe:)] autorelease];
+		self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissMe:)] autorelease];
 		
 		// NSBundle Info.plist
 		self.infoPlistDict = [[NSBundle mainBundle] infoDictionary];		// !! could use the supplied NSBundle or the mainBundle on nil
@@ -340,16 +340,6 @@
 - (void) setStatusMessage:(NSString *)message
 {
 	if (message) {
-		// check message length
-		CGFloat maxPossibleWidth = progressText.bounds.size.width * 1.1;		// text will be squeezed, so we allow a little overhead
-		CGFloat isWidth = [message sizeWithFont:progressText.font].width;
-		if (isWidth > maxPossibleWidth) {
-			CGFloat fraction = maxPossibleWidth / isWidth;
-			NSUInteger useNumChars = roundf([message length] * fraction);
-			
-			message = [NSString stringWithFormat:@"%@...", [message stringByPaddingToLength:useNumChars withString:@"X" startingAtIndex:0]];
-		}
-		
 		progressText.textColor = [UIColor blackColor];
 		progressText.text = message;
 	}

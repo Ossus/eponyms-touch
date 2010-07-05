@@ -22,7 +22,8 @@
 
 - (void) searchForString:(NSString *)searchString;
 - (void) reallySearchForString;
-- (void) abortSearch;
+- (void) initSearch:(id)sender;
+- (void) abortSearch:(id)sender;
 
 @end
 
@@ -60,14 +61,15 @@
 - (void) viewDidLoad
 {
 	[super viewDidLoad];
+	self.tableView.sectionIndexMinimumDisplayRowCount = 20;
 	
 	// Create the buttons to toggle search
 	self.initSearchButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch
 																		   target:self
-																		   action:@selector(initSearch)] autorelease];
+																		   action:@selector(initSearch:)] autorelease];
 	self.abortSearchButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
 																			target:self
-																			action:@selector(abortSearch)] autorelease];
+																			action:@selector(abortSearch:)] autorelease];
 	self.navigationItem.rightBarButtonItem = initSearchButton;
 	
 	// Create the search bar
@@ -86,6 +88,9 @@
 - (void) viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+		APP_DELEGATE.eponymShown = 0;
+	}
 	
 	// deselect the previously shown eponym
 	NSIndexPath *selectedCellIndexPath = [self.tableView indexPathForSelectedRow];
@@ -102,54 +107,49 @@
 
 
 #pragma mark Search
-- (void) switchToSearchMode:(BOOL)switchTo
+- (void) initSearch:(id)sender
 {
-	// switch searchmode on
-	if (switchTo) {
-		self.noDataHint = @"No eponyms match your search criteria";
-		
-		self.navigationItem.rightBarButtonItem = abortSearchButton;
-		self.navigationItem.hidesBackButton = YES;
-		self.navigationItem.titleView = mySearchBar;
-		isSearching = YES;
-		
-		BOOL isSideways = (UIInterfaceOrientationLandscapeLeft == [self interfaceOrientation]
-						   || UIInterfaceOrientationLandscapeRight == [self interfaceOrientation]);
-		CGFloat barHeight = isSideways ? 32 : 44;
-		CGRect searchBarRect = CGRectMake(0.0, 0.0, self.view.bounds.size.width, barHeight);
-		mySearchBar.bounds = searchBarRect;
-		mySearchBar.tintColor = self.navigationController.navigationBar.tintColor = isSideways ? nil : [delegate naviBarTintColor];
-		
-		[mySearchBar becomeFirstResponder];
-	}
+	self.noDataHint = @"No eponyms match your search criteria";
+	[self.tableView scrollRectToVisible:CGRectMake(0.f, 0.f, 10.f, 10.f) animated:NO];
 	
-	// switch off
-	else {
-		self.noDataHint = [(EponymCategory *)[delegate categoryShown] hint];
-		
-		if (searchTimeoutTimer && [searchTimeoutTimer isValid]) {
-			[searchTimeoutTimer invalidate];
-		}
-		if (![mySearchBar isFirstResponder]) {
-			[delegate loadEponymsOfCurrentCategoryContainingString:nil animated:NO];
-		}
-		else {
-			mySearchBar.text = @"";
-			[mySearchBar resignFirstResponder];
-		}
-		
-		mySearchBar.tintColor = self.navigationController.navigationBar.tintColor = [delegate naviBarTintColor];
-		
-		self.navigationItem.rightBarButtonItem = initSearchButton;
-		self.navigationItem.hidesBackButton = NO;
-		self.navigationItem.titleView = nil;
-		isSearching = NO;
-	}
+	self.navigationItem.rightBarButtonItem = abortSearchButton;
+	self.navigationItem.hidesBackButton = YES;
+	self.navigationItem.titleView = mySearchBar;
+	isSearching = YES;
+	
+	BOOL isSideways = IS_LANDSCAPE([self interfaceOrientation]);
+	CGFloat barHeight = isSideways ? 32.f : 44.f;
+	CGRect searchBarRect = CGRectMake(0.f, 0.f, self.view.bounds.size.width, barHeight);
+	mySearchBar.bounds = searchBarRect;
+	mySearchBar.tintColor = self.navigationController.navigationBar.tintColor = isSideways ? nil : [delegate naviBarTintColor];
+	
+	[mySearchBar becomeFirstResponder];
 }
 
-- (void) initSearch
+- (void) abortSearch:(id)sender
 {
-	[self switchToSearchMode:YES];
+	self.noDataHint = [(EponymCategory *)[delegate categoryShown] hint];
+	
+	if (searchTimeoutTimer && [searchTimeoutTimer isValid]) {
+		[searchTimeoutTimer invalidate];
+	}
+	
+	mySearchBar.text = @"";
+	mySearchBar.tintColor = self.navigationController.navigationBar.tintColor = [delegate naviBarTintColor];
+	
+	if (![mySearchBar isFirstResponder]) {
+		[delegate loadEponymsOfCurrentCategoryContainingString:nil animated:NO];
+	}
+	else {
+		[mySearchBar resignFirstResponder];
+	}
+	
+	self.navigationItem.rightBarButtonItem = initSearchButton;
+	self.navigationItem.hidesBackButton = NO;
+	self.navigationItem.titleView = nil;
+	isSearching = NO;
+	
+	[self assureEponymSelectedInListAnimated:NO];
 }
 
 - (void) searchForString:(NSString *)searchText
@@ -173,11 +173,6 @@
 		[delegate loadEponymsOfCurrentCategoryContainingString:searchText animated:NO];
 	}
 }
-
-- (void) abortSearch
-{
-	[self switchToSearchMode:NO];
-}
 #pragma mark -
 
 
@@ -198,10 +193,10 @@
 	
 	// adjust searchbar if necessary
 	if (self.navigationItem.titleView == mySearchBar) {
-		BOOL wasSideways = (UIInterfaceOrientationLandscapeLeft == fromInterfaceOrientation || UIInterfaceOrientationLandscapeRight == fromInterfaceOrientation);
+		BOOL wasSideways = IS_LANDSCAPE(fromInterfaceOrientation);
 		
 		CGRect searchBarRect = mySearchBar.bounds;
-		searchBarRect.size.height = wasSideways ? 44 : 32;
+		searchBarRect.size.height = wasSideways ? 44.f : 32.f;
 		mySearchBar.bounds = searchBarRect;
 		
 		// workaround to the tintColoring bug (bad color alignment) -> un-tint the bar!
@@ -213,33 +208,41 @@
 
 
 #pragma mark Selecting and Starring
-- (void) assureEponymSelectedInList
+- (void) assureEponymSelectedInListAnimated:(BOOL)animated
 {
-	NSUInteger activeEponym = [delegate eponymShown];
-	if (activeEponym > 0) {
-		NSUInteger section = 0;
-		for (NSArray *catArray in eponymArrayCache) {
-			NSUInteger row = 0;
-			for (Eponym *epo in catArray) {
-				if (epo.eponym_id == activeEponym) {
-					NSIndexPath *myIndex = [NSIndexPath indexPathForRow:row inSection:section];
-					[self.tableView selectRowAtIndexPath:myIndex animated:NO scrollPosition:UITableViewScrollPositionNone];
-					return;
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+		NSUInteger activeEponym = [delegate eponymShown];
+		if (activeEponym > 0) {
+			NSUInteger section = 0;
+			for (NSArray *catArray in eponymArrayCache) {
+				NSUInteger row = 0;
+				for (Eponym *epo in catArray) {
+					if (epo.eponym_id == activeEponym) {
+						NSIndexPath *myIndex = [NSIndexPath indexPathForRow:row inSection:section];
+						if (![self tableView:tableView rowIsVisible:myIndex]) {
+							[tableView selectRowAtIndexPath:myIndex animated:animated scrollPosition:UITableViewScrollPositionTop];
+						}
+						else {
+							[tableView selectRowAtIndexPath:myIndex animated:animated scrollPosition:UITableViewScrollPositionNone];
+						}
+
+						return;
+					}
+					row++;
 				}
-				row++;
+				section++;
 			}
-			section++;
 		}
-	}
-	
-	// no selected eponym - select the first one
-	if ([eponymArrayCache count] > 0) {
-		if ([[eponymArrayCache objectAtIndex:0] count] > 0) {
-			Eponym *firstEponym = [[eponymArrayCache objectAtIndex:0] objectAtIndex:0];
-			[delegate loadEponym:firstEponym animated:NO];
-			
-			 NSIndexPath *firstIndex = [NSIndexPath indexPathForRow:0 inSection:0];
-			[self.tableView selectRowAtIndexPath:firstIndex animated:NO scrollPosition:UITableViewScrollPositionNone];
+		
+		// no selected eponym - select the first one
+		if ([eponymArrayCache count] > 0) {
+			if ([[eponymArrayCache objectAtIndex:0] count] > 0) {
+				Eponym *firstEponym = [[eponymArrayCache objectAtIndex:0] objectAtIndex:0];
+				[delegate loadEponym:firstEponym animated:NO];
+				
+				NSIndexPath *firstIndex = [NSIndexPath indexPathForRow:0 inSection:0];
+				[self.tableView selectRowAtIndexPath:firstIndex animated:NO scrollPosition:UITableViewScrollPositionNone];
+			}
 		}
 	}
 }
@@ -256,7 +259,7 @@
 	}
 	
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-		[self assureEponymSelectedInList];
+		[self assureEponymSelectedInListAnimated:YES];
 	}
 }
 #pragma mark -
@@ -395,7 +398,7 @@
 
 - (void) searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
-	[self abortSearch];
+	[self abortSearch:nil];
 }
 
 

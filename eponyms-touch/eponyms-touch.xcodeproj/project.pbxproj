@@ -67,11 +67,18 @@
 		EE563940109E186200D6C4E6 /* MCTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE56393F109E186200D6C4E6 /* MCTextView.m */; };
 		EE563BCC109E4BAE00D6C4E6 /* MCTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE56393F109E186200D6C4E6 /* MCTextView.m */; };
 		EE5A6C7F10B831840092053C /* Icon-student.png in Resources */ = {isa = PBXBuildFile; fileRef = EE5A6C7E10B831840092053C /* Icon-student.png */; };
-		EE5A6DF610B88ECE0092053C /* BlueRoundedButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EE5A6DF510B88ECE0092053C /* BlueRoundedButton.png */; };
-		EE5A6DF710B88ECE0092053C /* BlueRoundedButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EE5A6DF510B88ECE0092053C /* BlueRoundedButton.png */; };
 		EE5BD32811D9173B00964E25 /* sqlite3_unicode.c in Sources */ = {isa = PBXBuildFile; fileRef = EE5BD32711D9173B00964E25 /* sqlite3_unicode.c */; };
 		EE5BD32911D9173B00964E25 /* sqlite3_unicode.c in Sources */ = {isa = PBXBuildFile; fileRef = EE5BD32711D9173B00964E25 /* sqlite3_unicode.c */; };
 		EE5BD33F11D917B500964E25 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EE5BD33E11D917B500964E25 /* libsqlite3.dylib */; };
+		EE5BD3A711D930F500964E25 /* RoundedButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EE5BD3A611D930F500964E25 /* RoundedButton.png */; };
+		EE5BD3A811D930F500964E25 /* RoundedButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EE5BD3A611D930F500964E25 /* RoundedButton.png */; };
+		EE5BD3AE11D9330900964E25 /* RoundedButtonBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = EE5BD3AD11D9330900964E25 /* RoundedButtonBlue.png */; };
+		EE5BD3AF11D9330900964E25 /* RoundedButtonBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = EE5BD3AD11D9330900964E25 /* RoundedButtonBlue.png */; };
+		EE5BD49511D9503900964E25 /* RoundedButtonBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE5BD49411D9503900964E25 /* RoundedButtonBlue@2x.png */; };
+		EE5BD49611D9503900964E25 /* RoundedButtonBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE5BD49411D9503900964E25 /* RoundedButtonBlue@2x.png */; };
+		EE5BD49811D9503E00964E25 /* RoundedButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE5BD49711D9503E00964E25 /* RoundedButton@2x.png */; };
+		EE5BD49911D9503E00964E25 /* RoundedButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE5BD49711D9503E00964E25 /* RoundedButton@2x.png */; };
+		EE5BD4D011D95E7700964E25 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE5BD4CF11D95E7700964E25 /* Default@2x.png */; };
 		EE64C7C00E2680D40000BC8D /* eponyms.xml in Resources */ = {isa = PBXBuildFile; fileRef = EE64C7BF0E2680D40000BC8D /* eponyms.xml */; };
 		EE66414F0E62A2220047D7ED /* Star_eponym_active.png in Resources */ = {isa = PBXBuildFile; fileRef = EE66414D0E62A2220047D7ED /* Star_eponym_active.png */; };
 		EE6641500E62A2220047D7ED /* Star_eponym_inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = EE66414E0E62A2220047D7ED /* Star_eponym_inactive.png */; };
@@ -170,10 +177,14 @@
 		EE56393E109E186200D6C4E6 /* MCTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTextView.h; sourceTree = "<group>"; };
 		EE56393F109E186200D6C4E6 /* MCTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTextView.m; sourceTree = "<group>"; };
 		EE5A6C7E10B831840092053C /* Icon-student.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-student.png"; sourceTree = "<group>"; };
-		EE5A6DF510B88ECE0092053C /* BlueRoundedButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueRoundedButton.png; sourceTree = "<group>"; };
 		EE5BD32611D9173B00964E25 /* sqlite3_unicode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3_unicode.h; sourceTree = "<group>"; };
 		EE5BD32711D9173B00964E25 /* sqlite3_unicode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sqlite3_unicode.c; sourceTree = "<group>"; };
 		EE5BD33E11D917B500964E25 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		EE5BD3A611D930F500964E25 /* RoundedButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RoundedButton.png; sourceTree = "<group>"; };
+		EE5BD3AD11D9330900964E25 /* RoundedButtonBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RoundedButtonBlue.png; sourceTree = "<group>"; };
+		EE5BD49411D9503900964E25 /* RoundedButtonBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RoundedButtonBlue@2x.png"; sourceTree = "<group>"; };
+		EE5BD49711D9503E00964E25 /* RoundedButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RoundedButton@2x.png"; sourceTree = "<group>"; };
+		EE5BD4CF11D95E7700964E25 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		EE64C7BF0E2680D40000BC8D /* eponyms.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = eponyms.xml; sourceTree = "<group>"; };
 		EE66414D0E62A2220047D7ED /* Star_eponym_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Star_eponym_active.png; sourceTree = "<group>"; };
 		EE66414E0E62A2220047D7ED /* Star_eponym_inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Star_eponym_inactive.png; sourceTree = "<group>"; };
@@ -357,7 +368,10 @@
 				EE89CE9C0E618B2C0016A781 /* Star_list_active.png */,
 				EEC2A6B211CE6B21009C9486 /* Star_list_active@2x.png */,
 				EE8E56740E6CA69600928D90 /* ElevatedBar.png */,
-				EE5A6DF510B88ECE0092053C /* BlueRoundedButton.png */,
+				EE5BD3A611D930F500964E25 /* RoundedButton.png */,
+				EE5BD49711D9503E00964E25 /* RoundedButton@2x.png */,
+				EE5BD3AD11D9330900964E25 /* RoundedButtonBlue.png */,
+				EE5BD49411D9503900964E25 /* RoundedButtonBlue@2x.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -455,6 +469,7 @@
 			isa = PBXGroup;
 			children = (
 				EE2DEDFE0E229DB700D97653 /* Default.png */,
+				EE5BD4CF11D95E7700964E25 /* Default@2x.png */,
 				EE53731F11D0294E004F030E /* Default-Landscape.png */,
 				EE53732011D0294E004F030E /* Default-Portrait.png */,
 				EE2DEDF90E229B9B00D97653 /* Icon.png */,
@@ -543,7 +558,6 @@
 				EE8E56750E6CA69600928D90 /* ElevatedBar.png in Resources */,
 				EE380FA60E97B3180066BA6E /* eponyms_info.xml in Resources */,
 				EEF9F2940EA74928002F024E /* Entitlements.plist in Resources */,
-				EE5A6DF710B88ECE0092053C /* BlueRoundedButton.png in Resources */,
 				EEDB74DE10B89A76007782DA /* Eponyms.png in Resources */,
 				EEC2A6A511CE6A3C009C9486 /* Icon-student~iPad.png in Resources */,
 				EEC2A6A611CE6A3C009C9486 /* Icon@2x.png in Resources */,
@@ -558,6 +572,11 @@
 				EE53732111D0294E004F030E /* Default-Landscape.png in Resources */,
 				EE53732211D0294E004F030E /* Default-Portrait.png in Resources */,
 				EE53732411D02A07004F030E /* Eponyms_bglogo.png in Resources */,
+				EE5BD3A711D930F500964E25 /* RoundedButton.png in Resources */,
+				EE5BD3AE11D9330900964E25 /* RoundedButtonBlue.png in Resources */,
+				EE5BD49511D9503900964E25 /* RoundedButtonBlue@2x.png in Resources */,
+				EE5BD49811D9503E00964E25 /* RoundedButton@2x.png in Resources */,
+				EE5BD4D011D95E7700964E25 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -581,7 +600,6 @@
 				EE56386A109DFB1D00D6C4E6 /* eponyms_info.xml in Resources */,
 				EE56386B109DFB1D00D6C4E6 /* Entitlements.plist in Resources */,
 				EE5A6C7F10B831840092053C /* Icon-student.png in Resources */,
-				EE5A6DF610B88ECE0092053C /* BlueRoundedButton.png in Resources */,
 				EEDB74ED10B89AF7007782DA /* Default.png in Resources */,
 				EEC2A6AB11CE6A5F009C9486 /* Icon-student@2x.png in Resources */,
 				EEC2A6AC11CE6A5F009C9486 /* Icon-student~iPad.png in Resources */,
@@ -591,6 +609,10 @@
 				EEC2A6B511CE6B21009C9486 /* Star_eponym_inactive@2x.png in Resources */,
 				EEC2A6B611CE6B21009C9486 /* Star_list_active@2x.png in Resources */,
 				EE3819F411CFE02100DB14D9 /* eponyms.sqlite in Resources */,
+				EE5BD3A811D930F500964E25 /* RoundedButton.png in Resources */,
+				EE5BD3AF11D9330900964E25 /* RoundedButtonBlue.png in Resources */,
+				EE5BD49611D9503900964E25 /* RoundedButtonBlue@2x.png in Resources */,
+				EE5BD49911D9503E00964E25 /* RoundedButton@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -973,7 +995,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
+				CODE_SIGN_IDENTITY = "Don't Code Sign";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Don't Code Sign";
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -987,7 +1010,8 @@
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "574DB9DC-0CDE-425B-9CB5-0FBD5DA32410";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -998,6 +1022,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Pascal Pfiffner";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
@@ -1009,6 +1035,8 @@
 					"\"$(SRCROOT)/GoogleAds\"",
 				);
 				PRODUCT_NAME = "eponyms-touch";
+				PROVISIONING_PROFILE = "BB0194E5-F63B-4EAB-9037-28CBC1251902";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
 			name = AdHoc;
 		};

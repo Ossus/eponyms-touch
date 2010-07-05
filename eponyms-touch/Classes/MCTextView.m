@@ -167,6 +167,31 @@ CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect);
 	
 	return CGSizeMake(textSize.width + (2 * textPadding), textSize.height + (2 * textPadding));
 }
+
+- (void) setFrame:(CGRect)newFrame
+{
+	if (!CGRectEqualToRect(newFrame, self.frame)) {
+		[super setFrame:newFrame];
+		
+		// define the stretchable area
+		[UIView setAnimationsEnabled:NO];
+		
+		CGSize selfSize = [self bounds].size;
+		CGFloat borderWidth = 1.f;
+		CGFloat borderRadius = 6.f;
+		
+		CGFloat top, bottom, left, right;
+		top = bottom = left = right = fmaxf(borderWidth, borderRadius);
+		CGFloat myLeft = left / selfSize.width;
+		CGFloat myTop = top / selfSize.height;
+		
+		self.contentStretch = CGRectMake(myLeft, myTop, 1.f - right / selfSize.width - myLeft, 1.f - bottom / selfSize.height - myTop);
+		
+		[UIView setAnimationsEnabled:YES];
+		
+		[self setNeedsDisplay];
+	}
+}
 #pragma mark -
 
 
