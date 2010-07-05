@@ -21,7 +21,6 @@
 		EE2DE9DE0E2125C700D97653 /* Eponym.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2DE9DD0E2125C700D97653 /* Eponym.m */; };
 		EE2DEDFA0E229B9B00D97653 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EE2DEDF90E229B9B00D97653 /* Icon.png */; };
 		EE2DEDFF0E229DB700D97653 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = EE2DEDFE0E229DB700D97653 /* Default.png */; };
-		EE380FA60E97B3180066BA6E /* eponyms_info.xml in Resources */ = {isa = PBXBuildFile; fileRef = EE380FA50E97B3180066BA6E /* eponyms_info.xml */; };
 		EE38197B11CFD83000DB14D9 /* SQLiteAccessors.c in Sources */ = {isa = PBXBuildFile; fileRef = EE38197A11CFD83000DB14D9 /* SQLiteAccessors.c */; };
 		EE38197C11CFD83000DB14D9 /* SQLiteAccessors.c in Sources */ = {isa = PBXBuildFile; fileRef = EE38197A11CFD83000DB14D9 /* SQLiteAccessors.c */; };
 		EE3819F311CFE02100DB14D9 /* eponyms.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = EE3819F211CFE02100DB14D9 /* eponyms.sqlite */; };
@@ -48,7 +47,6 @@
 		EE563867109DFB1D00D6C4E6 /* Badge_new_eponyms.png in Resources */ = {isa = PBXBuildFile; fileRef = EE3BC3C00E6ACEBF0051B69D /* Badge_new_eponyms.png */; };
 		EE563868109DFB1D00D6C4E6 /* InfoBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = EE3BC4420E6ADECB0051B69D /* InfoBackground.png */; };
 		EE563869109DFB1D00D6C4E6 /* ElevatedBar.png in Resources */ = {isa = PBXBuildFile; fileRef = EE8E56740E6CA69600928D90 /* ElevatedBar.png */; };
-		EE56386A109DFB1D00D6C4E6 /* eponyms_info.xml in Resources */ = {isa = PBXBuildFile; fileRef = EE380FA50E97B3180066BA6E /* eponyms_info.xml */; };
 		EE56386B109DFB1D00D6C4E6 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF9F2930EA74928002F024E /* Entitlements.plist */; };
 		EE56386E109DFB1D00D6C4E6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		EE56386F109DFB1D00D6C4E6 /* eponyms_touchAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* eponyms_touchAppDelegate.m */; };
@@ -87,7 +85,7 @@
 		EE89CE9D0E618B2C0016A781 /* Star_list_active.png in Resources */ = {isa = PBXBuildFile; fileRef = EE89CE9C0E618B2C0016A781 /* Star_list_active.png */; };
 		EE8E56750E6CA69600928D90 /* ElevatedBar.png in Resources */ = {isa = PBXBuildFile; fileRef = EE8E56740E6CA69600928D90 /* ElevatedBar.png */; };
 		EEAB00FA0E2E2F3E00D84A8A /* Info.txt in Resources */ = {isa = PBXBuildFile; fileRef = EEAB00F90E2E2F3E00D84A8A /* Info.txt */; };
-		EEC2A6A511CE6A3C009C9486 /* Icon-student~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6A311CE6A3C009C9486 /* Icon-student~iPad.png */; };
+		EEC2A6A511CE6A3C009C9486 /* Icon~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6A311CE6A3C009C9486 /* Icon~iPad.png */; };
 		EEC2A6A611CE6A3C009C9486 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6A411CE6A3C009C9486 /* Icon@2x.png */; };
 		EEC2A6A811CE6A51009C9486 /* Eponyms@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6A711CE6A51009C9486 /* Eponyms@2x.png */; };
 		EEC2A6AB11CE6A5F009C9486 /* Icon-student@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6A911CE6A5F009C9486 /* Icon-student@2x.png */; };
@@ -196,7 +194,7 @@
 		EE8E56740E6CA69600928D90 /* ElevatedBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ElevatedBar.png; sourceTree = "<group>"; };
 		EEAB00F90E2E2F3E00D84A8A /* Info.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Info.txt; sourceTree = "<group>"; };
 		EEBA8F120E66E727002D6DDC /* EponymUpdaterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EponymUpdaterDelegate.h; sourceTree = "<group>"; };
-		EEC2A6A311CE6A3C009C9486 /* Icon-student~iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-student~iPad.png"; sourceTree = "<group>"; };
+		EEC2A6A311CE6A3C009C9486 /* Icon~iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon~iPad.png"; sourceTree = "<group>"; };
 		EEC2A6A411CE6A3C009C9486 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		EEC2A6A711CE6A51009C9486 /* Eponyms@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Eponyms@2x.png"; sourceTree = "<group>"; };
 		EEC2A6A911CE6A5F009C9486 /* Icon-student@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-student@2x.png"; sourceTree = "<group>"; };
@@ -474,7 +472,7 @@
 				EE53732011D0294E004F030E /* Default-Portrait.png */,
 				EE2DEDF90E229B9B00D97653 /* Icon.png */,
 				EEC2A6A411CE6A3C009C9486 /* Icon@2x.png */,
-				EEC2A6A311CE6A3C009C9486 /* Icon-student~iPad.png */,
+				EEC2A6A311CE6A3C009C9486 /* Icon~iPad.png */,
 				EEDB74DD10B89A76007782DA /* Eponyms.png */,
 				EEC2A6A711CE6A51009C9486 /* Eponyms@2x.png */,
 				EE53732311D02A07004F030E /* Eponyms_bglogo.png */,
@@ -556,10 +554,9 @@
 				EE3BC3C10E6ACEBF0051B69D /* Badge_new_eponyms.png in Resources */,
 				EE3BC4430E6ADECB0051B69D /* InfoBackground.png in Resources */,
 				EE8E56750E6CA69600928D90 /* ElevatedBar.png in Resources */,
-				EE380FA60E97B3180066BA6E /* eponyms_info.xml in Resources */,
 				EEF9F2940EA74928002F024E /* Entitlements.plist in Resources */,
 				EEDB74DE10B89A76007782DA /* Eponyms.png in Resources */,
-				EEC2A6A511CE6A3C009C9486 /* Icon-student~iPad.png in Resources */,
+				EEC2A6A511CE6A3C009C9486 /* Icon~iPad.png in Resources */,
 				EEC2A6A611CE6A3C009C9486 /* Icon@2x.png in Resources */,
 				EEC2A6A811CE6A51009C9486 /* Eponyms@2x.png in Resources */,
 				EEC2A6B711CE6B21009C9486 /* Badge_new_eponyms@2x.png in Resources */,
@@ -597,7 +594,6 @@
 				EE563867109DFB1D00D6C4E6 /* Badge_new_eponyms.png in Resources */,
 				EE563868109DFB1D00D6C4E6 /* InfoBackground.png in Resources */,
 				EE563869109DFB1D00D6C4E6 /* ElevatedBar.png in Resources */,
-				EE56386A109DFB1D00D6C4E6 /* eponyms_info.xml in Resources */,
 				EE56386B109DFB1D00D6C4E6 /* Entitlements.plist in Resources */,
 				EE5A6C7F10B831840092053C /* Icon-student.png in Resources */,
 				EEDB74ED10B89AF7007782DA /* Default.png in Resources */,
@@ -776,6 +772,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Pascal Pfiffner";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -790,9 +787,11 @@
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0C954729-44E5-469B-9F90-DB1AF15A0033";
+				PROVISIONING_PROFILE = "97E6B393-8D57-476B-BDAF-A4A7DFC4D9A8";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "97E6B393-8D57-476B-BDAF-A4A7DFC4D9A8";
 				SDKROOT = iphoneos4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Distribution;
 		};

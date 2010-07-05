@@ -225,7 +225,7 @@
 						else {
 							[tableView selectRowAtIndexPath:myIndex animated:animated scrollPosition:UITableViewScrollPositionNone];
 						}
-
+						
 						return;
 					}
 					row++;
@@ -234,14 +234,28 @@
 			}
 		}
 		
-		// no selected eponym - select the first one
-		if ([eponymArrayCache count] > 0) {
-			if ([[eponymArrayCache objectAtIndex:0] count] > 0) {
+		// no selected eponym - select the first visible one
+		else if ([eponymArrayCache count] > 0) {
+			NSArray *visRows = [self.tableView indexPathsForVisibleRows];
+			if ([visRows count] > 0) {
+				NSIndexPath *firstRow = [visRows objectAtIndex:0];
+				
+				if ([eponymArrayCache count] > firstRow.section) {
+					if ([[eponymArrayCache objectAtIndex:firstRow.section] count] > firstRow.row) {
+						Eponym *firstEponym = [[eponymArrayCache objectAtIndex:firstRow.section] objectAtIndex:firstRow.row];
+						[delegate loadEponym:firstEponym animated:NO];
+						
+						[self.tableView selectRowAtIndexPath:firstRow animated:NO scrollPosition:UITableViewScrollPositionNone];
+						return;
+					}
+				}
+			}
+			else if ([[eponymArrayCache objectAtIndex:0] count] > 0) {
 				Eponym *firstEponym = [[eponymArrayCache objectAtIndex:0] objectAtIndex:0];
 				[delegate loadEponym:firstEponym animated:NO];
 				
 				NSIndexPath *firstIndex = [NSIndexPath indexPathForRow:0 inSection:0];
-				[self.tableView selectRowAtIndexPath:firstIndex animated:NO scrollPosition:UITableViewScrollPositionNone];
+				[self.tableView selectRowAtIndexPath:firstIndex animated:NO scrollPosition:UITableViewScrollPositionTop];
 			}
 		}
 	}
@@ -288,14 +302,6 @@
 
 
 #pragma mark UITableView delegate methods
-- (NSIndexPath *) tableView:(UITableView *)aTableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	if ([eponymArrayCache count] < 1) {
-		return nil;
-	}
-	return indexPath;
-}
-
 - (void) tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	if ([eponymArrayCache count] > 0) {

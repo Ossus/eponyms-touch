@@ -13,6 +13,7 @@
 #import "CategoriesViewController.h"
 #import "eponyms_touchAppDelegate.h"
 #import "EponymCategory.h"
+#import "ListViewController.h"
 
 
 static NSString *MyCellIdentifier = @"MyIdentifier";
@@ -45,7 +46,7 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-	if (((eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate]).allowAutoRotate) {
+	if (delegate.allowAutoRotate) {
 		return YES;
 	}
 	
@@ -96,6 +97,10 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 {
 	EponymCategory *selectedCategory = [[categoryArrayCache objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	[delegate loadEponymsOfCategory:selectedCategory containingString:nil animated:YES];
+	
+	if (delegate.listController != self.navigationController.topViewController) {
+		[self.navigationController pushViewController:delegate.listController animated:YES];
+	}
 }
 #pragma mark -
 
@@ -107,14 +112,13 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 	NSUInteger count = [categoryArrayCache count];
 	return (count < 1) ? 1 : count;
 }
+
 - (NSArray *) sectionIndexTitlesForTableView:(UITableView *)aTableView
 {
 	return [NSArray array];
 }
 
-/*- (UIView *)tableView:(UITableView *)aTableView viewForHeaderInSection:(NSInteger) section
- {
- }*/
+
 - (NSString *) tableView:(UITableView *)aTableView titleForHeaderInSection:(NSInteger) section
 {
 	return (1 == section) ? @"Categories" : nil;

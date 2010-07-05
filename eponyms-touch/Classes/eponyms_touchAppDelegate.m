@@ -37,6 +37,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 
 @interface eponyms_touchAppDelegate ()
 
+@property (nonatomic, readwrite, assign) UIViewController *topLevelController;
 @property (nonatomic, readwrite, retain) PPSplitViewController *splitController;
 @property (nonatomic, readwrite, retain) UINavigationController *naviController;
 @property (nonatomic, readwrite, retain) CategoriesViewController *categoriesController;
@@ -66,6 +67,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 @synthesize didCheckForNewEponyms;
 @synthesize newEponymsAvailable;
 @dynamic categoryShown;
+@synthesize topLevelController;
 @dynamic splitController;
 @synthesize naviController;
 @synthesize categoriesController;
@@ -109,10 +111,10 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	BOOL onIPad = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad);
 	
 	// **** Prefs
-	NSUInteger lastUsedDBVersion;
-	NSInteger lastEponymCheck;
-	NSInteger shownCategoryAtQuit;
-	NSUInteger shownEponymAtQuit;
+	NSUInteger lastUsedDBVersion = THIS_DB_VERSION;
+	NSInteger lastEponymCheck = 0;
+	NSInteger shownCategoryAtQuit = onIPad ? 0 : -100;
+	NSUInteger shownEponymAtQuit = 0;
 	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSNumber *testValue = [defaults objectForKey:@"usingEponymsOf"];
@@ -122,10 +124,6 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		
 		self.usingEponymsOf = 0;
 		self.shouldAutoCheck = YES;
-		lastUsedDBVersion = THIS_DB_VERSION;
-		lastEponymCheck = 0;
-		shownCategoryAtQuit = onIPad ? 0 : -100;
-		shownEponymAtQuit = 0;
 		self.allowAutoRotate = onIPad;
 		self.allowLearnMode = YES;
 	}
@@ -164,12 +162,14 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	if (onIPad) {
 		window.backgroundColor = [UIColor viewFlipsideBackgroundColor];
 		[window addSubview:self.splitController.view];
+		self.topLevelController = splitController;
 	}
 	
 	
 	// *** iPhone specific UI
 	else {
 		[window addSubview:naviController.view];
+		self.topLevelController = naviController;
 	}
 	
 	[window makeKeyAndVisible];
@@ -190,13 +190,18 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	
 	
 	// **** Restore State
+	if (shownCategoryAtQuit > -100) {										// Eponym list
+		[self loadEponymsOfCategoryID:shownCategoryAtQuit containingString:nil animated:NO];
+		
+		if (listController != naviController.topViewController) {
+			[naviController pushViewController:listController animated:NO];
+		}
+	}
+	
 	if (shownEponymAtQuit > 0) {											// Eponym
 		shownCategoryAtQuit = (shownCategoryAtQuit > -100) ? shownCategoryAtQuit : 0;
 		[self loadEponymsOfCategoryID:shownCategoryAtQuit containingString:nil animated:NO];
 		[self loadEponymWithId:shownEponymAtQuit animated:NO];
-	}
-	else if (shownCategoryAtQuit > -100) {									// Eponym list
-		[self loadEponymsOfCategoryID:shownCategoryAtQuit containingString:nil animated:NO];
 	}
 	//DLog(@"shownEponymAtQuit: %u, shownCategoryAtQuit: %u", shownEponymAtQuit, shownCategoryAtQuit);
 	
@@ -210,8 +215,11 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	else if (shouldAutoCheck) {
 		NSTimeInterval nowInEpoch = [[NSDate date] timeIntervalSince1970];
 		if (nowInEpoch > (lastEponymCheck + 7 * 24 * 3600)) {
-		//	NSLog(@"Will perform auto check (last check: %@)", [NSDate dateWithTimeIntervalSince1970:lastEponymCheck]);
+			DLog(@"Will perform auto check (last check: %@)", [NSDate dateWithTimeIntervalSince1970:lastEponymCheck]);
 			[self performSelector:@selector(checkForUpdates:) withObject:nil afterDelay:2.0];
+		}
+		else {
+			DLog(@"Will NOT perform auto check (last check: %@)", [NSDate dateWithTimeIntervalSince1970:lastEponymCheck]);
 		}
 	}
 	
@@ -280,7 +288,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	}
 	[loadedEponymsCopy release];
 	
-	[self closeMainDatabase];			// TODO: Check this
+	[self closeMainDatabase];
 	
 	// save state
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -459,13 +467,12 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		
 		// did check for updates
 		if (1 == updater.updateAction) {
+			didCheckForNewEponyms = YES;
 			self.newEponymsAvailable = updater.newEponymsAvailable;
 			[self showNewEponymsAreAvailable:updater.newEponymsAvailable];
 			mayReleaseUpdater = !updater.newEponymsAvailable;
 			
-			if (!updater.newEponymsAvailable) {
-				[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(NSInteger)nowInEpoch] forKey:@"lastEponymCheck"];
-			}
+			[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:(NSInteger)nowInEpoch] forKey:@"lastEponymCheck"];
 		}
 		
 		// did actually update eponyms
@@ -476,7 +483,6 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 				[defaults setObject:[NSNumber numberWithInt:(NSInteger)nowInEpoch] forKey:@"lastEponymUpdate"];
 				[defaults setObject:[NSNumber numberWithInt:usingEponymsOf] forKey:@"usingEponymsOf"];
 			}
-			[defaults setObject:[NSNumber numberWithInt:(NSInteger)nowInEpoch] forKey:@"lastEponymCheck"];
 			
 			mayReleaseUpdater = !updater.parseFailed;
 			[self showNewEponymsAreAvailable:NO];
@@ -572,7 +578,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 - (void) loadDatabaseAnimated:(BOOL)animated reload:(BOOL)as_reload
 {
 	// Drop back to the root view
-	if (as_reload && UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
+	if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
 		[naviController popToRootViewControllerAnimated:animated];
 	}
 	
@@ -637,7 +643,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	}
 	
 	categoriesController.categoryArrayCache = categoryArray;
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+	if (as_reload && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 		EponymCategory *fetchCat = oldCategory ? oldCategory : allEponyms;
 		[self loadEponymsOfCategory:fetchCat containingString:nil animated:animated];
 		
@@ -782,7 +788,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 			[firstLetter setString:[title stringByPaddingToLength:1 withString:nil startingAtIndex:0]];
 			
 			// new first letter!
-			if (NSOrderedSame != [firstLetter caseInsensitiveCompare:oldFirstLetter]) {
+			if (NSOrderedSame != [firstLetter compare:oldFirstLetter options:NSDiacriticInsensitiveSearch | NSCaseInsensitiveSearch]) {
 				if ([sectionArray count] > 0) {
 					[eponymArray addObject:[[sectionArray copy] autorelease]];
 					[sectionArray removeAllObjects];
@@ -811,9 +817,6 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	self.categoryShown = category;
 	
 	[listController cacheEponyms:eponymArray andHeaders:eponymSectionArray];		// will also reload the table
-	if (listController != naviController.topViewController) {
-		[naviController pushViewController:listController animated:animated];
-	}
 	
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
 		eponymShown = 0;

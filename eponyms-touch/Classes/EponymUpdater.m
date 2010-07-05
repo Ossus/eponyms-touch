@@ -185,7 +185,7 @@ static sqlite3_stmt *star_eponym_query = nil;
 	// success, evaluate newEponymsAvailable to YES when (availableEponyms > usingEponymsOf) or when no eponyms are currently present
 	else {
 		self.parseFailed = NO;
-		NSInteger usingEponymsOf = [(eponyms_touchAppDelegate *)delegate usingEponymsOf];
+		NSInteger usingEponymsOf = [APP_DELEGATE usingEponymsOf];
 		self.newEponymsAvailable = (0 == usingEponymsOf) || (eponymCheck_eponymUpdateTime > usingEponymsOf);
 	}
 	
@@ -231,7 +231,7 @@ static sqlite3_stmt *star_eponym_query = nil;
 	
 	
 	// Parse and create			****
-	NSLog(@"begin...");
+	DLog(@"begin...");
 	//* --
 	sqlite3_stmt *begin_transaction_stmt;
 	const char *beginTrans = "BEGIN EXCLUSIVE TRANSACTION";
@@ -255,7 +255,7 @@ static sqlite3_stmt *star_eponym_query = nil;
 	}
 	sqlite3_finalize(end_transaction_stmt);
 	// --	*/
-	NSLog(@"...done");
+	DLog(@"...done");
 	// Parsing done				****
 	
 	

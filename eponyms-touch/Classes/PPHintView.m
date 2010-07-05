@@ -196,14 +196,16 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight);
 	}
 	
 	// we don't want to display something under the status bar
+	BOOL is_landscape = UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation);
 	CGSize sbs = [UIApplication sharedApplication].statusBarFrame.size;
-	CGFloat statusBarHeight = UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation) ? sbs.width : sbs.height;
+	CGFloat statusBarHeight = is_landscape ? sbs.width : sbs.height;
 	
 	// find the view we want to attach to
 	CGPoint origin = CGPointZero;				// this will be the center of the popup
 	UIView *child = forElement;
 	UIView *parent = nil;
 	UIView *attachToView = nil;
+	
 	while (parent = [child superview]) {
 		NSString *parentClass = NSStringFromClass([parent class]);
 		if ([parentClass isEqualToString:@"UILayoutContainerView"]) {
@@ -221,6 +223,7 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight);
 	}
 	//DLog(@"-- USING --\n%@", attachToView);
 	CGSize attachSize = [attachToView bounds].size;
+	self.containerView.frame = CGRectMake(0.f, 0.f, attachSize.width, attachSize.height);
 	
 	elementFrame = [attachToView convertRect:forElement.frame fromView:[forElement superview]];
 	CGPoint refElementCenter = [attachToView convertPoint:forElement.center fromView:[forElement superview]];

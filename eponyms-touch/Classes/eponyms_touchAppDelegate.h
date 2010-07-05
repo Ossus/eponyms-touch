@@ -49,6 +49,7 @@ typedef enum {
 	NSMutableArray *loadedEponyms;			// 1D, used if a memory warning occurs
 	
 	// View Controllers
+	UIViewController *topLevelController;				// the controller we directly hang into the window. Used as workaround for several issues
 	PPSplitViewController *splitController;
 	UINavigationController *naviController;
 	CategoriesViewController *categoriesController;
@@ -93,6 +94,7 @@ typedef enum {
 @property (nonatomic, retain) NSMutableArray *eponymSectionArray;
 @property (nonatomic, retain) NSMutableArray *loadedEponyms;
 
+@property (nonatomic, readonly, assign) UIViewController *topLevelController;
 @property (nonatomic, readonly, retain) PPSplitViewController *splitController;
 @property (nonatomic, readonly, retain) UINavigationController *naviController;
 @property (nonatomic, readonly, retain) CategoriesViewController *categoriesController;

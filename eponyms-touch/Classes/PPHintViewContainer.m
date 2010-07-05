@@ -15,6 +15,14 @@
 @synthesize hint;
 
 
+- (void) dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
+	[super dealloc];
+}
+
+
 - (id) initWithFrame:(CGRect)frame
 {
 	self = [super initWithFrame:frame];
@@ -22,14 +30,29 @@
 		self.opaque = NO;
 		self.backgroundColor = [UIColor clearColor];
 		self.userInteractionEnabled = YES;
+		self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(didRotate:)
+													 name:UIDeviceOrientationDidChangeNotification
+												   object:nil];
 	}
 	return self;
 }
+#pragma mark -
 
 
+
+#pragma mark Actions
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	[hint hide];
 }
+
+- (void) didRotate:(NSNotification *)aNotification
+{
+	[hint hide];
+}
+
 
 @end

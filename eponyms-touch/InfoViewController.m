@@ -394,6 +394,7 @@
 	[self lockGUI:NO];
 	
 	if (success) {
+		
 		// did check for updates
 		if (1 == updater.updateAction) {
 			[self newEponymsAreAvailable:updater.newEponymsAvailable];
@@ -414,6 +415,7 @@
 			
 			[self setStatusMessage:statusMessage];
 			[self resetStatusElementsWithButtonTitle:nil];
+			delegate.newEponymsAvailable = NO;
 		}
 	}
 	

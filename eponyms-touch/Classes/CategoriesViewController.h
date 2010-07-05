@@ -12,14 +12,15 @@
 
 #import <UIKit/UIKit.h>
 #import "MCTableViewController.h"
+@class eponyms_touchAppDelegate;
 
 
 @interface CategoriesViewController : MCTableViewController {
-	id delegate;
+	eponyms_touchAppDelegate *delegate;
 	NSArray *categoryArrayCache;
 }
 
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, assign) eponyms_touchAppDelegate *delegate;
 @property (nonatomic, retain) NSArray *categoryArrayCache;
 
 

@@ -12,6 +12,7 @@
 
 #import "MCTableViewController.h"
 #import "TouchTableView.h"
+#import "eponyms_touchAppDelegate.h"
 
 #define kMCTVCStateSaveMask @"MCTVC_lastState_%@"
 
@@ -234,7 +235,11 @@
 	if ([state isKindOfClass:[NSDictionary class]]) {
 		NSNumber *scrollPos = [state objectForKey:@"scrollPosition"];
 		if (nil != scrollPos) {
-			self.tableView.contentOffset = CGPointMake(0.f, [scrollPos floatValue]);
+			CGFloat scr = [scrollPos floatValue];
+			if (scr > [self.tableView contentSize].height) {
+				scr = [self.tableView contentSize].height - [self.tableView frame].size.height;
+			}
+			self.tableView.contentOffset = CGPointMake(0.f, scr);
 		}
 	}
 }
@@ -268,13 +273,28 @@
 	NSValue *boundsValue = [info objectForKey:UIKeyboardBoundsUserInfoKey];			// deprecated as of iOS 3.2. Use UIKeyboardFrameEndUserInfoKey some time
 	CGFloat keyboardHeight = [boundsValue CGRectValue].size.height;
 	
-	NSValue *endPoint = [info objectForKey:UIKeyboardCenterEndUserInfoKey];
-	CGPoint inSelfPoint = [tableView convertPoint:[endPoint CGPointValue] fromView:tableView.window];		// this wont work rotated!
-	CGFloat endHeight = roundf(inSelfPoint.y - tableView.contentOffset.y - (keyboardHeight / 2));
+	// convert the point to rotated window coordinates
+	CGPoint endPoint = [[info objectForKey:UIKeyboardCenterEndUserInfoKey] CGPointValue];
+	UIDeviceOrientation orient = [[UIDevice currentDevice] orientation];
+	if (UIDeviceOrientationIsLandscape(orient)) {
+		CGFloat foo = endPoint.x;
+		endPoint.x = endPoint.y;
+		endPoint.y = foo;
+		if (UIDeviceOrientationLandscapeLeft == orient) {
+			endPoint.x = [tableView.window bounds].size.width - endPoint.x;
+		}
+	}
+	else if (UIDeviceOrientationPortraitUpsideDown == orient) {
+		endPoint.y = [tableView.window bounds].size.height - endPoint.y;
+	}
+	
+	// convert from window to tableView
+	CGPoint inSelfPoint = [tableView convertPoint:endPoint fromView:nil];
+	CGFloat endHeight = roundf(inSelfPoint.y - tableView.frame.origin.y - tableView.contentOffset.y - (keyboardHeight / 2));
 	
 	// Resize the table view view
 	CGRect viewFrame = [self.tableView frame];
-	viewFrame.size.height = endHeight;
+	viewFrame.size.height = fmaxf(44.f, fminf(2048.f, endHeight));
 	self.tableView.frame = viewFrame;
 }
 
