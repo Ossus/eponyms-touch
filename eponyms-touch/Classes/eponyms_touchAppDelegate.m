@@ -153,7 +153,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	self.listController = [[[ListViewController alloc] initWithNibName:nil bundle:nil] autorelease];
 	[listController setDelegate:self];
 	listController.autosaveName = @"EponymList";
-	self.eponymController = [[[EponymViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+	self.eponymController = [[[EponymViewController alloc] init] autorelease];
 	
 	[self showNewEponymsAreAvailable:NO];
 	

@@ -23,7 +23,8 @@
 #ifdef SHOW_GOOGLE_ADS
 													, GADAdViewControllerDelegate
 #endif
-	> {
+	>
+{
 	Eponym *eponymToBeShown;
 	BOOL viewIsVisible;
 	
@@ -41,9 +42,10 @@
 	UIButton *randomNoTextEponymButton;
 	UIButton *revealButton;
 	
-#ifdef SHOW_GOOGLE_ADS	
+#ifdef SHOW_GOOGLE_ADS
+	GADAdSize adSize;
 	BOOL adIsLoading;
-	BOOL adDidLoad;
+	BOOL adDidLoadForThisEponym;
 	GADAdViewController *adController;
 	NSTimeInterval adsAreRefractoryUntil;			// timestamp until we allow loading a new ad
 #endif

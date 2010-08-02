@@ -24,10 +24,6 @@
 #define kPopupTextYPadding 8.0
 #define kPopupTitleLabelHeight 20.0
 
-#ifndef PI
-#define PI 3.141593
-#endif
-
 
 @interface PPHintView ()
 
@@ -297,24 +293,28 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight);
 		origin.x = elementFrame.origin.x + elementFrame.size.width + (boxWidth / 2);
 	}
 	
-	// no, not enough space at all! try smaller fontsizes
+	// no, not enough space at all! TODO: Try smaller fontsizes; currently centering on screen
 	else {
-		NSLog(@"NOT ENOUGH SPACE FOR %fx%f -> IMPLEMENT smaller font sizes", boxWidth, boxHeight);
+		position = -1;
+		origin = refElementCenter;
+		DLog(@"Not enough space for %fx%f -> implement smaller font sizes", boxWidth, boxHeight);
 	}
 	
 	// check whether we're in bounds
+	CGSize frameSize = attachToView.frame.size;
+	
 	if ((origin.x - (boxWidth / 2)) < 0.f) {
 		origin.x = (boxWidth / 2);
 	}
-	else if ((origin.x + (boxWidth / 2)) > attachToView.frame.size.width) {
-		origin.x = attachToView.frame.size.width - (boxWidth / 2);
+	else if ((origin.x + (boxWidth / 2)) > frameSize.width) {
+		origin.x = frameSize.width - (boxWidth / 2);
 	}
 	
 	if ((origin.y - (boxHeight / 2)) < statusBarHeight) {
 		origin.y = statusBarHeight + (boxHeight / 2);
 	}
-	else if ((origin.y + (boxHeight / 2)) > attachToView.frame.size.height) {
-		origin.y = attachToView.frame.size.height - (boxHeight / 2);
+	else if ((origin.y + (boxHeight / 2)) > frameSize.height) {
+		origin.y = frameSize.height - (boxHeight / 2);
 	}
 	
 	origin.x = roundf(origin.x);
@@ -549,7 +549,7 @@ CGMutablePathRef createOutlinePath(NSInteger pPosition, CGRect pRect, CGPoint el
 		}
 		else {
 			CGPathMoveToPoint(path, NULL, pRect.origin.x, pRect.origin.y + lRadius);
-			CGPathAddArc(path, NULL, pRect.origin.x + lRadius, pRect.origin.y + lRadius, lRadius, PI, 1.5f * PI, 0);
+			CGPathAddArc(path, NULL, pRect.origin.x + lRadius, pRect.origin.y + lRadius, lRadius, M_PI, 1.5f * M_PI, 0);
 			CGPathAddLineToPoint(path, NULL, arrowHead.x - arrowOffset, arrowHead.y + arrowOffset);
 		}
 		
@@ -557,12 +557,12 @@ CGMutablePathRef createOutlinePath(NSInteger pPosition, CGRect pRect, CGPoint el
 		CGPathAddLineToPoint(path, NULL, arrowHead.x + arrowOffset, arrowHead.y + arrowOffset);
 		
 		if (rRadius >= 1.f) {
-			CGPathAddArc(path, NULL, pRect.origin.x + pRect.size.width - rRadius, pRect.origin.y + rRadius, rRadius, 1.5f * PI, 0.f, 0);
+			CGPathAddArc(path, NULL, pRect.origin.x + pRect.size.width - rRadius, pRect.origin.y + rRadius, rRadius, 1.5f * M_PI, 0.f, 0);
 		}
 		
 		// remaining body
-		CGPathAddArc(path, NULL, pRect.origin.x + pRect.size.width - borderRadius, pRect.origin.y + pRect.size.height - borderRadius, borderRadius, 0.f, 0.5f * PI, 0);
-		CGPathAddArc(path, NULL, pRect.origin.x + borderRadius, pRect.origin.y + pRect.size.height - borderRadius, borderRadius, 0.5f * PI, PI, 0);
+		CGPathAddArc(path, NULL, pRect.origin.x + pRect.size.width - borderRadius, pRect.origin.y + pRect.size.height - borderRadius, borderRadius, 0.f, 0.5f * M_PI, 0);
+		CGPathAddArc(path, NULL, pRect.origin.x + borderRadius, pRect.origin.y + pRect.size.height - borderRadius, borderRadius, 0.5f * M_PI, M_PI, 0);
 		CGPathCloseSubpath(path);
 	}
 	
@@ -570,6 +570,7 @@ CGMutablePathRef createOutlinePath(NSInteger pPosition, CGRect pRect, CGPoint el
 	// **** arrow points right
 	else if (1 == pPosition) {
 		// TODO: Implement
+		DLog(@"NOT IMPLEMENTED");
 	}
 	
 	
@@ -605,7 +606,7 @@ CGMutablePathRef createOutlinePath(NSInteger pPosition, CGRect pRect, CGPoint el
 		}
 		else {
 			CGPathMoveToPoint(path, NULL, pRect.origin.x, pRect.origin.y + pRect.size.height - lRadius);
-			CGPathAddArc(path, NULL, pRect.origin.x + lRadius, pRect.origin.y + pRect.size.height - lRadius, lRadius, PI, 0.5f * PI, 1);
+			CGPathAddArc(path, NULL, pRect.origin.x + lRadius, pRect.origin.y + pRect.size.height - lRadius, lRadius, M_PI, 0.5f * M_PI, 1);
 			CGPathAddLineToPoint(path, NULL, arrowHead.x - arrowOffset, arrowHead.y - arrowOffset);
 		}
 		
@@ -613,13 +614,13 @@ CGMutablePathRef createOutlinePath(NSInteger pPosition, CGRect pRect, CGPoint el
 		CGPathAddLineToPoint(path, NULL, arrowHead.x + arrowOffset, arrowHead.y - arrowOffset);
 		
 		if (rRadius >= 1.f) {
-			CGPathAddArc(path, NULL, pRect.origin.x + pRect.size.width - rRadius, pRect.origin.y + pRect.size.height - rRadius, rRadius, 0.5f * PI, 0.f, 1);
+			CGPathAddArc(path, NULL, pRect.origin.x + pRect.size.width - rRadius, pRect.origin.y + pRect.size.height - rRadius, rRadius, 0.5f * M_PI, 0.f, 1);
 		}
 		
 		
 		// remaining body
-		CGPathAddArc(path, NULL, pRect.origin.x + pRect.size.width - borderRadius, pRect.origin.y + borderRadius, borderRadius, 0.f, 1.5f * PI, 1);
-		CGPathAddArc(path, NULL, pRect.origin.x + borderRadius, pRect.origin.y + borderRadius, borderRadius, 1.5f * PI, PI, 1);
+		CGPathAddArc(path, NULL, pRect.origin.x + pRect.size.width - borderRadius, pRect.origin.y + borderRadius, borderRadius, 0.f, 1.5f * M_PI, 1);
+		CGPathAddArc(path, NULL, pRect.origin.x + borderRadius, pRect.origin.y + borderRadius, borderRadius, 1.5f * M_PI, M_PI, 1);
 		CGPathCloseSubpath(path);
 	}
 	
@@ -627,6 +628,21 @@ CGMutablePathRef createOutlinePath(NSInteger pPosition, CGRect pRect, CGPoint el
 	// **** arrow points left
 	else if (3 == pPosition) {
 		// TODO: Implement
+		DLog(@"NOT IMPLEMENTED");
+	}
+	
+	
+	// **** no arrow
+	else {
+		CGFloat lRadius = borderRadius;
+		CGFloat rRadius = borderRadius;
+		
+		CGPathMoveToPoint(path, NULL, pRect.origin.x, pRect.origin.y + pRect.size.height - lRadius);
+		CGPathAddArc(path, NULL, pRect.origin.x + lRadius, pRect.origin.y + pRect.size.height - lRadius, lRadius, M_PI, 0.5f * M_PI, 1);
+		CGPathAddArc(path, NULL, pRect.origin.x + pRect.size.width - rRadius, pRect.origin.y + pRect.size.height - rRadius, rRadius, 0.5f * M_PI, 0.f, 1);
+		CGPathAddArc(path, NULL, pRect.origin.x + pRect.size.width - borderRadius, pRect.origin.y + borderRadius, borderRadius, 0.f, 1.5f * M_PI, 1);
+		CGPathAddArc(path, NULL, pRect.origin.x + borderRadius, pRect.origin.y + borderRadius, borderRadius, 1.5f * M_PI, M_PI, 1);
+		CGPathCloseSubpath(path);
 	}
 	
 	return path;		// don't forget to release this!
@@ -647,7 +663,7 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight)
 	
 	// calculate the radius of the bow
 	CGFloat tangensAlpha = (bs.width / 2) / (2 * glossBow);
-	CGFloat radAlpha = (PI / 2) - atanf(tangensAlpha);
+	CGFloat radAlpha = (M_PI / 2) - atanf(tangensAlpha);
 	CGFloat bowRadius = (bs.width / 2) / sinf(radAlpha);
 	
 	// create the gloss path

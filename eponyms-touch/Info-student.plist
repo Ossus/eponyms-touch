@@ -33,7 +33,7 @@
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>NSMainNibFile~ipad</key>
-	<string>MainWindow</string>
+	<string>MainWindow-iPad</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

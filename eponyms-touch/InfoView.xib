@@ -12,8 +12,6 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="72"/>
-			<integer value="65"/>
 			<integer value="3"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
@@ -294,7 +292,7 @@
 					<object class="IBUITextView" id="853403725">
 						<reference key="NSNextResponder" ref="451520814"/>
 						<int key="NSvFlags">306</int>
-						<string key="NSFrame">{{20, 243}, {280, 169}}</string>
+						<string key="NSFrame">{{20, 243}, {280, 187}}</string>
 						<reference key="NSSuperview" ref="451520814"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -316,7 +314,7 @@
 						<bool key="IBUICanCancelContentTouches">NO</bool>
 						<bool key="IBUIBouncesZoom">NO</bool>
 						<bool key="IBUIEditable">NO</bool>
-						<string key="IBUIText">Robert Black, Andrea Bersano, Daniel Blanchard, Russell Brunet, Charles Cusumano, Lori Daniels, Philip Goodman, Niall Herity, Seppo Hietanen, Patrick T. Lee, Robert Lee, Thomas Mätzsch, Tom Kelly, John Murnick, James Noble, Adam Paley, Lorenz Pollack, Michael Propper, Gloria Saavedra, Leland Smith, Neale Thornton, Mathias Tschopp, Jeffrey L. Winters, Kerry Yancy</string>
+						<string key="IBUIText">Robert Black, Andrea Bersano, Daniel Blanchard, Russell Brunet, Charles Cusumano, Lori Daniels, Phil Davies, Philip Goodman, Niall Herity, Seppo Hietanen, Patrick T. Lee, Robert Lee, Jeffrey Leow, Thomas Mätzsch, Tom Kelly, John Murnick, James Noble, Adam Paley, Lorenz Pollack, Michael Propper, Gloria Saavedra, Leland Smith, Brian D. Soriano, Neale Thornton, Mathias Tschopp, Filipe Villa Verde, Jeffrey L. Winters, Kerry Yancy, Emily Yee</string>
 						<object class="NSFont" key="IBUIFont" id="941133211">
 							<string key="NSName">Helvetica</string>
 							<double key="NSSize">13</double>
@@ -348,7 +346,7 @@
 						<float key="IBUIMinimumFontSize">10</float>
 					</object>
 				</object>
-				<string key="NSFrameSize">{320, 432}</string>
+				<string key="NSFrameSize">{320, 450}</string>
 				<reference key="NSSuperview"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
@@ -368,6 +366,7 @@
 						<int key="NSvFlags">298</int>
 						<string key="NSFrame">{{0, 105}, {320, 180}}</string>
 						<reference key="NSSuperview" ref="433676126"/>
+						<reference key="NSWindow"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<int key="IBUIContentMode">4</int>
@@ -383,6 +382,7 @@
 						<int key="NSvFlags">290</int>
 						<string key="NSFrame">{{165, 16}, {135, 21}}</string>
 						<reference key="NSSuperview" ref="433676126"/>
+						<reference key="NSWindow"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -405,6 +405,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 16}, {132, 21}}</string>
 						<reference key="NSSuperview" ref="433676126"/>
+						<reference key="NSWindow"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -424,6 +425,7 @@
 						<int key="NSvFlags">290</int>
 						<string key="NSFrame">{{165, 37}, {135, 21}}</string>
 						<reference key="NSSuperview" ref="433676126"/>
+						<reference key="NSWindow"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -443,6 +445,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 37}, {132, 21}}</string>
 						<reference key="NSSuperview" ref="433676126"/>
+						<reference key="NSWindow"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -462,6 +465,7 @@
 						<int key="NSvFlags">266</int>
 						<string key="NSFrame">{{15, 375}, {290, 21}}</string>
 						<reference key="NSSuperview" ref="433676126"/>
+						<reference key="NSWindow"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -485,6 +489,7 @@
 						<int key="NSvFlags">265</int>
 						<string key="NSFrame">{{206, 345}, {94, 27}}</string>
 						<reference key="NSSuperview" ref="433676126"/>
+						<reference key="NSWindow"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -497,6 +502,7 @@
 						<int key="NSvFlags">266</int>
 						<string key="NSFrame">{{20, 348}, {173, 21}}</string>
 						<reference key="NSSuperview" ref="433676126"/>
+						<reference key="NSWindow"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -522,6 +528,7 @@
 								<int key="NSvFlags">293</int>
 								<string key="NSFrame">{{20, 61}, {280, 37}}</string>
 								<reference key="NSSuperview" ref="961735616"/>
+								<reference key="NSWindow"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -545,6 +552,7 @@
 								<int key="NSvFlags">293</int>
 								<string key="NSFrame">{{52, 40}, {215, 9}}</string>
 								<reference key="NSSuperview" ref="961735616"/>
+								<reference key="NSWindow"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -556,6 +564,7 @@
 								<int key="NSvFlags">290</int>
 								<string key="NSFrame">{{20, 10}, {280, 21}}</string>
 								<reference key="NSSuperview" ref="961735616"/>
+								<reference key="NSWindow"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -576,6 +585,7 @@
 						</object>
 						<string key="NSFrame">{{0, 134}, {320, 112}}</string>
 						<reference key="NSSuperview" ref="433676126"/>
+						<reference key="NSWindow"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MSAwAA</bytes>
@@ -586,6 +596,7 @@
 				</object>
 				<string key="NSFrameSize">{320, 416}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MCAwIDAgMAA</bytes>
@@ -604,6 +615,7 @@
 						<int key="NSvFlags">289</int>
 						<string key="NSFrame">{{206, 20}, {94, 27}}</string>
 						<reference key="NSSuperview" ref="45044430"/>
+						<reference key="NSWindow"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -617,6 +629,7 @@
 						<int key="NSvFlags">294</int>
 						<string key="NSFrame">{{20, 23}, {178, 21}}</string>
 						<reference key="NSSuperview" ref="45044430"/>
+						<reference key="NSWindow"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -637,6 +650,7 @@
 						<int key="NSvFlags">290</int>
 						<string key="NSFrame">{{20, 55}, {280, 54}}</string>
 						<reference key="NSSuperview" ref="45044430"/>
+						<reference key="NSWindow"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -661,6 +675,7 @@ ZXZpY2UuCihUaGlzIG9wdGlvbnMgc2NyZWVuIHdpbGwgbm90IHJvdGF0ZSk</string>
 						<int key="NSvFlags">289</int>
 						<string key="NSFrame">{{206, 125}, {94, 27}}</string>
 						<reference key="NSSuperview" ref="45044430"/>
+						<reference key="NSWindow"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -674,6 +689,7 @@ ZXZpY2UuCihUaGlzIG9wdGlvbnMgc2NyZWVuIHdpbGwgbm90IHJvdGF0ZSk</string>
 						<int key="NSvFlags">294</int>
 						<string key="NSFrame">{{20, 128}, {178, 22}}</string>
 						<reference key="NSSuperview" ref="45044430"/>
+						<reference key="NSWindow"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -694,6 +710,7 @@ ZXZpY2UuCihUaGlzIG9wdGlvbnMgc2NyZWVuIHdpbGwgbm90IHJvdGF0ZSk</string>
 						<int key="NSvFlags">290</int>
 						<string key="NSFrame">{{20, 160}, {280, 85}}</string>
 						<reference key="NSSuperview" ref="45044430"/>
+						<reference key="NSWindow"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -715,6 +732,7 @@ ZXZpY2UuCihUaGlzIG9wdGlvbnMgc2NyZWVuIHdpbGwgbm90IHJvdGF0ZSk</string>
 				</object>
 				<string key="NSFrameSize">{320, 265}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MCAwIDAgMAA</bytes>
@@ -1221,7 +1239,7 @@ ZXZpY2UuCihUaGlzIG9wdGlvbnMgc2NyZWVuIHdpbGwgbm90IHJvdGF0ZSk</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>{{414, 326}, {320, 432}}</string>
+					<string>{{645, 365}, {320, 450}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1345,7 +1363,6 @@ ZXZpY2UuCihUaGlzIG9wdGlvbnMgc2NyZWVuIHdpbGwgbm90IHJvdGF0ZSk</string>
 							<string>allowLearnModeSwitch</string>
 							<string>allowRotateSwitch</string>
 							<string>autocheckSwitch</string>
-							<string>delegate</string>
 							<string>eponymsDotNetButton</string>
 							<string>infoView</string>
 							<string>lastCheckLabel</string>
@@ -1365,7 +1382,6 @@ ZXZpY2UuCihUaGlzIG9wdGlvbnMgc2NyZWVuIHdpbGwgbm90IHJvdGF0ZSk</string>
 							<string>UISwitch</string>
 							<string>UISwitch</string>
 							<string>UISwitch</string>
-							<string>id</string>
 							<string>UIButton</string>
 							<string>UIView</string>
 							<string>UILabel</string>
@@ -1388,7 +1404,6 @@ ZXZpY2UuCihUaGlzIG9wdGlvbnMgc2NyZWVuIHdpbGwgbm90IHJvdGF0ZSk</string>
 							<string>allowLearnModeSwitch</string>
 							<string>allowRotateSwitch</string>
 							<string>autocheckSwitch</string>
-							<string>delegate</string>
 							<string>eponymsDotNetButton</string>
 							<string>infoView</string>
 							<string>lastCheckLabel</string>
@@ -1416,10 +1431,6 @@ ZXZpY2UuCihUaGlzIG9wdGlvbnMgc2NyZWVuIHdpbGwgbm90IHJvdGF0ZSk</string>
 							<object class="IBToOneOutletInfo">
 								<string key="name">autocheckSwitch</string>
 								<string key="candidateClassName">UISwitch</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">delegate</string>
-								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">eponymsDotNetButton</string>

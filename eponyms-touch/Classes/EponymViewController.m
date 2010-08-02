@@ -47,9 +47,8 @@
 @property (nonatomic, readwrite, retain) GADAdViewController *adController;
 
 - (BOOL) adViewIsVisible;
-- (BOOL) adViewExists;
-- (void) addGoogleAdsToView:(UIView *)toView inRect:(CGRect)inRect;
 - (void) loadGoogleAdsWithEponym:(Eponym *)eponym;
+- (void) assureGoogleAdsVisibleInView:(UIView *)inView;
 #endif
 
 @end
@@ -71,17 +70,9 @@
 @dynamic revealButton;
 @synthesize displayNextEponymInLearningMode;
 #ifdef SHOW_GOOGLE_ADS
-@synthesize adController;
+@dynamic adController;
 #endif
 
-
-- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-	if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-		self.title = @"Eponym";
-	}
-	return self;
-}
 
 - (void) dealloc
 {
@@ -100,6 +91,7 @@
 	self.revealButton = nil;
 	
 #ifdef SHOW_GOOGLE_ADS
+	adController.delegate = nil;
 	self.adController = nil;
 #endif
 	
@@ -121,10 +113,26 @@
 	self.revealButton = nil;
 	
 #ifdef SHOW_GOOGLE_ADS
+	adController.delegate = nil;
 	self.adController = nil;
 #endif
 	
 	[super viewDidUnload];
+}
+
+
+- (id) init
+{
+	return [self initWithNibName:nil bundle:nil];
+}
+
+- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+	if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+		self.title = @"Eponym";
+		adSize = kGADAdSize320x50;
+	}
+	return self;
 }
 #pragma mark -
 
@@ -169,11 +177,6 @@
 	}
 	
 	[self.view addSubview:container];
-	
-	// Google Ads
-#ifdef SHOW_GOOGLE_ADS
-	[self adViewExists];
-#endif
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -204,9 +207,6 @@
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
 	if (APP_DELEGATE.allowAutoRotate) {
-		if (nil != eponymCategoriesLabel.hintViewDisplayed) {
-			[eponymCategoriesLabel.hintViewDisplayed hide];
-		}
 		return YES;
 	}
 	
@@ -216,11 +216,6 @@
 - (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
 	[self alignUIElements];
-#ifdef SHOW_GOOGLE_ADS
-	if (!adIsLoading && !adDidLoad && [self adViewIsVisible]) {
-		[self loadGoogleAdsWithEponym:eponymToBeShown];
-	}
-#endif
 }
 #pragma mark -
 
@@ -249,7 +244,6 @@
 		self.revealButton.frame = eponymTextView.bounds;
 		[eponymTextView addSubview:revealButton];
 	}
-	displayNextEponymInLearningMode = EPLearningModeNone;
 	
 	// categories
 	if ([eponymToBeShown.categories count] > 0) {
@@ -289,6 +283,15 @@
 	
 	// adjust content
 	[self alignUIElements];
+	
+	// load ads
+#ifdef SHOW_GOOGLE_ADS
+	if (EPLearningModeNone == displayNextEponymInLearningMode && [self adViewIsVisible]) {
+		[self performSelector:@selector(loadGoogleAdsWithEponym:) withObject:eponymToBeShown afterDelay:0.4];
+	}
+#endif
+	
+	displayNextEponymInLearningMode = EPLearningModeNone;
 }
 
 - (void) alignUIElements
@@ -354,13 +357,14 @@
 	
 	// adjust Google ads
 #ifdef SHOW_GOOGLE_ADS
-	if ([self adViewExists]) {
-		CGFloat googleMin = viewFrame.size.height - kGADAdSize320x50.height;
+	if (self.adController) {
+		CGFloat googleMin = viewFrame.size.height - adSize.height;
 		CGFloat googleY = superRect.origin.y + superRect.size.height + kGoogleAdViewTopMargin;
 		CGFloat googleTop = fmaxf(googleY, googleMin);
-		CGRect adRect = CGRectMake(0.0, googleTop, kGADAdSize320x50.width, kGADAdSize320x50.height);
-		[self addGoogleAdsToView:self.view inRect:adRect];
-		totalHeight = googleTop + adRect.size.height;
+		CGRect adRect = CGRectMake(0.f, googleTop, adSize.width, adSize.height);
+		
+		adController.view.frame = adRect;
+		totalHeight = adRect.origin.y + adRect.size.height;
 	}
 #endif
 	
@@ -371,7 +375,7 @@
 	
 	// scroll to top when needed
 	if (totalHeight < minHeight) {
-		[((UIScrollView *)self.view) scrollRectToVisible:CGRectMake(0.0, 0.0, 10.0, 10.0) animated:NO];
+		[((UIScrollView *)self.view) scrollRectToVisible:CGRectMake(0.f, 0.f, 10.f, 10.f) animated:NO];
 	}
 }
 
@@ -386,18 +390,6 @@
 	}
 }
 
-- (void) showRandomEponymWithMode:(EPLearningMode)mode
-{
-	if (EPLearningModeNoTitle == mode) {
-		
-		
-	}
-	else {
-		
-		
-	}
-}
-
 - (IBAction) reveal:(id)sender
 {
 	[revealButton removeFromSuperview];
@@ -406,10 +398,18 @@
 	
 	eponymTitleLabel.text = eponymToBeShown.title;
 	eponymTextView.text = eponymToBeShown.text;
+	//eponymTextView.text = [NSString stringWithFormat:@"%@ %@ %@ %@", eponymToBeShown.text, eponymToBeShown.text, eponymToBeShown.text, eponymToBeShown.text];		// to test long eponyms
 	
 	[UIView beginAnimations:nil context:nil];
 	[self alignUIElements];
 	[UIView commitAnimations];
+	
+	// load ads
+#ifdef SHOW_GOOGLE_ADS
+	if ([self adViewIsVisible]) {
+		[self performSelector:@selector(loadGoogleAdsWithEponym:) withObject:eponymToBeShown afterDelay:0.4];
+	}
+#endif
 }
 #pragma mark -
 
@@ -449,11 +449,7 @@
 		
 		if (nil != eponymToBeShown) {
 #ifdef SHOW_GOOGLE_ADS
-			adIsLoading = NO;
-			adDidLoad = NO;
-			if ([self adViewIsVisible]) {
-				[self performSelector:@selector(loadGoogleAdsWithEponym:) withObject:eponymToBeShown afterDelay:0.4];
-			}
+			adDidLoadForThisEponym = NO;
 #endif
 			[self adjustInterfaceToEponym];
 		}
@@ -742,7 +738,7 @@
 #ifdef SHOW_GOOGLE_ADS
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView
 {
-	if (!adIsLoading && !adDidLoad && [self adViewIsVisible]) {
+	if (!adIsLoading && !adDidLoadForThisEponym && [self adViewIsVisible]) {
 		[self loadGoogleAdsWithEponym:eponymToBeShown];
 	}
 }
@@ -753,43 +749,50 @@
 
 #ifdef SHOW_GOOGLE_ADS
 #pragma mark Google Ads
+- (GADAdViewController *) adController
+{
+	if (nil == adController) {
+		adIsLoading = NO;
+		
+		self.adController = [[[GADAdViewController alloc] initWithDelegate:self] autorelease];
+		adController.adSize = adSize;
+		adController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	}
+	return adController;
+}
+- (void) setAdController:(GADAdViewController *)newController
+{
+	if (newController != adController) {
+		[adController release];
+		adController = [newController retain];
+	}
+}
+
+
 - (BOOL) adViewIsVisible
 {
 	BOOL adIsVisible = NO;
-	if (viewIsVisible && [self adViewExists]) {
+	if (viewIsVisible && self.adController) {
 		UIScrollView *scrollView = (UIScrollView *)self.view;
-		CGFloat adMiddle = adController.view.frame.origin.y + (adController.view.frame.size.height / 2);
+		CGRect adRect = [adController.view frame];
+		CGFloat adMiddle = adRect.origin.y + (adRect.size.height / 2);
 		CGFloat lowestVisible = scrollView.frame.size.height + scrollView.contentOffset.y;
 		adIsVisible = (adMiddle <= lowestVisible);
 	}
 	return adIsVisible;
 }
 
-- (BOOL) adViewExists
+- (void) assureGoogleAdsVisibleInView:(UIView *)inView
 {
-	if (nil != adController) {
-		return YES;
-	}
-	
-	self.adController = [[[GADAdViewController alloc] initWithDelegate:self] autorelease];
-	adController.adSize = kGADAdSize320x50;
-	adController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-	
-	return (nil != adController);
-}
-
-- (void) addGoogleAdsToView:(UIView *)toView inRect:(CGRect)inRect
-{
-	if ([self adViewExists]) {
+	if (self.adController) {
 		UIView *oldSuperview = [adController.view superview];
-		if (nil != oldSuperview && oldSuperview != toView) {
+		if (nil != oldSuperview && oldSuperview != inView) {
 			[adController.view removeFromSuperview];
 			oldSuperview = nil;
 		}
 		
-		adController.view.frame = inRect;
 		if (nil == oldSuperview) {
-			[toView addSubview:adController.view];
+			[inView addSubview:adController.view];
 		}
 	}
 }
@@ -797,13 +800,13 @@
 - (void) loadGoogleAdsWithEponym:(Eponym *)eponym
 {
 	DLog(@"load?");
-	if (!adIsLoading && !adDidLoad && [self adViewExists]) {
-		DLog(@"load!");
+	if (!adIsLoading && !adDidLoadForThisEponym && self.adController) {
 		NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
 		if (now < adsAreRefractoryUntil) {
 			return;
 		}
-		adsAreRefractoryUntil = now + 10.0;					// at max load a new ad every 10 seconds
+		DLog(@"load!");
+		adsAreRefractoryUntil = now + 20.0;					// at max load a new ad every 20 seconds
 		
 		adIsLoading = YES;
 		NSMutableArray *categoryStrings = [NSMutableArray arrayWithCapacity:[eponym.categories count]];
@@ -814,7 +817,7 @@
 								@"medical,eponyms,%@,%@",
 								[categoryStrings componentsJoinedByString:@","],
 								eponym.keywordTitle];
-		//NSLog(@"Google Ad keywords: %@", myKeywords);
+		
 		// **************************************************************************
 		// Please replace the kGADAdSenseClientID, kGADAdSenseKeywords, and
 		// kGADAdSenseChannelIDs values with your own AdSense client ID, keywords,
@@ -825,13 +828,14 @@
 		// PLEASE DO NOT CLICK ON THE AD UNLESS YOU ARE IN TEST MODE. OTHERWISE, YOUR
 		// ACCOUNT MAY BE DISABLED.
 		// **************************************************************************
+		NSString *channelId = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? kGoogleAdSenseIPadChannelID : kGoogleAdSenseChannelID;
 		NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
 									kGoogleAdSenseClientID, kGADAdSenseClientID,
 									kGoogleAdSenseCompanyName, kGADAdSenseCompanyName,
 									kGoogleAdSenseAppName, kGADAdSenseAppName,
 									kGoogleAdSenseAppleID, kGADAdSenseApplicationAppleID,
 									myKeywords, kGADAdSenseKeywords,
-									[NSArray arrayWithObject:kGoogleAdSenseChannelID], kGADAdSenseChannelIDs,
+									[NSArray arrayWithObject:channelId], kGADAdSenseChannelIDs,
 									@"e5e5e5", kGADAdSenseAdBackgroundColor,
 									@"999999", kGADAdSenseAdBorderColor,
 									@"000000", kGADAdSenseAdLinkColor,
@@ -851,26 +855,32 @@
 
 
 #pragma mark Ad Delegate
-- (UIViewController *) viewControllerForModalPresentation:(GADAdViewController *)adController
+- (UIViewController *) viewControllerForModalPresentation:(GADAdViewController *)anAdController
 {
-	return self;
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+		return self.parentViewController;
+	}
+	return self.navigationController;
 }
 
-- (GADAdClickAction) adControllerActionModelForAdClick:(GADAdViewController *)adController
+- (GADAdClickAction) adControllerActionModelForAdClick:(GADAdViewController *)anAdController
 {
 	return GAD_ACTION_DISPLAY_INTERNAL_WEBSITE_VIEW;
 }
 
-- (void) loadSucceeded:(GADAdViewController *)adController withResults:(NSDictionary *)results
+- (void) loadSucceeded:(GADAdViewController *)anAdController withResults:(NSDictionary *)results
 {
-	DLog(@"Load Succeeded: %@", results);
-	adDidLoad = YES;
+	//DLog(@"Load Succeeded: %@", results);
+	[self assureGoogleAdsVisibleInView:self.view];
+	adIsLoading = NO;
+	adDidLoadForThisEponym = YES;
 }
 
 - (void) loadFailed:(GADAdViewController *)anAdController withError:(NSError *)error
 {
-	DLog(@"Load Failed: %@", [error userInfo]);
+	//DLog(@"Load Failed: %@", [error userInfo]);
 	[anAdController.view removeFromSuperview];
+	adIsLoading = NO;
 }
 #endif
 
