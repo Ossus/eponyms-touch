@@ -756,7 +756,7 @@
 		
 		self.adController = [[[GADAdViewController alloc] initWithDelegate:self] autorelease];
 		adController.adSize = adSize;
-		adController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+		//adController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;		// not stretchable at the moment
 	}
 	return adController;
 }
@@ -799,14 +799,12 @@
 
 - (void) loadGoogleAdsWithEponym:(Eponym *)eponym
 {
-	DLog(@"load?");
 	if (!adIsLoading && !adDidLoadForThisEponym && self.adController) {
 		NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
 		if (now < adsAreRefractoryUntil) {
 			return;
 		}
-		DLog(@"load!");
-		adsAreRefractoryUntil = now + 20.0;					// at max load a new ad every 20 seconds
+		adsAreRefractoryUntil = now + 30.0;					// at max load a new ad every 30 seconds
 		
 		adIsLoading = YES;
 		NSMutableArray *categoryStrings = [NSMutableArray arrayWithCapacity:[eponym.categories count]];
@@ -858,7 +856,7 @@
 - (UIViewController *) viewControllerForModalPresentation:(GADAdViewController *)anAdController
 {
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-		return self.parentViewController;
+		return (UIViewController *)APP_DELEGATE.splitController;
 	}
 	return self.navigationController;
 }
@@ -867,6 +865,12 @@
 {
 	return GAD_ACTION_DISPLAY_INTERNAL_WEBSITE_VIEW;
 }
+
+- (void) adControllerDidCloseWebsiteView:(GADAdViewController *)anAdController
+{
+	[UIAccelerometer sharedAccelerometer].delegate = APP_DELEGATE;			// strangely needed here!
+}
+
 
 - (void) loadSucceeded:(GADAdViewController *)anAdController withResults:(NSDictionary *)results
 {

@@ -47,7 +47,7 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>SubversionRevision</key>
-	<string>r80</string>
+	<string>r86</string>
 	<key>eponymUpdateCheckURL</key>
 	<string>http://code.hillrippers.ch/eponyms/XML/eponyms_info.xml</string>
 	<key>eponymUpdateCheckURL DEBUG</key>
