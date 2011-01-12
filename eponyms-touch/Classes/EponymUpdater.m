@@ -223,7 +223,7 @@ static sqlite3_stmt *star_eponym_query = nil;
 {
 	NSAutoreleasePool *myAutoreleasePool = [[NSAutoreleasePool alloc] init];
 	
-	self.numEponymsParsed = 0;
+	numEponymsParsed = 0;
 	self.categoriesAlreadyInserted = [NSMutableDictionary dictionary];
 	[self prepareDBAndQueries];
 	
@@ -512,7 +512,7 @@ static sqlite3_stmt *star_eponym_query = nil;
 				[parser abortParsing];
 			}
 			
-			self.numEponymsParsed += 1;
+			numEponymsParsed += 1;
 			
 			// **
 			// Insert eponym, link to categories and clean up

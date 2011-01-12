@@ -20,7 +20,7 @@
 #import "EponymViewController.h"
 #import "SQLiteAccessors.h"
 #ifdef SQLITE_ENABLE_UNICODE
-#import "sqlite3_unicode.h"
+#	import "sqlite3_unicode.h"
 #endif
 
 #define EPONYM_TITLE_FIELD @"eponym_en"

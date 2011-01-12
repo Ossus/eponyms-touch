@@ -128,9 +128,11 @@
 
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-	if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
 		self.title = @"Eponym";
+#ifdef SHOW_GOOGLE_ADS
 		adSize = kGADAdSize320x50;
+#endif
 	}
 	return self;
 }
