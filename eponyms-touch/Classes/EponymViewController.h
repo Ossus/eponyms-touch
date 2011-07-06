@@ -12,7 +12,7 @@
 
 #import <UIKit/UIKit.h>
 #ifdef SHOW_GOOGLE_ADS
-#import "GADAdViewController.h"
+#import "GADBannerView.h"
 #endif
 @class Eponym;
 @class MCTextView;
@@ -21,7 +21,7 @@
 
 @interface EponymViewController : UIViewController <UIScrollViewDelegate
 #ifdef SHOW_GOOGLE_ADS
-													, GADAdViewControllerDelegate
+													, GADBannerViewDelegate
 #endif
 	>
 {
@@ -43,10 +43,10 @@
 	UIButton *revealButton;
 	
 #ifdef SHOW_GOOGLE_ADS
-	GADAdSize adSize;
+	CGSize adSize;
 	BOOL adIsLoading;
 	BOOL adDidLoadForThisEponym;
-	GADAdViewController *adController;
+	GADBannerView *adView;
 	NSTimeInterval adsAreRefractoryUntil;			// timestamp until we allow loading a new ad
 #endif
 }
@@ -68,7 +68,7 @@
 @property (nonatomic, retain) UIButton *revealButton;
 
 #ifdef SHOW_GOOGLE_ADS
-@property (nonatomic, readonly, retain) GADAdViewController *adController;
+@property (nonatomic, readonly, retain) GADBannerView *adView;
 #endif
 
 - (void) toggleEponymStarred:(id)sender;

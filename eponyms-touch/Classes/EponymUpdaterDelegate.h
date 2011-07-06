@@ -9,7 +9,7 @@
 //  Protocol for the delegate of the EponymUpdater
 // 
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 @class EponymUpdater;
 
 @protocol EponymUpdaterDelegate <NSObject>

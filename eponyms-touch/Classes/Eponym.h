@@ -11,17 +11,17 @@
 
 
 #import <Foundation/Foundation.h>
+@class eponyms_touchAppDelegate;
 
 
 @interface Eponym : NSObject {
-	id delegate;
+	eponyms_touchAppDelegate *delegate;
 	
 	// Primary key
 	NSUInteger eponym_id;
 	
 	// Eponym Attributes
 	NSString *title;
-	NSString *keywordTitle;			// the title ready to be used as a keyword
 	NSString *text;
 	NSArray *categories;
 	NSDate *created;
@@ -35,7 +35,6 @@
 // KVC
 @property (readonly, nonatomic) NSUInteger eponym_id;
 @property (copy, nonatomic) NSString *title;
-@property (copy, nonatomic, readonly) NSString *keywordTitle;
 @property (copy, nonatomic) NSString *text;
 @property (copy, nonatomic) NSArray *categories;
 @property (copy, nonatomic) NSDate *created;
@@ -47,7 +46,7 @@
 + (void) finalizeQueries;
 
 // Init the Eponym with the desired key
-- (id) initWithID:(NSUInteger) eid title:(NSString*) ttl delegate:(id)myDelegate;
+- (id) initWithID:(NSUInteger) eid title:(NSString*) ttl delegate:(eponyms_touchAppDelegate *)myDelegate;
 
 // Loading and unloading. Everything but key and title are wiped from memory on unload
 - (void) load;

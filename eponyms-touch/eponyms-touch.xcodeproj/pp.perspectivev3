@@ -285,20 +285,18 @@
 								<string>29B97314FDCFA39411CA2CEA</string>
 								<string>080E96DDFE201D6D7F000001</string>
 								<string>EE2DE7AD0E1C2F8600D97653</string>
-								<string>EE56383A109DFA7A00D6C4E6</string>
 								<string>29B97317FDCFA39411CA2CEA</string>
 								<string>1C37FBAC04509CD000000102</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>50</integer>
-									<integer>38</integer>
+									<integer>2</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 142}, {248, 754}}</string>
+							<string>{{0, 0}, {248, 754}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -335,7 +333,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>EE2DE69A0E1ADE1800D97653</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>eponyms.xml</string>
+								<string>eponyms_touchAppDelegate.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -343,11 +341,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>EE2DE69B0E1ADE1800D97653</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>eponyms.xml</string>
+										<string>eponyms_touchAppDelegate.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>EE97B82A12DE675B001966F6</string>
+										<string>EE5C00FA130A685600DDD3F7</string>
 										<key>history</key>
 										<array>
 											<string>EE3BC3C80E6ACEF20051B69D</string>
@@ -439,8 +437,8 @@
 											<string>EE97B81812DE6410001966F6</string>
 											<string>EE97B82112DE6463001966F6</string>
 											<string>EE97B82212DE6463001966F6</string>
-											<string>EE97B82512DE673A001966F6</string>
-											<string>EE97B82612DE673A001966F6</string>
+											<string>EE5C00F8130A685600DDD3F7</string>
+											<string>EE5C00F9130A685600DDD3F7</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -480,6 +478,8 @@
 									<dict>
 										<key>Frame</key>
 										<string>{{10, 27}, {1078, -27}}</string>
+										<key>RubberWindowFrame</key>
+										<string>1 43 1348 835 0 0 1440 878 </string>
 									</dict>
 									<key>Module</key>
 									<string>XCDetailModule</string>
@@ -495,7 +495,7 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {1078, -27}}</string>
+										<string>{{0, 0}, {614, 336}}</string>
 									</dict>
 									<key>Module</key>
 									<string>PBXProjectFindModule</string>
@@ -554,9 +554,7 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {1078, -27}}</string>
-										<key>RubberWindowFrame</key>
-										<string>1 43 1348 835 0 0 1440 878 </string>
+										<string>{{0, 0}, {568, 405}}</string>
 									</dict>
 									<key>Module</key>
 									<string>PBXBuildResultsModule</string>
@@ -584,11 +582,11 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>EE97B7AA12DE5BAE001966F6</string>
+				<string>EE5C00FB130A685600DDD3F7</string>
 				<string>1CA23ED40692098700951B8B</string>
-				<string>EE97B7AB12DE5BAE001966F6</string>
+				<string>EE5C00FC130A685600DDD3F7</string>
 				<string>EE2DE69A0E1ADE1800D97653</string>
-				<string>EE97B7AC12DE5BAE001966F6</string>
+				<string>EE5C00FD130A685600DDD3F7</string>
 				<string>1CA23EDF0692099D00951B8B</string>
 				<string>1CA23EE00692099D00951B8B</string>
 				<string>1CA23EE10692099D00951B8B</string>
@@ -780,9 +778,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>EE97B82B12DE675B001966F6</string>
-		<string>EE97B7DC12DE6090001966F6</string>
-		<string>EE97B7BF12DE5D26001966F6</string>
 		<string>/Users/pp/Programming/Cocoa/eponyms-touch/eponyms-touch.xcodeproj</string>
 	</array>
 	<key>WindowString</key>

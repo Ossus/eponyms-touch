@@ -9,7 +9,7 @@
 //  AppDelegate Header for eponyms-touch
 //  
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 #import <sqlite3.h>
 #import "EponymUpdaterDelegate.h"
 

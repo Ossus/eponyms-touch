@@ -20,18 +20,10 @@ static sqlite3_stmt *mark_accessed_query = nil;
 static sqlite3_stmt *toggle_starred_query = nil;
 
 
-@interface Eponym ()
-
-@property (nonatomic, readwrite, copy) NSString *keywordTitle;
-
-@end
-
-
 @implementation Eponym
 
 @synthesize eponym_id;
 @synthesize title;
-@dynamic keywordTitle;
 @synthesize text;
 @synthesize categories;
 @synthesize created;
@@ -58,10 +50,9 @@ static sqlite3_stmt *toggle_starred_query = nil;
 }
 
 // Init the Eponym with the desired key
-- (id) initWithID:(NSUInteger)eid title:(NSString*)ttl delegate:(id)myDelegate
+- (id) initWithID:(NSUInteger)eid title:(NSString*)ttl delegate:(eponyms_touchAppDelegate *)myDelegate
 {
-	self = [super init];
-	if(self) {
+	if ((self = [super init])) {
 		eponym_id = eid;
 		self.title = ttl;
 		delegate = myDelegate;
@@ -75,25 +66,6 @@ static sqlite3_stmt *toggle_starred_query = nil;
 	self.title = nil;
 	
 	[super dealloc];
-}
-#pragma mark -
-
-
-
-#pragma mark KVC
-- (NSString *) keywordTitle
-{
-	if (nil == keywordTitle) {
-		self.keywordTitle = [self.title stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-	}
-	return keywordTitle;
-}
-- (void) setKeywordTitle:(NSString *)newTitle
-{
-	if (newTitle != keywordTitle) {
-		[keywordTitle release];
-		keywordTitle = [newTitle copyWithZone:[self zone]];
-	}
 }
 #pragma mark -
 
@@ -186,10 +158,10 @@ static sqlite3_stmt *toggle_starred_query = nil;
 #pragma mark Other
 - (void) toggleStarred
 {
-	if([delegate database]) {
-		if(!toggle_starred_query) {
+	if ([delegate database]) {
+		if (!toggle_starred_query) {
 			const char *qry = "UPDATE eponyms SET starred = ? WHERE eponym_id = ?";
-			if(sqlite3_prepare_v2([delegate database], qry, -1, &toggle_starred_query, NULL) != SQLITE_OK) {
+			if (sqlite3_prepare_v2([delegate database], qry, -1, &toggle_starred_query, NULL) != SQLITE_OK) {
 				NSAssert1(0, @"Error: failed to prepare toggle_starred_query: '%s'.", sqlite3_errmsg([delegate database]));
 			}
 		}
@@ -199,7 +171,7 @@ static sqlite3_stmt *toggle_starred_query = nil;
 		sqlite3_bind_int(toggle_starred_query, 2, eponym_id);
 		
 		// execute
-		if(SQLITE_DONE != sqlite3_step(toggle_starred_query)) {
+		if (SQLITE_DONE != sqlite3_step(toggle_starred_query)) {
 			NSAssert1(0, @"Error: failed to execute toggle_starred_query: '%s'.", sqlite3_errmsg([delegate database]));
 		}
 		sqlite3_reset(toggle_starred_query);
@@ -209,10 +181,10 @@ static sqlite3_stmt *toggle_starred_query = nil;
 
 - (void) markAccessed
 {
-	if([delegate database]) {
-		if(!mark_accessed_query) {
+	if ([delegate database]) {
+		if (!mark_accessed_query) {
 			const char *qry = "UPDATE eponyms SET lastaccess = ? WHERE eponym_id = ?";
-			if(sqlite3_prepare_v2([delegate database], qry, -1, &mark_accessed_query, NULL) != SQLITE_OK) {
+			if (sqlite3_prepare_v2([delegate database], qry, -1, &mark_accessed_query, NULL) != SQLITE_OK) {
 				NSAssert1(0, @"Error: failed to prepare mark_accessed_query: '%s'.", sqlite3_errmsg([delegate database]));
 			}
 		}
@@ -220,7 +192,7 @@ static sqlite3_stmt *toggle_starred_query = nil;
 		sqlite3_bind_int(mark_accessed_query, 1, [[NSDate date] timeIntervalSince1970]);
 		sqlite3_bind_int(mark_accessed_query, 2, eponym_id);
 		
-		if(SQLITE_DONE != sqlite3_step(mark_accessed_query)) {
+		if (SQLITE_DONE != sqlite3_step(mark_accessed_query)) {
 			NSAssert1(0, @"Error: failed to execute mark_accessed_query: '%s'.", sqlite3_errmsg([delegate database]));
 		}
 		sqlite3_reset(mark_accessed_query);
