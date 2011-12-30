@@ -431,7 +431,7 @@
 				EEFA119210A38F3D0041A4D7 /* GoogleAdSenseClient.h */,
 			);
 			path = GoogleAds;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		EE89CD880E6174C00016A781 /* Subclasses */ = {
 			isa = PBXGroup;

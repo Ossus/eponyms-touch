@@ -1,0 +1,18 @@
+# ignore OS X and server files 
+.DS_Store
+.htaccess
+ 
+# build directories
+build/*
+ 
+# Xcode user data
+**.pbxuser
+**.mode?v?
+**.perspectivev?
+**.xcworkspace
+**/xcuserdata
+
+# private files
+GoogleAds
+sqlite3_unicode.*
+
