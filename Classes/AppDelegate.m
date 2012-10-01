@@ -9,7 +9,7 @@
 //  AppDelegate for eponyms-touch
 //  
 
-#import "eponyms_touchAppDelegate.h"
+#import "AppDelegate.h"
 #import "EponymCategory.h"
 #import "Eponym.h"
 #import "EponymUpdater.h"
@@ -35,7 +35,7 @@ static sqlite3_stmt *load_eponyms_of_category_query = nil;
 static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 
 
-@interface eponyms_touchAppDelegate ()
+@interface AppDelegate ()
 
 @property (nonatomic, readwrite, assign) UIViewController *topLevelController;
 @property (nonatomic, readwrite, retain) PPSplitViewController *splitController;
@@ -57,7 +57,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 
 #pragma mark -
 
-@implementation eponyms_touchAppDelegate
+@implementation AppDelegate
 
 @synthesize window, database, myUpdater, usingEponymsOf;
 @synthesize allowAutoRotate, allowLearnMode, shouldAutoCheck;

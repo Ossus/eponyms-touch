@@ -29,7 +29,7 @@ typedef enum {
 } EPLearningMode;
 
 
-@interface eponyms_touchAppDelegate : NSObject <UIApplicationDelegate, EponymUpdaterDelegate, UIAccelerometerDelegate> {
+@interface AppDelegate : NSObject <UIApplicationDelegate, EponymUpdaterDelegate, UIAccelerometerDelegate> {
 	IBOutlet UIWindow *window;
 	sqlite3 *database;
 	

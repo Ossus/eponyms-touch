@@ -13,7 +13,7 @@
 
 #import "EponymUpdater.h"
 #import "InfoViewController.h"
-#import "eponyms_touchAppDelegate.h"
+#import "AppDelegate.h"
 
 #define URL_LOAD_TIMEOUT 20.0
 
@@ -648,10 +648,10 @@ static sqlite3_stmt *star_eponym_query = nil;
 // Call before we start to parse
 - (void) prepareDBAndQueries
 {
-	database = [(eponyms_touchAppDelegate *)delegate database];
+	database = [(AppDelegate *)delegate database];
 	if (nil == database) {
-		[(eponyms_touchAppDelegate *)delegate connectToDBAndCreateIfNeeded];
-		database = [(eponyms_touchAppDelegate *)delegate database];
+		[(AppDelegate *)delegate connectToDBAndCreateIfNeeded];
+		database = [(AppDelegate *)delegate database];
 	}
 	
 	char *err;
@@ -659,7 +659,7 @@ static sqlite3_stmt *star_eponym_query = nil;
 	// ****
 	// Create the in-memory database (for faster insert operation)
 	if (SQLITE_OK == sqlite3_open(":memory:", &memory_database)) {		// sqlite3_open_v2(":memory:", &memory_database, SQLITE_OPEN_CREATE, NULL)
-		NSDictionary *creationQueries = [(eponyms_touchAppDelegate *)delegate databaseCreationQueries];
+		NSDictionary *creationQueries = [(AppDelegate *)delegate databaseCreationQueries];
 		NSString *createCatTable = [creationQueries objectForKey:@"createCatTable"];
 		NSString *createLinkTable = [creationQueries objectForKey:@"createLinkTable"];
 		NSString *createEpoTable = [creationQueries objectForKey:@"createEpoTable"];
@@ -757,7 +757,7 @@ static sqlite3_stmt *star_eponym_query = nil;
 	
 	// ****
 	// ATTACH main database to :memory: database
-	NSString *sqlPath = [(eponyms_touchAppDelegate *)delegate databaseFilePath];
+	NSString *sqlPath = [(AppDelegate *)delegate databaseFilePath];
 	NSString *attach_qry = [NSString stringWithFormat:@"ATTACH DATABASE \"%@\" AS real_db", sqlPath];
 	sqlite3_exec(memory_database, [attach_qry UTF8String], NULL, NULL, &err);
 	if (err) {

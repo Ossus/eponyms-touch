@@ -10,7 +10,7 @@
 //  
 
 
-#import "eponyms_touchAppDelegate.h"
+#import "AppDelegate.h"
 #import "InfoViewController.h"
 #import "EponymUpdater.h"
 
@@ -174,7 +174,7 @@
 	}
 	
 	// Adjust options
-	eponyms_touchAppDelegate *appDelegate = (eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate];
+	AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 	autocheckSwitch.on = [delegate shouldAutoCheck];
 	allowRotateSwitch.on = appDelegate.allowAutoRotate;
 	allowLearnModeSwitch.on = appDelegate.allowLearnMode;
@@ -365,7 +365,7 @@
 - (IBAction) switchToggled:(id)sender
 {
 	UISwitch *mySwitch = sender;
-	eponyms_touchAppDelegate *appDelegate = (eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate];
+	AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 	
 	if (autocheckSwitch == mySwitch) {
 		[delegate setShouldAutoCheck:mySwitch.on];
@@ -473,7 +473,7 @@
 	
 	// first import alert (can only be accepted at the moment)
 	else if (firstTimeLaunch) {
-		[(eponyms_touchAppDelegate *)delegate loadEponymXMLFromDisk];
+		[(AppDelegate *)delegate loadEponymXMLFromDisk];
 	}
 }
 #pragma mark -

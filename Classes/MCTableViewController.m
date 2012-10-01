@@ -12,7 +12,7 @@
 
 #import "MCTableViewController.h"
 #import "TouchTableView.h"
-#import "eponyms_touchAppDelegate.h"
+#import "AppDelegate.h"
 
 #define kMCTVCStateSaveMask @"MCTVC_lastState_%@"
 

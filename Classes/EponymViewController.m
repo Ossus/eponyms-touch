@@ -10,7 +10,7 @@
 //  
 
 
-#import "eponyms_touchAppDelegate.h"
+#import "AppDelegate.h"
 #import "EponymViewController.h"
 #import "ListViewController.h"
 #import "EponymCategory.h"

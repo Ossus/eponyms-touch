@@ -11,11 +11,11 @@
 
 
 #import <Foundation/Foundation.h>
-@class eponyms_touchAppDelegate;
+@class AppDelegate;
 
 
 @interface Eponym : NSObject {
-	eponyms_touchAppDelegate *delegate;
+	AppDelegate *delegate;
 	
 	// Primary key
 	NSUInteger eponym_id;
@@ -46,7 +46,7 @@
 + (void) finalizeQueries;
 
 // Init the Eponym with the desired key
-- (id) initWithID:(NSUInteger) eid title:(NSString*) ttl delegate:(eponyms_touchAppDelegate *)myDelegate;
+- (id) initWithID:(NSUInteger) eid title:(NSString*) ttl delegate:(AppDelegate *)myDelegate;
 
 // Loading and unloading. Everything but key and title are wiped from memory on unload
 - (void) load;

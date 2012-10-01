@@ -11,7 +11,7 @@
 
 
 #import "CategoriesViewController.h"
-#import "eponyms_touchAppDelegate.h"
+#import "AppDelegate.h"
 #import "EponymCategory.h"
 #import "ListViewController.h"
 

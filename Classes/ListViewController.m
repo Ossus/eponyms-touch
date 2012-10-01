@@ -11,7 +11,7 @@
 
 
 #import "ListViewController.h"
-#import "eponyms_touchAppDelegate.h"
+#import "AppDelegate.h"
 #import "EponymViewController.h"
 #import "EponymCategory.h"
 #import "Eponym.h"
@@ -180,7 +180,7 @@
 #pragma mark Rotation
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-	if (((eponyms_touchAppDelegate *)[[UIApplication sharedApplication] delegate]).allowAutoRotate) {
+	if (((AppDelegate *)[[UIApplication sharedApplication] delegate]).allowAutoRotate) {
 		return YES;
 	}
 	

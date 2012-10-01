@@ -14,12 +14,12 @@
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
 #import "EponymUpdaterDelegate.h"
-@class eponyms_touchAppDelegate;
+@class AppDelegate;
 
 
 
 @interface InfoViewController : UIViewController <UIAlertViewDelegate, EponymUpdaterDelegate> {
-	eponyms_touchAppDelegate *delegate;
+	AppDelegate *delegate;
 	
 	BOOL firstTimeLaunch;
 	BOOL askingToAbortImport;
@@ -55,7 +55,7 @@
 	IBOutlet UISwitch *allowLearnModeSwitch;
 }
 
-@property (nonatomic, assign) eponyms_touchAppDelegate *delegate;
+@property (nonatomic, assign) AppDelegate *delegate;
 @property (nonatomic, assign) BOOL firstTimeLaunch;
 
 @property (nonatomic, assign) NSInteger lastEponymCheck;

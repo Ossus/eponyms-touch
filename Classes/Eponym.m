@@ -12,7 +12,7 @@
 
 #import "Eponym.h"
 #import "EponymCategory.h"
-#import "eponyms_touchAppDelegate.h"
+#import "AppDelegate.h"
 #import <sqlite3.h>
 
 static sqlite3_stmt *load_query = nil;
@@ -50,7 +50,7 @@ static sqlite3_stmt *toggle_starred_query = nil;
 }
 
 // Init the Eponym with the desired key
-- (id) initWithID:(NSUInteger)eid title:(NSString*)ttl delegate:(eponyms_touchAppDelegate *)myDelegate
+- (id) initWithID:(NSUInteger)eid title:(NSString*)ttl delegate:(AppDelegate *)myDelegate
 {
 	if ((self = [super init])) {
 		eponym_id = eid;
