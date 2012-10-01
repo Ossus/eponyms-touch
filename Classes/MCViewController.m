@@ -108,7 +108,7 @@
 {
 	UIViewController *child = self;
 	UIViewController *parent = nil;
-	while (parent = child.parentViewController) {
+	while ((parent = child.parentViewController)) {
 		if (child == parent.modalViewController) {
 			return YES;
 		}
@@ -121,7 +121,7 @@
 {
 	UIViewController *child = self;
 	UIViewController *parent = nil;
-	while (parent = child.parentViewController) {
+	while ((parent = child.parentViewController)) {
 		if (child == parent.modalViewController) {
 			[parent dismissModalViewControllerAnimated:(nil != sender)];
 			return;

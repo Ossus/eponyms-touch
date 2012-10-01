@@ -61,7 +61,7 @@ int stepSqlite(sqlite3_stmt *query)
 			n++;
 			usleep(kSQLITESleepMilliSec);
 		}
-		else if ((response == SQLITE_BUSY)) {
+		else if (response == SQLITE_BUSY) {
 			n++;
 			usleep(kSQLITESleepMilliSec);
 		}

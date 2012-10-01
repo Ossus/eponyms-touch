@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 45;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -55,7 +55,6 @@
 		EE563867109DFB1D00D6C4E6 /* Badge_new_eponyms.png in Resources */ = {isa = PBXBuildFile; fileRef = EE3BC3C00E6ACEBF0051B69D /* Badge_new_eponyms.png */; };
 		EE563868109DFB1D00D6C4E6 /* InfoBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = EE3BC4420E6ADECB0051B69D /* InfoBackground.png */; };
 		EE563869109DFB1D00D6C4E6 /* ElevatedBar.png in Resources */ = {isa = PBXBuildFile; fileRef = EE8E56740E6CA69600928D90 /* ElevatedBar.png */; };
-		EE56386B109DFB1D00D6C4E6 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF9F2930EA74928002F024E /* Entitlements.plist */; };
 		EE56386E109DFB1D00D6C4E6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		EE56386F109DFB1D00D6C4E6 /* eponyms_touchAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* eponyms_touchAppDelegate.m */; };
 		EE563870109DFB1D00D6C4E6 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2DE6B90E1AE38200D97653 /* InfoViewController.m */; };
@@ -71,7 +70,7 @@
 		EE56387D109DFB1D00D6C4E6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED69F820E2BF41900BEF0C4 /* CoreGraphics.framework */; };
 		EE563940109E186200D6C4E6 /* MCTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE56393F109E186200D6C4E6 /* MCTextView.m */; };
 		EE563BCC109E4BAE00D6C4E6 /* MCTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = EE56393F109E186200D6C4E6 /* MCTextView.m */; };
-		EE5A6C7F10B831840092053C /* Icon-student.png in Resources */ = {isa = PBXBuildFile; fileRef = EE5A6C7E10B831840092053C /* Icon-student.png */; };
+		EE5A6C7F10B831840092053C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EE5A6C7E10B831840092053C /* Icon.png */; };
 		EE5BD32811D9173B00964E25 /* sqlite3_unicode.c in Sources */ = {isa = PBXBuildFile; fileRef = EE5BD32711D9173B00964E25 /* sqlite3_unicode.c */; };
 		EE5BD32911D9173B00964E25 /* sqlite3_unicode.c in Sources */ = {isa = PBXBuildFile; fileRef = EE5BD32711D9173B00964E25 /* sqlite3_unicode.c */; };
 		EE5BD33F11D917B500964E25 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EE5BD33E11D917B500964E25 /* libsqlite3.dylib */; };
@@ -99,8 +98,8 @@
 		EEC2A6A511CE6A3C009C9486 /* Icon~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6A311CE6A3C009C9486 /* Icon~iPad.png */; };
 		EEC2A6A611CE6A3C009C9486 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6A411CE6A3C009C9486 /* Icon@2x.png */; };
 		EEC2A6A811CE6A51009C9486 /* Eponyms@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6A711CE6A51009C9486 /* Eponyms@2x.png */; };
-		EEC2A6AB11CE6A5F009C9486 /* Icon-student@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6A911CE6A5F009C9486 /* Icon-student@2x.png */; };
-		EEC2A6AC11CE6A5F009C9486 /* Icon-student~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6AA11CE6A5F009C9486 /* Icon-student~iPad.png */; };
+		EEC2A6AB11CE6A5F009C9486 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6A911CE6A5F009C9486 /* Icon@2x.png */; };
+		EEC2A6AC11CE6A5F009C9486 /* Icon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6AA11CE6A5F009C9486 /* Icon~ipad.png */; };
 		EEC2A6AE11CE6A6A009C9486 /* Eponyms@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6AD11CE6A6A009C9486 /* Eponyms@2x.png */; };
 		EEC2A6B311CE6B21009C9486 /* Badge_new_eponyms@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6AF11CE6B21009C9486 /* Badge_new_eponyms@2x.png */; };
 		EEC2A6B411CE6B21009C9486 /* Star_eponym_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEC2A6B011CE6B21009C9486 /* Star_eponym_active@2x.png */; };
@@ -132,7 +131,10 @@
 		EED69F830E2BF41900BEF0C4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED69F820E2BF41900BEF0C4 /* CoreGraphics.framework */; };
 		EEDB74DE10B89A76007782DA /* Eponyms.png in Resources */ = {isa = PBXBuildFile; fileRef = EEDB74DD10B89A76007782DA /* Eponyms.png */; };
 		EEDB74ED10B89AF7007782DA /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = EEDB74EC10B89AF7007782DA /* Default.png */; };
-		EEF9F2940EA74928002F024E /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEF9F2930EA74928002F024E /* Entitlements.plist */; };
+		EEE91E0F16190CCE00BD41FE /* Icon@2x~iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = EEE91E0E16190CCE00BD41FE /* Icon@2x~iPad.png */; };
+		EEE91E1116190EC100BD41FE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEE91E1016190EC100BD41FE /* Default-568h@2x.png */; };
+		EEE91E1316190F8D00BD41FE /* Icon@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EEE91E1216190F8D00BD41FE /* Icon@2x~ipad.png */; };
+		EEE91E15161911E800BD41FE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEE91E14161911E800BD41FE /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -191,7 +193,7 @@
 		EE56388D109DFC0C00D6C4E6 /* Info-student.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-student.plist"; sourceTree = "<group>"; };
 		EE56393E109E186200D6C4E6 /* MCTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTextView.h; sourceTree = "<group>"; };
 		EE56393F109E186200D6C4E6 /* MCTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTextView.m; sourceTree = "<group>"; };
-		EE5A6C7E10B831840092053C /* Icon-student.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-student.png"; sourceTree = "<group>"; };
+		EE5A6C7E10B831840092053C /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		EE5BD32611D9173B00964E25 /* sqlite3_unicode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3_unicode.h; sourceTree = "<group>"; };
 		EE5BD32711D9173B00964E25 /* sqlite3_unicode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sqlite3_unicode.c; sourceTree = "<group>"; };
 		EE5BD33E11D917B500964E25 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -218,8 +220,8 @@
 		EEC2A6A311CE6A3C009C9486 /* Icon~iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon~iPad.png"; sourceTree = "<group>"; };
 		EEC2A6A411CE6A3C009C9486 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		EEC2A6A711CE6A51009C9486 /* Eponyms@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Eponyms@2x.png"; sourceTree = "<group>"; };
-		EEC2A6A911CE6A5F009C9486 /* Icon-student@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-student@2x.png"; sourceTree = "<group>"; };
-		EEC2A6AA11CE6A5F009C9486 /* Icon-student~iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-student~iPad.png"; sourceTree = "<group>"; };
+		EEC2A6A911CE6A5F009C9486 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		EEC2A6AA11CE6A5F009C9486 /* Icon~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon~ipad.png"; sourceTree = "<group>"; };
 		EEC2A6AD11CE6A6A009C9486 /* Eponyms@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Eponyms@2x.png"; sourceTree = "<group>"; };
 		EEC2A6AF11CE6B21009C9486 /* Badge_new_eponyms@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Badge_new_eponyms@2x.png"; sourceTree = "<group>"; };
 		EEC2A6B011CE6B21009C9486 /* Star_eponym_active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Star_eponym_active@2x.png"; sourceTree = "<group>"; };
@@ -247,7 +249,12 @@
 		EED69F820E2BF41900BEF0C4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		EEDB74DD10B89A76007782DA /* Eponyms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Eponyms.png; sourceTree = "<group>"; };
 		EEDB74EC10B89AF7007782DA /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		EEF9F2930EA74928002F024E /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+		EEE91E0C16190B6600BD41FE /* eponyms-touch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "eponyms-touch.entitlements"; sourceTree = "<group>"; };
+		EEE91E0D16190B9500BD41FE /* eponyms-student.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "eponyms-student.entitlements"; sourceTree = "<group>"; };
+		EEE91E0E16190CCE00BD41FE /* Icon@2x~iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x~iPad.png"; sourceTree = "<group>"; };
+		EEE91E1016190EC100BD41FE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		EEE91E1216190F8D00BD41FE /* Icon@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x~ipad.png"; sourceTree = "<group>"; };
+		EEE91E14161911E800BD41FE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		EEFA119210A38F3D0041A4D7 /* GoogleAdSenseClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleAdSenseClient.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -309,8 +316,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				EE1D61F813C41421007CB0BB /* AudioToolbox.framework */,
-				EE1D61F613C41418007CB0BB /* MessageUI.framework */,
 				1D3623240D0F684500981E51 /* eponyms_touchAppDelegate.h */,
 				1D3623250D0F684500981E51 /* eponyms_touchAppDelegate.m */,
 				EE5BD32611D9173B00964E25 /* sqlite3_unicode.h */,
@@ -354,7 +359,8 @@
 				EE3819F211CFE02100DB14D9 /* eponyms.sqlite */,
 				EE64C7BF0E2680D40000BC8D /* eponyms.xml */,
 				EE380FA50E97B3180066BA6E /* eponyms_info.xml */,
-				EEF9F2930EA74928002F024E /* Entitlements.plist */,
+				EEE91E0D16190B9500BD41FE /* eponyms-student.entitlements */,
+				EEE91E0C16190B6600BD41FE /* eponyms-touch.entitlements */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -363,6 +369,8 @@
 			isa = PBXGroup;
 			children = (
 				EED69F820E2BF41900BEF0C4 /* CoreGraphics.framework */,
+				EE1D61F813C41421007CB0BB /* AudioToolbox.framework */,
+				EE1D61F613C41418007CB0BB /* MessageUI.framework */,
 				EEC2A70C11CE6E8A009C9486 /* QuartzCore.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
@@ -394,7 +402,8 @@
 				EE5BD49411D9503900964E25 /* RoundedButtonBlue@2x.png */,
 			);
 			name = Images;
-			sourceTree = "<group>";
+			path = AnyVersion;
+			sourceTree = SOURCE_ROOT;
 		};
 		EE2DE7AD0E1C2F8600D97653 /* View Controllers */ = {
 			isa = PBXGroup;
@@ -473,34 +482,38 @@
 			children = (
 				EEDB74EC10B89AF7007782DA /* Default.png */,
 				EE664ED112077E630070BA19 /* Default@2x.png */,
+				EEE91E1016190EC100BD41FE /* Default-568h@2x.png */,
 				EE664EE5120780990070BA19 /* Default-Landscape.png */,
 				EE664EE6120780990070BA19 /* Default-Portrait.png */,
-				EE5A6C7E10B831840092053C /* Icon-student.png */,
-				EEC2A6A911CE6A5F009C9486 /* Icon-student@2x.png */,
-				EEC2A6AA11CE6A5F009C9486 /* Icon-student~iPad.png */,
+				EE5A6C7E10B831840092053C /* Icon.png */,
+				EEC2A6A911CE6A5F009C9486 /* Icon@2x.png */,
+				EEC2A6AA11CE6A5F009C9486 /* Icon~ipad.png */,
+				EEE91E1216190F8D00BD41FE /* Icon@2x~ipad.png */,
 				EE2DE6B40E1AE31800D97653 /* Eponyms.png */,
 				EEC2A6AD11CE6A6A009C9486 /* Eponyms@2x.png */,
 				EE664EED120780B40070BA19 /* Eponyms_bglogo.png */,
 			);
 			path = StudentVersion;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		EEDB74CB10B89953007782DA /* FullVersion */ = {
 			isa = PBXGroup;
 			children = (
 				EE2DEDFE0E229DB700D97653 /* Default.png */,
 				EE5BD4CF11D95E7700964E25 /* Default@2x.png */,
+				EEE91E14161911E800BD41FE /* Default-568h@2x.png */,
 				EE53731F11D0294E004F030E /* Default-Landscape.png */,
 				EE53732011D0294E004F030E /* Default-Portrait.png */,
 				EE2DEDF90E229B9B00D97653 /* Icon.png */,
 				EEC2A6A411CE6A3C009C9486 /* Icon@2x.png */,
 				EEC2A6A311CE6A3C009C9486 /* Icon~iPad.png */,
+				EEE91E0E16190CCE00BD41FE /* Icon@2x~iPad.png */,
 				EEDB74DD10B89A76007782DA /* Eponyms.png */,
 				EEC2A6A711CE6A51009C9486 /* Eponyms@2x.png */,
 				EE53732311D02A07004F030E /* Eponyms_bglogo.png */,
 			);
 			path = FullVersion;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -544,8 +557,11 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "eponyms-touch" */;
-			compatibilityVersion = "Xcode 3.1";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -583,7 +599,6 @@
 				EE3BC3C10E6ACEBF0051B69D /* Badge_new_eponyms.png in Resources */,
 				EE3BC4430E6ADECB0051B69D /* InfoBackground.png in Resources */,
 				EE8E56750E6CA69600928D90 /* ElevatedBar.png in Resources */,
-				EEF9F2940EA74928002F024E /* Entitlements.plist in Resources */,
 				EEDB74DE10B89A76007782DA /* Eponyms.png in Resources */,
 				EEC2A6A511CE6A3C009C9486 /* Icon~iPad.png in Resources */,
 				EEC2A6A611CE6A3C009C9486 /* Icon@2x.png in Resources */,
@@ -603,6 +618,8 @@
 				EE5BD49511D9503900964E25 /* RoundedButtonBlue@2x.png in Resources */,
 				EE5BD49811D9503E00964E25 /* RoundedButton@2x.png in Resources */,
 				EE5BD4D011D95E7700964E25 /* Default@2x.png in Resources */,
+				EEE91E0F16190CCE00BD41FE /* Icon@2x~iPad.png in Resources */,
+				EEE91E15161911E800BD41FE /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,11 +640,10 @@
 				EE563867109DFB1D00D6C4E6 /* Badge_new_eponyms.png in Resources */,
 				EE563868109DFB1D00D6C4E6 /* InfoBackground.png in Resources */,
 				EE563869109DFB1D00D6C4E6 /* ElevatedBar.png in Resources */,
-				EE56386B109DFB1D00D6C4E6 /* Entitlements.plist in Resources */,
-				EE5A6C7F10B831840092053C /* Icon-student.png in Resources */,
+				EE5A6C7F10B831840092053C /* Icon.png in Resources */,
 				EEDB74ED10B89AF7007782DA /* Default.png in Resources */,
-				EEC2A6AB11CE6A5F009C9486 /* Icon-student@2x.png in Resources */,
-				EEC2A6AC11CE6A5F009C9486 /* Icon-student~iPad.png in Resources */,
+				EEC2A6AB11CE6A5F009C9486 /* Icon@2x.png in Resources */,
+				EEC2A6AC11CE6A5F009C9486 /* Icon~ipad.png in Resources */,
 				EEC2A6AE11CE6A6A009C9486 /* Eponyms@2x.png in Resources */,
 				EEC2A6B311CE6B21009C9486 /* Badge_new_eponyms@2x.png in Resources */,
 				EEC2A6B411CE6B21009C9486 /* Star_eponym_active@2x.png in Resources */,
@@ -644,6 +660,8 @@
 				EE664EE7120780990070BA19 /* Default-Landscape.png in Resources */,
 				EE664EE8120780990070BA19 /* Default-Portrait.png in Resources */,
 				EE664EEE120780B40070BA19 /* Eponyms_bglogo.png in Resources */,
+				EEE91E1116190EC100BD41FE /* Default-568h@2x.png in Resources */,
+				EEE91E1316190F8D00BD41FE /* Icon@2x~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -715,7 +733,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_ENTITLEMENTS = "eponyms-touch.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -738,6 +756,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "eponyms-touch.entitlements";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
@@ -766,12 +785,11 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DDEBUG";
 				OTHER_LDFLAGS = "";
-				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
@@ -793,10 +811,9 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
-				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -818,10 +835,9 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
-				PREBINDING = NO;
 				PROVISIONING_PROFILE = "97E6B393-8D57-476B-BDAF-A4A7DFC4D9A8";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "97E6B393-8D57-476B-BDAF-A4A7DFC4D9A8";
 				SDKROOT = iphoneos;
@@ -834,6 +850,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "eponyms-touch.entitlements";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
@@ -852,7 +869,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_ENTITLEMENTS = "eponyms-student.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -880,6 +897,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "eponyms-student.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -902,6 +920,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "eponyms-student.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -924,7 +943,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_ENTITLEMENTS = "eponyms-student.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -957,12 +976,11 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DDEBUG";
 				OTHER_LDFLAGS = "";
-				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
@@ -974,7 +992,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_ENTITLEMENTS = "eponyms-touch.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -997,7 +1015,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_ENTITLEMENTS = "eponyms-student.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1033,10 +1051,9 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
-				PREBINDING = NO;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -1048,7 +1065,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_ENTITLEMENTS = "eponyms-touch.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Pascal Pfiffner";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;

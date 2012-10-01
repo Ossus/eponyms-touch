@@ -205,7 +205,7 @@ static sqlite3_stmt *toggle_starred_query = nil;
 #pragma mark Utilities
 - (NSString *) description
 {
-	return [NSString stringWithFormat:@"Eponym <0x%x> \"%@\" hydrated: %i", self, title, loaded];
+	return [NSString stringWithFormat:@"Eponym <%p> \"%@\" hydrated: %i", self, title, loaded];
 }
 
 

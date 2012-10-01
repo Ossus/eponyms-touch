@@ -202,7 +202,7 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight);
 	UIView *parent = nil;
 	UIView *attachToView = nil;
 	
-	while (parent = [child superview]) {
+	while ((parent = [child superview])) {
 		NSString *parentClass = NSStringFromClass([parent class]);
 		if ([parentClass isEqualToString:@"UILayoutContainerView"]) {
 			attachToView = parent;

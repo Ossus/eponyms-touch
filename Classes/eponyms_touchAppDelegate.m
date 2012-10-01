@@ -85,7 +85,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 @dynamic starImageEponymInactive;
 
 
-- (void) dealloc
+- (void)dealloc
 {
 	[categoryShown release];
 	self.categoryArray = nil;
@@ -106,7 +106,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 }
 
 
-- (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 	BOOL onIPad = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad);
 	
@@ -161,14 +161,14 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	// *** iPad specific UI
 	if (onIPad) {
 		window.backgroundColor = [UIColor viewFlipsideBackgroundColor];
-		[window addSubview:self.splitController.view];
+		window.rootViewController = splitController;
 		self.topLevelController = splitController;
 	}
 	
 	
 	// *** iPhone specific UI
 	else {
-		[window addSubview:naviController.view];
+		window.rootViewController = naviController;
 		self.topLevelController = naviController;
 	}
 	

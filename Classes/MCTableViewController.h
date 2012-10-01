@@ -12,7 +12,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MCViewController.h"
-#import "TouchTableViewDelegate.h";
+#import "TouchTableViewDelegate.h"
 #import "TouchTableView.h"
  
 
