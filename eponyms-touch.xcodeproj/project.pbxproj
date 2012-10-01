@@ -149,7 +149,7 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		32CA4F630368D1EE00C91783 /* eponyms_touch_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eponyms_touch_Prefix.pch; sourceTree = "<group>"; };
+		32CA4F630368D1EE00C91783 /* eponyms_touch_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = eponyms_touch_Prefix.pch; path = Resources/eponyms_touch_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE01C9C90E61CEF00050376E /* TouchTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchTableViewDelegate.h; sourceTree = "<group>"; };
 		EE14428E0E236E10003EA64C /* InfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoView.xib; sourceTree = "<group>"; };
@@ -167,8 +167,8 @@
 		EE2338C2120764DD007A58FF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		EE2338C6120764E9007A58FF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		EE2DE6B40E1AE31800D97653 /* Eponyms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Eponyms.png; sourceTree = "<group>"; };
-		EE2DE6B80E1AE38200D97653 /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoViewController.h; path = ../InfoViewController.h; sourceTree = "<group>"; };
-		EE2DE6B90E1AE38200D97653 /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfoViewController.m; path = ../InfoViewController.m; sourceTree = "<group>"; };
+		EE2DE6B80E1AE38200D97653 /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
+		EE2DE6B90E1AE38200D97653 /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
 		EE2DE74C0E1C297200D97653 /* ListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
 		EE2DE74D0E1C297200D97653 /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
 		EE2DE7510E1C297F00D97653 /* EponymViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EponymViewController.h; sourceTree = "<group>"; };
@@ -184,8 +184,8 @@
 		EE38197A11CFD83000DB14D9 /* SQLiteAccessors.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SQLiteAccessors.c; sourceTree = "<group>"; };
 		EE3819F111CFDF2A00DB14D9 /* create_database.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = create_database.sh; sourceTree = "<group>"; };
 		EE3819F211CFE02100DB14D9 /* eponyms.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = eponyms.sqlite; sourceTree = "<group>"; };
-		EE381BD611CFEFBD00DB14D9 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "Resources-iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
-		EE381BED11CFF14000DB14D9 /* InfoView-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "InfoView-iPad.xib"; path = "Resources-iPad/InfoView-iPad.xib"; sourceTree = "<group>"; };
+		EE381BD611CFEFBD00DB14D9 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "MainWindow-iPad.xib"; sourceTree = "<group>"; };
+		EE381BED11CFF14000DB14D9 /* InfoView-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "InfoView-iPad.xib"; sourceTree = "<group>"; };
 		EE3BC3C00E6ACEBF0051B69D /* Badge_new_eponyms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Badge_new_eponyms.png; sourceTree = "<group>"; };
 		EE4B74E90E2EB35500F7B157 /* NOTICE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NOTICE.txt; sourceTree = "<group>"; };
 		EE4B74EF0E2EB53800F7B157 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
@@ -323,6 +323,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				EE4B74EF0E2EB53800F7B157 /* LICENSE.txt */,
+				EE4B74E90E2EB35500F7B157 /* NOTICE.txt */,
 				1D3623240D0F684500981E51 /* AppDelegate.h */,
 				1D3623250D0F684500981E51 /* AppDelegate.m */,
 				EE5BD32611D9173B00964E25 /* sqlite3_unicode.h */,
@@ -334,6 +336,7 @@
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				EE56383A109DFA7A00D6C4E6 /* GoogleAds */,
 				EE2DE6B30E1AE30C00D97653 /* Images */,
+				EEC5AF1E1619FBD000C7424C /* Data */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
@@ -359,17 +362,10 @@
 				EE381BED11CFF14000DB14D9 /* InfoView-iPad.xib */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				EE56388D109DFC0C00D6C4E6 /* Info-student.plist */,
-				EE4B74EF0E2EB53800F7B157 /* LICENSE.txt */,
-				EE4B74E90E2EB35500F7B157 /* NOTICE.txt */,
-				EEAB00F90E2E2F3E00D84A8A /* Info.txt */,
-				EE3819F111CFDF2A00DB14D9 /* create_database.sh */,
-				EE3819F211CFE02100DB14D9 /* eponyms.sqlite */,
-				EE64C7BF0E2680D40000BC8D /* eponyms.xml */,
-				EE380FA50E97B3180066BA6E /* eponyms_info.xml */,
 				EEE91E0D16190B9500BD41FE /* eponyms-student.entitlements */,
 				EEE91E0C16190B6600BD41FE /* eponyms-touch.entitlements */,
 			);
-			name = Resources;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
@@ -485,6 +481,18 @@
 			);
 			name = Helpers;
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		EEC5AF1E1619FBD000C7424C /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				EEAB00F90E2E2F3E00D84A8A /* Info.txt */,
+				EE3819F111CFDF2A00DB14D9 /* create_database.sh */,
+				EE3819F211CFE02100DB14D9 /* eponyms.sqlite */,
+				EE64C7BF0E2680D40000BC8D /* eponyms.xml */,
+				EE380FA50E97B3180066BA6E /* eponyms_info.xml */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		EEDB74CA10B8994A007782DA /* StudentVersion */ = {
@@ -747,15 +755,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "eponyms-touch.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Resources/eponyms-touch.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
+				GCC_PREFIX_HEADER = Resources/eponyms_touch_Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
-				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_FILE = Resources/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -770,12 +778,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "eponyms-touch.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Resources/eponyms-touch.entitlements";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
+				GCC_PREFIX_HEADER = Resources/eponyms_touch_Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
-				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_FILE = Resources/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -864,12 +872,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "eponyms-touch.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Resources/eponyms-touch.entitlements";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
+				GCC_PREFIX_HEADER = Resources/eponyms_touch_Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
-				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_FILE = Resources/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -883,15 +891,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "eponyms-student.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Resources/eponyms-student.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
+				GCC_PREFIX_HEADER = Resources/eponyms_touch_Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
-				INFOPLIST_FILE = "Info-student.plist";
+				INFOPLIST_FILE = "Resources/Info-student.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -911,13 +919,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "eponyms-student.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Resources/eponyms-student.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
+				GCC_PREFIX_HEADER = Resources/eponyms_touch_Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
-				INFOPLIST_FILE = "Info-student.plist";
+				INFOPLIST_FILE = "Resources/Info-student.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -934,13 +942,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "eponyms-student.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Resources/eponyms-student.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
+				GCC_PREFIX_HEADER = Resources/eponyms_touch_Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
-				INFOPLIST_FILE = "Info-student.plist";
+				INFOPLIST_FILE = "Resources/Info-student.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -957,13 +965,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "eponyms-student.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Resources/eponyms-student.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
+				GCC_PREFIX_HEADER = Resources/eponyms_touch_Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
-				INFOPLIST_FILE = "Info-student.plist";
+				INFOPLIST_FILE = "Resources/Info-student.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -1006,15 +1014,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "eponyms-touch.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Resources/eponyms-touch.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
+				GCC_PREFIX_HEADER = Resources/eponyms_touch_Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
-				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_FILE = Resources/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -1029,15 +1037,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "eponyms-student.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Resources/eponyms-student.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
+				GCC_PREFIX_HEADER = Resources/eponyms_touch_Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
-				INFOPLIST_FILE = "Info-student.plist";
+				INFOPLIST_FILE = "Resources/Info-student.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -1079,14 +1087,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "eponyms-touch.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Resources/eponyms-touch.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Pascal Pfiffner";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = eponyms_touch_Prefix.pch;
+				GCC_PREFIX_HEADER = Resources/eponyms_touch_Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
-				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_FILE = Resources/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
