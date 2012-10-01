@@ -34,15 +34,7 @@
 @synthesize eponymArrayCache, eponymSectionArrayCache;
 
 
-- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-	if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-		self.title = @"Eponyms";
-	}
-	return self;
-}
-
-- (void) dealloc
+- (void)dealloc
 {
 	self.eponymArrayCache = nil;
 	self.eponymSectionArrayCache = nil;
@@ -57,8 +49,16 @@
 	[super dealloc];
 }
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
+		self.title = @"Eponyms";
+	}
+	return self;
+}
+
 // compose the interface
-- (void) viewDidLoad
+- (void)viewDidLoad
 {
 	[super viewDidLoad];
 	self.tableView.sectionIndexMinimumDisplayRowCount = 20;
@@ -85,7 +85,7 @@
 	//mySearchBar.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
@@ -102,12 +102,11 @@
 		self.navigationItem.backBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:[[delegate categoryShown] tag] style:UIBarButtonItemStylePlain target:nil action:nil] autorelease];
 	}
 }
-#pragma mark -
 
 
 
-#pragma mark Search
-- (void) initSearch:(id)sender
+#pragma mark - Search
+- (void)initSearch:(id)sender
 {
 	self.noDataHint = @"No eponyms match your search criteria";
 	[self.tableView scrollRectToVisible:CGRectMake(0.f, 0.f, 10.f, 10.f) animated:NO];
@@ -126,7 +125,7 @@
 	[mySearchBar becomeFirstResponder];
 }
 
-- (void) abortSearch:(id)sender
+- (void)abortSearch:(id)sender
 {
 	self.noDataHint = [(EponymCategory *)[delegate categoryShown] hint];
 	
@@ -137,12 +136,10 @@
 	mySearchBar.text = @"";
 	mySearchBar.tintColor = self.navigationController.navigationBar.tintColor = [delegate naviBarTintColor];
 	
-	if (![mySearchBar isFirstResponder]) {
-		[delegate loadEponymsOfCurrentCategoryContainingString:nil animated:NO];
-	}
-	else {
+	if ([mySearchBar isFirstResponder]) {
 		[mySearchBar resignFirstResponder];
 	}
+	[delegate loadEponymsOfCurrentCategoryContainingString:nil animated:NO];
 	
 	self.navigationItem.rightBarButtonItem = initSearchButton;
 	self.navigationItem.hidesBackButton = NO;

@@ -243,12 +243,11 @@
 		}
 	}
 }
-#pragma mark -
 
 
 
-#pragma mark UIKeyboardNotifications
-- (void) registerForKeyboardNotifications
+#pragma mark - UIKeyboardNotifications
+- (void)registerForKeyboardNotifications
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(keyboardDidShow:)
@@ -259,57 +258,35 @@
 												 name:UIKeyboardWillHideNotification object:nil];
 }
 
-- (void) forgetAboutKeyboardNotifications
+- (void)forgetAboutKeyboardNotifications
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 
-- (void) keyboardDidShow:(NSNotification*)aNotification
+- (void)keyboardDidShow:(NSNotification*)aNotification
 {
 	NSDictionary *info = [aNotification userInfo];
 	
-	NSValue *boundsValue = [info objectForKey:UIKeyboardBoundsUserInfoKey];			// deprecated as of iOS 3.2. Use UIKeyboardFrameEndUserInfoKey some time
-	CGFloat keyboardHeight = [boundsValue CGRectValue].size.height;
+	// get frame information
+	CGRect endRectOriginal = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+	CGRect endRect = [self.view convertRect:endRectOriginal fromView:self.view.window];
 	
-	// convert the point to rotated window coordinates
-	CGPoint endPoint = [[info objectForKey:UIKeyboardCenterEndUserInfoKey] CGPointValue];
-	UIDeviceOrientation orient = [[UIDevice currentDevice] orientation];
-	if (UIDeviceOrientationIsLandscape(orient)) {
-		CGFloat foo = endPoint.x;
-		endPoint.x = endPoint.y;
-		endPoint.y = foo;
-		if (UIDeviceOrientationLandscapeLeft == orient) {
-			endPoint.x = [tableView.window bounds].size.width - endPoint.x;
-		}
-	}
-	else if (UIDeviceOrientationPortraitUpsideDown == orient) {
-		endPoint.y = [tableView.window bounds].size.height - endPoint.y;
-	}
+	// resize the view
+	CGRect viewFrame = [tableView frame];
+	CGRect intersection = CGRectIntersection(viewFrame, endRect);
+	CGFloat endHeight = fmaxf(0.f, intersection.size.height);			// adding the origin compensates for a search input view that will move to the top
+	//DLog(@"%@ -> %@: %.0f", NSStringFromCGRect(viewFrame), NSStringFromCGRect(intersection), endHeight);
 	
-	// convert from window to tableView
-	CGPoint inSelfPoint = [tableView convertPoint:endPoint fromView:nil];
-	CGFloat endHeight = roundf(inSelfPoint.y - tableView.frame.origin.y - tableView.contentOffset.y - (keyboardHeight / 2));
-	
-	// Resize the table view view
-	CGRect viewFrame = [self.tableView frame];
-	viewFrame.size.height = fmaxf(44.f, fminf(2048.f, endHeight));
-	self.tableView.frame = viewFrame;
+	tableView.contentInset = UIEdgeInsetsMake(0.f, 0.f, endHeight, 0.f);
 }
 
-
-- (void) keyboardWillHide:(NSNotification*)aNotification
+- (void)keyboardWillHide:(NSNotification*)aNotification
 {
-	// adjust table view height to full height again
-//	[UIView beginAnimations:nil context:nil];
-//	[UIView setAnimationBeginsFromCurrentState:YES];
-//	[UIView setAnimationDuration:[[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
-	
-	tableView.frame = [[tableView superview] bounds];
-	
-//	[UIView commitAnimations];
+	tableView.contentInset = UIEdgeInsetsZero;
 }
+
 
 
 @end
