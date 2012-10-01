@@ -150,7 +150,7 @@
 		self.view.backgroundColor = [UIColor colorWithRed:0.936f green:0.953f blue:0.968f alpha:1.f];
 	}
 	else {
-		self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+		self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"pattern-vertical.png"]];
 	}
 	self.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 	self.view.autoresizesSubviews = YES;

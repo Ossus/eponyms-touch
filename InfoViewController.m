@@ -133,6 +133,8 @@
 #pragma mark View Controller Delegate
 - (void) viewDidLoad
 {
+	// update colors
+	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"pattern-horizontal.png"]];
 	tabSegments.tintColor = [delegate naviBarTintColor];
 	
 	// hide progress stuff
@@ -146,7 +148,7 @@
 	[self updateLabelsWithDateForLastCheck:lastCheckDate lastUpdate:lastUpdateDate usingEponyms:usingEponymsDate];
 	
 	// version
-	NSString *version = [NSString stringWithFormat:@"Version %@  (%@)", [infoPlistDict objectForKey:@"CFBundleVersion"], [infoPlistDict objectForKey:@"SubversionRevision"]];
+	NSString *version = [NSString stringWithFormat:@"Version %@", [infoPlistDict objectForKey:@"CFBundleVersion"]];
 	[versionLabel setText:version];
 }
 

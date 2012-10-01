@@ -60,29 +60,13 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 @implementation eponyms_touchAppDelegate
 
 @synthesize window, database, myUpdater, usingEponymsOf;
-@synthesize allowAutoRotate;
-@synthesize allowLearnMode;
-@synthesize shouldAutoCheck;
-@synthesize iAmUpdating;
-@synthesize didCheckForNewEponyms;
-@synthesize newEponymsAvailable;
+@synthesize allowAutoRotate, allowLearnMode, shouldAutoCheck;
+@synthesize iAmUpdating, didCheckForNewEponyms, newEponymsAvailable;
 @dynamic categoryShown;
-@synthesize topLevelController;
-@dynamic splitController;
-@synthesize naviController;
-@synthesize categoriesController;
-@synthesize listController;
-@synthesize eponymController;
-@synthesize infoController;
-@synthesize categoryIDShown;
-@synthesize eponymShown;
-@synthesize categoryArray;
-@synthesize eponymArray;
-@synthesize eponymSectionArray;
-@synthesize loadedEponyms;
-@dynamic starImageListActive;
-@dynamic starImageEponymActive;
-@dynamic starImageEponymInactive;
+@synthesize topLevelController, splitController, naviController, categoriesController, listController, eponymController, infoController;
+@synthesize categoryIDShown, eponymShown;
+@synthesize categoryArray, eponymArray, eponymSectionArray, loadedEponyms;
+@synthesize starImageListActive, starImageEponymActive, starImageEponymInactive;
 
 
 - (void)dealloc
@@ -161,7 +145,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	// *** iPad specific UI
 	if (onIPad) {
 		window.backgroundColor = [UIColor viewFlipsideBackgroundColor];
-		window.rootViewController = splitController;
+		window.rootViewController = self.splitController;
 		self.topLevelController = splitController;
 	}
 	
@@ -291,15 +275,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	[self closeMainDatabase];
 	
 	// save state
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	
-	[defaults setInteger:THIS_DB_VERSION forKey:@"lastUsedDBVersion"];
-	[defaults setBool:shouldAutoCheck forKey:@"shouldAutoCheck"];
-	[defaults setInteger:categoryIDShown forKey:@"shownCategoryAtQuit"];
-	[defaults setInteger:eponymShown forKey:@"shownEponymAtQuit"];
-	[defaults setBool:allowAutoRotate forKey:@"allowAutoRotate"];
-	[defaults setBool:allowLearnMode forKey:@"allowLearnMode"];
-	[defaults synchronize];
+	[self saveAppState];
 }
 
 // save our currently displayed view and close the database
@@ -314,6 +290,11 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	}
 	
 	// save state
+	[self saveAppState];
+}
+
+- (void)saveAppState
+{
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	[defaults setInteger:THIS_DB_VERSION forKey:@"lastUsedDBVersion"];
@@ -324,11 +305,10 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	[defaults setBool:allowLearnMode forKey:@"allowLearnMode"];
 	[defaults synchronize];
 }
-#pragma mark -
 
 
 
-#pragma mark KVC
+#pragma mark - KVC
 - (PPSplitViewController *) splitController
 {
 	if (nil == splitController) {
@@ -345,13 +325,6 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		splitController.logo = [UIImage imageNamed:@"Eponyms_bglogo.png"];
 	}
 	return splitController;
-}
-- (void) setSplitController:(PPSplitViewController *)newController
-{
-	if (newController != splitController) {
-		[splitController release];
-		splitController = [newController retain];
-	}
 }
 
 - (EponymCategory *) categoryShown
@@ -377,13 +350,6 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	}
 	return starImageListActive;
 }
-- (void) setStarImageListActive:(UIImage *)newImage
-{
-	if (newImage != starImageListActive) {
-		[starImageListActive release];
-		starImageListActive = [newImage retain];
-	}
-}
 
 - (UIImage *) starImageEponymActive
 {
@@ -391,13 +357,6 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		self.starImageEponymActive = [UIImage imageNamed:@"Star_eponym_active.png"];
 	}
 	return starImageEponymActive;
-}
-- (void) setStarImageEponymActive:(UIImage *)newImage
-{
-	if (newImage != starImageEponymActive) {
-		[starImageEponymActive release];
-		starImageEponymActive = [newImage retain];
-	}
 }
 
 - (UIImage *) starImageEponymInactive
@@ -407,18 +366,10 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	}
 	return starImageEponymInactive;
 }
-- (void) setStarImageEponymInactive:(UIImage *)newImage
-{
-	if (newImage != starImageEponymInactive) {
-		[starImageEponymInactive release];
-		starImageEponymInactive = [newImage retain];
-	}
-}
-#pragma mark -
 
 
 
-#pragma mark Updating
+#pragma mark - Updating
 - (void) checkForUpdates:(id)sender
 {
 	if (!myUpdater) {
