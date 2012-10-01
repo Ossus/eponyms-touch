@@ -21,11 +21,17 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 
 @implementation CategoriesViewController
 
-@synthesize delegate;
-@dynamic categoryArrayCache;
+@synthesize delegate, categoryArrayCache;
 
 
-- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (void)dealloc
+{
+	self.categoryArrayCache = nil;
+	
+	[super dealloc];
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
 	if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
 		self.title = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? @"Categories" : @"Eponyms";
@@ -33,7 +39,7 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 	return self;
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
 	
@@ -44,38 +50,31 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 }
 
 
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+/**
+ *  iOS 5 and prior
+ */
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-	if (delegate.allowAutoRotate) {
-		return YES;
-	}
-	
 	return IS_PORTRAIT(toInterfaceOrientation);
 }
 
-
-- (void) didReceiveMemoryWarning
+/**
+ *  iOS 6 and later
+ */
+- (BOOL)shouldAutorotate
 {
-	[super didReceiveMemoryWarning];
+	return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+	return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
 }
 
 
-- (void) dealloc
-{
-	self.categoryArrayCache = nil;
-	
-	[super dealloc];
-}
-#pragma mark -
 
-
-
-#pragma mark KVC
-- (NSArray *) categoryArrayCache
-{
-	return categoryArrayCache;
-}
-- (void) setCategoryArrayCache:(NSArray *)categories
+#pragma mark - KVC
+- (void)setCategoryArrayCache:(NSArray *)categories
 {
 	if (categories != categoryArrayCache) {
 		[categoryArrayCache release];
@@ -86,14 +85,11 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 		[self.tableView reloadData];
 	}
 }
-#pragma mark -
 
 
 
-#pragma mark UITableView delegate methods
-
-// table selection changed
-- (void) tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark - UITableView delegate methods
+- (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	EponymCategory *selectedCategory = [[categoryArrayCache objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	[delegate loadEponymsOfCategory:selectedCategory containingString:nil animated:YES];
@@ -102,29 +98,28 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 		[self.navigationController pushViewController:delegate.listController animated:YES];
 	}
 }
-#pragma mark -
 
 
 
-#pragma mark UITableView datasource methods
-- (NSInteger) numberOfSectionsInTableView:(UITableView *)aTableView
+#pragma mark - UITableView datasource methods
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)aTableView
 {
 	NSUInteger count = [categoryArrayCache count];
 	return (count < 1) ? 1 : count;
 }
 
-- (NSArray *) sectionIndexTitlesForTableView:(UITableView *)aTableView
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)aTableView
 {
 	return [NSArray array];
 }
 
 
-- (NSString *) tableView:(UITableView *)aTableView titleForHeaderInSection:(NSInteger) section
+- (NSString *)tableView:(UITableView *)aTableView titleForHeaderInSection:(NSInteger) section
 {
 	return (1 == section) ? @"Categories" : nil;
 }
 
-- (NSInteger) tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger) section
+- (NSInteger)tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger) section
 {
 	return [[categoryArrayCache objectAtIndex:section] count];
 }
@@ -141,7 +136,6 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 	
 	return cell;
 }
-#pragma mark -
 
 
 @end

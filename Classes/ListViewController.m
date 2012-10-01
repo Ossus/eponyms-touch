@@ -152,7 +152,7 @@
 	[self assureEponymSelectedInListAnimated:NO];
 }
 
-- (void) searchForString:(NSString *)searchText
+- (void)searchForString:(NSString *)searchText
 {
 	if (searchTimeoutTimer && [searchTimeoutTimer isValid]) {
 		[searchTimeoutTimer invalidate];
@@ -166,49 +166,42 @@
 	[[NSRunLoop currentRunLoop] addTimer:searchTimeoutTimer forMode:NSDefaultRunLoopMode];
 }
 
-- (void) reallySearchForString
+- (void)reallySearchForString
 {
 	if (searchTimeoutTimer) {
 		NSString *searchText = [searchTimeoutTimer userInfo];
 		[delegate loadEponymsOfCurrentCategoryContainingString:searchText animated:NO];
 	}
 }
-#pragma mark -
 
 
 
-#pragma mark Rotation
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+#pragma mark - Rotation
+/**
+ *  iOS 5 and prior
+ */
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-	if (((AppDelegate *)[[UIApplication sharedApplication] delegate]).allowAutoRotate) {
-		return YES;
-	}
-	
 	return IS_PORTRAIT(toInterfaceOrientation);
 }
 
-- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+/**
+ *  iOS 6 and later
+ */
+- (BOOL)shouldAutorotate
 {
-	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-	
-	// adjust searchbar if necessary
-	if (self.navigationItem.titleView == mySearchBar) {
-		BOOL wasSideways = IS_LANDSCAPE(fromInterfaceOrientation);
-		
-		CGRect searchBarRect = mySearchBar.bounds;
-		searchBarRect.size.height = wasSideways ? 44.f : 32.f;
-		mySearchBar.bounds = searchBarRect;
-		
-		// workaround to the tintColoring bug (bad color alignment) -> un-tint the bar!
-//		mySearchBar.tintColor = self.navigationController.navigationBar.tintColor = wasSideways ? [delegate naviBarTintColor] : nil;
-	}
+	return YES;
 }
-#pragma mark -
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+	return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
+}
 
 
 
-#pragma mark Selecting and Starring
-- (void) assureEponymSelectedInListAnimated:(BOOL)animated
+#pragma mark - Selecting and Starring
+- (void)assureEponymSelectedInListAnimated:(BOOL)animated
 {
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 		NSUInteger activeEponym = [delegate eponymShown];

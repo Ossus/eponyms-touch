@@ -14,6 +14,7 @@
 #import "Eponym.h"
 #import "EponymUpdater.h"
 #import "PPSplitViewController.h"
+#import "MasterViewController.h"
 #import "InfoViewController.h"
 #import "CategoriesViewController.h"
 #import "ListViewController.h"
@@ -37,9 +38,8 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 
 @interface AppDelegate ()
 
-@property (nonatomic, readwrite, assign) UIViewController *topLevelController;
 @property (nonatomic, readwrite, retain) PPSplitViewController *splitController;
-@property (nonatomic, readwrite, retain) UINavigationController *naviController;
+@property (nonatomic, readwrite, retain) MasterViewController *naviController;
 @property (nonatomic, readwrite, retain) CategoriesViewController *categoriesController;
 @property (nonatomic, readwrite, retain) ListViewController *listController;
 @property (nonatomic, readwrite, retain) EponymViewController *eponymController;
@@ -60,10 +60,10 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 @implementation AppDelegate
 
 @synthesize window, database, myUpdater, usingEponymsOf;
-@synthesize allowAutoRotate, allowLearnMode, shouldAutoCheck;
+@synthesize shouldAutoCheck;
 @synthesize iAmUpdating, didCheckForNewEponyms, newEponymsAvailable;
-@dynamic categoryShown;
-@synthesize topLevelController, splitController, naviController, categoriesController, listController, eponymController, infoController;
+@synthesize categoryShown;
+@synthesize splitController, naviController, categoriesController, listController, eponymController, infoController;
 @synthesize categoryIDShown, eponymShown;
 @synthesize categoryArray, eponymArray, eponymSectionArray, loadedEponyms;
 @synthesize starImageListActive, starImageEponymActive, starImageEponymInactive;
@@ -108,8 +108,6 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		
 		self.usingEponymsOf = 0;
 		self.shouldAutoCheck = YES;
-		self.allowAutoRotate = onIPad;
-		self.allowLearnMode = YES;
 	}
 	
 	// Prefs were there
@@ -120,8 +118,6 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		lastUsedDBVersion = [defaults integerForKey:@"lastUsedDBVersion"];
 		shownCategoryAtQuit = [defaults integerForKey:@"shownCategoryAtQuit"];
 		shownEponymAtQuit = [defaults integerForKey:@"shownEponymAtQuit"];
-		self.allowAutoRotate = [defaults boolForKey:@"allowAutoRotate"];
-		self.allowLearnMode = [defaults boolForKey:@"allowLearnMode"];
 	}
 	
 	
@@ -130,7 +126,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	self.categoriesController = [[[CategoriesViewController alloc] initWithNibName:nil bundle:nil] autorelease];
 	[categoriesController setDelegate:self];
 	categoriesController.autosaveName = @"CategoryList";
-	self.naviController = [[[UINavigationController alloc] initWithRootViewController:categoriesController] autorelease];
+	self.naviController = [[[MasterViewController alloc] initWithRootViewController:categoriesController] autorelease];
 	naviController.navigationBar.tintColor = [self naviBarTintColor];
 	
 	// create the view controllers for the Eponym list and the Eponym details
@@ -146,14 +142,12 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	if (onIPad) {
 		window.backgroundColor = [UIColor viewFlipsideBackgroundColor];
 		window.rootViewController = self.splitController;
-		self.topLevelController = splitController;
 	}
 	
 	
 	// *** iPhone specific UI
 	else {
 		window.rootViewController = naviController;
-		self.topLevelController = naviController;
 	}
 	
 	[window makeKeyAndVisible];
@@ -301,8 +295,6 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	[defaults setBool:shouldAutoCheck forKey:@"shouldAutoCheck"];
 	[defaults setInteger:categoryIDShown forKey:@"shownCategoryAtQuit"];
 	[defaults setInteger:eponymShown forKey:@"shownEponymAtQuit"];
-	[defaults setBool:allowAutoRotate forKey:@"allowAutoRotate"];
-	[defaults setBool:allowLearnMode forKey:@"allowLearnMode"];
 	[defaults synchronize];
 }
 
@@ -904,7 +896,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 
 #pragma mark GUI Actions
 - (void) showInfoPanel:(id)sender
-{	
+{
 	[self showInfoPanelAsFirstTimeLaunch:NO];
 }
 
@@ -937,14 +929,12 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	}
 	[tempNaviController release];
 }
-#pragma mark -
 
 
 
-#pragma mark Accelerometer Delegate
-- (void) accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
+#pragma mark - Accelerometer Delegate
+- (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
 {
-	if (allowLearnMode) {
 		BOOL deviceIsPortrait = UIDeviceOrientationIsPortrait(self.naviController.interfaceOrientation);
 		UIAccelerationValue deviceX = deviceIsPortrait ? acceleration.x : acceleration.y;
 		UIAccelerationValue deviceY = deviceIsPortrait ? acceleration.y : acceleration.x;
@@ -967,13 +957,11 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		
 		lastAccelerationX = accelerationX;
 		lastAccelerationY = accelerationY;
-	}
 }
-#pragma mark -
 
 
 
-#pragma mark Utilities
+#pragma mark - Utilities
 - (EponymCategory *) categoryWithID:(NSInteger)identifier
 {
 	// categories with identifier > 0 are real categories and stored in the second subarray of categoryArray

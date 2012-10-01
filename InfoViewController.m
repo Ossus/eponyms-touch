@@ -41,7 +41,6 @@
 @synthesize parentView;
 @synthesize infoView;
 @synthesize updatesView;
-@synthesize optionsView;
 @synthesize tabSegments;
 @synthesize versionLabel;
 @synthesize usingEponymsLabel;
@@ -53,8 +52,6 @@
 @synthesize progressView;
 @synthesize updateButton;
 @synthesize autocheckSwitch;
-@synthesize allowRotateSwitch;
-@synthesize allowLearnModeSwitch;
 
 
 - (id) init
@@ -70,14 +67,7 @@
 		askingToAbortImport = NO;
 		
 		// compose the navigation bar
-		NSArray *possibleTabs = nil;
-		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-			possibleTabs = [NSArray arrayWithObjects:@"About", @"Update", nil];
-		}
-		else {
-			possibleTabs = [NSArray arrayWithObjects:@"About", @"Update", @"Options", nil];
-		}
-		
+		NSArray *possibleTabs = @[@"About", @"Update"];
 		self.tabSegments = [[UISegmentedControl alloc] initWithItems:possibleTabs];
 		tabSegments.selectedSegmentIndex = 0;
 		tabSegments.segmentedControlStyle = UISegmentedControlStyleBar;
@@ -107,7 +97,6 @@
 	
 	self.infoView = nil;
 	self.updatesView = nil;
-	self.optionsView = nil;
 	
 	self.versionLabel = nil;
 	self.usingEponymsLabel = nil;
@@ -120,9 +109,6 @@
 	self.progressView = nil;
 	self.updateButton = nil;
 	self.autocheckSwitch = nil;
-	
-	self.allowRotateSwitch = nil;
-	self.allowLearnModeSwitch = nil;
 	
 	[super dealloc];
 }
@@ -173,14 +159,11 @@
 		[self alertViewWithTitle:title message:message cancelTitle:@"OK"];		// maybe allow postponing first import?
 	}
 	
-	// Adjust options
-	AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+	// Adjust autocheck option
 	autocheckSwitch.on = [delegate shouldAutoCheck];
-	allowRotateSwitch.on = appDelegate.allowAutoRotate;
-	allowLearnModeSwitch.on = appDelegate.allowLearnMode;
 }
 
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 		return YES;
@@ -190,7 +173,21 @@
 	return IS_PORTRAIT(toInterfaceOrientation);
 }
 
-- (void) dismissMe:(id)sender
+/**
+ *  iOS 6 and later
+ */
+- (BOOL)shouldAutorotate
+{
+	return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+	return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
+}
+
+
+- (void)dismissMe:(id)sender
 {
 	// warning when closing during import
 	if ([delegate iAmUpdating]) {
@@ -204,11 +201,10 @@
 		[self.parentViewController dismissModalViewControllerAnimated:YES];
 	}
 }
-#pragma mark -
 
 
 
-#pragma mark GUI
+#pragma mark - GUI
 - (void) tabChanged:(id)sender
 {
 	UISegmentedControl *segment = sender;
@@ -224,14 +220,8 @@
 	UIView *viewToAdd = nil;
 	BOOL adjustFrame = YES;
 	
-	// Show the About page
-	if (0 == tab) {
-		viewToAdd = infoView;
-		adjustFrame = NO;
-	}
-	
 	// Show the update tab
-	else if (1 == tab) {
+	if (1 == tab) {
 		viewToAdd = updatesView;
 		
 		// adjust the elements
@@ -240,9 +230,10 @@
 		}
 	}
 	
-	// Show the options
+	// Show the About page
 	else {
-		viewToAdd = optionsView;
+		viewToAdd = infoView;
+		adjustFrame = NO;
 	}
 	
 	// add the view?
@@ -362,26 +353,17 @@
 	}
 }
 
-- (IBAction) switchToggled:(id)sender
+- (IBAction)switchToggled:(id)sender
 {
 	UISwitch *mySwitch = sender;
-	AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-	
 	if (autocheckSwitch == mySwitch) {
 		[delegate setShouldAutoCheck:mySwitch.on];
 	}
-	else if (allowRotateSwitch == mySwitch) {
-		appDelegate.allowAutoRotate = mySwitch.on;
-	}
-	else if (allowLearnModeSwitch == mySwitch) {
-		appDelegate.allowLearnMode = mySwitch.on;
-	}
 }
-#pragma mark -
 
 
 
-#pragma mark Updater Delegate
+#pragma mark - Updater Delegate
 - (void) updaterDidStartAction:(EponymUpdater *)updater
 {
 	[updater retain];

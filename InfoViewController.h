@@ -19,40 +19,7 @@
 
 
 @interface InfoViewController : UIViewController <UIAlertViewDelegate, EponymUpdaterDelegate> {
-	AppDelegate *delegate;
-	
-	BOOL firstTimeLaunch;
 	BOOL askingToAbortImport;
-	
-	NSInteger lastEponymCheck;
-	NSInteger lastEponymUpdate;
-	NSDictionary *infoPlistDict;
-	NSURL *projectWebsiteURL;
-	
-	IBOutlet UIScrollView *parentView;
-	UISegmentedControl *tabSegments;
-	
-	IBOutlet UIView *infoView;
-	IBOutlet UIView *updatesView;
-	IBOutlet UIView *optionsView;
-	
-	// Info
-	IBOutlet UILabel *versionLabel;
-	IBOutlet UILabel *usingEponymsLabel;
-	IBOutlet UIButton *projectWebsiteButton;
-	IBOutlet UIButton *eponymsDotNetButton;
-	
-	// Updates
-	IBOutlet UILabel *lastCheckLabel;
-	IBOutlet UILabel *lastUpdateLabel;
-	IBOutlet UILabel *progressText;
-	IBOutlet UIProgressView *progressView;
-	IBOutlet UIButton *updateButton;
-	IBOutlet UISwitch *autocheckSwitch;
-	
-	// Options
-	IBOutlet UISwitch *allowRotateSwitch;
-	IBOutlet UISwitch *allowLearnModeSwitch;
 }
 
 @property (nonatomic, assign) AppDelegate *delegate;
@@ -68,7 +35,6 @@
 
 @property (nonatomic, retain) IBOutlet UIView *infoView;
 @property (nonatomic, retain) IBOutlet UIView *updatesView;
-@property (nonatomic, retain) IBOutlet UIView *optionsView;
 
 @property (nonatomic, retain) IBOutlet UILabel *versionLabel;
 @property (nonatomic, retain) IBOutlet UILabel *usingEponymsLabel;
@@ -81,10 +47,6 @@
 @property (nonatomic, retain) IBOutlet UIProgressView *progressView;
 @property (nonatomic, retain) IBOutlet UIButton *updateButton;
 @property (nonatomic, retain) IBOutlet UISwitch *autocheckSwitch;
-
-@property (nonatomic, retain) IBOutlet UISwitch *allowRotateSwitch;
-@property (nonatomic, retain) IBOutlet UISwitch *allowLearnModeSwitch;
-
 
 - (IBAction) tabChanged:(id)sender;
 - (void) updateLabelsWithDateForLastCheck:(NSDate *)lastCheck lastUpdate:(NSDate *)lastUpdate usingEponyms:(NSDate *)usingEponyms;

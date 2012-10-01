@@ -137,6 +137,8 @@
 		EEE91E191619166400BD41FE /* pattern-horizontal.png in Resources */ = {isa = PBXBuildFile; fileRef = EEE91E161619166300BD41FE /* pattern-horizontal.png */; };
 		EEE91E1A1619166400BD41FE /* pattern-vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = EEE91E171619166300BD41FE /* pattern-vertical.png */; };
 		EEE91E1B1619166400BD41FE /* pattern-vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = EEE91E171619166300BD41FE /* pattern-vertical.png */; };
+		EEE91E1E161927EF00BD41FE /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE91E1D161927EF00BD41FE /* MasterViewController.m */; };
+		EEE91E1F161927EF00BD41FE /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE91E1D161927EF00BD41FE /* MasterViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -258,6 +260,8 @@
 		EEE91E14161911E800BD41FE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		EEE91E161619166300BD41FE /* pattern-horizontal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-horizontal.png"; sourceTree = "<group>"; };
 		EEE91E171619166300BD41FE /* pattern-vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-vertical.png"; sourceTree = "<group>"; };
+		EEE91E1C161927EF00BD41FE /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
+		EEE91E1D161927EF00BD41FE /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		EEFA119210A38F3D0041A4D7 /* GoogleAdSenseClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleAdSenseClient.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -418,6 +422,8 @@
 				EEC2A6C811CE6C4F009C9486 /* MCTableViewController.m */,
 				EEC2A6BF11CE6C3A009C9486 /* PPSplitViewController.h */,
 				EEC2A6C011CE6C3A009C9486 /* PPSplitViewController.m */,
+				EEE91E1C161927EF00BD41FE /* MasterViewController.h */,
+				EEE91E1D161927EF00BD41FE /* MasterViewController.m */,
 				EE2DE7AA0E1C2F7A00D97653 /* CategoriesViewController.h */,
 				EE2DE7AB0E1C2F7A00D97653 /* CategoriesViewController.m */,
 				EE2DE74C0E1C297200D97653 /* ListViewController.h */,
@@ -700,6 +706,7 @@
 				EEC2A96C11CEC5A6009C9486 /* UIView+shadowBug.m in Sources */,
 				EE38197C11CFD83000DB14D9 /* SQLiteAccessors.c in Sources */,
 				EE5BD32811D9173B00964E25 /* sqlite3_unicode.c in Sources */,
+				EEE91E1E161927EF00BD41FE /* MasterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -729,6 +736,7 @@
 				EEC2A96B11CEC5A6009C9486 /* UIView+shadowBug.m in Sources */,
 				EE38197B11CFD83000DB14D9 /* SQLiteAccessors.c in Sources */,
 				EE5BD32911D9173B00964E25 /* sqlite3_unicode.c in Sources */,
+				EEE91E1F161927EF00BD41FE /* MasterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

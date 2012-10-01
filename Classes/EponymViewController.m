@@ -205,24 +205,35 @@
 }
 
 
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+/**
+ *  iOS 5 and prior
+ */
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-	if (APP_DELEGATE.allowAutoRotate) {
-		return YES;
-	}
-	
 	return IS_PORTRAIT(toInterfaceOrientation);
 }
 
-- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+/**
+ *  iOS 6 and later
+ */
+- (BOOL)shouldAutorotate
+{
+	return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+	return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
 	[self alignUIElements];
 }
-#pragma mark -
 
 
 
-#pragma mark Eponym Display
+#pragma mark - Eponym Display
 - (void) adjustInterfaceToEponym
 {
 	((UIScrollView *)self.view).contentOffset = CGPointZero;

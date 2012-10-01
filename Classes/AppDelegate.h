@@ -30,44 +30,6 @@ typedef enum {
 
 
 @interface AppDelegate : NSObject <UIApplicationDelegate, EponymUpdaterDelegate, UIAccelerometerDelegate> {
-	IBOutlet UIWindow *window;
-	sqlite3 *database;
-	
-	// Prefs
-	BOOL shouldAutoCheck;
-	BOOL allowAutoRotate;
-	BOOL allowLearnMode;
-	
-	// Eponyms
-	EponymCategory *categoryShown;
-	NSInteger categoryIDShown;				// not unsigned! -100 = no category, -2 = recent, -1 = starred, 0 = all
-	NSUInteger eponymShown;
-	
-	NSMutableArray *categoryArray;			// 2D	
-	NSMutableArray *eponymArray;			// 2D!!	(for the table sections)
-	NSMutableArray *eponymSectionArray;		// 1D	(holds the section titles - letters A..Z in our case)
-	NSMutableArray *loadedEponyms;			// 1D, used if a memory warning occurs
-	
-	// View Controllers
-	UIViewController *topLevelController;				// the controller we directly hang into the window. Used as workaround for several issues
-	PPSplitViewController *splitController;
-	UINavigationController *naviController;
-	CategoriesViewController *categoriesController;
-	ListViewController *listController;
-	EponymViewController *eponymController;
-	InfoViewController *infoController;
-	
-	// GUI
-	UIImage *starImageListActive;
-	UIImage *starImageEponymActive;
-	UIImage *starImageEponymInactive;
-	
-	// Updating
-	EponymUpdater *myUpdater;
-	BOOL iAmUpdating;
-	BOOL didCheckForNewEponyms;
-	BOOL newEponymsAvailable;
-	NSInteger usingEponymsOf;
 	
 	// Accelerometer
 	UIAccelerationValue accelerationX;
@@ -78,23 +40,20 @@ typedef enum {
 	NSTimeInterval randomIsRefractoryUntil;			// timestamp until the next shake event is allowed
 }
 
-@property (nonatomic, retain) UIWindow *window;
+@property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, assign) sqlite3 *database;
 
 @property (nonatomic, assign) BOOL shouldAutoCheck;
-@property (nonatomic, assign) BOOL allowAutoRotate;
-@property (nonatomic, assign) BOOL allowLearnMode;
 
 @property (nonatomic, retain) EponymCategory *categoryShown;
-@property (nonatomic, assign) NSInteger categoryIDShown;
+@property (nonatomic, assign) NSInteger categoryIDShown;				// not unsigned! -100 = no category, -2 = recent, -1 = starred, 0 = all
 @property (nonatomic, assign) NSUInteger eponymShown;
 
-@property (nonatomic, retain) NSMutableArray *categoryArray;
-@property (nonatomic, retain) NSMutableArray *eponymArray;
-@property (nonatomic, retain) NSMutableArray *eponymSectionArray;
-@property (nonatomic, retain) NSMutableArray *loadedEponyms;
+@property (nonatomic, retain) NSMutableArray *categoryArray;			// 2D
+@property (nonatomic, retain) NSMutableArray *eponymArray;				// 2D!!	(for the table sections)
+@property (nonatomic, retain) NSMutableArray *eponymSectionArray;		// 1D	(holds the section titles - letters A..Z in our case)
+@property (nonatomic, retain) NSMutableArray *loadedEponyms;			// 1D, used if a memory warning occurs
 
-@property (nonatomic, readonly, assign) UIViewController *topLevelController;
 @property (nonatomic, readonly, retain) PPSplitViewController *splitController;
 @property (nonatomic, readonly, retain) UINavigationController *naviController;
 @property (nonatomic, readonly, retain) CategoriesViewController *categoriesController;
