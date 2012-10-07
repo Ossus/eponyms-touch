@@ -847,7 +847,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Pascal Pfiffner";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Pascal Pfiffner";
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -860,8 +860,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
-				PROVISIONING_PROFILE = "97E6B393-8D57-476B-BDAF-A4A7DFC4D9A8";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "97E6B393-8D57-476B-BDAF-A4A7DFC4D9A8";
+				PROVISIONING_PROFILE = "357DDC6F-881A-4718-90AB-4B5DF63FB645";
+				"PROVISIONING_PROFILE[sdk=*]" = "357DDC6F-881A-4718-90AB-4B5DF63FB645";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -873,6 +873,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = "Resources/eponyms-touch.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Resources/eponyms_touch_Prefix.pch;
@@ -884,6 +885,7 @@
 					"\"$(SRCROOT)/GoogleAds\"",
 				);
 				PRODUCT_NAME = "eponyms-touch";
+				"PROVISIONING_PROFILE[sdk=*]" = "";
 			};
 			name = Distribution;
 		};
