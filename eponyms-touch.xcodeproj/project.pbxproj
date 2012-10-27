@@ -14,9 +14,6 @@
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		EE14428F0E236E10003EA64C /* InfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE14428E0E236E10003EA64C /* InfoView.xib */; };
 		EE1443EA0E23A576003EA64C /* EponymUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1443E90E23A576003EA64C /* EponymUpdater.m */; };
-		EE1D61F513C412F2007CB0BB /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE1D61F413C412F2007CB0BB /* libGoogleAdMobAds.a */; };
-		EE1D61F713C41418007CB0BB /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE1D61F613C41418007CB0BB /* MessageUI.framework */; };
-		EE1D61F913C41421007CB0BB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE1D61F813C41421007CB0BB /* AudioToolbox.framework */; };
 		EE2338731207646F007A58FF /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EE5BD33E11D917B500964E25 /* libsqlite3.dylib */; };
 		EE2338BE120764B8007A58FF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC2A70C11CE6E8A009C9486 /* QuartzCore.framework */; };
 		EE2338C7120764E9007A58FF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE2338C6120764E9007A58FF /* SystemConfiguration.framework */; };
@@ -139,6 +136,11 @@
 		EEE91E1B1619166400BD41FE /* pattern-vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = EEE91E171619166300BD41FE /* pattern-vertical.png */; };
 		EEE91E1E161927EF00BD41FE /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE91E1D161927EF00BD41FE /* MasterViewController.m */; };
 		EEE91E1F161927EF00BD41FE /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE91E1D161927EF00BD41FE /* MasterViewController.m */; };
+		EEEF1EA6163C25C700A2931A /* iSoma.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEEF1EA5163C25C700A2931A /* iSoma.framework */; };
+		EEEF1EA8163C25EA00A2931A /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEEF1EA7163C25EA00A2931A /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		EEEF1EAA163C260200A2931A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEEF1EA9163C260200A2931A /* CoreLocation.framework */; };
+		EEEF1EAC163C261200A2931A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEEF1EAB163C261200A2931A /* MediaPlayer.framework */; };
+		EEEF1EAE163C262800A2931A /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEEF1EAD163C262800A2931A /* StoreKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -155,15 +157,7 @@
 		EE14428E0E236E10003EA64C /* InfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoView.xib; sourceTree = "<group>"; };
 		EE1443E80E23A576003EA64C /* EponymUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EponymUpdater.h; sourceTree = "<group>"; };
 		EE1443E90E23A576003EA64C /* EponymUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EponymUpdater.m; sourceTree = "<group>"; };
-		EE1D61EE13C412F2007CB0BB /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerView.h; sourceTree = "<group>"; };
-		EE1D61EF13C412F2007CB0BB /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerViewDelegate.h; sourceTree = "<group>"; };
-		EE1D61F013C412F2007CB0BB /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitial.h; sourceTree = "<group>"; };
-		EE1D61F113C412F2007CB0BB /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitialDelegate.h; sourceTree = "<group>"; };
-		EE1D61F213C412F2007CB0BB /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
-		EE1D61F313C412F2007CB0BB /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
-		EE1D61F413C412F2007CB0BB /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
 		EE1D61F613C41418007CB0BB /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		EE1D61F813C41421007CB0BB /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		EE2338C2120764DD007A58FF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		EE2338C6120764E9007A58FF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		EE2DE6B40E1AE31800D97653 /* Eponyms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Eponyms.png; sourceTree = "<group>"; };
@@ -262,7 +256,12 @@
 		EEE91E171619166300BD41FE /* pattern-vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-vertical.png"; sourceTree = "<group>"; };
 		EEE91E1C161927EF00BD41FE /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		EEE91E1D161927EF00BD41FE /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
-		EEFA119210A38F3D0041A4D7 /* GoogleAdSenseClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleAdSenseClient.h; sourceTree = "<group>"; };
+		EEEF1EA5163C25C700A2931A /* iSoma.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iSoma.framework; sourceTree = "<group>"; };
+		EEEF1EA7163C25EA00A2931A /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		EEEF1EA9163C260200A2931A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		EEEF1EAB163C261200A2931A /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		EEEF1EAD163C262800A2931A /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		EEEF1EAF163C36C900A2931A /* SMAATOConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMAATOConfig.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,15 +281,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE1D61F913C41421007CB0BB /* AudioToolbox.framework in Frameworks */,
-				EE1D61F713C41418007CB0BB /* MessageUI.framework in Frameworks */,
 				EE56387B109DFB1D00D6C4E6 /* Foundation.framework in Frameworks */,
 				EE56387C109DFB1D00D6C4E6 /* UIKit.framework in Frameworks */,
 				EE56387D109DFB1D00D6C4E6 /* CoreGraphics.framework in Frameworks */,
 				EE2338BE120764B8007A58FF /* QuartzCore.framework in Frameworks */,
 				EE2338731207646F007A58FF /* libsqlite3.dylib in Frameworks */,
+				EEEF1EA8163C25EA00A2931A /* AdSupport.framework in Frameworks */,
+				EEEF1EA6163C25C700A2931A /* iSoma.framework in Frameworks */,
+				EEEF1EAA163C260200A2931A /* CoreLocation.framework in Frameworks */,
+				EEEF1EAC163C261200A2931A /* MediaPlayer.framework in Frameworks */,
+				EEEF1EAE163C262800A2931A /* StoreKit.framework in Frameworks */,
 				EE2338C7120764E9007A58FF /* SystemConfiguration.framework in Frameworks */,
-				EE1D61F513C412F2007CB0BB /* libGoogleAdMobAds.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,12 +330,12 @@
 				1D3623250D0F684500981E51 /* AppDelegate.m */,
 				EE5BD32611D9173B00964E25 /* sqlite3_unicode.h */,
 				EE5BD32711D9173B00964E25 /* sqlite3_unicode.c */,
+				EEEF1EAF163C36C900A2931A /* SMAATOConfig.h */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				EE2DE7AD0E1C2F8600D97653 /* View Controllers */,
 				EE89CD880E6174C00016A781 /* Subclasses */,
 				EEC2A6FC11CE6E19009C9486 /* Helpers */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
-				EE56383A109DFA7A00D6C4E6 /* GoogleAds */,
 				EE2DE6B30E1AE30C00D97653 /* Images */,
 				EEC5AF1E1619FBD000C7424C /* Data */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -372,7 +373,6 @@
 			isa = PBXGroup;
 			children = (
 				EED69F820E2BF41900BEF0C4 /* CoreGraphics.framework */,
-				EE1D61F813C41421007CB0BB /* AudioToolbox.framework */,
 				EE1D61F613C41418007CB0BB /* MessageUI.framework */,
 				EEC2A70C11CE6E8A009C9486 /* QuartzCore.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
@@ -380,6 +380,11 @@
 				EE5BD33E11D917B500964E25 /* libsqlite3.dylib */,
 				EE2338C2120764DD007A58FF /* AVFoundation.framework */,
 				EE2338C6120764E9007A58FF /* SystemConfiguration.framework */,
+				EEEF1EA5163C25C700A2931A /* iSoma.framework */,
+				EEEF1EAD163C262800A2931A /* StoreKit.framework */,
+				EEEF1EAB163C261200A2931A /* MediaPlayer.framework */,
+				EEEF1EA9163C260200A2931A /* CoreLocation.framework */,
+				EEEF1EA7163C25EA00A2931A /* AdSupport.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -432,21 +437,6 @@
 			name = "View Controllers";
 			path = Classes;
 			sourceTree = "<group>";
-		};
-		EE56383A109DFA7A00D6C4E6 /* GoogleAds */ = {
-			isa = PBXGroup;
-			children = (
-				EE1D61EE13C412F2007CB0BB /* GADBannerView.h */,
-				EE1D61EF13C412F2007CB0BB /* GADBannerViewDelegate.h */,
-				EE1D61F013C412F2007CB0BB /* GADInterstitial.h */,
-				EE1D61F113C412F2007CB0BB /* GADInterstitialDelegate.h */,
-				EE1D61F213C412F2007CB0BB /* GADRequest.h */,
-				EE1D61F313C412F2007CB0BB /* GADRequestError.h */,
-				EE1D61F413C412F2007CB0BB /* libGoogleAdMobAds.a */,
-				EEFA119210A38F3D0041A4D7 /* GoogleAdSenseClient.h */,
-			);
-			path = GoogleAds;
-			sourceTree = SOURCE_ROOT;
 		};
 		EE89CD880E6174C00016A781 /* Subclasses */ = {
 			isa = PBXGroup;
@@ -764,11 +754,6 @@
 				GCC_PREFIX_HEADER = Resources/eponyms_touch_Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
 				INFOPLIST_FILE = Resources/Info.plist;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/GoogleAds\"",
-				);
 				PRODUCT_NAME = "eponyms-touch";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
@@ -784,11 +769,6 @@
 				GCC_PREFIX_HEADER = Resources/eponyms_touch_Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
 				INFOPLIST_FILE = Resources/Info.plist;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/GoogleAds\"",
-				);
 				PRODUCT_NAME = "eponyms-touch";
 			};
 			name = Release;
@@ -879,11 +859,6 @@
 				GCC_PREFIX_HEADER = Resources/eponyms_touch_Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
 				INFOPLIST_FILE = Resources/Info.plist;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/GoogleAds\"",
-				);
 				PRODUCT_NAME = "eponyms-touch";
 				"PROVISIONING_PROFILE[sdk=*]" = "";
 			};
@@ -896,21 +871,22 @@
 				CODE_SIGN_ENTITLEMENTS = "Resources/eponyms-student.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Resources/eponyms_touch_Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
 				INFOPLIST_FILE = "Resources/Info-student.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/GoogleAds\"",
-				);
+				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CFLAGS = (
-					"-DSHOW_GOOGLE_ADS",
 					"-DDEBUG",
+					"-DSHOW_ADS",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "eponyms-student";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -924,16 +900,17 @@
 				CODE_SIGN_ENTITLEMENTS = "Resources/eponyms-student.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Resources/eponyms_touch_Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
 				INFOPLIST_FILE = "Resources/Info-student.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/GoogleAds\"",
-				);
-				OTHER_CFLAGS = "-DSHOW_GOOGLE_ADS";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "-DSHOW_ADS";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "eponyms-student";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "574DB9DC-0CDE-425B-9CB5-0FBD5DA32410";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -947,16 +924,17 @@
 				CODE_SIGN_ENTITLEMENTS = "Resources/eponyms-student.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Resources/eponyms_touch_Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
 				INFOPLIST_FILE = "Resources/Info-student.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/GoogleAds\"",
-				);
-				OTHER_CFLAGS = "-DSHOW_GOOGLE_ADS";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "-DSHOW_ADS";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "eponyms-student";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "97E6B393-8D57-476B-BDAF-A4A7DFC4D9A8";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -970,16 +948,17 @@
 				CODE_SIGN_ENTITLEMENTS = "Resources/eponyms-student.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Resources/eponyms_touch_Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
 				INFOPLIST_FILE = "Resources/Info-student.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/GoogleAds\"",
-				);
-				OTHER_CFLAGS = "-DSHOW_GOOGLE_ADS";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "-DSHOW_ADS";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "eponyms-student";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "574DB9DC-0CDE-425B-9CB5-0FBD5DA32410";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1025,11 +1004,6 @@
 				GCC_PREFIX_HEADER = Resources/eponyms_touch_Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
 				INFOPLIST_FILE = Resources/Info.plist;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/GoogleAds\"",
-				);
 				PRODUCT_NAME = "eponyms-touch";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
@@ -1042,18 +1016,19 @@
 				CODE_SIGN_ENTITLEMENTS = "Resources/eponyms-student.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Resources/eponyms_touch_Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
 				INFOPLIST_FILE = "Resources/Info-student.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/GoogleAds\"",
-				);
-				OTHER_CFLAGS = "-DSHOW_GOOGLE_ADS";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "-DSHOW_ADS";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "eponyms-student";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "574DB9DC-0CDE-425B-9CB5-0FBD5DA32410";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1097,11 +1072,6 @@
 				GCC_PREFIX_HEADER = Resources/eponyms_touch_Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
 				INFOPLIST_FILE = Resources/Info.plist;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/GoogleAds\"",
-				);
 				PRODUCT_NAME = "eponyms-touch";
 				PROVISIONING_PROFILE = "BB0194E5-F63B-4EAB-9037-28CBC1251902";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";

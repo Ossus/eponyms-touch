@@ -11,47 +11,28 @@
 
 
 #import <UIKit/UIKit.h>
-#ifdef SHOW_GOOGLE_ADS
-#import "GADBannerView.h"
+#ifdef SHOW_ADS
+#	import <iSoma/SOMAAdListenerProtocol.h>
 #endif
+
 @class Eponym;
 @class MCTextView;
 @class PPHintableLabel;
 
 
 @interface EponymViewController : UIViewController <UIScrollViewDelegate
-#ifdef SHOW_GOOGLE_ADS
-													, GADBannerViewDelegate
+#ifdef SHOW_ADS
+													, SOMAAdListenerProtocol
 #endif
 	>
 {
-	Eponym *eponymToBeShown;
 	BOOL viewIsVisible;
-	
-	UIBarButtonItem *rightBarButtonStarredItem;
-	UIBarButtonItem *rightBarButtonNotStarredItem;
-	
-	UILabel *eponymTitleLabel;
-	MCTextView *eponymTextView;
-	PPHintableLabel *eponymCategoriesLabel;
-	UILabel *dateCreatedLabel;
-	UILabel *dateUpdatedLabel;
-	
-	EPLearningMode displayNextEponymInLearningMode;
-	UIButton *randomNoTitleEponymButton;
-	UIButton *randomNoTextEponymButton;
-	UIButton *revealButton;
-	
-#ifdef SHOW_GOOGLE_ADS
-	CGSize adSize;
-	BOOL adIsLoading;
-	BOOL adDidLoadForThisEponym;
-	GADBannerView *adView;
+#ifdef SHOW_ADS
 	NSTimeInterval adsAreRefractoryUntil;			// timestamp until we allow loading a new ad
 #endif
 }
 
-@property (nonatomic, retain) Eponym *eponymToBeShown;
+@property (nonatomic, retain) Eponym *eponym;
 
 @property (nonatomic, retain) UIBarButtonItem *rightBarButtonStarredItem;
 @property (nonatomic, retain) UIBarButtonItem *rightBarButtonNotStarredItem;
@@ -67,14 +48,10 @@
 @property (nonatomic, retain) UIButton *randomNoTextEponymButton;
 @property (nonatomic, retain) UIButton *revealButton;
 
-#ifdef SHOW_GOOGLE_ADS
-@property (nonatomic, readonly, retain) GADBannerView *adView;
-#endif
+- (void)toggleEponymStarred:(id)sender;
+- (void)indicateEponymStarredStatus;
 
-- (void) toggleEponymStarred:(id)sender;
-- (void) indicateEponymStarredStatus;
-
-- (IBAction) reveal:(id)sender;
+- (IBAction)reveal:(id)sender;
 
 
 @end

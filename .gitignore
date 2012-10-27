@@ -2,9 +2,6 @@
 .DS_Store
 .htaccess
  
-# build directories
-build/*
- 
 # Xcode user data
 **.pbxuser
 **.mode?v?
@@ -13,6 +10,9 @@ build/*
 **/xcuserdata
 
 # private files
-GoogleAds
 sqlite3_unicode.*
+
+# Ads
+SMAATOConfig.h
+iSoma.framework
 
