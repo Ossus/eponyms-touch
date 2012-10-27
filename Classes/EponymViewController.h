@@ -48,6 +48,8 @@
 @property (nonatomic, strong) UIButton *randomNoTextEponymButton;
 @property (nonatomic, strong) UIButton *revealButton;
 
+- (void)setEponym:(Eponym *)newEponym animated:(BOOL)animated;
+
 - (void)toggleEponymStarred:(id)sender;
 - (void)indicateEponymStarredStatus;
 

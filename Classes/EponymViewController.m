@@ -40,8 +40,8 @@
 
 @interface EponymViewController ()
 
-- (void)adjustInterfaceToEponym;
-- (void)alignUIElements;
+- (void)adjustInterfaceToEponymAnimated:(BOOL)animated;
+- (void)alignUIElementsAnimated:(BOOL)animated;
 - (void)showRandomEponym:(id)sender;
 
 #ifdef SHOW_ADS
@@ -131,12 +131,14 @@
 	
 	[_adView addAdListener:self];
 #endif
+	
+	[self adjustInterfaceToEponymAnimated:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-	[self alignUIElements];
+	[self alignUIElementsAnimated:NO];
 	
 #ifdef SHOW_ADS
 	[self loadNewAdFor:_eponym];
@@ -186,13 +188,13 @@
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-	[self alignUIElements];
+	[self alignUIElementsAnimated:YES];
 }
 
 
 
 #pragma mark - Eponym Display
-- (void)adjustInterfaceToEponym
+- (void)adjustInterfaceToEponymAnimated:(BOOL)animated
 {
 	((UIScrollView *)self.view).contentOffset = CGPointZero;
 	
@@ -200,8 +202,9 @@
 	[self indicateEponymStarredStatus];
 	
 	// title and text
-	_eponymTitleLabel.text = (EPLearningModeNoTitle == _displayNextEponymInLearningMode) ? @"…" : _eponym.title;
-	_eponymTextView.text = (EPLearningModeNoText == _displayNextEponymInLearningMode) ? @"…" : _eponym.text;
+	_eponymTitleLabel.text = _eponym ? ((EPLearningModeNoTitle == _displayNextEponymInLearningMode) ? @"…" : _eponym.title) : @"No eponym";
+	_eponymTitleLabel.textColor = _eponym ? [UIColor blackColor] : [UIColor darkGrayColor];
+	_eponymTextView.text = _eponym ? (EPLearningModeNoText == _displayNextEponymInLearningMode) ? @"…" : _eponym.text : @"Choose an eponym from the list to your left";
 	_eponymTextView.contentOffset = CGPointZero;
 	[_eponymTextView resignFirstResponder];
 	
@@ -252,62 +255,56 @@
 	}
 	
 	// adjust content
-	[self alignUIElements];
+	[self alignUIElementsAnimated:animated];
 	
 	_displayNextEponymInLearningMode = EPLearningModeNone;
 }
 
-- (void)alignUIElements
+- (void)alignUIElementsAnimated:(BOOL)animated
 {
 	CGRect viewFrame = self.view.frame;
 	CGFloat scaleFactor = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? 1.5f : 1.f;
 	
 	// Size needed to fit all text
-	CGRect currRect = _eponymTextView.frame;
-	CGSize szMax = CGSizeMake(currRect.size.width, 10000.0);
+	CGRect textFrame = _eponymTextView.frame;
+	CGSize szMax = CGSizeMake(textFrame.size.width, 10000.0);
 	CGSize optimalSize = [_eponymTextView sizeThatFits:szMax];
 	
 	if (optimalSize.height < 10000.0) {
-		currRect.size.height = optimalSize.height;
+		textFrame.size.height = optimalSize.height;
 	}
-	_eponymTextView.frame = currRect;
 	
 	// Align the labels below
 	CGRect catRect = _eponymCategoriesLabel.frame;
-	catRect.origin.x = currRect.origin.x + kLabelSideMargin;
-	catRect.origin.y = currRect.size.height + roundf(kDistanceCatLabelFromText * scaleFactor);
 	catRect.size.width = [_eponymCategoriesLabel.text sizeWithFont:_eponymCategoriesLabel.font].width;
 	_eponymCategoriesLabel.frame = catRect;
 	
+	catRect.origin.x = textFrame.origin.x + kLabelSideMargin;
+	catRect.origin.y = textFrame.size.height + roundf(kDistanceCatLabelFromText * scaleFactor);
+	
 	CGFloat subviewHeight = catRect.origin.y + catRect.size.height;
 	
+	CGRect creaRect = _dateCreatedLabel.frame;
+	creaRect.origin.y = subviewHeight + roundf(kDistanceDateLabelsFromCat * scaleFactor);
 	if (!_dateCreatedLabel.hidden) {
-		CGRect creaRect = _dateCreatedLabel.frame;
-		creaRect.origin.y = subviewHeight + roundf(kDistanceDateLabelsFromCat * scaleFactor);
-		_dateCreatedLabel.frame = creaRect;
 		subviewHeight = creaRect.origin.y + creaRect.size.height;
 	}
 	
+	CGRect updRect = _dateUpdatedLabel.frame;
+	updRect.origin.y = subviewHeight + 1.f;
 	if (!_dateUpdatedLabel.hidden) {
-		CGRect updRect = _dateUpdatedLabel.frame;
-		updRect.origin.y = subviewHeight + 1.f;
-		_dateUpdatedLabel.frame = updRect;
 		subviewHeight = updRect.origin.y + updRect.size.height;
 	}
 	
 	// "random eponym" buttons on iPad
+	CGRect rand1Frame = _randomNoTitleEponymButton.frame;
+	CGRect rand2Frame = _randomNoTextEponymButton.frame;
 	if (_randomNoTitleEponymButton && _randomNoTextEponymButton) {
 		CGFloat orig = subviewHeight + roundf(kDistanceDateLabelsFromCat * scaleFactor);
+		rand1Frame.origin.y = orig;
+		rand2Frame.origin.y = orig;
 		
-		CGRect buttRect = _randomNoTitleEponymButton.frame;
-		buttRect.origin.y = orig;
-		_randomNoTitleEponymButton.frame = buttRect;
-		
-		buttRect = _randomNoTextEponymButton.frame;
-		buttRect.origin.y = orig;
-		_randomNoTextEponymButton.frame = buttRect;
-		
-		subviewHeight = orig + buttRect.size.height;
+		subviewHeight = orig + rand1Frame.size.height;
 	}
 	
 	// tell the container view its new height
@@ -320,14 +317,14 @@
 	
 	// align ads
 #ifdef SHOW_ADS
+	CGRect adRect = CGRectZero;
 	if ([_adView superview]) {
 		CGSize adSize = [_adView frame].size;
 		CGFloat minY = viewFrame.size.height - adSize.height;
 		CGFloat targetY = superRect.origin.y + superRect.size.height;
 		CGFloat top = fmaxf(targetY, minY);
 		
-		CGRect adRect = CGRectMake(0.f, top, adSize.width, adSize.height);
-		_adView.frame = adRect;
+		adRect = CGRectMake(0.f, top, adSize.width, adSize.height);
 		
 		totalHeight = adRect.origin.y + adRect.size.height;
 	}
@@ -342,6 +339,30 @@
 	if (totalHeight < minHeight) {
 		[((UIScrollView *)self.view) scrollRectToVisible:CGRectMake(0.f, 0.f, 10.f, 10.f) animated:NO];
 	}
+	
+	// animated selected changes
+	[UIView animateWithDuration:(animated ? 0.2 : 0.0)
+					 animations:^{
+						 
+						 // text view
+						 _eponymTextView.frame = textFrame;
+						 
+						 // categories
+						 _eponymCategoriesLabel.frame = catRect;
+						 
+						 // dates
+						 _dateCreatedLabel.frame = creaRect;
+						 _dateUpdatedLabel.frame = updRect;
+						 
+						 // "random" buttons
+						 _randomNoTitleEponymButton.frame = rand1Frame;
+						 _randomNoTextEponymButton.frame = rand2Frame;
+						 
+						 // ads
+#ifdef SHOW_ADS
+						 _adView.frame = adRect;
+#endif
+					 }];
 }
 
 
@@ -362,12 +383,11 @@
 	[[APP_DELEGATE listController] assureEponymSelectedInListAnimated:NO];
 	
 	_eponymTitleLabel.text = _eponym.title;
+	_eponymTitleLabel.textColor = [UIColor blackColor];
 	_eponymTextView.text = _eponym.text;
 	//eponymTextView.text = [NSString stringWithFormat:@"%@ %@ %@ %@", eponymToBeShown.text, eponymToBeShown.text, eponymToBeShown.text, eponymToBeShown.text];		// to test long eponyms
 	
-	[UIView beginAnimations:nil context:nil];
-	[self alignUIElements];
-	[UIView commitAnimations];
+	 [self alignUIElementsAnimated:YES];
 }
 
 
@@ -399,7 +419,18 @@
 		_eponym = newEponym;
 		
 		if (_eponym) {
-			[self adjustInterfaceToEponym];
+			[self adjustInterfaceToEponymAnimated:NO];
+		}
+	}
+}
+
+- (void)setEponym:(Eponym *)newEponym animated:(BOOL)animated
+{
+	if (newEponym != _eponym) {
+		_eponym = newEponym;
+		
+		if (_eponym) {
+			[self adjustInterfaceToEponymAnimated:animated];
 		}
 	}
 }

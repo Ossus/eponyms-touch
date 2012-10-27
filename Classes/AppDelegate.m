@@ -746,7 +746,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	[eponym load];
 	
 	self.eponymShown = eponym.eponym_id;
-	eponymController.eponym = eponym;
+	[eponymController setEponym:eponym animated:animated];
 	
 	// iPhone - push navigation controller
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
