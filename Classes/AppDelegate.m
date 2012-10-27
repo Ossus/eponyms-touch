@@ -122,7 +122,6 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	
 	// *** iPad specific UI
 	if (onIPad) {
-		window.backgroundColor = [UIColor viewFlipsideBackgroundColor];
 		window.rootViewController = self.splitController;
 	}
 	
@@ -132,6 +131,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		window.rootViewController = naviController;
 	}
 	
+	window.backgroundColor = [UIColor viewFlipsideBackgroundColor];
 	[window makeKeyAndVisible];
 	
 	
@@ -746,7 +746,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	[eponym load];
 	
 	self.eponymShown = eponym.eponym_id;
-	[eponymController setEponym:eponym animated:animated];
+	[eponymController setEponym:eponym animated:animated && (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)];		// only allow animation on iPad
 	
 	// iPhone - push navigation controller
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
