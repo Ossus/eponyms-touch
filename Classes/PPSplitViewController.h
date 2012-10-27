@@ -34,17 +34,17 @@
 	BOOL trackRotationAnimation;
 }
 
-@property (nonatomic, retain) UIViewController *leftViewController;
-@property (nonatomic, retain) UIViewController *rightViewController;
-@property (nonatomic, retain) UIViewController *tabViewController;
-@property (nonatomic, retain) UIImage *logo;
+@property (nonatomic, strong) UIViewController *leftViewController;
+@property (nonatomic, strong) UIViewController *rightViewController;
+@property (nonatomic, strong) UIViewController *tabViewController;
+@property (nonatomic, strong) UIImage *logo;
 
 @property (nonatomic, assign) BOOL usesFullLandscapeWidth;
 
 @property (nonatomic, assign) BOOL useCustomLeftTitleBar;
 @property (nonatomic, assign) BOOL useCustomRightTitleBar;
-@property (nonatomic, readonly, retain) UINavigationBar *leftTitleBar;
-@property (nonatomic, readonly, retain) UINavigationBar *rightTitleBar;
+@property (nonatomic, readonly, strong) UINavigationBar *leftTitleBar;
+@property (nonatomic, readonly, strong) UINavigationBar *rightTitleBar;
 
 
 @end

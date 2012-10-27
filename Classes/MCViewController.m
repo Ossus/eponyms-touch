@@ -17,7 +17,7 @@
 
 @interface MCViewController ()
 
-@property (nonatomic, retain) NSDictionary *restoreOnLoad;
+@property (nonatomic, strong) NSDictionary *restoreOnLoad;
 
 - (void) willQuit;
 - (NSString *) stateSaveName;
@@ -30,18 +30,12 @@
 
 @synthesize myParentController;
 @synthesize shouldBeDismissed;
-@dynamic autosaveName;
 @synthesize restoreOnLoad;
 
 
-- (void) dealloc
+- (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	
-	self.autosaveName = nil;
-	self.restoreOnLoad = nil;
-	
-	[super dealloc];
 }
 
 
@@ -55,45 +49,33 @@
 	if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
 		shouldBeDismissed = YES;
 		
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(willQuit)
-													 name:UIApplicationWillTerminateNotification
-												   object:nil];
+		NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+		[center addObserver:self selector:@selector(willQuit) name:UIApplicationWillTerminateNotification object:nil];
 		if (&UIApplicationDidEnterBackgroundNotification != NULL) {
-			[[NSNotificationCenter defaultCenter] addObserver:self
-													 selector:@selector(willQuit)
-														 name:UIApplicationDidEnterBackgroundNotification
-													   object:nil];
+			[center addObserver:self selector:@selector(willQuit) name:UIApplicationDidEnterBackgroundNotification object:nil];
 		}
 	}
 	return self;
 }
-#pragma mark -
 
 
 
-#pragma mark KVC
-- (NSString *) autosaveName
+#pragma mark - KVC
+- (void)setAutosaveName:(NSString *)newName
 {
-	return autosaveName;
-}
-- (void) setAutosaveName:(NSString *)newName
-{
-	if (newName != autosaveName) {
-		[autosaveName release];
-		autosaveName = [newName copy];
+	if (newName != _autosaveName) {
+		_autosaveName = [newName copy];
 		
-		if (nil != autosaveName) {
+		if (nil != _autosaveName) {
 			[self restoreState];
 		}
 	}
 }
-#pragma mark -
 
 
 
-#pragma mark View Tasks
-- (void) viewDidLoad
+#pragma mark - View Tasks
+- (void)viewDidLoad
 {
 	[super viewDidLoad];
 	
@@ -146,12 +128,12 @@
 
 - (NSString *) stateSaveName
 {
-	return [NSString stringWithFormat:kMCVCStateSaveMask, autosaveName];
+	return [NSString stringWithFormat:kMCVCStateSaveMask, _autosaveName];
 }
 
 - (void) saveState
 {
-	if (nil != autosaveName) {
+	if (nil != _autosaveName) {
 		NSDictionary *state = [self currentState];
 		if (nil != state) {
 			[[NSUserDefaults standardUserDefaults] setObject:state forKey:[self stateSaveName]];
@@ -164,7 +146,7 @@
 	if (restoreOnLoad) {
 		[self restoreStateFrom:restoreOnLoad];
 	}
-	else if (autosaveName) {
+	else if (_autosaveName) {
 		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		NSString *saveName = [self stateSaveName];
 		
@@ -191,7 +173,7 @@
 	if (restoreOnLoad) {
 		return YES;
 	}
-	if (autosaveName) {
+	if (_autosaveName) {
 		return (nil != [[NSUserDefaults standardUserDefaults] objectForKey:[self stateSaveName]]);
 	}
 	return NO;

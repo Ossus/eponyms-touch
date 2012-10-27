@@ -5,26 +5,32 @@
 //  Created by Pascal Pfiffner on 18.10.09.
 //  Copyright 2009 Pascal Pfiffner. All rights reserved.
 //  
-//  A custom view that displays text pointing at some element
-//	Deduced from MedCalc's MCPopupView
-// 
 
 #import <UIKit/UIKit.h>
-@class PPHintViewContainer;
+#import "MCOverlayManager.h"
 
+typedef void (^PPHintViewDismissalBlock)(void);
 
-@interface PPHintView : UIView {
-	PPHintViewContainer *containerView;
-	
-	UIView *forElement;
-	CGRect elementFrame;				// element frame as if it was on our containerView
-	CGPoint elementCenter;				// the center of the element
+/**
+ *	A custom view that displays text pointing at some element
+ *	Deduced from MedCalc's MCPopupView
+ */
+@interface PPHintView : UIView <MCOverlayManagerDelegate> {
+	MCOverlayManager *overlayManager;
 	
 	UILabel *titleLabel;
 	UILabel *textLabel;
+	UIFont *originalTitleFont;
+	UIFont *originalTextFont;
 	
-	NSInteger position;					// 0 = top, 1 = left, 2 = bottom, 3 = right
-	CGRect boxRect;						// the rect of the actual box
+	BOOL resignFirstResponderUponHide;			///< YES by default. If NO the view pointed to will keep first responder status upon hiding the hint.
+	PPHintViewDismissalBlock dismissBlock;		///< Block to be executed when the hint hides
+	
+	@private
+	NSInteger position;							///< 0 = top, 1 = left, 2 = bottom, 3 = right
+	CGRect boxRect;								///< the rect of the actual box inside our bounds
+	UIView *textContainer;						///< contains the text labels
+	UIColor *myBackgroundColor;					///< cache for backgroundColor, which we'll leave untouched
 	
 	CGColorRef cgBackgroundColor;
 	CGColorRef cgBorderColor;
@@ -33,17 +39,20 @@
 	CGGradientRef cgGlossGradient;
 }
 
-@property (nonatomic, readonly, retain) PPHintViewContainer *containerView;
-@property (nonatomic, assign) UIView *forElement;
+@property (nonatomic, readonly, strong) MCOverlayManager *overlayManager;
+@property (nonatomic, unsafe_unretained) UIView *forElement;
+@property (nonatomic, assign) BOOL resignFirstResponderUponHide;
 
-@property (nonatomic, retain) UILabel *titleLabel;
-@property (nonatomic, retain) UILabel *textLabel;
+@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UILabel *textLabel;
 
-+ (PPHintView *) hintViewForView:(UIView *)forView;
+@property (nonatomic, copy) PPHintViewDismissalBlock dismissBlock;
 
-- (void) show;
-- (void) hide;
-- (CGRect) insideRect;
++ (PPHintView *)hintViewForView:(UIView *)forView;
+
+- (void)show;
+- (void)hide;
+- (CGRect)insideRect;
 
 
 @end

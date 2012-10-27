@@ -10,25 +10,17 @@
 @class PPHintView;
 
 
-@interface PPHintableLabel : UILabel {
-	NSString *hintText;
-	UIColor *readyColor;				// the color when we are ready to show the hint, by default "Ocean" rgb(0,25%,50%)
-	UIColor *activeColor;				// the color when we are showing the hint, by default rgb(0,40%,80%)
-	
-	@private
-	UIColor *oldTextColor;
-	PPHintView *hintViewDisplayed;
-}
+@interface PPHintableLabel : UILabel
 
 @property (nonatomic, copy) NSString *hintText;
-@property (nonatomic, retain) UIColor *readyColor;
-@property (nonatomic, retain) UIColor *activeColor;
+@property (nonatomic, strong) UIColor *readyColor;					// the color when we are ready to show the hint, by default "Ocean" rgb(0,25%,50%)
+@property (nonatomic, strong) UIColor *activeColor;					// the color when we are showing the hint, by default rgb(0,40%,80%)
 
-@property (nonatomic, readonly, assign) PPHintView *hintViewDisplayed;
+@property (nonatomic, readonly, unsafe_unretained) PPHintView *hintViewDisplayed;
 
 
-- (void) hintView:(PPHintView *)hintView didDisplayAnimated:(BOOL)animated;
-- (void) hintView:(PPHintView *)hintView didHideAnimated:(BOOL)animated;
+- (void)hintView:(PPHintView *)hintView didDisplayAnimated:(BOOL)animated;
+- (void)hintView:(PPHintView *)hintView didHideAnimated:(BOOL)animated;
 
 
 @end

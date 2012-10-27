@@ -14,13 +14,10 @@
 
 @implementation EponymCategory
 
-@synthesize myID, tag, sqlLimitTo;
-@dynamic title, hint, sqlWhereStatement, sqlOrderStatement;
 
-- (id) initWithID:(NSInteger)thisID tag:(NSString *)myTag title:(NSString *)myTitle whereStatement:(NSString *)myStatement;
+- (id)initWithID:(NSInteger)thisID tag:(NSString *)myTag title:(NSString *)myTitle whereStatement:(NSString *)myStatement;
 {
-	self = [super init];
-	if (self) {
+	if ((self = [super init])) {
 		self.myID = thisID;
 		self.tag = myTag;
 		self.title = myTitle;
@@ -33,76 +30,41 @@
 	return self;
 }
 
-- (void) dealloc
+
++ (id)eponymCategoryWithID:(NSInteger)thisID tag:(NSString *)myTag title:(NSString *)myTitle whereStatement:(NSString *)myStatement;
 {
-	self.tag = nil;
-	self.title = nil;
-	self.hint = nil;
-	
-	self.sqlWhereStatement = nil;
-	self.sqlOrderStatement = nil;
-	
-	[super dealloc];
+	return [[EponymCategory alloc] initWithID:thisID tag:myTag title:myTitle whereStatement:myStatement];
 }
 
 
-+ (id) eponymCategoryWithID:(NSInteger)thisID tag:(NSString *)myTag title:(NSString *)myTitle whereStatement:(NSString *)myStatement;
-{
-	return [[[EponymCategory alloc] initWithID:thisID tag:myTag title:myTitle whereStatement:myStatement] autorelease];
-}
-#pragma mark -
 
-
-
-#pragma mark KVC
-- (NSString *) title
+#pragma mark - KVC
+- (NSString *)_title
 {
-	return [title isEqualToString:@""] ? ([tag isEqualToString:@""] ? @"(unknown)" : tag) : title;
-}
-- (void) setTitle:(NSString *)newTitle
-{
-	if (newTitle != title) {
-		[title release];
-		title = [newTitle retain];
+	if (![_title length] > 0) {
+		if ([_tag length] > 0) {
+			return _tag;
+		}
+		return @"(unknown)";
 	}
+	return _title;
 }
 
-- (NSString *) hint
+- (NSString *)hint
 {
-	return [hint isEqualToString:@""] ? @"No eponyms for this category" : hint;
-}
-- (void) setHint:(NSString *)newHint
-{
-	if (newHint != hint) {
-		[hint release];
-		hint = [newHint retain];
-	}
+	return ([_hint length] > 0) ? _hint : @"No eponyms for this category";
 }
 
-- (NSString *) sqlWhereStatement
+- (NSString *)sqlWhereStatement
 {
-	return sqlWhereStatement ? sqlWhereStatement : @"1";
-}
-- (void) setSqlWhereStatement:(NSString *)stmt
-{
-	if (stmt != sqlWhereStatement) {
-		[sqlWhereStatement release];
-		sqlWhereStatement = [stmt retain];
-	}
+	return _sqlWhereStatement ? _sqlWhereStatement : @"1";
 }
 
-- (NSString *) sqlOrderStatement
-{
-	return sqlOrderStatement ? sqlOrderStatement : @"eponym_en";
-}
-- (void) setSqlOrderStatement:(NSString *)stmt
-{
-	if (stmt != sqlOrderStatement) {
-		[sqlOrderStatement release];
-		sqlOrderStatement = [stmt retain];
-	}
-}
 
+- (NSString *)sqlOrderStatement
+{
+	return _sqlOrderStatement ? _sqlOrderStatement : @"eponym_en";
+}
 
 
 @end

@@ -14,7 +14,7 @@
 
 @interface UIView (MCViewAnimationsPrivate)
 
-- (void) animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context;
+- (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context;
 
 @end
 
@@ -25,19 +25,20 @@ static NSString *removeAnimID = @"removeFromSuperviewAnimated";
 
 
 #pragma mark View Hierarchy
-- (void) addSubviewAnimated:(UIView *)view
+- (void)addSubviewAnimated:(UIView *)view
 {
 	view.layer.opacity = 0.f;
 	[self addSubview:view];
 	
 	// animate
-	[UIView beginAnimations:nil context:nil];
-	view.layer.opacity = 1.f;
-	[UIView commitAnimations];
+	[UIView animateWithDuration:0.2
+					 animations:^{
+						 view.layer.opacity = 1.f;
+					 }];
 }
 
 
-- (void) removeFromSuperviewAnimated
+- (void)removeFromSuperviewAnimated
 {
 	if (nil != [self superview] && nil == [self.layer animationForKey:removeAnimID]) {
 		CAKeyframeAnimation *fadeAnim = [CAKeyframeAnimation animationWithKeyPath:@"opacity"];
@@ -52,19 +53,18 @@ static NSString *removeAnimID = @"removeFromSuperviewAnimated";
 	}
 }
 
-- (void) animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
+- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
 {
 	if (theAnimation == [self.layer animationForKey:removeAnimID]) {
 		[self removeFromSuperview];
 		[self.layer removeAllAnimations];
 	}
 }
-#pragma mark -
 
 
 
 #pragma mark Animations
-- (void) curvedMoveFromCenter:(CGPoint)startCenter toCenter:(CGPoint)targetCenter withDelegate:(id)animDelegate forKey:(NSString *)animKey
+- (void)curvedMoveFromCenter:(CGPoint)startCenter toCenter:(CGPoint)targetCenter withDelegate:(id)animDelegate forKey:(NSString *)animKey
 {
 	CAKeyframeAnimation *curveAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
 	curveAnimation.delegate = animDelegate;
@@ -94,7 +94,7 @@ static NSString *removeAnimID = @"removeFromSuperviewAnimated";
 }
 
 
-- (void) bubbleViewWithDelegate:(id)animDelegate forKey:(NSString *)animKey
+- (void)bubbleViewWithDelegate:(id)animDelegate forKey:(NSString *)animKey
 {
 	CAKeyframeAnimation *bubbleAnimation = [CAKeyframeAnimation animationWithKeyPath:@"bounds.size.height"];
 	bubbleAnimation.delegate = animDelegate;

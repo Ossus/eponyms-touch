@@ -24,16 +24,9 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 @synthesize delegate, categoryArrayCache;
 
 
-- (void)dealloc
-{
-	self.categoryArrayCache = nil;
-	
-	[super dealloc];
-}
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-	if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
 		self.title = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? @"Categories" : @"Eponyms";
 	}
 	return self;
@@ -77,8 +70,7 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 - (void)setCategoryArrayCache:(NSArray *)categories
 {
 	if (categories != categoryArrayCache) {
-		[categoryArrayCache release];
-		categoryArrayCache = [categories retain];
+		categoryArrayCache = categories;
 	}
 	
 	if (categories) {
@@ -128,7 +120,7 @@ static NSString *MyCellIdentifier = @"MyIdentifier";
 {
 	UITableViewCell *cell = [aTableView dequeueReusableCellWithIdentifier:MyCellIdentifier];
 	if (cell == nil) {
-		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyCellIdentifier] autorelease];
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyCellIdentifier];
 	}
 	
 	cell.textLabel.text = [[[categoryArrayCache objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] title];

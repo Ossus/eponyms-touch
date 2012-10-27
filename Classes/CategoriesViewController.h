@@ -15,13 +15,10 @@
 @class AppDelegate;
 
 
-@interface CategoriesViewController : MCTableViewController {
-	AppDelegate *delegate;
-	NSArray *categoryArrayCache;
-}
+@interface CategoriesViewController : MCTableViewController
 
-@property (nonatomic, assign) AppDelegate *delegate;
-@property (nonatomic, retain) NSArray *categoryArrayCache;
+@property (nonatomic, unsafe_unretained) AppDelegate *delegate;
+@property (nonatomic, strong) NSArray *categoryArrayCache;
 
 
 @end

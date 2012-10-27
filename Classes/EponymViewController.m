@@ -40,9 +40,9 @@
 
 @interface EponymViewController ()
 
-- (void) adjustInterfaceToEponym;
-- (void) alignUIElements;
-- (void) showRandomEponym:(id)sender;
+- (void)adjustInterfaceToEponym;
+- (void)alignUIElements;
+- (void)showRandomEponym:(id)sender;
 
 #ifdef SHOW_ADS
 @property (nonatomic, strong) SOMABannerView *adView;
@@ -57,27 +57,7 @@
 @implementation EponymViewController
 
 
-
-- (void)dealloc
-{
-	[_eponym release];
-	
-	self.rightBarButtonStarredItem = nil;
-	self.rightBarButtonNotStarredItem = nil;
-	
-	self.eponymTitleLabel = nil;
-	self.eponymTextView = nil;
-	self.eponymCategoriesLabel = nil;
-	self.dateCreatedLabel = nil;
-	self.dateUpdatedLabel = nil;
-	self.randomNoTitleEponymButton = nil;
-	self.randomNoTextEponymButton = nil;
-	self.revealButton = nil;
-	
-	[super dealloc];
-}
-
-- (void) viewDidUnload
+- (void)viewDidUnload
 {
 	self.rightBarButtonStarredItem = nil;
 	self.rightBarButtonNotStarredItem = nil;
@@ -109,7 +89,7 @@
 	CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
 	
 	// The main view
-	self.view = [[[UIScrollView alloc] initWithFrame:screenRect] autorelease];
+	self.view = [[UIScrollView alloc] initWithFrame:screenRect];
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 		self.view.backgroundColor = [UIColor colorWithRed:0.936f green:0.953f blue:0.968f alpha:1.f];
 	}
@@ -126,7 +106,7 @@
 	CGFloat fullWidth = screenRect.size.width - 2 * kSideMargin;
 	CGRect containerRect = CGRectMake(kSideMargin, kSideMargin + kHeightTitle + kDistanceTextFromTitle, fullWidth, 20.0);
 	
-	UIView *container = [[[UIView alloc] initWithFrame:containerRect] autorelease];
+	UIView *container = [[UIView alloc] initWithFrame:containerRect];
 	container.autoresizingMask = UIViewAutoresizingFlexibleWidth;// | UIViewAutoresizingFlexibleHeight;
 	container.autoresizesSubviews = YES;
 	
@@ -251,7 +231,7 @@
 	}
 	
 	// dates
-	NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateStyle:NSDateFormatterShortStyle];
 	[dateFormatter setTimeStyle:NSDateFormatterNoStyle];
 	
@@ -416,8 +396,7 @@
 - (void)setEponym:(Eponym *)newEponym
 {
 	if (newEponym != _eponym) {
-		[_eponym release];
-		_eponym = [newEponym retain];
+		_eponym = newEponym;
 		
 		if (_eponym) {
 			[self adjustInterfaceToEponym];
@@ -437,7 +416,7 @@
 		myButton.showsTouchWhenHighlighted = YES;
 		myButton.frame = buttonSize;
 		
-		self.rightBarButtonStarredItem = [[[UIBarButtonItem alloc] initWithCustomView:myButton] autorelease];
+		self.rightBarButtonStarredItem = [[UIBarButtonItem alloc] initWithCustomView:myButton];
 	}
 	return _rightBarButtonStarredItem;
 }
@@ -454,7 +433,7 @@
 		myButton.showsTouchWhenHighlighted = YES;
 		myButton.frame = buttonSize;
 		
-		self.rightBarButtonNotStarredItem = [[[UIBarButtonItem alloc] initWithCustomView:myButton] autorelease];
+		self.rightBarButtonNotStarredItem = [[UIBarButtonItem alloc] initWithCustomView:myButton];
 	}
 	return _rightBarButtonNotStarredItem;
 }
@@ -466,7 +445,7 @@
 		CGFloat fullWidth = screenRect.size.width - 2 * kSideMargin;
 		CGRect titleRect = CGRectMake(kSideMargin, kSideMargin, fullWidth, kHeightTitle);
 		
-		self.eponymTitleLabel = [[[UILabel alloc] initWithFrame:titleRect] autorelease];
+		self.eponymTitleLabel = [[UILabel alloc] initWithFrame:titleRect];
 		_eponymTitleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		_eponymTitleLabel.userInteractionEnabled = YES;
 		_eponymTitleLabel.font = [UIFont boldSystemFontOfSize:24.f];
@@ -488,7 +467,7 @@
 		CGFloat fullWidth = screenRect.size.width - 2 * kSideMargin;
 		CGRect textRect = CGRectMake(0.f, 0.f, fullWidth, 40.f);
 		
-		self.eponymTextView = [[[MCTextView alloc] initWithFrame:textRect] autorelease];
+		self.eponymTextView = [[MCTextView alloc] initWithFrame:textRect];
 		_eponymTextView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		_eponymTextView.userInteractionEnabled = YES;
 		_eponymTextView.scrollEnabled = NO;
@@ -507,7 +486,7 @@
 		CGFloat labelWidth = fullWidth - 2 * kLabelSideMargin;
 		CGRect catRect = CGRectMake(kLabelSideMargin, kDistanceCatLabelFromText, labelWidth, 19.f);
 		
-		self.eponymCategoriesLabel = [[[PPHintableLabel alloc] initWithFrame:catRect] autorelease];
+		self.eponymCategoriesLabel = [[PPHintableLabel alloc] initWithFrame:catRect];
 		_eponymCategoriesLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		_eponymCategoriesLabel.adjustsFontSizeToFitWidth = YES;
 		_eponymCategoriesLabel.minimumFontSize = 12.f;
@@ -527,7 +506,7 @@
 		CGFloat labelWidth = fullWidth - 2 * kLabelSideMargin;
 		CGRect createdRect = CGRectMake(kLabelSideMargin, kDistanceDateLabelsFromCat, labelWidth, 18.0);
 		
-		self.dateCreatedLabel = [[[UILabel alloc] initWithFrame:createdRect] autorelease];
+		self.dateCreatedLabel = [[UILabel alloc] initWithFrame:createdRect];
 		_dateCreatedLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		_dateCreatedLabel.textColor = [UIColor darkGrayColor]; 
 		_dateCreatedLabel.font = [UIFont systemFontOfSize:14.0];
@@ -546,7 +525,7 @@
 		CGFloat labelWidth = fullWidth - 2 * kLabelSideMargin;
 		CGRect createdRect = CGRectMake(kLabelSideMargin, kDistanceDateLabelsFromCat, labelWidth, 18.0);
 		
-		self.dateUpdatedLabel = [[[UILabel alloc] initWithFrame:createdRect] autorelease];
+		self.dateUpdatedLabel = [[UILabel alloc] initWithFrame:createdRect];
 		_dateUpdatedLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		_dateUpdatedLabel.textColor = [UIColor darkGrayColor]; 
 		_dateUpdatedLabel.font = [UIFont systemFontOfSize:14.0];

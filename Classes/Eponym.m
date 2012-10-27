@@ -33,24 +33,24 @@ static sqlite3_stmt *toggle_starred_query = nil;
 
 
 // finalizes the compiled queries (needed before quitting)
-+ (void) finalizeQueries;
++ (void)finalizeQueries;
 {
-	if(load_query) {
+	if (load_query) {
 		sqlite3_finalize(load_query);
 		load_query = nil;
 	}
-	if(mark_accessed_query) {
+	if (mark_accessed_query) {
 		sqlite3_finalize(mark_accessed_query);
 		mark_accessed_query = nil;
 	}
-	if(toggle_starred_query) {
+	if (toggle_starred_query) {
 		sqlite3_finalize(toggle_starred_query);
 		toggle_starred_query = nil;
 	}
 }
 
 // Init the Eponym with the desired key
-- (id) initWithID:(NSUInteger)eid title:(NSString*)ttl delegate:(AppDelegate *)myDelegate
+- (id)initWithID:(NSUInteger)eid title:(NSString*)ttl delegate:(AppDelegate *)myDelegate
 {
 	if ((self = [super init])) {
 		eponym_id = eid;
@@ -60,19 +60,15 @@ static sqlite3_stmt *toggle_starred_query = nil;
     return self;
 }
 
-- (void) dealloc
+- (void)dealloc
 {
 	[self unload];
-	self.title = nil;
-	
-	[super dealloc];
 }
-#pragma mark -
 
 
 
-#pragma mark loading/unloading
-- (void) load
+#pragma mark - loading/unloading
+- (void)load
 {
 	[self markAccessed];
 	if (loaded) {
@@ -132,7 +128,6 @@ static sqlite3_stmt *toggle_starred_query = nil;
 		}
 		
 		self.categories = newCategoriesArr;
-		[newCategoriesArr release];
 		
 		sqlite3_reset(load_query);
 		loaded = YES;

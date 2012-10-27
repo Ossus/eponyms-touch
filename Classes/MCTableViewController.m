@@ -32,19 +32,9 @@
 @implementation MCTableViewController
 
 @synthesize tableStyle;
-@dynamic tableView;
-@dynamic noDataHint;
 
 
-- (void) dealloc
-{
-	self.tableView = nil;
-	[noDataHint release];
-	
-	[super dealloc];
-}
-
-- (void) viewDidUnload
+- (void)viewDidUnload
 {
 	self.tableView = nil;
 	
@@ -52,52 +42,45 @@
 }
 
 
-- (id) init
+- (id)init
 {
 	return [self initWithStyle:UITableViewStylePlain];
 }
 
-- (id) initWithStyle:(UITableViewStyle)style
+- (id)initWithStyle:(UITableViewStyle)style
 {
-	if (self = [super initWithNibName:nil bundle:nil]) {
+	if ((self = [super initWithNibName:nil bundle:nil])) {
 		tableStyle = style;
 	}
 	return self;
 }
 
-- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-	if (self = [super initWithNibName:nil bundle:nil]) {		// check whether this can be improved when loading from XIBs
+	if ((self = [super initWithNibName:nil bundle:nil])) {		// check whether this can be improved when loading from XIBs
 		tableStyle = UITableViewStylePlain;
 	}
 	return self;
 }
-#pragma mark -
 
 
 
-#pragma mark KVC
-- (TouchTableView *) tableView
+#pragma mark - KVC
+- (void)setTableView:(TouchTableView *)newTableView
 {
-	return tableView;
-}
-- (void) setTableView:(TouchTableView *)newTableView
-{
-	if (newTableView != tableView) {
-		tableView = newTableView;
-		self.tableView = newTableView;
+	if (newTableView != _tableView) {
+		_tableView = newTableView;
 		
-		if (nil != tableView && nil != noDataHint) {
-			tableView.noDataHint = noDataHint;
+		if (nil != _tableView && nil != _noDataHint) {
+			_tableView.noDataHint = _noDataHint;
 		}
 	}
 }
-#pragma mark -
 
 
 
-#pragma mark View Tasks
-- (void) loadView
+#pragma mark - View Tasks
+- (void)loadView
 {
 	// create the table
 	CGRect availRect = [[UIScreen mainScreen] applicationFrame];
@@ -106,17 +89,17 @@
 		availRect.size.height -= tabBarRect.size.height;
 	}
 	
-	self.tableView = [[[TouchTableView alloc] initWithFrame:availRect style:tableStyle] autorelease];
-	tableView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-	tableView.autoresizesSubviews = YES;
+	self.tableView = [[TouchTableView alloc] initWithFrame:availRect style:tableStyle];
+	_tableView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+	_tableView.autoresizesSubviews = YES;
 	
-	tableView.delegate = self;
-	tableView.dataSource = self;
+	_tableView.delegate = self;
+	_tableView.dataSource = self;
 	
-	self.view = tableView;
+	self.view = _tableView;
 }
 
-- (void) viewDidLoad
+- (void)viewDidLoad
 {
 	[super viewDidLoad];
 	
@@ -126,71 +109,64 @@
 	}
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
 	
 	[self registerForKeyboardNotifications];
 	
-	NSIndexPath *selectedRow = [tableView indexPathForSelectedRow];
+	NSIndexPath *selectedRow = [_tableView indexPathForSelectedRow];
 	if (selectedRow) {
-		[tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:selectedRow] withRowAnimation:UITableViewRowAnimationNone];
-		[tableView deselectRowAtIndexPath:selectedRow animated:animated];
+		[_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:selectedRow] withRowAnimation:UITableViewRowAnimationNone];
+		[_tableView deselectRowAtIndexPath:selectedRow animated:animated];
 	}
 }
 
-- (void) viewWillDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
 	[super viewWillDisappear:animated];
 	[self forgetAboutKeyboardNotifications];
 }
 
-- (void) setEditing:(BOOL)editing animated:(BOOL)animated
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
-	[tableView setEditing:editing animated:animated];
+	[_tableView setEditing:editing animated:animated];
 	[super setEditing:editing animated:animated];
 }
-#pragma mark -
 
 
 
-#pragma mark No Data Hint
-- (NSString *) noDataHint
+#pragma mark - No Data Hint
+- (void)setNoDataHint:(NSString *)newHint
 {
-	return noDataHint;
-}
-- (void) setNoDataHint:(NSString *)newHint
-{
-	if (newHint != noDataHint) {
-		[noDataHint release];
-		noDataHint = [newHint copy];
+	if (newHint != _noDataHint) {
+		_noDataHint = [newHint copy];
 		
-		if (nil != tableView) {
-			tableView.noDataHint = noDataHint;
+		if (_tableView) {
+			_tableView.noDataHint = _noDataHint;
 		}
 	}
 }
 
-- (void) showNoDataHintAnimated:(BOOL)animated
+- (void)showNoDataHintAnimated:(BOOL)animated
 {
 	if ([self isViewLoaded]) {
-		[tableView showNoDataLabelAnimated:animated];
+		[_tableView showNoDataLabelAnimated:animated];
 	}
 	else {
 		shouldShowDataHintAfterLoading = YES;
 	}
 }
 
-- (void) hideNoDataHintAnimated:(BOOL)animated
+- (void)hideNoDataHintAnimated:(BOOL)animated
 {
-	[tableView hideNoDataLabelAnimated:animated];
+	[_tableView hideNoDataLabelAnimated:animated];
 }
-#pragma mark -
 
 
 
-#pragma mark Data Source and Delegate
-- (NSInteger) tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger)section
+#pragma mark - Data Source and Delegate
+- (NSInteger)tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger)section
 {
 	return 0;
 }
@@ -200,7 +176,7 @@
 	return nil;
 }
 
-- (BOOL) tableView:(TouchTableView *)aTableView rowIsVisible:(NSIndexPath *)indexPath
+- (BOOL)tableView:(TouchTableView *)aTableView rowIsVisible:(NSIndexPath *)indexPath
 {
 	CGRect visibleRect = aTableView.bounds;
 	visibleRect.origin.y = aTableView.contentOffset.y;
@@ -208,17 +184,16 @@
 	
 	return CGRectIntersectsRect(rowRect, visibleRect);
 }
-#pragma mark -
 
 
 
-#pragma mark State saving and restoring
-- (NSString *) stateSaveName
+#pragma mark - State saving and restoring
+- (NSString *)stateSaveName
 {
-	return [NSString stringWithFormat:kMCTVCStateSaveMask, autosaveName];
+	return [NSString stringWithFormat:kMCTVCStateSaveMask, self.autosaveName];
 }
 
-- (NSDictionary *) currentState
+- (NSDictionary *)currentState
 {
 	if ([self isViewLoaded]) {
 		
@@ -230,7 +205,7 @@
 	return nil;
 }
 
-- (void) setStateTo:(NSDictionary *)state
+- (void)setStateTo:(NSDictionary *)state
 {
 	if ([state isKindOfClass:[NSDictionary class]]) {
 		NSNumber *scrollPos = [state objectForKey:@"scrollPosition"];
@@ -274,17 +249,17 @@
 	CGRect endRect = [self.view convertRect:endRectOriginal fromView:self.view.window];
 	
 	// resize the view
-	CGRect viewFrame = [tableView frame];
+	CGRect viewFrame = _tableView.frame;
 	CGRect intersection = CGRectIntersection(viewFrame, endRect);
 	CGFloat endHeight = fmaxf(0.f, intersection.size.height);			// adding the origin compensates for a search input view that will move to the top
 	//DLog(@"%@ -> %@: %.0f", NSStringFromCGRect(viewFrame), NSStringFromCGRect(intersection), endHeight);
 	
-	tableView.contentInset = UIEdgeInsetsMake(0.f, 0.f, endHeight, 0.f);
+	_tableView.contentInset = UIEdgeInsetsMake(0.f, 0.f, endHeight, 0.f);
 }
 
 - (void)keyboardWillHide:(NSNotification*)aNotification
 {
-	tableView.contentInset = UIEdgeInsetsZero;
+	_tableView.contentInset = UIEdgeInsetsZero;
 }
 
 

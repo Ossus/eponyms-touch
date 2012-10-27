@@ -115,12 +115,8 @@
 		EEC2A70811CE6E37009C9486 /* UIViewController+PPSubclassing.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC2A70711CE6E37009C9486 /* UIViewController+PPSubclassing.m */; };
 		EEC2A70911CE6E37009C9486 /* UIViewController+PPSubclassing.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC2A70711CE6E37009C9486 /* UIViewController+PPSubclassing.m */; };
 		EEC2A70D11CE6E8A009C9486 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC2A70C11CE6E8A009C9486 /* QuartzCore.framework */; };
-		EEC2A96B11CEC5A6009C9486 /* UIView+shadowBug.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC2A96A11CEC5A6009C9486 /* UIView+shadowBug.m */; };
-		EEC2A96C11CEC5A6009C9486 /* UIView+shadowBug.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC2A96A11CEC5A6009C9486 /* UIView+shadowBug.m */; };
 		EECD008410A0DAAE002B06C6 /* PPHintableLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EECD008310A0DAAE002B06C6 /* PPHintableLabel.m */; };
 		EECD008910A0DAC1002B06C6 /* PPHintView.m in Sources */ = {isa = PBXBuildFile; fileRef = EECD008610A0DAC1002B06C6 /* PPHintView.m */; };
-		EECD008A10A0DAC1002B06C6 /* PPHintViewContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = EECD008810A0DAC1002B06C6 /* PPHintViewContainer.m */; };
-		EECD015610A0EC95002B06C6 /* PPHintViewContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = EECD008810A0DAC1002B06C6 /* PPHintViewContainer.m */; };
 		EECD015710A0EC95002B06C6 /* PPHintableLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = EECD008310A0DAAE002B06C6 /* PPHintableLabel.m */; };
 		EECD015810A0EC95002B06C6 /* PPHintView.m in Sources */ = {isa = PBXBuildFile; fileRef = EECD008610A0DAC1002B06C6 /* PPHintView.m */; };
 		EED69F830E2BF41900BEF0C4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED69F820E2BF41900BEF0C4 /* CoreGraphics.framework */; };
@@ -141,6 +137,8 @@
 		EEEF1EAA163C260200A2931A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEEF1EA9163C260200A2931A /* CoreLocation.framework */; };
 		EEEF1EAC163C261200A2931A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEEF1EAB163C261200A2931A /* MediaPlayer.framework */; };
 		EEEF1EAE163C262800A2931A /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEEF1EAD163C262800A2931A /* StoreKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		EEEF1EB2163C4CEB00A2931A /* MCOverlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EEEF1EB1163C4CEB00A2931A /* MCOverlayManager.m */; };
+		EEEF1EB3163C4CEB00A2931A /* MCOverlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EEEF1EB1163C4CEB00A2931A /* MCOverlayManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -235,14 +233,10 @@
 		EEC2A70611CE6E37009C9486 /* UIViewController+PPSubclassing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PPSubclassing.h"; sourceTree = "<group>"; };
 		EEC2A70711CE6E37009C9486 /* UIViewController+PPSubclassing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PPSubclassing.m"; sourceTree = "<group>"; };
 		EEC2A70C11CE6E8A009C9486 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		EEC2A96911CEC5A6009C9486 /* UIView+shadowBug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+shadowBug.h"; sourceTree = "<group>"; };
-		EEC2A96A11CEC5A6009C9486 /* UIView+shadowBug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+shadowBug.m"; sourceTree = "<group>"; };
 		EECD008210A0DAAE002B06C6 /* PPHintableLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPHintableLabel.h; sourceTree = "<group>"; };
 		EECD008310A0DAAE002B06C6 /* PPHintableLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPHintableLabel.m; sourceTree = "<group>"; };
 		EECD008510A0DAC1002B06C6 /* PPHintView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPHintView.h; sourceTree = "<group>"; };
 		EECD008610A0DAC1002B06C6 /* PPHintView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPHintView.m; sourceTree = "<group>"; };
-		EECD008710A0DAC1002B06C6 /* PPHintViewContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPHintViewContainer.h; sourceTree = "<group>"; };
-		EECD008810A0DAC1002B06C6 /* PPHintViewContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPHintViewContainer.m; sourceTree = "<group>"; };
 		EED69F820E2BF41900BEF0C4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		EEDB74DD10B89A76007782DA /* Eponyms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Eponyms.png; sourceTree = "<group>"; };
 		EEDB74EC10B89AF7007782DA /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -262,6 +256,8 @@
 		EEEF1EAB163C261200A2931A /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		EEEF1EAD163C262800A2931A /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		EEEF1EAF163C36C900A2931A /* SMAATOConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMAATOConfig.h; sourceTree = "<group>"; };
+		EEEF1EB0163C4CEB00A2931A /* MCOverlayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOverlayManager.h; sourceTree = "<group>"; };
+		EEEF1EB1163C4CEB00A2931A /* MCOverlayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCOverlayManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -450,8 +446,8 @@
 				EECD008310A0DAAE002B06C6 /* PPHintableLabel.m */,
 				EECD008510A0DAC1002B06C6 /* PPHintView.h */,
 				EECD008610A0DAC1002B06C6 /* PPHintView.m */,
-				EECD008710A0DAC1002B06C6 /* PPHintViewContainer.h */,
-				EECD008810A0DAC1002B06C6 /* PPHintViewContainer.m */,
+				EEEF1EB0163C4CEB00A2931A /* MCOverlayManager.h */,
+				EEEF1EB1163C4CEB00A2931A /* MCOverlayManager.m */,
 			);
 			name = Subclasses;
 			path = Classes;
@@ -464,8 +460,6 @@
 				EEC2A6F911CE6E12009C9486 /* MCViewAnimations.m */,
 				EEC2A70611CE6E37009C9486 /* UIViewController+PPSubclassing.h */,
 				EEC2A70711CE6E37009C9486 /* UIViewController+PPSubclassing.m */,
-				EEC2A96911CEC5A6009C9486 /* UIView+shadowBug.h */,
-				EEC2A96A11CEC5A6009C9486 /* UIView+shadowBug.m */,
 				EE38197911CFD83000DB14D9 /* SQLiteAccessors.h */,
 				EE38197A11CFD83000DB14D9 /* SQLiteAccessors.c */,
 			);
@@ -695,16 +689,15 @@
 				EE563940109E186200D6C4E6 /* MCTextView.m in Sources */,
 				EECD008410A0DAAE002B06C6 /* PPHintableLabel.m in Sources */,
 				EECD008910A0DAC1002B06C6 /* PPHintView.m in Sources */,
-				EECD008A10A0DAC1002B06C6 /* PPHintViewContainer.m in Sources */,
 				EEC2A6C211CE6C3A009C9486 /* PPSplitViewController.m in Sources */,
 				EEC2A6C611CE6C47009C9486 /* MCViewController.m in Sources */,
 				EEC2A6CA11CE6C4F009C9486 /* MCTableViewController.m in Sources */,
 				EEC2A6FB11CE6E12009C9486 /* MCViewAnimations.m in Sources */,
 				EEC2A70911CE6E37009C9486 /* UIViewController+PPSubclassing.m in Sources */,
-				EEC2A96C11CEC5A6009C9486 /* UIView+shadowBug.m in Sources */,
 				EE38197C11CFD83000DB14D9 /* SQLiteAccessors.c in Sources */,
 				EE5BD32811D9173B00964E25 /* sqlite3_unicode.c in Sources */,
 				EEE91E1E161927EF00BD41FE /* MasterViewController.m in Sources */,
+				EEEF1EB2163C4CEB00A2931A /* MCOverlayManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -723,7 +716,6 @@
 				EE563877109DFB1D00D6C4E6 /* EponymCategory.m in Sources */,
 				EE563878109DFB1D00D6C4E6 /* TouchTableView.m in Sources */,
 				EE563BCC109E4BAE00D6C4E6 /* MCTextView.m in Sources */,
-				EECD015610A0EC95002B06C6 /* PPHintViewContainer.m in Sources */,
 				EECD015710A0EC95002B06C6 /* PPHintableLabel.m in Sources */,
 				EECD015810A0EC95002B06C6 /* PPHintView.m in Sources */,
 				EEC2A6C111CE6C3A009C9486 /* PPSplitViewController.m in Sources */,
@@ -731,10 +723,10 @@
 				EEC2A6C911CE6C4F009C9486 /* MCTableViewController.m in Sources */,
 				EEC2A6FA11CE6E12009C9486 /* MCViewAnimations.m in Sources */,
 				EEC2A70811CE6E37009C9486 /* UIViewController+PPSubclassing.m in Sources */,
-				EEC2A96B11CEC5A6009C9486 /* UIView+shadowBug.m in Sources */,
 				EE38197B11CFD83000DB14D9 /* SQLiteAccessors.c in Sources */,
 				EE5BD32911D9173B00964E25 /* sqlite3_unicode.c in Sources */,
 				EEE91E1F161927EF00BD41FE /* MasterViewController.m in Sources */,
+				EEEF1EB3163C4CEB00A2931A /* MCOverlayManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -868,6 +860,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "Resources/eponyms-student.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -897,6 +890,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "Resources/eponyms-student.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
 				COPY_PHASE_STRIP = YES;
@@ -921,6 +915,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "Resources/eponyms-student.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
 				COPY_PHASE_STRIP = YES;
@@ -945,6 +940,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "Resources/eponyms-student.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
 				COPY_PHASE_STRIP = YES;
@@ -1013,6 +1009,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "Resources/eponyms-student.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
 				COPY_PHASE_STRIP = NO;

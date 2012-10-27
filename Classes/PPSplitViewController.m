@@ -15,14 +15,14 @@
 
 @interface PPSplitViewController ()
 
-@property (nonatomic, retain) UIView *containerView;
-@property (nonatomic, retain) UIView *leftView;
-@property (nonatomic, retain) UIView *rightView;
-@property (nonatomic, retain) UIView *tabView;
-@property (nonatomic, retain) UIImageView *logoView;
+@property (nonatomic, strong) UIView *containerView;
+@property (nonatomic, strong) UIView *leftView;
+@property (nonatomic, strong) UIView *rightView;
+@property (nonatomic, strong) UIView *tabView;
+@property (nonatomic, strong) UIImageView *logoView;
 
-@property (nonatomic, readwrite, retain) UINavigationBar *leftTitleBar;
-@property (nonatomic, readwrite, retain) UINavigationBar *rightTitleBar;
+@property (nonatomic, readwrite, strong) UINavigationBar *leftTitleBar;
+@property (nonatomic, readwrite, strong) UINavigationBar *rightTitleBar;
 
 - (void) addLeftView;
 - (void) addRightView;
@@ -55,19 +55,13 @@
 {
 	self.leftViewController = nil;
 	self.rightViewController = nil;
-	self.tabViewController = nil;
 	self.logo = nil;
 	self.logoView = nil;
 	
-	self.containerView = nil;
 	self.leftView = nil;
 	self.rightView = nil;
-	self.tabView = nil;
 	
-	self.leftTitleBar = nil;
-	self.rightTitleBar = nil;
 	
-	[super dealloc];
 }
 
 - (void) viewDidUnload
@@ -115,7 +109,7 @@
 - (void) loadView
 {
 	CGRect appFrame = [[UIScreen mainScreen] applicationFrame];
-	self.view = [[[UIView alloc] initWithFrame:appFrame] autorelease];
+	self.view = [[UIView alloc] initWithFrame:appFrame];
 	self.view.backgroundColor = [UIColor viewFlipsideBackgroundColor];
 	self.view.opaque = YES;
 	self.view.autoresizesSubviews = YES;
@@ -127,7 +121,7 @@
 	}
 	
 	// container view
-	self.containerView = [[[UIView alloc] initWithFrame:self.view.bounds] autorelease];
+	self.containerView = [[UIView alloc] initWithFrame:self.view.bounds];
 	containerView.opaque = NO;
 	containerView.backgroundColor = [UIColor clearColor];
 	containerView.autoresizesSubviews = YES;
@@ -144,7 +138,7 @@
 	if (useCustomLeftTitleBar) {
 		naviHeight = 44.f;
 		CGRect naviFrame = CGRectMake(0.f, 0.f, halfWidth - dividerWidth, naviHeight);
-		self.leftTitleBar = [[[UINavigationBar alloc] initWithFrame:naviFrame] autorelease];
+		self.leftTitleBar = [[UINavigationBar alloc] initWithFrame:naviFrame];
 		leftTitleBar.autoresizingMask = UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
 		
 		[containerView addSubview:leftTitleBar];
@@ -155,7 +149,7 @@
 	viewFrame.size.width = halfWidth - dividerWidth;
 	viewFrame.size.height -= naviHeight;
 	
-	self.leftView = [[[UIView alloc] initWithFrame:viewFrame] autorelease];
+	self.leftView = [[UIView alloc] initWithFrame:viewFrame];
 	leftView.backgroundColor = [UIColor whiteColor];
 	leftView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin;
 	
@@ -168,7 +162,7 @@
 		naviHeight = 44.f;
 		CGRect naviFrame = CGRectMake(halfWidth, 0.f, halfWidth, naviHeight);
 		naviFrame.size.width += dividerWidth;
-		self.rightTitleBar = [[[UINavigationBar alloc] initWithFrame:naviFrame] autorelease];
+		self.rightTitleBar = [[UINavigationBar alloc] initWithFrame:naviFrame];
 		rightTitleBar.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
 		
 		[containerView addSubview:rightTitleBar];
@@ -180,7 +174,7 @@
 	viewFrame.size.width = halfWidth;
 	viewFrame.size.height -= naviHeight;
 	
-	self.rightView = [[[UIView alloc] initWithFrame:viewFrame] autorelease];
+	self.rightView = [[UIView alloc] initWithFrame:viewFrame];
 	rightView.backgroundColor = [UIColor whiteColor];
 	rightView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin;
 	
@@ -338,8 +332,7 @@
 			[leftViewController setParentController:nil];
 		}
 		
-		[leftViewController release];
-		leftViewController = [newController retain];
+		leftViewController = newController;
 		
 		if (nil != leftViewController) {
 			[self addLeftView];
@@ -364,8 +357,7 @@
 			[rightViewController setParentController:nil];
 		}
 		
-		[rightViewController release];
-		rightViewController = [newController retain];
+		rightViewController = newController;
 		
 		if ([self isViewLoaded] && nil != rightViewController) {
 			[self addRightView];
@@ -384,8 +376,7 @@
 - (void) setLeftView:(UIView *)newView
 {
 	if (newView != leftView) {
-		[leftView release];
-		leftView = [newView retain];
+		leftView = newView;
 	}
 }
 
@@ -399,8 +390,7 @@
 - (void) setRightView:(UIView *)newView
 {
 	if (newView != rightView) {
-		[rightView release];
-		rightView = [newView retain];
+		rightView = newView;
 	}
 }
 #pragma mark -
@@ -415,8 +405,7 @@
 - (void) setLogo:(UIImage *)newLogo
 {
 	if (newLogo != logo) {
-		[logo release];
-		logo = [newLogo retain];
+		logo = newLogo;
 		
 		if (logo) {
 			if ([self isViewLoaded]) {
@@ -430,7 +419,7 @@
 - (UIImageView *) logoView
 {
 	if (nil == logoView) {
-		self.logoView = [[[UIImageView alloc] initWithImage:logo] autorelease];
+		self.logoView = [[UIImageView alloc] initWithImage:logo];
 		CGSize sz = [logoView frame].size;
 		CGSize cs = [self.view bounds].size;
 		logoView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
@@ -441,8 +430,7 @@
 - (void) setLogoView:(UIImageView *)newView
 {
 	if (newView != logoView) {
-		[logoView release];
-		logoView = [newView retain];
+		logoView = newView;
 	}
 }
 #pragma mark -

@@ -17,17 +17,12 @@
  
 
 @interface MCTableViewController : MCViewController <TouchTableViewDelegate, UITableViewDataSource> {
-	UITableViewStyle tableStyle;							// only effective if set before calling loadView!
-	TouchTableView *tableView;
-	
-	NSString *noDataHint;
-	
 	@private
 	BOOL shouldShowDataHintAfterLoading;
 }
 
-@property (nonatomic, assign) UITableViewStyle tableStyle;
-@property (nonatomic, retain) TouchTableView *tableView;
+@property (nonatomic, assign) UITableViewStyle tableStyle;				// only effective before calling loadView
+@property (nonatomic, strong) TouchTableView *tableView;
 @property (nonatomic, copy) NSString *noDataHint;
 
 - (id) initWithStyle:(UITableViewStyle)style;

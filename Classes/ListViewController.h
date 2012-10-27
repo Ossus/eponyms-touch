@@ -15,33 +15,24 @@
 
 
 @interface ListViewController : MCTableViewController <UISearchBarDelegate> {
-	id delegate;
-	
-	NSArray *eponymArrayCache;
-	NSArray *eponymSectionArrayCache;
-	
-	UISearchBar *mySearchBar;
-	UIBarButtonItem *initSearchButton;
-	UIBarButtonItem *abortSearchButton;
-	NSTimer *searchTimeoutTimer;
 	BOOL isSearching;
 }
 
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, unsafe_unretained) id delegate;
 
-@property (nonatomic, retain) NSArray *eponymArrayCache;				// 2 dimensional array, 1st dimension first letter, 2nd dimension its eponyms
-@property (nonatomic, retain) NSArray *eponymSectionArrayCache;			// 1 dimensional, first letters
+@property (nonatomic, strong) NSArray *eponymArrayCache;				// 2 dimensional array, 1st dimension first letter, 2nd dimension its eponyms
+@property (nonatomic, strong) NSArray *eponymSectionArrayCache;			// 1 dimensional, first letters
 
-@property (nonatomic, retain) UISearchBar *mySearchBar;
-@property (nonatomic, retain) UIBarButtonItem *initSearchButton;
-@property (nonatomic, retain) UIBarButtonItem *abortSearchButton;
-@property (nonatomic, retain) NSTimer *searchTimeoutTimer;
+@property (nonatomic, strong) UISearchBar *mySearchBar;
+@property (nonatomic, strong) UIBarButtonItem *initSearchButton;
+@property (nonatomic, strong) UIBarButtonItem *abortSearchButton;
+@property (nonatomic, strong) NSTimer *searchTimeoutTimer;
 
-- (void) cacheEponyms:(NSArray *)eponyms andHeaders:(NSArray *)sections;
+- (void)cacheEponyms:(NSArray *)eponyms andHeaders:(NSArray *)sections;
 
-- (void) assureEponymSelectedInListAnimated:(BOOL)animated;
-- (void) assureSelectedEponymStarredInList;
-- (void) assureEponymAtIndexPathStarredInList:(NSIndexPath *)indexPath;
+- (void)assureEponymSelectedInListAnimated:(BOOL)animated;
+- (void)assureSelectedEponymStarredInList;
+- (void)assureEponymAtIndexPathStarredInList:(NSIndexPath *)indexPath;
 
 
 @end

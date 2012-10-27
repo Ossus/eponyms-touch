@@ -20,10 +20,10 @@
 
 @interface InfoViewController (Private)
 
-- (void) switchToTab:(NSUInteger)tab;
-- (void) lockGUI:(BOOL)lock;
-- (void) newEponymsAreAvailable:(BOOL)available;
-- (void) resetStatusElementsWithButtonTitle:(NSString *)buttonTitle;
+- (void)switchToTab:(NSUInteger)tab;
+- (void)lockGUI:(BOOL)lock;
+- (void)newEponymsAreAvailable:(BOOL)available;
+- (void)resetStatusElementsWithButtonTitle:(NSString *)buttonTitle;
 
 @end
 
@@ -32,127 +32,76 @@
 
 @implementation InfoViewController
 
-@synthesize delegate;
-@synthesize firstTimeLaunch;
-@synthesize lastEponymCheck;
-@synthesize lastEponymUpdate;
-@synthesize infoPlistDict;
-@synthesize projectWebsiteURL;
-@synthesize parentView;
-@synthesize infoView;
-@synthesize updatesView;
-@synthesize tabSegments;
-@synthesize versionLabel;
-@synthesize usingEponymsLabel;
-@synthesize projectWebsiteButton;
-@synthesize eponymsDotNetButton;
-@synthesize lastCheckLabel;
-@synthesize lastUpdateLabel;
-@synthesize progressText;
-@synthesize progressView;
-@synthesize updateButton;
-@synthesize autocheckSwitch;
 
-
-- (id) init
+- (id)init
 {
 	NSString *thisNibName = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? @"InfoView-iPad" : @"InfoView";
 	return [self initWithNibName:thisNibName bundle:nil];
 }
 
-- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-	if (self) {
+	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
 		askingToAbortImport = NO;
 		
 		// compose the navigation bar
 		NSArray *possibleTabs = @[@"About", @"Update"];
 		self.tabSegments = [[UISegmentedControl alloc] initWithItems:possibleTabs];
-		tabSegments.selectedSegmentIndex = 0;
-		tabSegments.segmentedControlStyle = UISegmentedControlStyleBar;
-		tabSegments.frame = CGRectMake(0.0, 0.0, 220.0, 30.0);
-		tabSegments.autoresizingMask = UIViewAutoresizingNone;
-		[tabSegments addTarget:self action:@selector(tabChanged:) forControlEvents:UIControlEventValueChanged];
+		_tabSegments.selectedSegmentIndex = 0;
+		_tabSegments.segmentedControlStyle = UISegmentedControlStyleBar;
+		_tabSegments.frame = CGRectMake(0.0, 0.0, 220.0, 30.0);
+		_tabSegments.autoresizingMask = UIViewAutoresizingNone;
+		[_tabSegments addTarget:self action:@selector(tabChanged:) forControlEvents:UIControlEventValueChanged];
 		
-		self.navigationItem.titleView = tabSegments;
-		self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissMe:)] autorelease];
+		self.navigationItem.titleView = _tabSegments;
+		self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissMe:)];
 		
 		// NSBundle Info.plist
 		self.infoPlistDict = [[NSBundle mainBundle] infoDictionary];		// !! could use the supplied NSBundle or the mainBundle on nil
-		self.projectWebsiteURL = [NSURL URLWithString:[infoPlistDict objectForKey:@"projectWebsite"]];
+		self.projectWebsiteURL = [NSURL URLWithString:[_infoPlistDict objectForKey:@"projectWebsite"]];
 	}
 	return self;
 }
 
-- (void) dealloc
-{
-	self.infoPlistDict = nil;
-	self.projectWebsiteURL = nil;
-	self.tabSegments = nil;
-	
-	// IBOutlets
-	self.parentView = nil;
-	self.tabSegments = nil;
-	
-	self.infoView = nil;
-	self.updatesView = nil;
-	
-	self.versionLabel = nil;
-	self.usingEponymsLabel = nil;
-	self.projectWebsiteButton = nil;
-	self.eponymsDotNetButton = nil;
-	
-	self.lastCheckLabel = nil;
-	self.lastUpdateLabel = nil;
-	self.progressText = nil;
-	self.progressView = nil;
-	self.updateButton = nil;
-	self.autocheckSwitch = nil;
-	
-	[super dealloc];
-}
-#pragma mark -
 
 
-
-#pragma mark View Controller Delegate
-- (void) viewDidLoad
+#pragma mark - View Controller Delegate
+- (void)viewDidLoad
 {
 	// update colors
 	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"pattern-horizontal.png"]];
-	tabSegments.tintColor = [delegate naviBarTintColor];
+	_tabSegments.tintColor = [_delegate naviBarTintColor];
 	
 	// hide progress stuff
 	[self setStatusMessage:nil];
 	[self resetStatusElementsWithButtonTitle:nil];
 	
 	// last update date/time
-	NSDate *lastCheckDate = [NSDate dateWithTimeIntervalSince1970:lastEponymCheck];
-	NSDate *lastUpdateDate = [NSDate dateWithTimeIntervalSince1970:lastEponymUpdate];
-	NSDate *usingEponymsDate = [NSDate dateWithTimeIntervalSince1970:[delegate usingEponymsOf]];
+	NSDate *lastCheckDate = [NSDate dateWithTimeIntervalSince1970:_lastEponymCheck];
+	NSDate *lastUpdateDate = [NSDate dateWithTimeIntervalSince1970:_lastEponymUpdate];
+	NSDate *usingEponymsDate = [NSDate dateWithTimeIntervalSince1970:[_delegate usingEponymsOf]];
 	[self updateLabelsWithDateForLastCheck:lastCheckDate lastUpdate:lastUpdateDate usingEponyms:usingEponymsDate];
 	
 	// version
-	NSString *version = [NSString stringWithFormat:@"Version %@", [infoPlistDict objectForKey:@"CFBundleVersion"]];
-	[versionLabel setText:version];
+	NSString *version = [NSString stringWithFormat:@"Version %@", [_infoPlistDict objectForKey:@"CFBundleVersion"]];
+	[_versionLabel setText:version];
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-	BOOL mustSeeProgress = firstTimeLaunch || [delegate newEponymsAvailable];
+	BOOL mustSeeProgress = _firstTimeLaunch || [_delegate newEponymsAvailable];
 	
 	if (mustSeeProgress) {
 		[self switchToTab:1];
 	}
 	else {
-		[self switchToTab:tabSegments.selectedSegmentIndex];
+		[self switchToTab:_tabSegments.selectedSegmentIndex];
 	}
 }
 
-- (void) viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
-	if (firstTimeLaunch) {
+	if (_firstTimeLaunch) {
 		NSString *title = @"First Launch";
 		NSString *message = @"Welcome to Eponyms!\nBefore using Eponyms, the database must be created.";
 		
@@ -160,7 +109,7 @@
 	}
 	
 	// Adjust autocheck option
-	autocheckSwitch.on = [delegate shouldAutoCheck];
+	_autocheckSwitch.on = [_delegate shouldAutoCheck];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -190,7 +139,7 @@
 - (void)dismissMe:(id)sender
 {
 	// warning when closing during import
-	if ([delegate iAmUpdating]) {
+	if ([_delegate iAmUpdating]) {
 		askingToAbortImport = YES;
 		NSString *warning = @"Are you sure you want to abort the eponym import? This will discard any imported eponyms.";
 		[self alertViewWithTitle:CANCEL_IMPORT_TITLE message:warning cancelTitle:@"Continue" otherTitle:@"Abort Import"];
@@ -205,50 +154,50 @@
 
 
 #pragma mark - GUI
-- (void) tabChanged:(id)sender
+- (void)tabChanged:(id)sender
 {
 	UISegmentedControl *segment = sender;
 	[self switchToTab:segment.selectedSegmentIndex];
 }
 
-- (void) switchToTab:(NSUInteger)tab
+- (void)switchToTab:(NSUInteger)tab
 {
-	tabSegments.selectedSegmentIndex = tab;
+	_tabSegments.selectedSegmentIndex = tab;
 	
 	// remove current view
-	[[parentView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+	[[_parentView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
 	UIView *viewToAdd = nil;
 	BOOL adjustFrame = YES;
 	
 	// Show the update tab
 	if (1 == tab) {
-		viewToAdd = updatesView;
+		viewToAdd = _updatesView;
 		
 		// adjust the elements
-		if ([delegate didCheckForNewEponyms]) {
-			[self newEponymsAreAvailable:[delegate newEponymsAvailable]];
+		if ([_delegate didCheckForNewEponyms]) {
+			[self newEponymsAreAvailable:[_delegate newEponymsAvailable]];
 		}
 	}
 	
 	// Show the About page
 	else {
-		viewToAdd = infoView;
+		viewToAdd = _infoView;
 		adjustFrame = NO;
 	}
 	
 	// add the view?
 	if (nil != viewToAdd) {
 		if (adjustFrame) {
-			viewToAdd.frame = parentView.bounds;
+			viewToAdd.frame = _parentView.bounds;
 		}
 		
-		[parentView addSubview:viewToAdd];
-		parentView.contentSize = viewToAdd.frame.size;
-		parentView.contentOffset = CGPointZero;
+		[_parentView addSubview:viewToAdd];
+		_parentView.contentSize = viewToAdd.frame.size;
+		_parentView.contentOffset = CGPointZero;
 	}
 }
 
-- (void) newEponymsAreAvailable:(BOOL)available
+- (void)newEponymsAreAvailable:(BOOL)available
 {
 	NSString *statusMessage = nil;
 	if (available) {
@@ -265,32 +214,32 @@
 	[self setStatusMessage:statusMessage];
 }
 
-- (void) resetStatusElementsWithButtonTitle:(NSString *)buttonTitle
+- (void)resetStatusElementsWithButtonTitle:(NSString *)buttonTitle
 {
 	[self setUpdateButtonTitle:(buttonTitle ? buttonTitle : @"Check for Eponym Updates")];
 	[self setUpdateButtonTitleColor:nil];
 	[self setProgress:-1.0];
 }
 
-- (void) lockGUI:(BOOL)lock
+- (void)lockGUI:(BOOL)lock
 {
 	if (lock) {
-		updateButton.enabled = NO;
-		projectWebsiteButton.enabled = NO;
-		eponymsDotNetButton.enabled = NO;
-		autocheckSwitch.enabled = NO;
+		_updateButton.enabled = NO;
+		_projectWebsiteButton.enabled = NO;
+		_eponymsDotNetButton.enabled = NO;
+		_autocheckSwitch.enabled = NO;
 		self.navigationItem.rightBarButtonItem.title = @"Abort";
 	}
 	else {
-		updateButton.enabled = YES;
-		projectWebsiteButton.enabled = YES;
-		eponymsDotNetButton.enabled = YES;
-		autocheckSwitch.enabled = YES;
+		_updateButton.enabled = YES;
+		_projectWebsiteButton.enabled = YES;
+		_eponymsDotNetButton.enabled = YES;
+		_autocheckSwitch.enabled = YES;
 		self.navigationItem.rightBarButtonItem.title = @"Done";
 	}
 }
 
-- (void) updateLabelsWithDateForLastCheck:(NSDate *)lastCheck lastUpdate:(NSDate *)lastUpdate usingEponyms:(NSDate *)usingEponyms
+- (void)updateLabelsWithDateForLastCheck:(NSDate *)lastCheck lastUpdate:(NSDate *)lastUpdate usingEponyms:(NSDate *)usingEponyms
 {
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateStyle:NSDateFormatterShortStyle];
@@ -298,83 +247,79 @@
 	
 	// last check
 	if (lastCheck) {
-		[lastCheckLabel setText:([lastCheck timeIntervalSince1970] > 10.0) ? [dateFormatter stringFromDate:lastCheck] : @"Never"];
+		[_lastCheckLabel setText:([lastCheck timeIntervalSince1970] > 10.0) ? [dateFormatter stringFromDate:lastCheck] : @"Never"];
 	}
 	
 	// last update
 	if (lastUpdate) {
-		[lastUpdateLabel setText:([lastUpdate timeIntervalSince1970] > 10.0) ? [dateFormatter stringFromDate:lastUpdate] : @"Never"];
+		[_lastUpdateLabel setText:([lastUpdate timeIntervalSince1970] > 10.0) ? [dateFormatter stringFromDate:lastUpdate] : @"Never"];
 	}
 	
 	// using eponyms
 	if (usingEponyms) {
 		[dateFormatter setTimeStyle:NSDateFormatterNoStyle];
 		NSString *usingEponymsString = ([usingEponyms timeIntervalSince1970] > 10.0) ? [dateFormatter stringFromDate:usingEponyms] : @"Unknown";
-		[usingEponymsLabel setText:[NSString stringWithFormat:@"Eponyms Date: %@", usingEponymsString]];
+		[_usingEponymsLabel setText:[NSString stringWithFormat:@"Eponyms Date: %@", usingEponymsString]];
 	}
 	
-	[dateFormatter release];
 }
 
 
-- (void) setUpdateButtonTitle:(NSString *)title
+- (void)setUpdateButtonTitle:(NSString *)title
 {
-	[updateButton setTitle:title forState:(UIControlStateNormal & UIControlStateHighlighted & UIControlStateDisabled & UIControlStateSelected & UIControlStateApplication & UIControlStateReserved)];
+	[_updateButton setTitle:title forState:(UIControlStateNormal & UIControlStateHighlighted & UIControlStateDisabled & UIControlStateSelected & UIControlStateApplication & UIControlStateReserved)];
 }
 
-- (void) setUpdateButtonTitleColor:(UIColor *)color
+- (void)setUpdateButtonTitleColor:(UIColor *)color
 {
 	if (nil == color) {
 		color = [UIColor colorWithRed:0.2 green:0.3 blue:0.5 alpha:1.0];		// default button text color
 	}
-	[updateButton setTitleColor:color forState:(UIControlStateNormal & UIControlStateHighlighted & UIControlStateSelected & UIControlStateDisabled)];
+	[_updateButton setTitleColor:color forState:(UIControlStateNormal & UIControlStateHighlighted & UIControlStateSelected & UIControlStateDisabled)];
 }
 
-- (void) setStatusMessage:(NSString *)message
+- (void)setStatusMessage:(NSString *)message
 {
 	if (message) {
-		progressText.textColor = [UIColor blackColor];
-		progressText.text = message;
+		_progressText.textColor = [UIColor blackColor];
+		_progressText.text = message;
 	}
 	else {
-		progressText.textColor = [UIColor grayColor];
-		progressText.text = @"Ready";
+		_progressText.textColor = [UIColor grayColor];
+		_progressText.text = @"Ready";
 	}
 }
 
-- (void) setProgress:(CGFloat)progress
+- (void)setProgress:(CGFloat)progress
 {
 	if (progress >= 0.0) {
-		progressView.hidden = NO;
-		progressView.progress = progress;
+		_progressView.hidden = NO;
+		_progressView.progress = progress;
 	}
 	else {
-		progressView.hidden = YES;
+		_progressView.hidden = YES;
 	}
 }
 
 - (IBAction)switchToggled:(id)sender
 {
 	UISwitch *mySwitch = sender;
-	if (autocheckSwitch == mySwitch) {
-		[delegate setShouldAutoCheck:mySwitch.on];
+	if (_autocheckSwitch == mySwitch) {
+		[_delegate setShouldAutoCheck:mySwitch.on];
 	}
 }
 
 
 
 #pragma mark - Updater Delegate
-- (void) updaterDidStartAction:(EponymUpdater *)updater
+- (void)updaterDidStartAction:(EponymUpdater *)updater
 {
-	[updater retain];
 	[self lockGUI:YES];
 	[self setStatusMessage:updater.statusMessage];
-	[updater release];
 }
 
-- (void) updater:(EponymUpdater *)updater didEndActionSuccessful:(BOOL)success
+- (void)updater:(EponymUpdater *)updater didEndActionSuccessful:(BOOL)success
 {
-	[updater retain];
 	[self lockGUI:NO];
 	
 	if (success) {
@@ -399,7 +344,7 @@
 			
 			[self setStatusMessage:statusMessage];
 			[self resetStatusElementsWithButtonTitle:nil];
-			delegate.newEponymsAvailable = NO;
+			_delegate.newEponymsAvailable = NO;
 		}
 	}
 	
@@ -414,78 +359,71 @@
 		[self setStatusMessage:updater.statusMessage];
 	}
 	
-	[updater release];
 }
 
-- (void) updater:(EponymUpdater *)updater progress:(CGFloat)progress
+- (void)updater:(EponymUpdater *)updater progress:(CGFloat)progress
 {
 	[self setProgress:progress];
 }
-#pragma mark -
 
 
 
-#pragma mark Alert View + Delegate
+#pragma mark - Alert View + Delegate
 // alert with one button
-- (void) alertViewWithTitle:(NSString *)title message:(NSString *)message cancelTitle:(NSString *)cancelTitle
+- (void)alertViewWithTitle:(NSString *)title message:(NSString *)message cancelTitle:(NSString *)cancelTitle
 {
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelTitle otherButtonTitles:nil];
 	[alert show];
-	[alert release];
 }
 
 // alert with 2 buttons
-- (void) alertViewWithTitle:(NSString *)title message:(NSString *)message cancelTitle:(NSString *)cancelTitle otherTitle:(NSString *)otherTitle
+- (void)alertViewWithTitle:(NSString *)title message:(NSString *)message cancelTitle:(NSString *)cancelTitle otherTitle:(NSString *)otherTitle
 {
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelTitle otherButtonTitles:otherTitle, nil];
 	[alert show];
-	[alert release];
 }
 
-- (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger) buttonIndex
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger) buttonIndex
 {
 	// abort import alert
 	if (askingToAbortImport) {
 		if (buttonIndex == alertView.firstOtherButtonIndex) {
-			[delegate abortUpdateAction];
+			[_delegate abortUpdateAction];
 			[self dismissMe:nil];
 		}
 		askingToAbortImport = NO;
 	}
 	
 	// first import alert (can only be accepted at the moment)
-	else if (firstTimeLaunch) {
-		[(AppDelegate *)delegate loadEponymXMLFromDisk];
+	else if (_firstTimeLaunch) {
+		[(AppDelegate *)_delegate loadEponymXMLFromDisk];
 	}
 }
-#pragma mark -
 
 
 
-#pragma mark Online Access
-- (IBAction) performUpdateAction:(id)sender
+#pragma mark - Online Access
+- (IBAction)performUpdateAction:(id)sender
 {
-	[delegate checkForUpdates:sender];
+	[_delegate checkForUpdates:sender];
 }
 
-- (void) openWebsite:(NSURL *)url fromButton:(id) button
+- (void)openWebsite:(NSURL *)url fromButton:(id) button
 {
 	if (![[UIApplication sharedApplication] openURL:url]) {
 		[button setText:@"Failed"];
 	}
 }
 
-- (IBAction) openProjectWebsite:(id) sender
+- (IBAction)openProjectWebsite:(id) sender
 {
-	[self openWebsite:projectWebsiteURL fromButton:sender];
+	[self openWebsite:_projectWebsiteURL fromButton:sender];
 }
 
-- (IBAction) openEponymsDotNet:(id) sender
+- (IBAction)openEponymsDotNet:(id) sender
 {
 	[self openWebsite:[NSURL URLWithString:@"http://www.eponyms.net/"] fromButton:sender];
 }
-
-
 
 
 @end

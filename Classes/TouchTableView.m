@@ -17,8 +17,8 @@
 
 @interface TouchTableView ()
 
-@property (nonatomic, retain) UILabel *noDataLabel;
-@property (nonatomic, retain) NSIndexPath *indexPathOfLastSelectedRow;
+@property (nonatomic, strong) UILabel *noDataLabel;
+@property (nonatomic, strong) NSIndexPath *indexPathOfLastSelectedRow;
 //@property (nonatomic, retain) UIImageView *shadowView;
 
 - (void) didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
@@ -36,16 +36,6 @@
 //@dynamic shadowView;
 
 
-- (void) dealloc
-{
-	self.indexPathOfLastSelectedRow = nil;
-	[noDataHint release];
-	[noDataLabel release];
-	
-//	self.shadowView = nil;
-	
-	[super dealloc];
-}
 
 - (id) initWithFrame:(CGRect)frame style:(UITableViewStyle)style
 {
@@ -129,7 +119,6 @@
 - (void) setNoDataHint:(NSString *)newHint
 {
 	if (newHint != noDataHint) {
-		[noDataHint release];
 		noDataHint = [newHint copy];
 		
 		if (nil != noDataLabel) {
@@ -148,7 +137,7 @@
 			return nil;
 		}
 		
-		self.noDataLabel = [[[UILabel alloc] initWithFrame:[self optimalLabelFrame]] autorelease];
+		self.noDataLabel = [[UILabel alloc] initWithFrame:[self optimalLabelFrame]];
 		noDataLabel.backgroundColor = [UIColor clearColor];
 		noDataLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
 		noDataLabel.font = [UIFont systemFontOfSize:15.f];
@@ -166,8 +155,7 @@
 - (void) setNoDataLabel:(UILabel *)newLabel
 {
 	if (newLabel != noDataLabel) {
-		[noDataLabel release];
-		noDataLabel = [newLabel retain];
+		noDataLabel = newLabel;
 	}
 }
 

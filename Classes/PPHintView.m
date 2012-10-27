@@ -10,16 +10,15 @@
 //
 
 #import "PPHintView.h"
-#import "PPHintViewContainer.h"
 #import "PPHintableLabel.h"
 #import <QuartzCore/QuartzCore.h>
-#import "UIView+shadowBug.h"
+//#import "UIView+Utilities.h"
 
-#define kPopupBoxPadding 10.0			// min distance to screen edges
-#define kPopupElementDistance 10.0		// distance to the referring element
-#define kPopupMarginForShadow 30.0		// the frame will be this much bigger
-#define kPopupShadowOffset 6.0			// shadow offset downwards
-#define kPopupShadowBlurRadius 18.0		// shadow blur radius
+#define kPopupBoxPadding 10.0			///< min distance to screen edges
+#define kPopupElementDistance 10.0		///< distance to the referring element
+#define kPopupMarginForShadow 30.0		///< the frame will be this much bigger
+#define kPopupShadowOffset 6.0			///< shadow offset downwards
+#define kPopupShadowBlurRadius 18.0		///< shadow blur radius
 #define kPopupTextXPadding 12.0
 #define kPopupTextYPadding 8.0
 #define kPopupTitleLabelHeight 20.0
@@ -27,14 +26,15 @@
 
 @interface PPHintView ()
 
-@property (nonatomic, readwrite, retain) PPHintViewContainer *containerView;
+@property (nonatomic, readwrite, strong) MCOverlayManager *overlayManager;
+@property (nonatomic, strong) UIFont *originalTitleFont;
+@property (nonatomic, strong) UIFont *originalTextFont;
+@property (nonatomic, strong) UIView *textContainer;
 
-- (void) setupForView:(UIView *)forView;
-- (void) hideAnimationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context;
+- (CGPoint)adjustAndCenterIn:(UIView *)hostView forView:(UIView *)targetView;
 
-- (void) initCGObjects;
-- (void) releaseCGObjects;
-CGMutablePathRef createOutlinePath(NSInteger pPosition, CGRect pRect, CGPoint elemCenter, CGFloat borderWidth, CGFloat borderRadius);
+- (void)initCGObjects;
+CGMutablePathRef createOutlinePath(NSInteger pPosition, CGRect pRect, CGPoint arrowHead, CGFloat borderWidth, CGFloat borderRadius);
 CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight);
 
 @end
@@ -43,20 +43,31 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight);
 
 @implementation PPHintView
 
-@synthesize forElement;
-@dynamic containerView;
-@dynamic titleLabel;
-@dynamic textLabel;
+@synthesize forElement, resignFirstResponderUponHide, dismissBlock;
+@synthesize overlayManager;
+@synthesize titleLabel, textLabel;
+@synthesize originalTitleFont, originalTextFont;
+@synthesize textContainer;
 
 
-- (id) initWithFrame:(CGRect)frame
+- (void)dealloc
 {
-	self = [super initWithFrame:frame];
-    if (self) {
-        self.backgroundColor = [UIColor clearColor];
-		//self.backgroundColor = [UIColor colorWithRed:0.f green:0.f blue:1.f alpha:0.3f];
+	CGColorRelease(cgBackgroundColor);
+	CGColorRelease(cgBorderColor);
+	CGColorRelease(cgBoxShadowColor);
+	CGColorRelease(cgBlackColor);
+	CGGradientRelease(cgGlossGradient);
+	
+}
+
+- (id)initWithFrame:(CGRect)frame
+{
+    if ((self = [super initWithFrame:frame])) {
+		[super setBackgroundColor:[UIColor clearColor]];
+		//[super setBackgroundColor:[UIColor colorWithRed:0.f green:0.f blue:1.f alpha:0.3f]];
 		self.opaque = NO;
 		self.userInteractionEnabled = YES;
+		resignFirstResponderUponHide = YES;
 		
 		// create the colors
 		[self initCGObjects];
@@ -65,91 +76,53 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight);
     return self;
 }
 
-+ (PPHintView *) hintViewForView:(UIView *)forView;
++ (PPHintView *)hintViewForView:(UIView *)forView;
 {
 	CGRect appRect = [[UIScreen mainScreen] bounds];
 	PPHintView *view = [[self alloc] initWithFrame:appRect];
-	[view setupForView:forView];
+	view.forElement = forView;
 	
-	return [view autorelease];
+	return view;
 }
 
-- (void) setupForView:(UIView *)forView
-{
-	self.forElement = forView;
-}
-
-- (void) dealloc
-{
-	self.forElement = nil;
-	self.containerView = nil;
-	self.titleLabel = nil;
-	self.textLabel = nil;
-	
-	[self releaseCGObjects];
-	
-    [super dealloc];
-}
-#pragma mark -
 
 
-
-#pragma mark KVC
-- (PPHintViewContainer *) containerView
+#pragma mark - KVC
+- (UILabel *)titleLabel
 {
-	if (nil == containerView) {
-		CGRect appRect = [[UIScreen mainScreen] bounds];
-		self.containerView = [[[PPHintViewContainer alloc] initWithFrame:appRect] autorelease];
-		//containerView.layer.delegate = self;
-		containerView.hint = self;
-	}
-	
-	return containerView;
-}
-- (void) setContainerView:(PPHintViewContainer *)newContainer
-{
-	if (newContainer != containerView) {
-		[containerView release];
-		containerView = [newContainer retain];
-	}
-}
-
-- (UILabel *) titleLabel
-{
-	if (nil == titleLabel) {
-		CGRect frame = CGRectInset(self.bounds, kPopupMarginForShadow + kPopupTextXPadding, kPopupMarginForShadow + kPopupTextYPadding);
+	if (!titleLabel) {
+		CGRect frame = CGRectInset(self.textContainer.bounds, kPopupTextXPadding, kPopupTextYPadding);
 		frame.size.height = kPopupTitleLabelHeight;
 		
 		self.titleLabel = [[UILabel alloc] initWithFrame:frame];
 		titleLabel.opaque = NO;
 		titleLabel.backgroundColor = [UIColor clearColor];
 		titleLabel.textColor = [UIColor whiteColor];
-		titleLabel.font = [UIFont boldSystemFontOfSize:17.f];
+		titleLabel.font = self.originalTitleFont = [UIFont boldSystemFontOfSize:17.f];
 		titleLabel.adjustsFontSizeToFitWidth = YES;
 		titleLabel.shadowColor = [UIColor colorWithWhite:0.f alpha:0.9f];
 		titleLabel.shadowOffset = CGSizeMake(0.f, -1.f);
 		titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
 		
-		[self addSubview:[titleLabel autorelease]];
+		[textContainer addSubview:titleLabel];
 	}
 	
 	return titleLabel;
 }
-- (void) setTitleLabel:(UILabel *)newTitleLabel
+- (void)setTitleLabel:(UILabel *)newTitleLabel
 {
 	if (newTitleLabel != titleLabel) {
 		if (nil != [titleLabel superview]) {
 			[titleLabel removeFromSuperview];
 		}
-		[titleLabel release];
-		titleLabel = [newTitleLabel retain];
+		titleLabel = newTitleLabel;
 	}
 }
 
-- (UILabel *) textLabel
+- (UILabel *)textLabel
 {
 	if (nil == textLabel) {
-		CGRect frame = CGRectInset(self.bounds, kPopupMarginForShadow + kPopupTextXPadding, kPopupMarginForShadow + kPopupTextYPadding);
+		CGRect frame = CGRectInset(self.textContainer.bounds, kPopupTextXPadding, kPopupTextYPadding);
 		CGFloat topPadding = titleLabel ? (kPopupTitleLabelHeight + kPopupTextYPadding / 2) : 0.f;
 		frame.origin.y += topPadding;
 		frame.size.height -= topPadding;
@@ -158,223 +131,286 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight);
 		textLabel.opaque = NO;
 		textLabel.backgroundColor = [UIColor clearColor];
 		textLabel.textColor = [UIColor whiteColor];
-		textLabel.font = [UIFont systemFontOfSize:15.f];
+		textLabel.font = self.originalTextFont = [UIFont systemFontOfSize:15.f];
 		textLabel.shadowColor = [UIColor colorWithWhite:0.f alpha:0.9f];
 		textLabel.shadowOffset = CGSizeMake(0.f, -1.f);
 		textLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		textLabel.numberOfLines = 100;
 		
-		[self addSubview:[textLabel autorelease]];
+		[textContainer addSubview:textLabel];
 	}
 	
 	return textLabel;
 }
-- (void) setTextLabel:(UILabel *)newTextLabel
+- (void)setTextLabel:(UILabel *)newTextLabel
 {
 	if (newTextLabel != textLabel) {
 		if (nil != [textLabel superview]) {
 			[textLabel removeFromSuperview];
 		}
-		[textLabel release];
-		textLabel = [newTextLabel retain];
+		textLabel = newTextLabel;
 	}
 }
-#pragma mark -
+
+- (UIView *)textContainer
+{
+	if (!textContainer) {
+		CGRect aFrame = CGRectInset(self.bounds, kPopupMarginForShadow, kPopupMarginForShadow);
+		
+		self.textContainer = [[UIView alloc] initWithFrame:aFrame];
+		textContainer.opaque = NO;
+		textContainer.backgroundColor = [UIColor clearColor];
+		
+		[self addSubview:textContainer];
+	}
+	return textContainer;
+}
+
+/**
+ *	Setting the background color leaves super's background color intact but assigns a private value just so we know it.
+ *	Also creates the required CG color
+ */
+- (void)setBackgroundColor:(UIColor *)aColor
+{
+	if (aColor != myBackgroundColor) {
+		myBackgroundColor = aColor;
+		
+		CGColorRelease(cgBackgroundColor);
+		cgBackgroundColor = myBackgroundColor ? CGColorRetain([myBackgroundColor CGColor]) : NULL;
+		
+		[self setNeedsDisplay];
+	}
+}
+
+- (UIColor *)backgroundColor
+{
+	return myBackgroundColor;
+}
 
 
 
-#pragma mark GUI
-- (void) show
+#pragma mark - Showing/Hiding
+/**
+ *	Shows the hint view
+ */
+- (void)show
 {
 	if (nil == forElement) {
-		NSLog(@"PPHintView: Cannot show without an element to point to");
+		ALog(@"Cannot show without an element to point to");
+		return;
+	}
+	if (!titleLabel.text && !textLabel.text) {
+		ALog(@"No use to show without any text");
 		return;
 	}
 	
-	// we don't want to display something under the status bar
-	BOOL is_landscape = UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation);
-	CGSize sbs = [UIApplication sharedApplication].statusBarFrame.size;
-	CGFloat statusBarHeight = is_landscape ? sbs.width : sbs.height;
+	// prepare overlay
+	self.overlayManager = [MCOverlayManager new];
+	overlayManager.delegate = self;
+	overlayManager.inAnimation = MCAnimationTypeFadeInOut;
+	overlayManager.outAnimation = MCAnimationTypeFadeInOut;
+	overlayManager.alignOnScreen = NO;
+	overlayManager.pollPosition = YES;
 	
-	// find the view we want to attach to
-	CGPoint origin = CGPointZero;				// this will be the center of the popup
-	UIView *child = forElement;
-	UIView *parent = nil;
-	UIView *attachToView = nil;
+	// size according to coordinate system of the overlay
+	[overlayManager overlaySizeForView:[forElement superview]];
+	CGPoint origin = [self adjustAndCenterIn:overlayManager forView:forElement];
 	
-	while ((parent = [child superview])) {
-		NSString *parentClass = NSStringFromClass([parent class]);
-		if ([parentClass isEqualToString:@"UILayoutContainerView"]) {
-			attachToView = parent;
-			break;
-		}
-		else if ([UIWindow class] == [parent class]) {
-			attachToView = child;
-			break;
-		}
-		child = parent;
-	}
-	if (!attachToView) {
-		attachToView = child;
-	}
-	//DLog(@"-- USING --\n%@", attachToView);
-	CGSize attachSize = [attachToView bounds].size;
-	self.containerView.frame = CGRectMake(0.f, 0.f, attachSize.width, attachSize.height);
-	
-	elementFrame = [attachToView convertRect:forElement.frame fromView:[forElement superview]];
-	CGPoint refElementCenter = [attachToView convertPoint:forElement.center fromView:[forElement superview]];
+	// present according to OUR coordinate system (!!!)
+	[overlayManager overlay:self
+				 withCenter:[overlayManager convertPoint:origin toView:[forElement superview]]
+					 inView:[forElement superview]];
+}
+
+
+/**
+ *	Repositions the hint view to point at the given targetView
+ *	@param hostView Usually our superview
+ *	@param targetView The view we should point to
+ */
+- (CGPoint)adjustAndCenterIn:(UIView *)hostView forView:(UIView *)targetView
+{
+	CGSize attachSize = [hostView bounds].size;
+	CGRect elementFrame = [hostView convertRect:targetView.frame fromView:[targetView superview]];
+	CGPoint currentCenter = self.center;
 	
 	// calculate needed dimensions based on the titleLabel (width) and textView (height)
+	BOOL tooBig = YES;
 	CGFloat boxWidth = 0.f;
 	CGFloat boxHeight = 0.f;
-	if (nil != titleLabel) {
-		CGSize labelSize = [titleLabel.text sizeWithFont:titleLabel.font];
-		boxWidth = fminf(labelSize.width + 2 * kPopupTextXPadding, attachSize.width - 2 * kPopupBoxPadding);
-		boxHeight = kPopupTextYPadding + 20.f + kPopupTextYPadding;
-	}
-	if (nil != textLabel) {
-		BOOL useWidth = NO;
-		if (0.f == boxWidth) {
-			useWidth = YES;
-			boxWidth = attachSize.width - 2 * kPopupBoxPadding;
-		}
-		CGSize maxSize = CGSizeMake(boxWidth - 2 * kPopupTextXPadding, 600.f);
-		CGSize textSize = [textLabel.text sizeWithFont:textLabel.font constrainedToSize:maxSize];
-		CGFloat widthHeightRatio = textSize.width / textSize.height;
+	CGPoint origin = [hostView convertPoint:targetView.center fromView:[targetView superview]];
+	CGSize fitSize = CGSizeZero;
+	
+	while (tooBig) {
+		tooBig = NO;
+		boxWidth = 0.f;
+		boxHeight = 0.f;
 		
-		//especially on the iPad, we don't want to have a view the whole screen wide but only one or two lines of text
-		if (widthHeightRatio > 4.f && textSize.width > 320.f) {
-			maxSize.width = fmaxf(320.f - 2 * kPopupBoxPadding, textSize.width / (widthHeightRatio / 3));		// 3 is approx. the target ratio
-			textSize = [textLabel.text sizeWithFont:textLabel.font constrainedToSize:maxSize];
+		
+		// ** DETERMINE SIZE; according to title label first
+		if (titleLabel.text) {
+			CGSize labelSize = [titleLabel.text sizeWithFont:titleLabel.font];
+			boxWidth = fminf(labelSize.width + (2 * kPopupTextXPadding), attachSize.width - (2 * kPopupBoxPadding));
+			boxHeight = kPopupTextYPadding + kPopupTitleLabelHeight + kPopupTextYPadding / 2;
 		}
 		
-		// set box height according to needed size
-		boxHeight = ([textLabel frame].origin.y - kPopupMarginForShadow) + textSize.height + kPopupTextYPadding;
-		if (useWidth) {
-			boxWidth = textSize.width + 2 * kPopupTextXPadding;
+		// determine text label size
+		if (textLabel.text) {
+			CGFloat maxBoxWidth = fmaxf(boxWidth + (2 * kPopupTextXPadding), attachSize.width - (2 * kPopupBoxPadding));
+			CGSize maxSize = CGSizeMake(maxBoxWidth - (2 * kPopupTextXPadding), CGFLOAT_MAX);
+			CGSize textSize = [textLabel.text sizeWithFont:textLabel.font constrainedToSize:maxSize];
+			CGFloat widthHeightRatio = textSize.width / textSize.height;
+			
+			// especially on the iPad, we don't want to have a view the whole screen wide but only one or two lines of text (except the title is that wide)
+			CGFloat refWidth = fmaxf(boxWidth, 320.f - 2 * kPopupBoxPadding);
+			if (widthHeightRatio > 4.f && textSize.width > refWidth) {
+				maxSize.width = fmaxf(refWidth, textSize.width / (widthHeightRatio / 3));		// 3 is approx. the target ratio
+				textSize = [textLabel.text sizeWithFont:textLabel.font constrainedToSize:maxSize];
+			}
+			
+			// set box height according to needed size
+			boxHeight = [textLabel frame].origin.y + textSize.height + kPopupTextYPadding;
+			boxWidth = fmaxf(boxWidth, textSize.width + 2 * kPopupTextXPadding);
+		}
+		
+		// assure we don't have zero width/height and have an even size
+		boxWidth = ((boxWidth < 20.f) ? attachSize.width - (2 * kPopupBoxPadding) : boxWidth);
+		boxWidth += ((NSInteger)boxWidth % 2);			// needed to avoid interpolation
+		boxHeight = ((boxHeight < 20.f) ? attachSize.height - (2 * kPopupBoxPadding) : boxHeight);
+		boxHeight += ((NSInteger)boxHeight % 2);
+		
+		boxRect = CGRectMake(kPopupMarginForShadow, kPopupMarginForShadow, boxWidth, boxHeight);
+		self.frame = CGRectInset(boxRect, -kPopupMarginForShadow, -kPopupMarginForShadow);
+		self.center = currentCenter;			// to avoid reposition artifacts
+		self.textContainer.frame = boxRect;
+		
+		boxWidth += (2 * kPopupBoxPadding);
+		boxHeight += (2 * kPopupBoxPadding);
+		
+		// ** PLACEMENT; check where we fit in
+		fitSize = CGSizeMake(boxWidth + (2 * kPopupBoxPadding), boxHeight + (2 * kPopupBoxPadding) + kPopupShadowOffset);
+		
+		// enough space at the top?
+		if (elementFrame.origin.y > fitSize.height) {
+			position = 0;
+			origin.y = elementFrame.origin.y - (boxHeight / 2);
+		}
+		
+		// no; enough space at the bottom?
+		else if (attachSize.height - (elementFrame.origin.y + elementFrame.size.height) > fitSize.height) {
+			position = 2;
+			origin.y = elementFrame.origin.y + elementFrame.size.height + (boxHeight / 2);
+		}
+		
+		// no; enough space to the left?
+		else if (elementFrame.origin.x > fitSize.width) {
+			position = 1;
+			origin.x = elementFrame.origin.x - (boxWidth / 2);
+		}
+		
+		// no; enough space to the right?
+		else if ((attachSize.width - (elementFrame.origin.x + elementFrame.size.width)) > fitSize.width) {
+			position = 3;
+			origin.x = elementFrame.origin.x + elementFrame.size.width + (boxWidth / 2);
+		}
+		
+		// not enough space at all for an arrow, try putting it over the label
+		else if (fitSize.height <= attachSize.height && fitSize.width <= attachSize.width) {
+			position = -1;
+		}
+		
+		// no, not enough space at all!
+		else {
+			position = -1;
+			tooBig = YES;
+		}
+		
+		// try smaller fontsize
+		if (tooBig) {
+			if (titleLabel) {
+				CGFloat titleSize = titleLabel.font.pointSize - 1.f;
+				if (titleSize < 12.f) {
+					DLog(@"Already shrunk title font to 12 points, stopping here. Not enough space for %fx%f, only got %fx%f", boxWidth, boxHeight, attachSize.width, attachSize.height);
+					break;
+				}
+				titleLabel.font = [titleLabel.font fontWithSize:titleSize];
+			}
+			
+			if (textLabel) {
+				CGFloat textSize = textLabel.font.pointSize - 1.f;
+				if (textSize < 12.f) {
+					DLog(@"Already shrunk text font to 12 points, stopping here. Not enough space for %fx%f, only got %fx%f", boxWidth, boxHeight, attachSize.width, attachSize.height);
+					break;
+				}
+				textLabel.font = [textLabel.font fontWithSize:textSize];
+			}
 		}
 	}
-	boxWidth = ((0.f == boxWidth) ? attachSize.width : boxWidth);
-	boxWidth += ((NSInteger)boxWidth % 2);			// to avoid interpolation
-	boxHeight = ((0.f == boxHeight) ? attachSize.height : boxHeight);
-	boxHeight += ((NSInteger)boxHeight % 2);
 	
-	boxRect = CGRectMake(kPopupMarginForShadow, kPopupMarginForShadow, boxWidth, boxHeight);
-	self.frame = CGRectInset(boxRect, -kPopupMarginForShadow, -kPopupMarginForShadow);
 	
-	boxWidth += (2 * kPopupBoxPadding);
-	boxHeight += (2 * kPopupBoxPadding);
-	
-	// placement - enough space at the top?
-	if ((elementFrame.origin.y - statusBarHeight) > boxHeight) {
-		position = 0;
-		origin.y = elementFrame.origin.y - (boxHeight / 2);
-		origin.x = refElementCenter.x;
-	}
-	
-	// yes; enough space to the left?
-	else if (elementFrame.origin.x > boxWidth) {
-		position = 1;
-		origin.y = refElementCenter.y;
-		origin.x = elementFrame.origin.x - (boxWidth / 2);
-	}
-	
-	// yes; enough space at the bottom?
-	else if ((attachSize.height - (elementFrame.origin.y + elementFrame.size.height)) > boxHeight) {
-		position = 2;
-		origin.y = elementFrame.origin.y + elementFrame.size.height + (boxHeight / 2);
-		origin.x = refElementCenter.x;
-	}
-	
-	// yes; enough space to the right?
-	else if ((attachSize.width - (elementFrame.origin.x + elementFrame.size.width)) > boxWidth) {
-		position = 3;
-		origin.y = refElementCenter.y;
-		origin.x = elementFrame.origin.x + elementFrame.size.width + (boxWidth / 2);
-	}
-	
-	// no, not enough space at all! TODO: Try smaller fontsizes; currently centering on screen
-	else {
-		position = -1;
-		origin = refElementCenter;
-		DLog(@"Not enough space for %fx%f -> implement smaller font sizes", boxWidth, boxHeight);
-	}
-	
-	// check whether we're in bounds
-	CGSize frameSize = attachToView.frame.size;
-	
-	if ((origin.x - (boxWidth / 2)) < 0.f) {
+	// ** BOUNDS CHECK
+	if ((origin.x - (fitSize.width / 2)) < 0.f) {
 		origin.x = (boxWidth / 2);
 	}
-	else if ((origin.x + (boxWidth / 2)) > frameSize.width) {
-		origin.x = frameSize.width - (boxWidth / 2);
+	else if ((origin.x + (fitSize.width / 2)) > attachSize.width) {
+		origin.x = attachSize.width - (boxWidth / 2);
 	}
 	
-	if ((origin.y - (boxHeight / 2)) < statusBarHeight) {
-		origin.y = statusBarHeight + (boxHeight / 2);
+	if ((origin.y - (fitSize.height / 2)) < 0.f) {
+		origin.y = (boxHeight / 2);
 	}
-	else if ((origin.y + (boxHeight / 2)) > frameSize.height) {
-		origin.y = frameSize.height - (boxHeight / 2);
+	else if ((origin.y + (fitSize.height / 2)) > attachSize.height) {
+		origin.y = attachSize.height - (boxHeight / 2);
 	}
 	
 	origin.x = roundf(origin.x);
 	origin.y = roundf(origin.y);
 	
-	self.center = origin;
-	self.layer.opacity = 0.f;
+	return origin;
+}
+
+
+- (void)hide
+{
+	[overlayManager hideOverlayAnimated:YES];
+}
+
+
+
+#pragma mark - MCOverlayManagerDelegate
+- (BOOL)overlayShouldReposition:(MCOverlayManager *)overlay
+{
+	CGPoint origin = [self adjustAndCenterIn:overlay forView:forElement];
+	[overlay moveOverlayTo:[overlay convertPoint:origin toView:[forElement superview]] animated:YES];
+	[self setNeedsDisplay];
 	
-	// add to window and animate in
-	[self.containerView addSubview:self];
-	[attachToView addSubview:containerView];
-	elementCenter = [self convertPoint:forElement.center fromView:[forElement superview]];
+	// return NO as we do this ourselves
+	return NO;
+}
+
+- (void)willDismissOverlay:(MCOverlayManager *)overlay
+{
+	// un-highlight forElement if possible
+	if (resignFirstResponderUponHide && [forElement respondsToSelector:@selector(resignFirstResponder)]) {
+		[forElement performSelector:@selector(resignFirstResponder)];
+	}
 	
-	[UIView beginAnimations:nil context:nil];
-	//[UIView setAnimationDuration:0.1f];
-	
-	self.layer.opacity = 1.f;
-	
-	[UIView commitAnimations];
-	
-	// highlight forElement if possible
-	if ([forElement isKindOfClass:[PPHintableLabel class]]) {
-		[(PPHintableLabel *)forElement hintView:self didDisplayAnimated:YES];
+	// callback
+	if (dismissBlock) {
+		dismissBlock();
+		self.dismissBlock = nil;
 	}
 }
 
-- (void) hide
-{
-	[UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:0.4f];
-    [UIView setAnimationDelegate:self];
-	[UIView setAnimationDidStopSelector:@selector(hideAnimationDidStop:finished:context:)];
-	
-	self.layer.opacity = 0.f;
-	
-	[UIView commitAnimations];
-	
-	// unhighlight forElement
-	if ([forElement isKindOfClass:[PPHintableLabel class]]) {
-		[(PPHintableLabel *)forElement hintView:self didHideAnimated:YES];
-	}
-}
-
-- (void) hideAnimationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
-{
-	[containerView removeFromSuperview];
-	self.containerView = nil;
-}
-#pragma mark -
 
 
-
-#pragma mark Touch Handling
-- (CGRect) insideRect
+#pragma mark - Touch Handling
+- (CGRect)insideRect
 {
 	return self.frame;
-	//return CGRectInset(self.frame, kPopupBoxPadding, kPopupBoxPadding);
 }
 
-- (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	UITouch *touch = [touches anyObject];
 	CGPoint location = [touch locationInView:[self superview]];
@@ -385,7 +421,7 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight);
 	}
 }
 
-- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	UITouch *touch = [touches anyObject];
 	CGPoint location = [touch locationInView:[self superview]];
@@ -395,20 +431,11 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight);
 		[self hide];
 	}
 }
-#pragma mark -
 
 
 
 #pragma mark Drawing
-/*
- - (void) drawLayer:(CALayer *)layer inContext:(CGContextRef)context
- {
- if (layer == containerView.layer) {
- 
- }
- }	//	*/
-
-- (void) drawRect:(CGRect)rect
+- (void)drawRect:(CGRect)rect
 {
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	
@@ -419,7 +446,8 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight);
 	CGContextSaveGState(context);
 	
 	// create our outline path. Will be used multiple times
-	CGPathRef outlinePath = createOutlinePath(position, boxRect, elementCenter, borderWidth, borderRadius);
+	CGPoint elemCenter = [self convertPoint:forElement.center fromView:[forElement superview]];
+	CGPathRef outlinePath = createOutlinePath(position, boxRect, elemCenter, borderWidth, borderRadius);
 	
 	// draw box shadow
 	CGContextAddRect(context, self.bounds);
@@ -427,7 +455,7 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight);
 	CGContextEOClip(context);
 	
 	CGContextAddPath(context, outlinePath);
-	CGContextSetShadowWithColor(context, CGSizeMake(0.f, [UIView shadowVerticalMultiplier] * kPopupShadowOffset), kPopupShadowBlurRadius, cgBoxShadowColor);
+	CGContextSetShadowWithColor(context, CGSizeMake(0.f, kPopupShadowOffset), kPopupShadowBlurRadius, cgBoxShadowColor);
 	CGContextSetFillColorWithColor(context, cgBlackColor);		// you won't see this, but this generates the shadow
 	CGContextFillPath(context);
 	
@@ -466,7 +494,7 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight);
 }
 
 
-- (void) initCGObjects
+- (void)initCGObjects
 {
 	CGColorSpaceRef rgbColorSpace = CGColorSpaceCreateDeviceRGB();
 	
@@ -483,37 +511,20 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight);
 	cgBlackColor = CGColorCreate(rgbColorSpace, blackColorComponents);
 	
 	CGFloat locations[2] = { 0.f, 1.f };
-	CGFloat glossComponents[8] = {	1.f, 1.f, 1.f, 0.5f,			// Top color
-		1.f, 1.f, 1.f, 0.1f };		// Bottom color
+	CGFloat glossComponents[8] = {	1.f, 1.f, 1.f, 0.5f,		// Top color
+									1.f, 1.f, 1.f, 0.1f };		// Bottom color
 	cgGlossGradient = CGGradientCreateWithColorComponents(rgbColorSpace, glossComponents, locations, 2);
 	
 	CGColorSpaceRelease(rgbColorSpace);
 }
 
-- (void) releaseCGObjects
-{
-	if (NULL != cgBackgroundColor) {
-		CGColorRelease(cgBackgroundColor);
-	}
-	if (NULL != cgBorderColor) {
-		CGColorRelease(cgBorderColor);
-	}
-	if (NULL != cgBoxShadowColor) {
-		CGColorRelease(cgBoxShadowColor);
-	}
-	if (NULL != cgBlackColor) {
-		CGColorRelease(cgBlackColor);
-	}
-	if (NULL != cgGlossGradient) {
-		CGGradientRelease(cgGlossGradient);
-	}
-}
+
+@end
 
 
-CGMutablePathRef createOutlinePath(NSInteger pPosition, CGRect pRect, CGPoint elemCenter, CGFloat borderWidth, CGFloat borderRadius)
+CGMutablePathRef createOutlinePath(NSInteger pPosition, CGRect pRect, CGPoint arrowHead, CGFloat borderWidth, CGFloat borderRadius)
 {
 	CGFloat arrowOffset = kPopupBoxPadding;
-	CGPoint arrowHead = CGPointMake(elemCenter.x, elemCenter.y);
 	CGMutablePathRef path = CGPathCreateMutable();
 	//NSLog(@"rect: %@", NSStringFromCGRect(pRect));
 	
@@ -679,5 +690,3 @@ CGMutablePathRef createGlossPath(CGRect pRect, CGFloat glossHeight)
 	return path;
 }
 
-
-@end

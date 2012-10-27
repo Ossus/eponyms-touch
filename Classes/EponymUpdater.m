@@ -66,7 +66,7 @@ static sqlite3_stmt *star_eponym_query = nil;
 @synthesize isParsing, mustAbortImport, parseFailed, eponymCheck_eponymUpdateTime, eponymCheckFileSize, readyToLoadNumEponyms, eponymCreationDate, currentlyParsedNode, contentOfCurrentXMLNode, categoriesOfCurrentEponym, categoriesAlreadyInserted, numEponymsParsed;
 
 
-- (id) initWithDelegate:(id)myDelegate
+- (id)initWithDelegate:(id)myDelegate
 {
 	self = [super init];
 	if (self) {
@@ -85,26 +85,12 @@ static sqlite3_stmt *star_eponym_query = nil;
 }
 
 
-- (void) dealloc
+- (void)dealloc
 {
 	self.delegate = nil;
-	self.myConnection = nil;
-	self.receivedData = nil;
-	
-	self.statusMessage = nil;
-	self.eponymUpdateCheckURL = nil;
-	self.eponymXMLURL = nil;
-	
-	self.eponymCreationDate = nil;
-	self.currentlyParsedNode = nil;
-	self.contentOfCurrentXMLNode = nil;
-	self.categoriesOfCurrentEponym = nil;
-	self.categoriesAlreadyInserted = nil;
 	
 	// SQLite
 	[self finalizeQueries];
-	
-	[super dealloc];
 }
 #pragma mark -
 
@@ -139,7 +125,7 @@ static sqlite3_stmt *star_eponym_query = nil;
 		
 		// create the request and start downloading by making the connection
 		NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:URL_LOAD_TIMEOUT];
-		self.myConnection = [[[NSURLConnection alloc] initWithRequest:urlRequest delegate:self] autorelease];
+		self.myConnection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
 		
 		if (!myConnection) {
 			[self downloadFailedWithMessage:@"Could not create the NSURLConnection object"];
@@ -170,9 +156,7 @@ static sqlite3_stmt *star_eponym_query = nil;
 	
 	
 	// Parse			****
-	[XMLData retain];
 	[self parseXMLData:XMLData parseError:nil];
-	[XMLData release];
 	// Parse finished	****
 	
 	
@@ -221,71 +205,71 @@ static sqlite3_stmt *star_eponym_query = nil;
 // will detach this thread from the main thread - create our own NSAutoreleasePool
 - (void) parseEponyms:(NSData *)XMLData
 {
-	NSAutoreleasePool *myAutoreleasePool = [[NSAutoreleasePool alloc] init];
+	@autoreleasepool {
 	
-	numEponymsParsed = 0;
-	self.categoriesAlreadyInserted = [NSMutableDictionary dictionary];
-	[self prepareDBAndQueries];
-	
-	NSError *parseError = nil;
-	
-	
-	// Parse and create			****
-	DLog(@"begin...");
-	//* --
-	sqlite3_stmt *begin_transaction_stmt;
-	const char *beginTrans = "BEGIN EXCLUSIVE TRANSACTION";
-	if (sqlite3_prepare_v2(memory_database, beginTrans, -1, &begin_transaction_stmt, NULL) != SQLITE_OK) {
-		NSAssert1(0, @"Error: Failed to prepare exclusive transaction: '%s'.", sqlite3_errmsg(memory_database));
-	}
-	if (SQLITE_DONE != sqlite3_step(begin_transaction_stmt)) {
-		NSAssert1(0, @"Error: Failed to step on begin_transaction_stmt: '%s'.", sqlite3_errmsg(memory_database));
-	}
-	sqlite3_finalize(begin_transaction_stmt);
-	// --	*/
-	[self parseXMLData:XMLData parseError:&parseError];			// does the parsing and inserting into memory_database
-	//* --
-	sqlite3_stmt *end_transaction_stmt;
-	const char *endTrans = "COMMIT";
-	if (sqlite3_prepare_v2(memory_database, endTrans, -1, &end_transaction_stmt, NULL) != SQLITE_OK) {
-		NSAssert1(0, @"Error: failed to commit transaction: '%s'.", sqlite3_errmsg(memory_database));
-	}
-	if (SQLITE_DONE != sqlite3_step(end_transaction_stmt)) {
-		NSAssert1(0, @"Error: Failed to step on end_transaction_stmt: '%s'.", sqlite3_errmsg(memory_database));
-	}
-	sqlite3_finalize(end_transaction_stmt);
-	// --	*/
-	DLog(@"...done");
-	// Parsing done				****
-	
-	
-	// Error occurred (we also end up here if mustAbortImport was set to true)
-	if (parseError) {
-		self.parseFailed = YES;
-		self.statusMessage = mustAbortImport ? @"Import Aborted" : @"Parser Error";
 		numEponymsParsed = 0;
-		database = nil;
+		self.categoriesAlreadyInserted = [NSMutableDictionary dictionary];
+		[self prepareDBAndQueries];
+		
+		NSError *parseError = nil;
+		
+		
+		// Parse and create			****
+		DLog(@"begin...");
+		//* --
+		sqlite3_stmt *begin_transaction_stmt;
+		const char *beginTrans = "BEGIN EXCLUSIVE TRANSACTION";
+		if (sqlite3_prepare_v2(memory_database, beginTrans, -1, &begin_transaction_stmt, NULL) != SQLITE_OK) {
+			NSAssert1(0, @"Error: Failed to prepare exclusive transaction: '%s'.", sqlite3_errmsg(memory_database));
+		}
+		if (SQLITE_DONE != sqlite3_step(begin_transaction_stmt)) {
+			NSAssert1(0, @"Error: Failed to step on begin_transaction_stmt: '%s'.", sqlite3_errmsg(memory_database));
+		}
+		sqlite3_finalize(begin_transaction_stmt);
+		// --	*/
+		[self parseXMLData:XMLData parseError:&parseError];			// does the parsing and inserting into memory_database
+		//* --
+		sqlite3_stmt *end_transaction_stmt;
+		const char *endTrans = "COMMIT";
+		if (sqlite3_prepare_v2(memory_database, endTrans, -1, &end_transaction_stmt, NULL) != SQLITE_OK) {
+			NSAssert1(0, @"Error: failed to commit transaction: '%s'.", sqlite3_errmsg(memory_database));
+		}
+		if (SQLITE_DONE != sqlite3_step(end_transaction_stmt)) {
+			NSAssert1(0, @"Error: Failed to step on end_transaction_stmt: '%s'.", sqlite3_errmsg(memory_database));
+		}
+		sqlite3_finalize(end_transaction_stmt);
+		// --	*/
+		DLog(@"...done");
+		// Parsing done				****
+		
+		
+		// Error occurred (we also end up here if mustAbortImport was set to true)
+		if (parseError) {
+			self.parseFailed = YES;
+			self.statusMessage = mustAbortImport ? @"Import Aborted" : @"Parser Error";
+			numEponymsParsed = 0;
+			database = nil;
+		}
+		
+		// cat memory_data to disk (also re-sets starred eponyms)
+		else {
+			self.parseFailed = NO;
+			[self catMemoryDBToDisk];			// concatenates memory_database to the file database and closes memory_database
+		}
+		
+		// Clean up
+		self.isParsing = NO;
+		self.categoriesAlreadyInserted = nil;
+		self.newEponymsAvailable = NO;
+		
+		// inform the delegates
+		if (viewController) {
+			[self performSelectorOnMainThread:@selector(notifyParseEndedTo:) withObject:viewController waitUntilDone:YES];
+		}
+		[self performSelectorOnMainThread:@selector(notifyParseEndedTo:) withObject:delegate waitUntilDone:YES];
+		self.updateAction = parseFailed ? updateAction : 1;
+	
 	}
-	
-	// cat memory_data to disk (also re-sets starred eponyms)
-	else {
-		self.parseFailed = NO;
-		[self catMemoryDBToDisk];			// concatenates memory_database to the file database and closes memory_database
-	}
-	
-	// Clean up
-	self.isParsing = NO;
-	self.categoriesAlreadyInserted = nil;
-	self.newEponymsAvailable = NO;
-	
-	// inform the delegates
-	if (viewController) {
-		[self performSelectorOnMainThread:@selector(notifyParseEndedTo:) withObject:viewController waitUntilDone:YES];
-	}
-	[self performSelectorOnMainThread:@selector(notifyParseEndedTo:) withObject:delegate waitUntilDone:YES];
-	self.updateAction = parseFailed ? updateAction : 1;
-	
-	[myAutoreleasePool release];
 }
 #pragma mark -
 
@@ -425,16 +409,15 @@ static sqlite3_stmt *star_eponym_query = nil;
 	[parser setShouldResolveExternalEntities:NO];
 	
 	// Parse
-	innerPool = [[NSAutoreleasePool alloc] init];
-	[parser parse];
-	[innerPool release];
+	@autoreleasepool {
+		[parser parse];
+	}
 	
 	NSError *parseError = [parser parserError];
 	if (parseError && error) {
 		*error = parseError;
 	}
 	
-	[parser release];
 }
 
 
@@ -521,25 +504,22 @@ static sqlite3_stmt *star_eponym_query = nil;
 			self.currentlyParsedNode = nil;
 			self.categoriesOfCurrentEponym = nil;
 			
-			// show progress and flush the innerPool
+			// show progress
 			if (0 == numEponymsParsed % 50) {
 				CGFloat fraction = numEponymsParsed / (CGFloat) readyToLoadNumEponyms;
 				[self performSelectorOnMainThread:@selector(updateProgress:) withObject:[NSNumber numberWithFloat:fraction] waitUntilDone:NO];
-				
-				[innerPool release];
-				innerPool = [[NSAutoreleasePool alloc] init];
 			}
 		}
 		
 		// Ended eponym attributes  <name> <desc> <c> <e>
 		else if ([elementName isEqualToString:@"name"] || [elementName isEqualToString:@"desc"] || [elementName isEqualToString:@"c"] || [elementName isEqualToString:@"e"]) {
-			[currentlyParsedNode setObject:[[contentOfCurrentXMLNode copy] autorelease] forKey:elementName];
+			[currentlyParsedNode setObject:[contentOfCurrentXMLNode copy] forKey:elementName];
 			self.contentOfCurrentXMLNode = nil;
 		}
 		
 		// Ended a category  <cat>
 		else if ([elementName isEqualToString:@"cat"]) {
-			[categoriesOfCurrentEponym addObject:[[contentOfCurrentXMLNode copy] autorelease]];
+			[categoriesOfCurrentEponym addObject:[contentOfCurrentXMLNode copy]];
 		}
 	}
 }
@@ -569,7 +549,6 @@ static sqlite3_stmt *star_eponym_query = nil;
 - (void) insertCategory:(NSDictionary *)category
 {
 	if (category) {
-		[category retain];
 		NSString *tag = [category objectForKey:@"tag"];
 		sqlite3_bind_text(insert_category_query, 1, [tag UTF8String], -1, SQLITE_TRANSIENT);
 		sqlite3_bind_text(insert_category_query, 2, [[category objectForKey:@"title"] UTF8String], -1, SQLITE_TRANSIENT);
@@ -581,7 +560,6 @@ static sqlite3_stmt *star_eponym_query = nil;
 			NSAssert2(0, @"Error: Failed to insert category %@: '%s'.", tag, sqlite3_errmsg(memory_database));
 		}
 		sqlite3_reset(insert_category_query);
-		[category release];
 	}
 }
 
@@ -591,7 +569,6 @@ static sqlite3_stmt *star_eponym_query = nil;
 		NSAssert(0, @"memory_database is not present!");
 	}
 	
-	[eponymDict retain];
 	NSInteger insert_eponym_id = 0;
 	
 	// Insert the eponym **
@@ -608,7 +585,6 @@ static sqlite3_stmt *star_eponym_query = nil;
 		NSAssert2(0, @"Error: Failed to insert eponym %@: '%s'.", [eponymDict objectForKey:@"identifier"], sqlite3_errmsg(memory_database));
 	}
 	sqlite3_reset(insert_eponym_query);
-	[eponymDict release];
 	
 	return insert_eponym_id;
 }
@@ -616,7 +592,6 @@ static sqlite3_stmt *star_eponym_query = nil;
 - (void) linkEponym:(NSUInteger)eponym_id toCategories:(NSArray *)categoryArray
 {
 	if ([categoryArray count] > 0) {
-		[categoryArray retain];
 		
 		for (NSString *category in categoryArray) {
 			if ([category isEqualToString:@""]) {
@@ -639,7 +614,6 @@ static sqlite3_stmt *star_eponym_query = nil;
 			// else should not happen
 		}
 		
-		[categoryArray release];
 	}
 }
 
@@ -867,7 +841,6 @@ static sqlite3_stmt *star_eponym_query = nil;
 - (NSInteger) epochForStringDate:(NSString *)stringDate
 {
 	NSInteger epoch = 0;
-	[stringDate retain];
 	
 	// split the date
 	NSArray *dateParts = [stringDate componentsSeparatedByString:@"/"];
@@ -879,19 +852,18 @@ static sqlite3_stmt *star_eponym_query = nil;
 		year = (year < 100) ? ((year < 90) ? (year += 2000) : (year += 1900)) : year;
 		
 		// compose the date
-		NSDateComponents *components = [[[NSDateComponents alloc] init] autorelease];
+		NSDateComponents *components = [[NSDateComponents alloc] init];
 		[components setYear:year];
 		[components setMonth:month];
 		[components setDay:day];
 		
 		// get the date
-		NSCalendar *gregorianCalendar = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+		NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
 		NSDate *date = [gregorianCalendar dateFromComponents:components];
 		
 		epoch = [date timeIntervalSince1970];
 	}
 	
-	[stringDate release];
 	
 	return epoch;
 }

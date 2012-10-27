@@ -14,11 +14,11 @@
 
 @protocol EponymUpdaterDelegate <NSObject>
 
-- (void) updaterDidStartAction:(EponymUpdater *)updater;
-- (void) updater:(EponymUpdater *)updater didEndActionSuccessful:(BOOL)success;
+- (void)updaterDidStartAction:(EponymUpdater *)updater;
+- (void)updater:(EponymUpdater *)updater didEndActionSuccessful:(BOOL)success;
 
 @optional
 
-- (void) updater:(EponymUpdater *)updater progress:(CGFloat)progress;
+- (void)updater:(EponymUpdater *)updater progress:(CGFloat)progress;
 
 @end

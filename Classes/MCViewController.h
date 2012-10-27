@@ -16,13 +16,10 @@
 
 
 @interface MCViewController : UIViewController {
-	MCViewController *myParentController;					// workaround for the @private parentViewController of UIViewController :P
-	BOOL shouldBeDismissed;									// YES by default. If NO, modal views can't be dismissed
-	NSString *autosaveName;
 	NSDictionary *restoreOnLoad;
 }
 
-@property (nonatomic, assign) MCViewController *myParentController;
+@property (nonatomic, unsafe_unretained) MCViewController *myParentController;
 @property (nonatomic, assign) BOOL shouldBeDismissed;
 @property (nonatomic, copy) NSString *autosaveName;
 

@@ -16,19 +16,6 @@
 
 @interface Eponym : NSObject {
 	AppDelegate *delegate;
-	
-	// Primary key
-	NSUInteger eponym_id;
-	
-	// Eponym Attributes
-	NSString *title;
-	NSString *text;
-	NSArray *categories;
-	NSDate *created;
-	NSDate *lastedit;
-	NSDate *lastaccess;
-	NSUInteger starred;
-	
 	BOOL loaded;
 }
 	
@@ -43,16 +30,17 @@
 @property (nonatomic, assign) NSUInteger starred;
 
 // Finalize (delete) all of the SQLite compiled queries.
-+ (void) finalizeQueries;
++ (void)finalizeQueries;
 
 // Init the Eponym with the desired key
-- (id) initWithID:(NSUInteger) eid title:(NSString*) ttl delegate:(AppDelegate *)myDelegate;
+- (id)initWithID:(NSUInteger) eid title:(NSString*) ttl delegate:(AppDelegate *)myDelegate;
 
 // Loading and unloading. Everything but key and title are wiped from memory on unload
-- (void) load;
-- (void) unload;
+- (void)load;
+- (void)unload;
 
-- (void) toggleStarred;
-- (void) markAccessed;
+- (void)toggleStarred;
+- (void)markAccessed;
+
 
 @end

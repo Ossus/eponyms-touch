@@ -13,11 +13,11 @@
 
 @interface UIView (MCViewAnimations)
 
-- (void) addSubviewAnimated:(UIView *)view;
-- (void) removeFromSuperviewAnimated;
+- (void)addSubviewAnimated:(UIView *)view;
+- (void)removeFromSuperviewAnimated;
 
-- (void) curvedMoveFromCenter:(CGPoint)startCenter toCenter:(CGPoint)targetCenter withDelegate:(id)animDelegate forKey:(NSString *)animKey;
-- (void) bubbleViewWithDelegate:(id)animDelegate forKey:(NSString *)animKey;
+- (void)curvedMoveFromCenter:(CGPoint)startCenter toCenter:(CGPoint)targetCenter withDelegate:(id)animDelegate forKey:(NSString *)animKey;
+- (void)bubbleViewWithDelegate:(id)animDelegate forKey:(NSString *)animKey;
 
 
 @end

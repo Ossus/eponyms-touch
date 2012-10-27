@@ -32,21 +32,21 @@
 #endif
 }
 
-@property (nonatomic, retain) Eponym *eponym;
+@property (nonatomic, strong) Eponym *eponym;
 
-@property (nonatomic, retain) UIBarButtonItem *rightBarButtonStarredItem;
-@property (nonatomic, retain) UIBarButtonItem *rightBarButtonNotStarredItem;
+@property (nonatomic, strong) UIBarButtonItem *rightBarButtonStarredItem;
+@property (nonatomic, strong) UIBarButtonItem *rightBarButtonNotStarredItem;
 
-@property (nonatomic, retain) UILabel *eponymTitleLabel;
-@property (nonatomic, retain) MCTextView *eponymTextView;
-@property (nonatomic, retain) PPHintableLabel *eponymCategoriesLabel;
-@property (nonatomic, retain) UILabel *dateCreatedLabel;
-@property (nonatomic, retain) UILabel *dateUpdatedLabel;
+@property (nonatomic, strong) UILabel *eponymTitleLabel;
+@property (nonatomic, strong) MCTextView *eponymTextView;
+@property (nonatomic, strong) PPHintableLabel *eponymCategoriesLabel;
+@property (nonatomic, strong) UILabel *dateCreatedLabel;
+@property (nonatomic, strong) UILabel *dateUpdatedLabel;
 
 @property (nonatomic, assign) EPLearningMode displayNextEponymInLearningMode;
-@property (nonatomic, retain) UIButton *randomNoTitleEponymButton;
-@property (nonatomic, retain) UIButton *randomNoTextEponymButton;
-@property (nonatomic, retain) UIButton *revealButton;
+@property (nonatomic, strong) UIButton *randomNoTitleEponymButton;
+@property (nonatomic, strong) UIButton *randomNoTextEponymButton;
+@property (nonatomic, strong) UIButton *revealButton;
 
 - (void)toggleEponymStarred:(id)sender;
 - (void)indicateEponymStarredStatus;

@@ -38,12 +38,12 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 
 @interface AppDelegate ()
 
-@property (nonatomic, readwrite, retain) PPSplitViewController *splitController;
-@property (nonatomic, readwrite, retain) MasterViewController *naviController;
-@property (nonatomic, readwrite, retain) CategoriesViewController *categoriesController;
-@property (nonatomic, readwrite, retain) ListViewController *listController;
-@property (nonatomic, readwrite, retain) EponymViewController *eponymController;
-@property (nonatomic, readwrite, retain) InfoViewController *infoController;
+@property (nonatomic, readwrite, strong) PPSplitViewController *splitController;
+@property (nonatomic, readwrite, strong) MasterViewController *naviController;
+@property (nonatomic, readwrite, strong) CategoriesViewController *categoriesController;
+@property (nonatomic, readwrite, strong) ListViewController *listController;
+@property (nonatomic, readwrite, strong) EponymViewController *eponymController;
+@property (nonatomic, readwrite, strong) InfoViewController *infoController;
 
 
 - (void) showNewEponymsAreAvailable:(BOOL)available;
@@ -69,25 +69,6 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 @synthesize starImageListActive, starImageEponymActive, starImageEponymInactive;
 
 
-- (void)dealloc
-{
-	[categoryShown release];
-	self.categoryArray = nil;
-	self.eponymArray = nil;
-	self.eponymSectionArray = nil;
-	self.loadedEponyms = nil;
-	
-	self.splitController = nil;
-	self.naviController = nil;
-	self.listController = nil;
-	self.eponymController = nil;
-	self.infoController = nil;
-	
-	self.myUpdater = nil;
-	
-	[window release];
-	[super dealloc];
-}
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -123,17 +104,17 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	
 	// **** GUI
 	// create the NavigationController and the first ViewController (categoryController)
-	self.categoriesController = [[[CategoriesViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+	self.categoriesController = [[CategoriesViewController alloc] initWithNibName:nil bundle:nil];
 	[categoriesController setDelegate:self];
 	categoriesController.autosaveName = @"CategoryList";
-	self.naviController = [[[MasterViewController alloc] initWithRootViewController:categoriesController] autorelease];
+	self.naviController = [[MasterViewController alloc] initWithRootViewController:categoriesController];
 	naviController.navigationBar.tintColor = [self naviBarTintColor];
 	
 	// create the view controllers for the Eponym list and the Eponym details
-	self.listController = [[[ListViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+	self.listController = [[ListViewController alloc] initWithNibName:nil bundle:nil];
 	[listController setDelegate:self];
 	listController.autosaveName = @"EponymList";
-	self.eponymController = [[[EponymViewController alloc] init] autorelease];
+	self.eponymController = [[EponymViewController alloc] init];
 	
 	[self showNewEponymsAreAvailable:NO];
 	
@@ -227,7 +208,6 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 			[eponym unload];
 		}
 	}
-	[loadedEponymsCopy release];
 }
 
 
@@ -264,7 +244,6 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 			[eponym unload];
 		}
 	}
-	[loadedEponymsCopy release];
 	
 	[self closeMainDatabase];
 	
@@ -304,7 +283,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 - (PPSplitViewController *) splitController
 {
 	if (nil == splitController) {
-		self.splitController = [[[PPSplitViewController alloc] init] autorelease];
+		self.splitController = [[PPSplitViewController alloc] init];
 		splitController.usesFullLandscapeWidth = NO;
 		splitController.useCustomLeftTitleBar = NO;
 		splitController.leftViewController = self.naviController;
@@ -321,13 +300,12 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 
 - (EponymCategory *) categoryShown
 {
-	return [[categoryShown retain] autorelease];
+	return categoryShown;
 }
 - (void) setCategoryShown:(EponymCategory *)catShown
 {
 	if (catShown != categoryShown) {
-		[categoryShown release];
-		categoryShown = [catShown retain];
+		categoryShown = catShown;
 		
 		listController.noDataHint = [categoryShown hint];
 	}
@@ -365,7 +343,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 - (void) checkForUpdates:(id)sender
 {
 	if (!myUpdater) {
-		self.myUpdater = [[[EponymUpdater alloc] initWithDelegate:self] autorelease];
+		self.myUpdater = [[EponymUpdater alloc] initWithDelegate:self];
 	}
 	
 	if (infoController) {
@@ -377,7 +355,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 // called on first launch
 - (void) loadEponymXMLFromDisk
 {
-	self.myUpdater = [[[EponymUpdater alloc] initWithDelegate:self] autorelease];
+	self.myUpdater = [[EponymUpdater alloc] initWithDelegate:self];
 	myUpdater.updateAction = 3;
 	if (infoController) {
 		myUpdater.viewController = infoController;
@@ -401,7 +379,6 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 
 - (void) updater:(EponymUpdater *)updater didEndActionSuccessful:(BOOL)success
 {
-	[updater retain];
 	self.iAmUpdating = NO;
 	BOOL mayReleaseUpdater = NO;
 	
@@ -434,7 +411,6 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	}
 	// else an error occurred, no need to do anything
 	
-	[updater release];
 	if (mayReleaseUpdater) {
 		self.myUpdater = nil;
 	}
@@ -471,7 +447,6 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	else {
 		categoriesController.navigationItem.rightBarButtonItem = infoBarButton;
 	}
-	[infoBarButton release];
 }
 #pragma mark -
 
@@ -571,7 +546,6 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 																		title:(title ? [NSString stringWithUTF8String:title] : @"")
 															   whereStatement:nil];
 			[normalCats addObject:thisCategory];
-			[thisCategory release];
 		}
 		
 		sqlite3_reset(load_all_categories_query);
@@ -733,7 +707,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 			// new first letter!
 			if (NSOrderedSame != [firstLetter compare:oldFirstLetter options:NSDiacriticInsensitiveSearch | NSCaseInsensitiveSearch]) {
 				if ([sectionArray count] > 0) {
-					[eponymArray addObject:[[sectionArray copy] autorelease]];
+					[eponymArray addObject:[sectionArray copy]];
 					[sectionArray removeAllObjects];
 					
 					[eponymSectionArray addObject:[oldFirstLetter uppercaseString]];
@@ -744,15 +718,13 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		
 		// add to section array (there's only one section for the special categories)
 		[sectionArray addObject:eponym];
-		[eponym release];
 	}
 	
 	// add last section
 	if ([sectionArray count] > 0) {
-		[eponymArray addObject:[[sectionArray copy] autorelease]];
+		[eponymArray addObject:[sectionArray copy]];
 		[eponymSectionArray addObject:[oldFirstLetter uppercaseString]];
 	}
-	[sectionArray release];
 	
 	sqlite3_reset(query);
 	
@@ -903,7 +875,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 - (void) showInfoPanelAsFirstTimeLaunch:(BOOL)firstTimeLaunch
 {
 	if (!infoController) {
-		self.infoController = [[[InfoViewController alloc] init] autorelease];
+		self.infoController = [[InfoViewController alloc] init];
 		infoController.delegate = self;
 	}
 	
@@ -927,7 +899,6 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	else {
 		[naviController presentModalViewController:tempNaviController animated:YES];
 	}
-	[tempNaviController release];
 }
 
 

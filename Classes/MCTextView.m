@@ -10,7 +10,6 @@
 //  
 
 #import "MCTextView.h"
-#import "UIView+shadowBug.h"
 
 
 CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect);
@@ -18,15 +17,10 @@ CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect);
 
 @implementation MCTextView
 
-@synthesize borderColor;
-@dynamic backgroundGradientType;
-@dynamic gradientBackgroundColor;
 
-
-- (id) initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame
 {
-	self = [super initWithFrame:frame];
-	if (self) {
+	if ((self = [super initWithFrame:frame])) {
 		myColorSpace = CGColorSpaceCreateDeviceRGB();
 		self.opaque = NO;
 		self.backgroundGradientType = 1;
@@ -38,10 +32,9 @@ CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect);
 	return self;
 }
 
-- (id) initWithCoder:(NSCoder *)coder
+- (id)initWithCoder:(NSCoder *)coder
 {
-	self = [super initWithCoder:coder];
-	if (self) {
+	if ((self = [super initWithCoder:coder])) {
 		myColorSpace = CGColorSpaceCreateDeviceRGB();
 		self.opaque = NO;
 		self.backgroundGradientType = 1;
@@ -51,52 +44,39 @@ CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect);
 	return self;
 }
 
-- (void) dealloc
+- (void)dealloc
 {
 	CGColorSpaceRelease(myColorSpace);
-	self.borderColor = nil;
 	self.gradientBackgroundColor = nil;
-	
-	[super dealloc];
 }
-#pragma mark -
 
 
 
-#pragma mark KVC
-- (NSInteger) backgroundGradientType
+#pragma mark - KVC
+- (void)setBackgroundGradientType:(NSInteger)newType
 {
-	return backgroundGradientType;
-}
-- (void) setBackgroundGradientType:(NSInteger)newType
-{
-	if (newType != backgroundGradientType) {
-		backgroundGradientType = newType;
+	if (newType != _backgroundGradientType) {
+		_backgroundGradientType = newType;
 		
-		if (nil != gradientBackgroundColor) {
-			UIColor *foo = [gradientBackgroundColor retain];
+		if (nil != _gradientBackgroundColor) {
+			UIColor *foo = _gradientBackgroundColor;
 			self.gradientBackgroundColor = nil;
-			self.gradientBackgroundColor = [foo autorelease];
+			self.gradientBackgroundColor = foo;
 		}
 	}
 }
 
-- (UIColor *) gradientBackgroundColor
+- (void)setGradientBackgroundColor:(UIColor *)newColor
 {
-	return gradientBackgroundColor;
-}
-- (void) setGradientBackgroundColor:(UIColor *)newColor
-{
-	if (newColor != gradientBackgroundColor) {
-		[gradientBackgroundColor release];
-		gradientBackgroundColor = [newColor retain];
+	if (newColor != _gradientBackgroundColor) {
+		_gradientBackgroundColor = newColor;
 		
 		if (backgroundGradient) {
 			CGGradientRelease(backgroundGradient);
 			backgroundGradient = NULL;
 		}
 		
-		if (0 != backgroundGradientType && nil != gradientBackgroundColor) {
+		if (0 != _backgroundGradientType && nil != _gradientBackgroundColor) {
 			CGColorRef cgColor = [newColor CGColor];
 			size_t num_comp = CGColorGetNumberOfComponents(cgColor);
 			const CGFloat *comp = CGColorGetComponents(cgColor);
@@ -132,7 +112,7 @@ CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect);
 				CGFloat components[8];
 				NSUInteger i;
 				
-				if (1 == backgroundGradientType) {
+				if (1 == _backgroundGradientType) {
 					for (i = 0; i < 8; i++) {
 						components[i] = (i < 4) ? topComponents[i] : bottomComponents[i - 4];
 					}
@@ -149,12 +129,11 @@ CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect);
 		}
 	}
 }
-#pragma mark -
 
 
 
-#pragma mark Sizing
-- (CGSize) sizeThatFits:(CGSize)size
+#pragma mark - Sizing
+- (CGSize)sizeThatFits:(CGSize)size
 {
 	if ([self.text isEqualToString:@""]) {			// [self hasText] does not work??
 		return size;
@@ -168,7 +147,7 @@ CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect);
 	return CGSizeMake(textSize.width + (2 * textPadding), textSize.height + (2 * textPadding));
 }
 
-- (void) setFrame:(CGRect)newFrame
+- (void)setFrame:(CGRect)newFrame
 {
 	if (!CGRectEqualToRect(newFrame, self.frame)) {
 		[super setFrame:newFrame];
@@ -192,12 +171,11 @@ CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect);
 		[self setNeedsDisplay];
 	}
 }
-#pragma mark -
 
 
 
-#pragma mark Drawing
-- (void) drawRect:(CGRect)rect
+#pragma mark - Drawing
+- (void)drawRect:(CGRect)rect
 {
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	
@@ -214,7 +192,7 @@ CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect);
 	
 	// fill the clipped border area
 	if (self.borderColor) {
-		CGContextSetFillColorWithColor(context, [borderColor CGColor]);
+		CGContextSetFillColorWithColor(context, [_borderColor CGColor]);
 		CGContextFillRect(context, localRect);
 	}
 	else {
@@ -245,7 +223,7 @@ CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect);
 			CGContextDrawLinearGradient(context, backgroundGradient, startPoint, endPoint, 0);
 		}
 		else {
-			CGContextSetFillColorWithColor(context, [gradientBackgroundColor CGColor]);
+			CGContextSetFillColorWithColor(context, [_gradientBackgroundColor CGColor]);
 			CGContextFillRect(context, localRect);
 		}
 		CGPathRelease(boxPath);
@@ -261,7 +239,7 @@ CGMutablePathRef createRoundedPathInRect(CGFloat borderRadius, CGRect rect);
 		CGColorRef shadowColor = CGColorCreate(myColorSpace, shadowColorComponents);
 		
 		CGContextSetLineWidth(context, 2 * borderWidth);
-		CGContextSetShadowWithColor(context, CGSizeMake(0.f, [UIView shadowVerticalMultiplier] * 1.f), 2.f, shadowColor);
+		CGContextSetShadowWithColor(context, CGSizeMake(0.f, 1.f), 2.f, shadowColor);
 		CGContextSetStrokeColor(context, blackColorComponents);
 		CGContextStrokePath(context);
 		CGColorRelease(shadowColor);
