@@ -100,6 +100,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		shownCategoryAtQuit = [defaults integerForKey:@"shownCategoryAtQuit"];
 		shownEponymAtQuit = [defaults integerForKey:@"shownEponymAtQuit"];
 	}
+	[defaults synchronize];
 	
 	
 	// **** GUI
@@ -448,11 +449,10 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 		categoriesController.navigationItem.rightBarButtonItem = infoBarButton;
 	}
 }
-#pragma mark -
 
 
 
-#pragma mark SQLite
+#pragma mark - SQLite
 // Creates a writable copy of the bundled default database in the application Documents directory.
 - (BOOL) connectToDBAndCreateIfNeeded
 {
@@ -493,7 +493,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 }
 
 
-- (void) loadDatabaseAnimated:(BOOL)animated reload:(BOOL)as_reload
+- (void)loadDatabaseAnimated:(BOOL)animated reload:(BOOL)as_reload
 {
 	// Drop back to the root view
 	if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {

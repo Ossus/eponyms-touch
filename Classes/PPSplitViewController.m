@@ -10,7 +10,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "UIViewController+PPSubclassing.h"
 
-#define USE_TWO_PART_ANIMATION 0
+
+#define kSplitViewDividerWidth 1.f
 
 
 @interface PPSplitViewController ()
@@ -24,56 +25,25 @@
 @property (nonatomic, readwrite, strong) UINavigationBar *leftTitleBar;
 @property (nonatomic, readwrite, strong) UINavigationBar *rightTitleBar;
 
-- (void) addLeftView;
-- (void) addRightView;
-- (void) layoutViews;
+- (void)addLeftView;
+- (void)addRightView;
 
 @end
 
 
 @implementation PPSplitViewController
 
-@dynamic leftViewController;
-@dynamic rightViewController;
-@synthesize tabViewController;
-@dynamic logo;
-@dynamic logoView;
-@synthesize usesFullLandscapeWidth;
 
-@synthesize containerView;
-@dynamic leftView;
-@dynamic rightView;
-@synthesize tabView;
-
-@synthesize useCustomLeftTitleBar;
-@synthesize useCustomRightTitleBar;
-@synthesize leftTitleBar;
-@synthesize rightTitleBar;
-
-
-- (void) dealloc
+- (void)viewDidUnload
 {
-	self.leftViewController = nil;
-	self.rightViewController = nil;
-	self.logo = nil;
-	self.logoView = nil;
-	
-	self.leftView = nil;
-	self.rightView = nil;
-	
-	
-}
-
-- (void) viewDidUnload
-{
-	if ([leftViewController isViewLoaded]) {
-		[leftViewController viewDidUnload];
+	if ([_leftViewController isViewLoaded]) {
+		[_leftViewController viewDidUnload];
 	}
-	if ([rightViewController isViewLoaded]) {
-		[rightViewController viewDidUnload];
+	if ([_rightViewController isViewLoaded]) {
+		[_rightViewController viewDidUnload];
 	}
-	if ([tabViewController isViewLoaded]) {
-		[tabViewController viewDidUnload];
+	if ([_tabViewController isViewLoaded]) {
+		[_tabViewController viewDidUnload];
 	}
 	
 	self.containerView = nil;
@@ -87,26 +57,25 @@
 }
 
 
-- (id) init
+- (id)init
 {
-	if (self = [super initWithNibName:nil bundle:nil]) {
-		usesFullLandscapeWidth = YES;
-		useCustomLeftTitleBar = YES;
-		useCustomRightTitleBar = YES;
+	if ((self = [super initWithNibName:nil bundle:nil])) {
+		_usesFullLandscapeWidth = YES;
+		_useCustomLeftTitleBar = YES;
+		_useCustomRightTitleBar = YES;
 	}
 	return self;
 }
 
-- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
 	return [self init];
 }
-#pragma mark -
 
 
 
-#pragma mark View Loading
-- (void) loadView
+#pragma mark - View Loading
+- (void)loadView
 {
 	CGRect appFrame = [[UIScreen mainScreen] applicationFrame];
 	self.view = [[UIView alloc] initWithFrame:appFrame];
@@ -115,57 +84,57 @@
 	self.view.autoresizesSubviews = YES;
 	
 	// add background logo
-	if (logo) {
-		self.logoView.image = logo;
-		[self.view addSubview:logoView];
+	if (_logo) {
+		self.logoView.image = _logo;
+		[self.view addSubview:_logoView];
 	}
 	
 	// container view
 	self.containerView = [[UIView alloc] initWithFrame:self.view.bounds];
-	containerView.opaque = NO;
-	containerView.backgroundColor = [UIColor clearColor];
-	containerView.autoresizesSubviews = YES;
-	containerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-	containerView.layer.cornerRadius = 4.f;
-	containerView.clipsToBounds = YES;
-	[self.view addSubview:containerView];
+	_containerView.opaque = NO;
+	_containerView.backgroundColor = [UIColor clearColor];
+	_containerView.autoresizesSubviews = YES;
+	_containerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	_containerView.layer.cornerRadius = 4.f;
+	_containerView.clipsToBounds = YES;
+	[self.view addSubview:_containerView];
 	
-	CGFloat dividerWidth = 1.f;
 	CGFloat naviHeight = 0.f;
-	CGFloat halfWidth = roundf(0.5 * appFrame.size.width);
+	CGFloat halfWidth = roundf(0.5f * appFrame.size.width);
 	
 	// *** add left view and title (navigation) bar
-	if (useCustomLeftTitleBar) {
+	if (_useCustomLeftTitleBar) {
 		naviHeight = 44.f;
-		CGRect naviFrame = CGRectMake(0.f, 0.f, halfWidth - dividerWidth, naviHeight);
+		CGRect naviFrame = CGRectMake(0.f, 0.f, halfWidth - kSplitViewDividerWidth, naviHeight);
 		self.leftTitleBar = [[UINavigationBar alloc] initWithFrame:naviFrame];
-		leftTitleBar.autoresizingMask = UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
+		_leftTitleBar.autoresizingMask = UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
 		
-		[containerView addSubview:leftTitleBar];
+		[_containerView addSubview:_leftTitleBar];
 	}
 	
+	appFrame.origin = CGPointZero;
 	CGRect viewFrame = appFrame;
 	viewFrame.origin.y = naviHeight;
-	viewFrame.size.width = halfWidth - dividerWidth;
+	viewFrame.size.width = halfWidth - kSplitViewDividerWidth;
 	viewFrame.size.height -= naviHeight;
 	
 	self.leftView = [[UIView alloc] initWithFrame:viewFrame];
-	leftView.backgroundColor = [UIColor whiteColor];
-	leftView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin;
+	_leftView.backgroundColor = [UIColor whiteColor];
+	_leftView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin;
 	
-	[containerView addSubview:leftView];
+	[_containerView addSubview:_leftView];
 	
 	
 	// *** add right view and title (navigation) bar
 	naviHeight = 0.f;
-	if (useCustomRightTitleBar) {
+	if (_useCustomRightTitleBar) {
 		naviHeight = 44.f;
 		CGRect naviFrame = CGRectMake(halfWidth, 0.f, halfWidth, naviHeight);
-		naviFrame.size.width += dividerWidth;
+	//	naviFrame.size.width += kSplitViewDividerWidth;
 		self.rightTitleBar = [[UINavigationBar alloc] initWithFrame:naviFrame];
-		rightTitleBar.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
+		_rightTitleBar.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
 		
-		[containerView addSubview:rightTitleBar];
+		[_containerView addSubview:_rightTitleBar];
 	}
 	
 	viewFrame = appFrame;
@@ -175,10 +144,10 @@
 	viewFrame.size.height -= naviHeight;
 	
 	self.rightView = [[UIView alloc] initWithFrame:viewFrame];
-	rightView.backgroundColor = [UIColor whiteColor];
-	rightView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin;
+	_rightView.backgroundColor = [UIColor whiteColor];
+	_rightView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	
-	[containerView addSubview:rightView];
+	[_containerView addSubview:_rightView];
 	
 	// add real subviews
 	[self addLeftView];
@@ -188,269 +157,220 @@
 }
 
 
-- (void) layoutViews
+- (void)viewDidLayoutSubviews
 {
-	//CGRect appFrame = [[UIScreen mainScreen] applicationFrame];
-	CGRect statusFrame = [[UIApplication sharedApplication] statusBarFrame];
+	CGRect appFrame = [[UIScreen mainScreen] applicationFrame];
+	CGFloat availWidth = 0.f;
 	
 	// landscape
 	if (isLandscape) {
-		//CGFloat availWidth = appFrame.origin.y + appFrame.size.height;		// yeah, I know that this is strange...
-		//CGFloat availHeight = appFrame.origin.x + appFrame.size.width - statusFrame.size.height;
-		CGFloat availWidth = 1024.f;
-#if USE_TWO_PART_ANIMATION
-		CGFloat availHeight = 768.f - statusFrame.size.height;
-#else
-		CGFloat availHeight = 768.f - statusFrame.size.width;		// !!!
-#endif
+		availWidth = appFrame.size.height;
+		CGFloat availHeight = appFrame.size.width;
 		CGFloat tabWidth = 0.f;
 		
-		if (usesFullLandscapeWidth) {
-			containerView.frame = CGRectMake(0.f, 0.f, availWidth - tabWidth, availHeight);
+		if (_usesFullLandscapeWidth) {
+			_containerView.frame = CGRectMake(0.f, 0.f, availWidth - tabWidth, availHeight);
 		}
 		else {
-			CGFloat sideOffset = roundf((availWidth - 768.f) / 2);
-			containerView.frame = CGRectMake(sideOffset, 0.f, 768.f, availHeight);
+			CGFloat sideOffset = roundf((availWidth - availHeight) / 2);
+			_containerView.frame = CGRectMake(sideOffset, 0.f, availHeight, availHeight);
+			availWidth = availHeight;
 		}
 	}
 	
 	// portrait
 	else {
-		CGFloat availWidth = 768.f;
-#if USE_TWO_PART_ANIMATION
-		CGFloat availHeight = 1024.f - statusFrame.size.width;		// !!!
-#else
-		CGFloat availHeight = 1024.f - statusFrame.size.height;
-#endif
+		availWidth = appFrame.size.width;
+		CGFloat availHeight = appFrame.size.height;
 		CGFloat tabHeight = 0.f;
 		
-		containerView.frame = CGRectMake(0.f, 0.f, availWidth, availHeight - tabHeight);
+		_containerView.frame = CGRectMake(0.f, 0.f, availWidth, availHeight - tabHeight);
 	}
+	
+	// make sure the left and right views are absolutely correct
+	CGFloat halfWidth = roundf(availWidth / 2);
+	
+	CGRect leftFrame = _leftView.frame;
+	leftFrame.size.width = halfWidth - kSplitViewDividerWidth;
+	_leftView.frame = leftFrame;
+	
+	CGRect rightFrame = _rightView.frame;
+	rightFrame.origin.x = halfWidth;
+	rightFrame.size.width = halfWidth;
+	_leftView.frame = leftFrame;
 }
-#pragma mark -
 
 
 
-#pragma mark Rotation
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+#pragma mark - Rotation
+/**
+ *  iOS 6+
+ */
+- (NSUInteger)supportedInterfaceOrientations
+{
+	return 30;		// == UIInterfaceOrientationMaskAll;
+}
+
+/**
+ *  iOS 5 and lower.
+ *  TODO: Remove once only supporting iOS 6+
+ */
+- (BOOL)shouldAutomaticallyForwardRotationMethods
+{
+	return NO;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
 	return YES;
 }
 
-- (void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
 	[super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
 	
-	if (usesFullLandscapeWidth) {
-		containerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	if (_usesFullLandscapeWidth) {
+		_containerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		trackRotationAnimation = NO;
 	}
 	else {
-		containerView.autoresizingMask = UIViewAutoresizingNone;
+		_containerView.autoresizingMask = UIViewAutoresizingNone;
 		wasLandscape = UIInterfaceOrientationIsLandscape(self.interfaceOrientation);
 		trackRotationAnimation = YES;
 	}
 	
 	// inform subview controllers
-	[leftViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-	[rightViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-	[tabViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	[_leftViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	[_rightViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	[_tabViewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
 }
 
 
-#if USE_TWO_PART_ANIMATION
-- (void) willAnimateFirstHalfOfRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-	if (trackRotationAnimation) {
-		isLandscape = UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
-		
-		if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation) != isLandscape) {
-			[self layoutViews];
-		}
-	}
-	
-	//[leftViewController willAnimateFirstHalfOfRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-	//[rightViewController willAnimateFirstHalfOfRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-	//[tabViewController willAnimateFirstHalfOfRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-}
-
-- (void) willAnimateSecondHalfOfRotationFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation duration:(NSTimeInterval)duration
-{
-	if (trackRotationAnimation) {
-		
-	}
-	
-	//[leftViewController willAnimateSecondHalfOfRotationFromInterfaceOrientation:fromInterfaceOrientation duration:duration];
-	//[rightViewController willAnimateSecondHalfOfRotationFromInterfaceOrientation:fromInterfaceOrientation duration:duration];
-	//[tabViewController willAnimateSecondHalfOfRotationFromInterfaceOrientation:fromInterfaceOrientation duration:duration];
-}
-
-#else
-
-- (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
 	if (trackRotationAnimation) {
 		isLandscape = UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
 		
 		if (wasLandscape != isLandscape) {
-			[self layoutViews];
+			[self viewDidLayoutSubviews];
 		}
 	}
-	
-	//[leftViewController willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-	//[rightViewController willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-	//[tabViewController willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
 }
-#endif
 
-- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
 	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 	
-	[leftViewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-	[rightViewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-	[tabViewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+	[_leftViewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+	[_rightViewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+	[_tabViewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
-#pragma mark -
 
 
 
-#pragma mark View Controller Handling
-- (UIViewController *) leftViewController
+#pragma mark - View Controller Handling
+- (void)setLeftViewController:(UIViewController *)newController
 {
-	return leftViewController;
-}
-- (void) setLeftViewController:(UIViewController *)newController
-{
-	if (newController != leftViewController) {
-		if (leftViewController) {
-			if ([leftViewController isViewLoaded] && nil != [leftViewController.view superview]) {
-				[leftViewController viewWillDisappear:NO];
-				[leftViewController.view removeFromSuperview];
-				[leftViewController viewDidDisappear:NO];
+	if (newController != _leftViewController) {
+		if (_leftViewController) {
+			if ([_leftViewController isViewLoaded] && nil != [_leftViewController.view superview]) {
+				[_leftViewController viewWillDisappear:NO];
+				[_leftViewController.view removeFromSuperview];
+				[_leftViewController viewDidDisappear:NO];
 			}
-			[leftViewController setParentController:nil];
+			[_leftViewController setParentController:nil];
 		}
 		
-		leftViewController = newController;
+		_leftViewController = newController;
 		
-		if (nil != leftViewController) {
+		if ([self isViewLoaded] && _leftViewController) {
 			[self addLeftView];
 		}
 	}
 	
 }
 
-- (UIViewController *) rightViewController
+- (void)setRightViewController:(UIViewController *)newController
 {
-	return rightViewController;
-}
-- (void) setRightViewController:(UIViewController *)newController
-{
-	if (newController != rightViewController) {
-		if (rightViewController) {
-			if ([rightViewController isViewLoaded] && nil != [rightViewController.view superview]) {
-				[rightViewController viewWillDisappear:NO];
-				[rightViewController.view removeFromSuperview];
-				[rightViewController viewDidDisappear:NO];
+	if (newController != _rightViewController) {
+		if (_rightViewController) {
+			if ([_rightViewController isViewLoaded] && nil != [_rightViewController.view superview]) {
+				[_rightViewController viewWillDisappear:NO];
+				[_rightViewController.view removeFromSuperview];
+				[_rightViewController viewDidDisappear:NO];
 			}
-			[rightViewController setParentController:nil];
+			[_rightViewController setParentController:nil];
 		}
 		
-		rightViewController = newController;
+		_rightViewController = newController;
 		
-		if ([self isViewLoaded] && nil != rightViewController) {
+		if ([self isViewLoaded] && _rightViewController) {
 			[self addRightView];
 		}
 	}
 	
 }
 
-- (UIView *) leftView
+- (UIView *)leftView
 {
-	if (nil == leftView) {
+	if (!_leftView) {
 		[self loadView];
 	}
-	return leftView;
-}
-- (void) setLeftView:(UIView *)newView
-{
-	if (newView != leftView) {
-		leftView = newView;
-	}
+	return _leftView;
 }
 
-- (UIView *) rightView
+- (UIView *)rightView
 {
-	if (nil == rightView) {
+	if (!_rightView) {
 		[self loadView];
 	}
-	return rightView;
+	return _rightView;
 }
-- (void) setRightView:(UIView *)newView
-{
-	if (newView != rightView) {
-		rightView = newView;
-	}
-}
-#pragma mark -
 
 
 
 #pragma mark The Logo
-- (UIImage *) logo
+- (void)setLogo:(UIImage *)newLogo
 {
-	return logo;
-}
-- (void) setLogo:(UIImage *)newLogo
-{
-	if (newLogo != logo) {
-		logo = newLogo;
+	if (newLogo != _logo) {
+		_logo = newLogo;
 		
-		if (logo) {
-			if ([self isViewLoaded]) {
-				self.logoView.image = logo;
-				[self.view insertSubview:logoView atIndex:0];
-			}
+		if (_logo && [self isViewLoaded]) {
+			self.logoView.image = _logo;
+			[self.view insertSubview:_logoView atIndex:0];
 		}
 	}
 }
 
-- (UIImageView *) logoView
+- (UIImageView *)logoView
 {
-	if (nil == logoView) {
-		self.logoView = [[UIImageView alloc] initWithImage:logo];
-		CGSize sz = [logoView frame].size;
+	if (!_logoView) {
+		self.logoView = [[UIImageView alloc] initWithImage:_logo];
+		CGSize sz = [_logoView frame].size;
 		CGSize cs = [self.view bounds].size;
-		logoView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
-		logoView.frame = CGRectMake(cs.width - sz.width - 5.f, cs.height - sz.height - 5.f, sz.width, sz.height);
+		_logoView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
+		_logoView.frame = CGRectMake(cs.width - sz.width - 5.f, cs.height - sz.height - 5.f, sz.width, sz.height);
 	}
-	return logoView;
+	return _logoView;
 }
-- (void) setLogoView:(UIImageView *)newView
+
+
+
+#pragma mark - Actions
+- (void)addLeftView
 {
-	if (newView != logoView) {
-		logoView = newView;
-	}
-}
-#pragma mark -
-
-
-
-#pragma mark Actions
-- (void) addLeftView
-{
-	if (nil != leftViewController) {
-		UIView *lView = leftViewController.view;
-		lView.frame = leftView.bounds;
+	if (nil != _leftViewController) {
+		UIView *addedView = _leftViewController.view;
+		addedView.frame = _leftView.bounds;
+		addedView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		
-		[leftViewController viewWillAppear:NO];
-		[leftView addSubview:lView];
-		[leftViewController viewDidAppear:NO];
+		[_leftViewController viewWillAppear:NO];
+		[_leftView addSubview:addedView];
+		[_leftViewController viewDidAppear:NO];
 		
 		// update navigation bar
-		if (leftTitleBar.topItem != leftViewController.navigationItem) {
-			[leftTitleBar pushNavigationItem:leftViewController.navigationItem animated:NO];
+		if (_leftTitleBar.topItem != _leftViewController.navigationItem) {
+			[_leftTitleBar pushNavigationItem:_leftViewController.navigationItem animated:NO];
 		}
 	}
 	else {
@@ -458,31 +378,26 @@
 	}
 }
 
-- (void) addRightView
+- (void)addRightView
 {
-	if (nil != rightViewController) {
-		UIView *rView = rightViewController.view;
-		rView.frame = rightView.bounds;
+	if (nil != _rightViewController) {
+		UIView *addedView = _rightViewController.view;
+		addedView.frame = _rightView.bounds;
+		addedView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		
-		[rightViewController viewWillAppear:NO];
-		[rightView addSubview:rView];
-		[rightViewController viewDidAppear:NO];
+		[_rightViewController viewWillAppear:NO];
+		[_rightView addSubview:addedView];
+		[_rightViewController viewDidAppear:NO];
 		
 		// update navigation bar
-		if (rightTitleBar.topItem != rightViewController.navigationItem) {
-			[rightTitleBar pushNavigationItem:rightViewController.navigationItem animated:NO];
+		if (_rightTitleBar.topItem != _rightViewController.navigationItem) {
+			[_rightTitleBar pushNavigationItem:_rightViewController.navigationItem animated:NO];
 		}
 	}
 	else {
 		DLog(@"No rightViewController");
 	}
 }
-#pragma mark -
-
-
-
-#pragma mark Utilities
 
 
 @end
-
