@@ -345,7 +345,7 @@
 }
 
 
-- (void) showRandomEponym:(id)sender
+- (void)showRandomEponym:(id)sender
 {
 	if (_randomNoTitleEponymButton == sender) {
 		[APP_DELEGATE loadRandomEponymWithMode:EPLearningModeNoTitle];
@@ -355,7 +355,7 @@
 	}
 }
 
-- (IBAction) reveal:(id)sender
+- (IBAction)reveal:(id)sender
 {
 	[_revealButton removeFromSuperview];
 	[APP_DELEGATE resetEponymRefractoryTimeout];

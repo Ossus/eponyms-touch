@@ -36,8 +36,8 @@
 	if ([_searchTimeoutTimer isValid]) {
 		[_searchTimeoutTimer invalidate];
 	}
-	
 }
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

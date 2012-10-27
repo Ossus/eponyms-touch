@@ -570,19 +570,19 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 
 
 // *****
-- (void) loadEponymsOfCurrentCategoryContainingString:(NSString *)searchString animated:(BOOL)animated;
+- (void)loadEponymsOfCurrentCategoryContainingString:(NSString *)searchString animated:(BOOL)animated;
 {
 	[self loadEponymsOfCategory:categoryShown containingString:searchString animated:animated];
 }
 
 // load eponyms of a given category (or all if category_id is ZERO)
-- (void) loadEponymsOfCategoryID:(NSInteger)category_id containingString:(NSString *)searchString animated:(BOOL)animated
+- (void)loadEponymsOfCategoryID:(NSInteger)category_id containingString:(NSString *)searchString animated:(BOOL)animated
 {
 	EponymCategory *epoCat = [self categoryWithID:category_id];
 	[self loadEponymsOfCategory:epoCat containingString:searchString animated:animated];
 }
 
-- (void) loadEponymsOfCategory:(EponymCategory *)category containingString:(NSString *)searchString animated:(BOOL)animated
+- (void)loadEponymsOfCategory:(EponymCategory *)category containingString:(NSString *)searchString animated:(BOOL)animated
 {
 	[eponymArray removeAllObjects];
 	[eponymSectionArray removeAllObjects];
@@ -741,7 +741,7 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 
 // *****
 // load a single eponym
-- (void) loadEponym:(Eponym *)eponym animated:(BOOL)animated
+- (void)loadEponym:(Eponym *)eponym animated:(BOOL)animated
 {
 	[eponym load];
 	
@@ -757,21 +757,15 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 }
 
 // accessory method to load the eponym last shown. Calls loadEponym:animated:
-- (void) loadEponymWithId:(NSUInteger)eponym_id animated:(BOOL)animated
+- (void)loadEponymWithId:(NSUInteger)eponym_id animated:(BOOL)animated
 {
 	Eponym *eponym = [self eponymWithId:eponym_id];
 	[self loadEponym:eponym animated:animated];
 }
 
 // loads a random eponym of the current group
-- (void) loadRandomEponymWithMode:(EPLearningMode)mode
+- (void)loadRandomEponymWithMode:(EPLearningMode)mode
 {
-	NSTimeInterval startDate = [[NSDate date] timeIntervalSince1970];
-	if (randomIsRefractoryUntil > startDate) {
-		return;
-	}
-	randomIsRefractoryUntil = startDate + 3.0;		// at max all three seconds
-	
 	// no loaded group -> load all eponyms
 	if ([eponymArray count] < 1) {
 		EponymCategory *fullCategory = [self categoryWithID:0];
@@ -813,14 +807,14 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	NSLog(@"Did not get a good random group!");
 }
 
-- (void) resetEponymRefractoryTimeout
+- (void)resetEponymRefractoryTimeout
 {
 	randomIsRefractoryUntil = 0;
 }
 
 
 // cleans up the queries and closes the database
-- (void) closeMainDatabase
+- (void)closeMainDatabase
 {
 	// finalize queries
 	if (load_all_categories_query) {
@@ -857,16 +851,15 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 #endif
 }
 
-- (void) deleteDatabaseFile
+- (void)deleteDatabaseFile
 {
 	NSString *sqlPath = [self databaseFilePath];
 	[[NSFileManager defaultManager] removeItemAtPath:sqlPath error:nil];
 }
-#pragma mark -
 
 
 
-#pragma mark GUI Actions
+#pragma mark - GUI Actions
 - (void) showInfoPanel:(id)sender
 {
 	[self showInfoPanelAsFirstTimeLaunch:NO];
@@ -906,28 +899,34 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 #pragma mark - Accelerometer Delegate
 - (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
 {
-		BOOL deviceIsPortrait = UIDeviceOrientationIsPortrait(self.naviController.interfaceOrientation);
-		UIAccelerationValue deviceX = deviceIsPortrait ? acceleration.x : acceleration.y;
-		UIAccelerationValue deviceY = deviceIsPortrait ? acceleration.y : acceleration.x;
-		
-		// Simple high pass filter by subtracting low pass values
-		accelerationX = deviceX - ((deviceX * 0.1) + (accelerationX * 0.9));
-		accelerationY = deviceY - ((deviceY * 0.1) + (accelerationY * 0.9));
-		
-		// X-shake
-		if ((lastAccelerationX * accelerationX < 0.0) && (abs(accelerationX - lastAccelerationX) > 1.5)) {
-			[self loadRandomEponymWithMode:EPLearningModeNoText];
-			accelerationX = 0.0;
-		}
-		
-		// Y-shake
-		else if ((lastAccelerationY * accelerationY < 0.0) && (abs(accelerationY - lastAccelerationY) > 1.2)) {
-			[self loadRandomEponymWithMode:EPLearningModeNoTitle];
-			accelerationY = 0.0;
-		}
-		
-		lastAccelerationX = accelerationX;
-		lastAccelerationY = accelerationY;
+	NSTimeInterval startDate = [[NSDate date] timeIntervalSince1970];
+	if (randomIsRefractoryUntil > startDate) {
+		return;
+	}
+	randomIsRefractoryUntil = startDate + 3.0;		// at max all three seconds
+	
+	BOOL deviceIsPortrait = UIDeviceOrientationIsPortrait(self.naviController.interfaceOrientation);
+	UIAccelerationValue deviceX = deviceIsPortrait ? acceleration.x : acceleration.y;
+	UIAccelerationValue deviceY = deviceIsPortrait ? acceleration.y : acceleration.x;
+	
+	// Simple high pass filter by subtracting low pass values
+	accelerationX = deviceX - ((deviceX * 0.1) + (accelerationX * 0.9));
+	accelerationY = deviceY - ((deviceY * 0.1) + (accelerationY * 0.9));
+	
+	// X-shake
+	if ((lastAccelerationX * accelerationX < 0.0) && (abs(accelerationX - lastAccelerationX) > 1.5)) {
+		[self loadRandomEponymWithMode:EPLearningModeNoText];
+		accelerationX = 0.0;
+	}
+	
+	// Y-shake
+	else if ((lastAccelerationY * accelerationY < 0.0) && (abs(accelerationY - lastAccelerationY) > 1.2)) {
+		[self loadRandomEponymWithMode:EPLearningModeNoTitle];
+		accelerationY = 0.0;
+	}
+	
+	lastAccelerationX = accelerationX;
+	lastAccelerationY = accelerationY;
 }
 
 

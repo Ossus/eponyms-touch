@@ -73,31 +73,29 @@ typedef enum {
 @property (nonatomic, assign) NSInteger usingEponymsOf;
 
 
-- (BOOL) connectToDBAndCreateIfNeeded;
-- (void) loadDatabaseAnimated:(BOOL)animated reload:(BOOL)as_reload;
-- (void) loadEponymsOfCurrentCategoryContainingString:(NSString *)searchString animated:(BOOL)animated;
-- (void) loadEponymsOfCategoryID:(NSInteger)category_id containingString:(NSString *)searchString animated:(BOOL)animated;
-- (void) loadEponymsOfCategory:(EponymCategory *)category containingString:(NSString *)searchString animated:(BOOL)animated;
-- (void) loadEponym:(Eponym *)eponym animated:(BOOL)animated;
-- (void) loadRandomEponymWithMode:(EPLearningMode)mode;
-- (void) resetEponymRefractoryTimeout;
+- (BOOL)connectToDBAndCreateIfNeeded;
+- (void)loadDatabaseAnimated:(BOOL)animated reload:(BOOL)as_reload;
+- (void)loadEponymsOfCurrentCategoryContainingString:(NSString *)searchString animated:(BOOL)animated;
+- (void)loadEponymsOfCategoryID:(NSInteger)category_id containingString:(NSString *)searchString animated:(BOOL)animated;
+- (void)loadEponymsOfCategory:(EponymCategory *)category containingString:(NSString *)searchString animated:(BOOL)animated;
+- (void)loadEponym:(Eponym *)eponym animated:(BOOL)animated;
+- (void)loadRandomEponymWithMode:(EPLearningMode)mode;
+- (void)resetEponymRefractoryTimeout;
 
-- (void) closeMainDatabase;
-- (void) deleteDatabaseFile;
+- (void)closeMainDatabase;
+- (void)deleteDatabaseFile;
 
-- (NSString *) databaseFilePath;
-- (NSDictionary *) databaseCreationQueries;
+- (NSString *)databaseFilePath;
+- (NSDictionary *)databaseCreationQueries;
 
-- (EponymCategory *) categoryWithID:(NSInteger)identifier;
+- (EponymCategory *)categoryWithID:(NSInteger)identifier;
 
 // Updating
-- (void) checkForUpdates:(id)sender;
-- (void) loadEponymXMLFromDisk;
-- (void) abortUpdateAction;
+- (void)checkForUpdates:(id)sender;
+- (void)loadEponymXMLFromDisk;
+- (void)abortUpdateAction;
 
-- (UIColor *) naviBarTintColor;
-
+- (UIColor *)naviBarTintColor;
 
 
 @end
-
