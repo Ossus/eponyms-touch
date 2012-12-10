@@ -324,7 +324,7 @@
 		CGFloat targetY = superRect.origin.y + superRect.size.height;
 		CGFloat top = fmaxf(targetY, minY);
 		
-		adRect = CGRectMake(0.f, top, adSize.width, adSize.height);
+		adRect = CGRectMake(0.f, top, viewFrame.size.width, adSize.height);
 		
 		totalHeight = adRect.origin.y + adRect.size.height;
 	}
@@ -431,6 +431,9 @@
 		
 		if (_eponym) {
 			[self adjustInterfaceToEponymAnimated:animated];
+#ifdef SHOW_ADS
+			[self loadNewAdFor:_eponym];
+#endif
 		}
 	}
 }

@@ -57,11 +57,11 @@
 			<key>TintColor</key>
 			<dict>
 				<key>Blue</key>
-				<real>0.50196081399917603</real>
+				<real>0.501960813999176</real>
 				<key>Green</key>
-				<real>0.25098040699958801</real>
+				<real>0.250980406999588</real>
 				<key>Red</key>
-				<real>0.0</real>
+				<real>0</real>
 			</dict>
 			<key>Translucent</key>
 			<false/>
@@ -93,7 +93,7 @@
 	<key>eponymXMLURL DEBUG</key>
 	<string>http://127.0.0.1/pp/Projects/Eponyms/XML/eponyms.xml</string>
 	<key>numberOfIncludedEponyms</key>
-	<string>1751</string>
+	<string>1762</string>
 	<key>projectWebsite</key>
 	<string>https://github.com/p2/eponyms-touch</string>
 </dict>

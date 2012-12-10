@@ -920,7 +920,6 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "Resources/eponyms-student.entitlements";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pascal Pfiffner";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -934,7 +933,6 @@
 				OTHER_CFLAGS = "-DSHOW_ADS";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "eponyms-student";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "97E6B393-8D57-476B-BDAF-A4A7DFC4D9A8";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Distribution;
