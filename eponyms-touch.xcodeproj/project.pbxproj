@@ -848,14 +848,14 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = "Resources/eponyms-touch.entitlements";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Pascal Pfiffner";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Resources/eponyms_touch_Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/../SQLiteUnicode/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include\"";
 				INFOPLIST_FILE = Resources/Info.plist;
 				PRODUCT_NAME = "eponyms-touch";
-				"PROVISIONING_PROFILE[sdk=*]" = "";
+				"PROVISIONING_PROFILE[sdk=*]" = "357DDC6F-881A-4718-90AB-4B5DF63FB645";
 			};
 			name = Distribution;
 		};

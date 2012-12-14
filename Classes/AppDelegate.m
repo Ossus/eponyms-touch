@@ -903,7 +903,6 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	if (randomIsRefractoryUntil > startDate) {
 		return;
 	}
-	randomIsRefractoryUntil = startDate + 3.0;		// at max all three seconds
 	
 	BOOL deviceIsPortrait = UIDeviceOrientationIsPortrait(self.naviController.interfaceOrientation);
 	UIAccelerationValue deviceX = deviceIsPortrait ? acceleration.x : acceleration.y;
@@ -917,12 +916,14 @@ static sqlite3_stmt *load_eponyms_of_category_search_query = nil;
 	if ((lastAccelerationX * accelerationX < 0.0) && (abs(accelerationX - lastAccelerationX) > 1.5)) {
 		[self loadRandomEponymWithMode:EPLearningModeNoText];
 		accelerationX = 0.0;
+		randomIsRefractoryUntil = startDate + 3.0;			// at max all three seconds
 	}
 	
 	// Y-shake
 	else if ((lastAccelerationY * accelerationY < 0.0) && (abs(accelerationY - lastAccelerationY) > 1.2)) {
 		[self loadRandomEponymWithMode:EPLearningModeNoTitle];
 		accelerationY = 0.0;
+		randomIsRefractoryUntil = startDate + 3.0;
 	}
 	
 	lastAccelerationX = accelerationX;
